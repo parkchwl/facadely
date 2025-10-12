@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-montserrat: var(--font-montserrat);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +20,88 @@
   }
 }
 
+html {
+  font-size: 80%; /* 전체 크기를 80%로 조정 */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Scrolling Banner Styles */
+.banner {
+  overflow: hidden;
+  background: #000000;
+  padding: 0;
+}
+
+.marquee {
+  display: flex;
+  white-space: nowrap;
+  width: fit-content;
+  animation: moveLeft 300s linear infinite;
+}
+
+.marquee span {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  margin: 0 2rem;
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hide Scrollbar */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Infinite Scroll Animations */
+.scroll-container {
+  display: flex;
+  width: fit-content;
+}
+
+.scroll-container:hover {
+  animation-play-state: paused;
+}
+
+.scroll-left {
+  animation: scroll-left 210s linear infinite;
+}
+
+.scroll-right {
+  animation: scroll-right 210s linear infinite;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
 }
