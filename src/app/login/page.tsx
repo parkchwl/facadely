@@ -14,7 +14,6 @@ export default function LoginPage() {
 
   const handleSocialLogin = async (provider: string) => {
     // TODO: 실제 OAuth 플로우 구현
-    console.log(`${provider} 로그인 시도`);
 
     // 시뮬레이션: 50% 확률로 신규 유저
     const isNewUser = Math.random() > 0.5;

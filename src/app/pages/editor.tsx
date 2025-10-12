@@ -69,7 +69,6 @@ const EditorPage = () => {
           }
           
           const templateData: Website = templateModule.default;
-          console.log("Loaded template data:", templateData);
           setWebsite(templateData);
         } catch (error) {
           console.error("Error loading template:", error);

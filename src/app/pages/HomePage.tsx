@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { DM_Serif_Display } from 'next/font/google';
@@ -19,8 +19,6 @@ export default function HomePage() {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
-  const progressRef = useRef(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 50);
@@ -62,6 +60,16 @@ export default function HomePage() {
     heroContainerClasses: "w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
     sectionSpacing: "py-16 sm:py-20 lg:py-24 xl:py-28 2xl:py-32"
   }), []);
+
+  const duplicatedRow1 = useMemo(() =>
+    [...allTemplates.slice(0, 13), ...allTemplates.slice(0, 13)],
+    [allTemplates]
+  );
+
+  const duplicatedRow2 = useMemo(() =>
+    [...allTemplates.slice(13, 26), ...allTemplates.slice(13, 26)],
+    [allTemplates]
+  );
 
   const statsData = useMemo(() => [
     { stat: '94%', highlight: 'of first impressions', text: 'are design-related.', source: 'Northumbria University UX Lab' },
@@ -109,44 +117,35 @@ export default function HomePage() {
     }
   ], []);
 
-  // FAQ 인덱스 변경 시 프로그레스 리셋
+  // FAQ 자동 재생 효과 - 최적화된 버전
   useEffect(() => {
-    progressRef.current = 0;
-    setProgress(0);
-  }, [activeFaqIndex]);
+    if (isPaused) return;
 
-  // FAQ 자동 재생 효과
-  useEffect(() => {
-    if (isPaused) {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-      return;
-    }
+    const duration = 15000;
+    const startTime = Date.now();
+    let animationFrameId: number;
 
-    const duration = 15000; // 15초
-    const interval = 50; // 50ms마다 업데이트
-    const increment = (interval / duration) * 100;
+    const updateProgress = () => {
+      const elapsed = Date.now() - startTime;
+      const newProgress = (elapsed / duration) * 100;
 
-    timerRef.current = setInterval(() => {
-      progressRef.current += increment;
-
-      if (progressRef.current >= 100) {
-        // 다음 질문으로 순차 이동 (0 -> 1 -> 2 -> ... -> 5 -> 0)
+      if (newProgress >= 100) {
+        setProgress(0);
         setActiveFaqIndex((current) => (current + 1) % faqs.length);
       } else {
-        setProgress(progressRef.current);
-      }
-    }, interval);
-
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
+        setProgress(newProgress);
+        animationFrameId = requestAnimationFrame(updateProgress);
       }
     };
-  }, [isPaused, faqs.length]);
+
+    animationFrameId = requestAnimationFrame(updateProgress);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [isPaused, activeFaqIndex, faqs.length]);
 
 
 
@@ -203,7 +202,7 @@ export default function HomePage() {
           <div className="overflow-hidden">
             <div className="scroll-container scroll-left">
               {/* Render templates twice for infinite loop */}
-              {[...allTemplates.slice(0, 13), ...allTemplates.slice(0, 13)].map((template, index) => (
+              {duplicatedRow1.map((template, index) => (
                 <Link href="/templates" key={`row1-${template.id}-${index}`}>
                   <div className="flex-shrink-0 w-72 sm:w-80 lg:w-96 mx-4">
                     <TemplateCard template={template} index={index} />
@@ -217,7 +216,7 @@ export default function HomePage() {
           <div className="overflow-hidden">
             <div className="scroll-container scroll-right">
               {/* Render templates twice for infinite loop */}
-              {[...allTemplates.slice(13, 26), ...allTemplates.slice(13, 26)].map((template, index) => (
+              {duplicatedRow2.map((template, index) => (
                 <Link href="/templates" key={`row2-${template.id}-${index}`}>
                   <div className="flex-shrink-0 w-72 sm:w-80 lg:w-96 mx-4">
                     <TemplateCard template={template} index={index + 13} />
@@ -409,7 +408,6 @@ export default function HomePage() {
                   viewport={{ once: true }}
                   onClick={() => {
                     setActiveFaqIndex(index);
-                    progressRef.current = 0;
                     setProgress(0);
                     setIsPaused(false);
                   }}
@@ -493,7 +491,6 @@ export default function HomePage() {
                         key={index}
                         onClick={() => {
                           setActiveFaqIndex(index);
-                          progressRef.current = 0;
                           setProgress(0);
                           setIsPaused(false);
                         }}

@@ -123,20 +123,23 @@ export default function PricingPage() {
     const handleScroll = () => {
       const featureSection = document.getElementById('feature-comparison');
       const pricingSection = document.getElementById('pricing-cards');
-      
+
       if (featureSection && pricingSection) {
         const featureSectionTop = featureSection.getBoundingClientRect().top;
         const pricingSectionBottom = pricingSection.getBoundingClientRect().bottom;
-        
+
         // 더 부드러운 임계점 설정과 하이스테리시스 적용
         const STICKY_THRESHOLD = 120;
         const UNSTICKY_THRESHOLD = 80;
-        
-        if (!stickyPlan && featureSectionTop <= STICKY_THRESHOLD && pricingSectionBottom < STICKY_THRESHOLD) {
-          setStickyPlan(true);
-        } else if (stickyPlan && (featureSectionTop > UNSTICKY_THRESHOLD || pricingSectionBottom >= UNSTICKY_THRESHOLD)) {
-          setStickyPlan(false);
-        }
+
+        setStickyPlan(prev => {
+          if (!prev && featureSectionTop <= STICKY_THRESHOLD && pricingSectionBottom < STICKY_THRESHOLD) {
+            return true;
+          } else if (prev && (featureSectionTop > UNSTICKY_THRESHOLD || pricingSectionBottom >= UNSTICKY_THRESHOLD)) {
+            return false;
+          }
+          return prev;
+        });
       }
     };
 
@@ -152,9 +155,9 @@ export default function PricingPage() {
       }
     };
 
-    window.addEventListener('scroll', throttledScroll);
+    window.addEventListener('scroll', throttledScroll, { passive: true });
     return () => window.removeEventListener('scroll', throttledScroll);
-  }, [stickyPlan]); // stickyPlan 상태를 dependency에 추가
+  }, []); // Empty dependency array to prevent re-creation
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },

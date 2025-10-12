@@ -78,23 +78,33 @@ export default function TemplatesPage() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-between">
             {/* Search Bar */}
             <div className="relative flex-1 w-full sm:max-w-md">
-              <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+              <label htmlFor="template-search" className="sr-only">
+                Search templates
+              </label>
+              <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
               <input
-                type="text"
+                id="template-search"
+                type="search"
                 placeholder="Search templates..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                aria-label="Search templates"
               />
             </div>
 
             <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
               {/* Sort Dropdown */}
               <div className="relative flex-1 sm:flex-initial">
+                <label htmlFor="sort-templates" className="sr-only">
+                  Sort templates by
+                </label>
                 <select
+                  id="sort-templates"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                   className="w-full appearance-none px-3 sm:px-4 py-2.5 sm:py-3 pr-8 sm:pr-10 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors cursor-pointer bg-white"
+                  aria-label="Sort templates by"
                 >
                   {sortOptions.map((option) => (
                     <option key={option} value={option}>
@@ -102,26 +112,30 @@ export default function TemplatesPage() {
                     </option>
                   ))}
                 </select>
-                <ChevronDown className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5 pointer-events-none" />
+                <ChevronDown className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5 pointer-events-none" aria-hidden="true" />
               </div>
 
               {/* Grid View Toggle */}
-              <div className="flex gap-1 sm:gap-2 border-2 border-gray-200 rounded-lg p-0.5 sm:p-1">
+              <div className="flex gap-1 sm:gap-2 border-2 border-gray-200 rounded-lg p-0.5 sm:p-1" role="group" aria-label="Grid view options">
                 <button
                   onClick={() => setGridCols(2)}
                   className={`p-1.5 sm:p-2 rounded transition-colors ${
                     gridCols === 2 ? 'bg-black text-white' : 'text-gray-400 hover:text-gray-600'
                   }`}
+                  aria-label="2 column grid view"
+                  aria-pressed={gridCols === 2}
                 >
-                  <Grid2x2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <Grid2x2 className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                 </button>
                 <button
                   onClick={() => setGridCols(3)}
                   className={`p-1.5 sm:p-2 rounded transition-colors ${
                     gridCols === 3 ? 'bg-black text-white' : 'text-gray-400 hover:text-gray-600'
                   }`}
+                  aria-label="3 column grid view"
+                  aria-pressed={gridCols === 3}
                 >
-                  <Grid3x3 className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <Grid3x3 className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                 </button>
               </div>
             </div>
