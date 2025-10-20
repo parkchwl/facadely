@@ -41,7 +41,7 @@ body {
   display: flex;
   white-space: nowrap;
   width: fit-content;
-  animation: moveLeft 300s linear infinite;
+  animation: moveLeft 500s linear infinite;
 }
 
 .marquee span {
@@ -49,6 +49,7 @@ body {
   font-weight: 900;
   color: white;
   margin: 0 2rem;
+  white-space: pre; /* Preserve multiple spaces */
 }
 
 @keyframes moveLeft {
@@ -68,6 +69,39 @@ body {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+/* Smooth Image Loading Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    #1f2937 0%,
+    #374151 20%,
+    #1f2937 40%,
+    #1f2937 100%
+  );
+  background-size: 1000px 100%;
 }
 
 /* Infinite Scroll Animations */
@@ -104,4 +138,80 @@ body {
   to {
     transform: translateX(0%);
   }
+}
+
+/* Gradient X Animation for Loading Screen */
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% auto;
+  animation: gradient-x 3s ease infinite;
+}
+
+/* Pulse Glow Animation for Loading Screen */
+@keyframes pulse-glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                 0 0 20px rgba(255, 255, 255, 0.3),
+                 0 0 30px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                 0 0 30px rgba(255, 255, 255, 0.6),
+                 0 0 40px rgba(255, 255, 255, 0.4),
+                 0 0 50px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Shine Scan Animation for Loading Screen */
+@keyframes shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-shine {
+  animation: shine 2s ease-in-out infinite;
+}
+
+/* FAQ Progress Bar Animation - CSS 최적화 */
+@keyframes progressBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Stats Card Optimizations */
+.stat-card-inner-glow {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+}
+
+.stat-card-dashed-border {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.3) 0px,
+    rgba(255, 255, 255, 0.3) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  background-size: 2px 100%;
+  background-position: 0 0, 100% 0;
+  background-repeat: no-repeat;
 }

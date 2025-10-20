@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import PolicyPageHeader from '../components/PolicyPageHeader';
 
 export default function PrivacyPage() {
@@ -163,7 +164,7 @@ export default function PrivacyPage() {
 
           {/* Children's Privacy */}
           <section className="mb-16">
-            <h2 className="text-2xl font-light text-black mb-6 tracking-tight">9. Children's Privacy</h2>
+            <h2 className="text-2xl font-light text-black mb-6 tracking-tight">9. Children&apos;s Privacy</h2>
             <p className="text-gray-600 leading-relaxed font-light">
               Facadely is not intended for users under 18 years of age. We do not knowingly collect personal information from children. If we become aware that we have collected data from a child without parental consent, we will take steps to delete that information promptly.
             </p>
@@ -176,7 +177,7 @@ export default function PrivacyPage() {
               We may update this Privacy Policy periodically. We will notify you of material changes by:
             </p>
             <ul className="space-y-3 text-gray-600 font-light">
-              <li className="pl-6 border-l border-gray-200">Posting the updated policy on this page with a new "Last Updated" date</li>
+              <li className="pl-6 border-l border-gray-200">Posting the updated policy on this page with a new &quot;Last Updated&quot; date</li>
               <li className="pl-6 border-l border-gray-200">Sending an email notification to your registered email address</li>
               <li className="pl-6 border-l border-gray-200">Displaying a prominent notice on our Service</li>
             </ul>
@@ -201,7 +202,7 @@ export default function PrivacyPage() {
               California residents have specific rights under the California Consumer Privacy Act:
             </p>
             <ul className="space-y-2 text-gray-600 font-light">
-              <li className="pl-6 border-l border-gray-200">Right to know what personal information is collected and how it's used</li>
+              <li className="pl-6 border-l border-gray-200">Right to know what personal information is collected and how it&apos;s used</li>
               <li className="pl-6 border-l border-gray-200">Right to delete personal information (with certain exceptions)</li>
               <li className="pl-6 border-l border-gray-200">Right to opt-out of the sale of personal information (we do not sell personal information)</li>
               <li className="pl-6 border-l border-gray-200">Right to non-discrimination for exercising CCPA rights</li>
@@ -225,7 +226,7 @@ export default function PrivacyPage() {
         {/* Footer CTA */}
         <div className="mt-20 pt-12 border-t border-gray-100">
           <p className="text-center text-gray-400 mb-8 font-light">
-            Your privacy is important to us. We're committed to protecting your data and being transparent about our practices.
+            Your privacy is important to us. We&apos;re committed to protecting your data and being transparent about our practices.
           </p>
           <div className="flex justify-center gap-4">
             <Link

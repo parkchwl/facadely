@@ -5,6 +5,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Globe, Check, Menu, X, Instagram, Facebook, Twitter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Cardo } from 'next/font/google';
+
+const cardo = Cardo({
+  subsets: ['latin'],
+  weight: ['700'],
+  display: 'swap',
+});
 
 const countryLanguages = [
   { country: 'Global English', language: 'English', code: 'global-en' },
@@ -133,7 +140,7 @@ export default function Layout({ children }: LayoutProps) {
               href="/login"
               className="bg-white text-black hover:bg-gray-200 py-2 px-4 rounded-lg transition shadow font-bold"
             >
-              Sign up <span className="font-normal">It's free!</span>
+              Sign up <span className="font-normal">It&apos;s free!</span>
             </Link>
           </div>
 
@@ -153,7 +160,7 @@ export default function Layout({ children }: LayoutProps) {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 35, stiffness: 300 }}
-              className="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900 z-50 flex flex-col justify-between p-8 lg:hidden"
+              className="fixed inset-0 bg-black z-50 flex flex-col justify-between p-8 lg:hidden"
             >
               {/* Close Button - Top Right */}
               <div className="flex justify-end">
@@ -224,7 +231,7 @@ export default function Layout({ children }: LayoutProps) {
                     SIGN UP
                   </Link>
                   <p className="text-white/30 text-xs font-light tracking-wide">
-                    It's free to get started
+                    It&apos;s free to get started
                   </p>
                 </div>
               </div>
@@ -239,7 +246,7 @@ export default function Layout({ children }: LayoutProps) {
       </main>
 
       {/* Footer */}
-      <footer className={`w-full text-white ${pathname === '/templates' ? '' : 'bg-black'}`}>
+      <footer className={`relative z-10 w-full text-white ${pathname === '/templates' ? '' : 'bg-black'}`}>
         <div className={`py-12 ${
           pathname === '/templates'
             ? 'max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 bg-black'
@@ -288,8 +295,7 @@ export default function Layout({ children }: LayoutProps) {
         {/* BLOOM YOUR DREAM */}
         <div className="mt-16 text-center overflow-hidden">
           <h1
-            className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap ${cardo.className}`}
           >
             BLOOM YOUR DREAM
           </h1>

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import PolicyPageHeader from '../components/PolicyPageHeader';
 
 export default function TermsPage() {
@@ -18,7 +19,7 @@ export default function TermsPage() {
           <section className="mb-16">
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">1. Agreement to Terms</h2>
             <p className="text-gray-600 leading-relaxed mb-4 font-light">
-              Welcome to Facadely. By accessing or using our website builder platform ("Service"), you agree to be bound by these Terms of Service ("Terms"). If you disagree with any part of these terms, you may not access the Service.
+              Welcome to Facadely. By accessing or using our website builder platform (&quot;Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you disagree with any part of these terms, you may not access the Service.
             </p>
             <p className="text-gray-600 leading-relaxed font-light">
               Facadely provides a no-code website building platform that allows users to create, customize, and publish professional websites without technical knowledge. These Terms apply to all users of the Service, including without limitation users who are browsers, builders, and contributors of content.

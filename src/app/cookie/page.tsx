@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import PolicyPageHeader from '../components/PolicyPageHeader';
 
 export default function CookiePage() {
@@ -217,7 +218,7 @@ export default function CookiePage() {
           <section className="mb-16">
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">6. Updates to This Cookie Policy</h2>
             <p className="text-gray-600 leading-relaxed font-light">
-              We may update this Cookie Policy from time to time. We will notify you of any material changes by updating the "Last Updated" date and displaying a prominent notice on our website.
+              We may update this Cookie Policy from time to time. We will notify you of any material changes by updating the &quot;Last Updated&quot; date and displaying a prominent notice on our website.
             </p>
           </section>
 

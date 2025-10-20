@@ -4,9 +4,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Monitor } from 'lucide-react';
 
+interface Website {
+  [key: string]: unknown;
+}
+
 // 임시로 비워둔 컴포넌트들 (실제 구현 필요)
 const useWebsiteBuilderStore = () => ({
-  setWebsite: () => {},
+  setWebsite: (_data?: Website) => {},
   isPreviewMode: false,
   isLayoutsPanelOpen: false,
   editorViewMode: 'single-edit'
@@ -18,11 +22,6 @@ const Canvas = () => <div>Canvas</div>;
 const PropertiesPanel = () => <div>Properties Panel</div>;
 const EditorHeader = () => <div>Editor Header</div>;
 const LinkClickToast = () => null;
-
-interface Website {
-  // 타입 정의 필요
-}
-
 const EditorPage = () => {
   const { setWebsite, isPreviewMode, isLayoutsPanelOpen, editorViewMode } = useWebsiteBuilderStore();
   const searchParams = useSearchParams();
@@ -46,11 +45,11 @@ const EditorPage = () => {
           try {
             // 1. 기본 패턴: templateId.json
             templateModule = await import(`../data/${templateId}.json`);
-          } catch (firstError) {
+          } catch {
             try {
               // 2. -template 패턴: templateId-template.json
               templateModule = await import(`../data/${templateId}-template.json`);
-            } catch (secondError) {
+            } catch (error) {
               // 3. 기존 파일들과의 호환성을 위한 특별 케이스들
               const legacyMapping: Record<string, string> = {
                 'sunny-lake': 'sunny-lake-template',
@@ -58,12 +57,12 @@ const EditorPage = () => {
                 'modern-saas-template': 'modern-saas-template',
                 'modern-ecommerce-template': 'modern-ecommerce-template'
               };
-              
+
               const mappedId = legacyMapping[templateId];
               if (mappedId) {
                 templateModule = await import(`../data/${mappedId}.json`);
               } else {
-                throw secondError;
+                throw error;
               }
             }
           }

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, ChevronDown, Grid3x3, Grid2x2, Sparkles } from 'lucide-react';
+import { Search, ChevronDown, Grid3x3, Grid2x2 } from 'lucide-react';
 
 // 템플릿 카테고리
 const categories = ['All', 'Business', 'Portfolio', 'E-commerce', 'Blog', 'Landing Page'];

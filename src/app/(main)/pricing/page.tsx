@@ -1,8 +1,46 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Check, X } from 'lucide-react';
+
+// 카드 스타일 상수
+const CARD_SHADOWS = {
+  pro: `inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+       0 8px 16px -2px rgba(0, 0, 0, 0.4),
+       0 4px 8px -2px rgba(0, 0, 0, 0.3),
+       0 0 60px rgba(147, 51, 234, 0.4),
+       0 0 100px rgba(99, 102, 241, 0.2)`,
+  business: `inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+            0 6px 12px -2px rgba(0, 0, 0, 0.5),
+            0 3px 6px -2px rgba(0, 0, 0, 0.4),
+            0 0 45px rgba(148, 163, 184, 0.2),
+            0 0 70px rgba(203, 213, 225, 0.1)`,
+  free: `inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+        0 4px 6px -1px rgba(0, 0, 0, 0.3),
+        0 2px 4px -1px rgba(0, 0, 0, 0.2)`
+};
+
+const CARD_HOVER_SHADOWS = {
+  pro: `0 20px 25px -5px rgba(0, 0, 0, 0.4),
+       0 10px 10px -5px rgba(0, 0, 0, 0.3),
+       0 0 50px rgba(147, 51, 234, 0.3),
+       0 0 80px rgba(147, 51, 234, 0.2)`,
+  business: `0 20px 25px -5px rgba(0, 0, 0, 0.5),
+            0 10px 10px -5px rgba(0, 0, 0, 0.4),
+            0 0 50px rgba(148, 163, 184, 0.25),
+            0 0 80px rgba(203, 213, 225, 0.15)`,
+  free: `0 20px 25px -5px rgba(0, 0, 0, 0.4),
+        0 10px 10px -5px rgba(0, 0, 0, 0.3),
+        0 0 50px rgba(255, 255, 255, 0.1),
+        0 0 80px rgba(255, 255, 255, 0.05)`
+};
+
+const INNER_GLOW = {
+  pro: 'radial-gradient(circle at center, rgba(147, 51, 234, 0.15) 0%, transparent 70%)',
+  business: 'radial-gradient(circle at center, rgba(203, 213, 225, 0.12) 0%, transparent 70%)',
+  free: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%)'
+};
 
 const pricingTiers = [
   {
@@ -118,53 +156,35 @@ export default function PricingPage() {
   const [isYearly, setIsYearly] = useState(true);
   const [stickyPlan, setStickyPlan] = useState(false);
   const stickyHeaderRef = useRef(null);
+  const pricingSectionRef = useRef<HTMLDivElement>(null);
 
+  // Intersection Observer로 최적화
   useEffect(() => {
-    const handleScroll = () => {
-      const featureSection = document.getElementById('feature-comparison');
-      const pricingSection = document.getElementById('pricing-cards');
+    const pricingSection = pricingSectionRef.current;
+    if (!pricingSection) return;
 
-      if (featureSection && pricingSection) {
-        const featureSectionTop = featureSection.getBoundingClientRect().top;
-        const pricingSectionBottom = pricingSection.getBoundingClientRect().bottom;
-
-        // 더 부드러운 임계점 설정과 하이스테리시스 적용
-        const STICKY_THRESHOLD = 120;
-        const UNSTICKY_THRESHOLD = 80;
-
-        setStickyPlan(prev => {
-          if (!prev && featureSectionTop <= STICKY_THRESHOLD && pricingSectionBottom < STICKY_THRESHOLD) {
-            return true;
-          } else if (prev && (featureSectionTop > UNSTICKY_THRESHOLD || pricingSectionBottom >= UNSTICKY_THRESHOLD)) {
-            return false;
-          }
-          return prev;
-        });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // 섹션이 화면에서 벗어나면 sticky header 표시
+        setStickyPlan(!entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+        rootMargin: '-120px 0px 0px 0px' // 120px 위에서 트리거
       }
-    };
+    );
 
-    // throttle을 사용해 스크롤 이벤트 최적화
-    let ticking = false;
-    const throttledScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
+    observer.observe(pricingSection);
+    return () => observer.disconnect();
+  }, []);
 
-    window.addEventListener('scroll', throttledScroll, { passive: true });
-    return () => window.removeEventListener('scroll', throttledScroll);
-  }, []); // Empty dependency array to prevent re-creation
-
-  const fadeIn = {
+  // 애니메이션 variants 메모이제이션
+  const fadeIn = useMemo(() => ({
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
+  }), []);
 
-  const staggerContainer = {
+  const staggerContainer = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -173,9 +193,10 @@ export default function PricingPage() {
         delayChildren: 0.2
       }
     }
-  };
+  }), []);
 
-const renderFeatureValue = (value: boolean | string) => {
+// Feature Value 컴포넌트 메모이제이션
+const FeatureValue = React.memo(({ value }: { value: boolean | string }) => {
   if (typeof value === 'boolean') {
     return value ? (
       <Check className="h-5 w-5 text-green-400 mx-auto" />
@@ -184,10 +205,24 @@ const renderFeatureValue = (value: boolean | string) => {
     );
   }
   return <span className="text-sm text-center">{value}</span>;
-};
+});
+
+FeatureValue.displayName = 'FeatureValue';
 
   return (
-    <main className="bg-black min-h-screen text-white">
+    <main className="relative bg-black min-h-screen text-white">
+      {/* Background Image */}
+      <div
+        className="fixed inset-0"
+        style={{
+          backgroundImage: 'url(/image/Pricing.webp)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.6,
+          zIndex: 0
+        }}
+      ></div>
       {/* Sticky Plan Headers - 높이를 고정하여 점프 방지 */}
       <div 
         ref={stickyHeaderRef}
@@ -214,47 +249,49 @@ const renderFeatureValue = (value: boolean | string) => {
         </div>
       </div>
 
-      {/* Pricing Cards Section - 패딩 조정 제거 */}
-      <motion.section 
+      {/* Pricing Cards Section */}
+      <motion.section
+        ref={pricingSectionRef}
         id="pricing-cards"
-        className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 pt-32 sm:pt-40 pb-16 sm:pb-20 lg:pb-32"
+        className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 pt-32 sm:pt-40 pb-20 sm:pb-28 lg:pb-40"
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
       >
-        <div className="w-full">
+        <div className="w-full relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 xl:gap-16 items-start">
-            
+
+            {/* Left Side - Header & Toggle */}
             <motion.div variants={fadeIn} className="lg:sticky top-24">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 sm:mb-6 lg:mb-8 leading-tight">
-                Pricing
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 sm:mb-6 lg:mb-8 leading-tight bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">
+                Simple, Transparent Pricing
               </h1>
               <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-8 lg:mb-12 leading-relaxed">
-                Choose the plan that works for you
+                Choose the perfect plan for your business
               </p>
-              
+
               <div className="flex items-center justify-start">
-                <div className="flex items-center bg-gray-900 rounded-full p-1">
+                <div className="flex items-center bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-lg rounded-full p-1.5 border-2 border-white/20 shadow-xl">
                   <button
                       onClick={() => setIsYearly(false)}
-                      className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm font-medium transition-all duration-300 ${
-                      !isYearly 
-                          ? 'bg-white text-black' 
-                          : 'text-gray-600 hover:text-white'
+                      className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm font-bold transition-all duration-300 ${
+                      !isYearly
+                          ? 'bg-white text-black shadow-lg'
+                          : 'text-gray-400 hover:text-white'
                       }`}
                   >
                       MONTHLY
                   </button>
                   <button
                       onClick={() => setIsYearly(true)}
-                      className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
-                      isYearly 
-                          ? 'bg-white text-black' 
-                          : 'text-gray-600 hover:text-white'
+                      className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                      isYearly
+                          ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg'
+                          : 'text-gray-400 hover:text-white'
                       }`}
                   >
                       YEARLY
-                      <span className="text-xs text-white px-1 py-1 rounded-md bg-gradient-to-r from-purple-800 to-indigo-600">
+                      <span className="text-xs text-white px-1 py-1 rounded-md bg-black/30">
                           SAVE 20%
                       </span>
                   </button>
@@ -262,55 +299,107 @@ const renderFeatureValue = (value: boolean | string) => {
               </div>
             </motion.div>
 
+            {/* Right Side - Pricing Cards */}
             <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-12">
               {pricingTiers.map((tier) => (
                   <motion.div
                     key={tier.name}
                     variants={fadeIn}
-                    className={`relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 h-full transition-all duration-300 flex flex-col transform hover:scale-105 hover:shadow-2xl ${
-                      tier.isGradient 
-                        ? 'bg-gradient-to-br from-slate-900 via-purple-950/90 to-indigo-950/80 border border-purple-800/30 ring-2 ring-purple-500/20' 
-                        : 'bg-gray-950 border border-gray-800 hover:border-gray-700'
+                    className={`relative group rounded-3xl p-8 sm:p-10 lg:p-12 h-full transition-all duration-300 flex flex-col cursor-pointer overflow-hidden hover:-translate-y-2 hover:scale-[1.02] ${
+                      tier.isGradient
+                        ? 'bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-transparent backdrop-blur-xl border-2 border-purple-500/30 hover:border-purple-400/50 lg:scale-105 lg:-mt-8 lg:mb-8'
+                        : tier.name === 'Business'
+                        ? 'bg-gradient-to-br from-slate-800/50 via-gray-800/40 to-transparent backdrop-blur-xl border-2 border-slate-400/40 hover:border-slate-300/60 lg:scale-102 lg:-mt-4 lg:mb-4'
+                        : 'bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg border-2 border-white/10 hover:border-white/30'
                     }`}
+                    style={{
+                      boxShadow: tier.isGradient
+                        ? CARD_SHADOWS.pro
+                        : tier.name === 'Business'
+                        ? CARD_SHADOWS.business
+                        : CARD_SHADOWS.free,
+                      transform: 'translateZ(0)'
+                    }}
                   >
-                    <div className="mb-6 sm:mb-8">
-                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-4">{tier.name}</h3>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white">
-                            {isYearly && tier.yearlyPrice > 0 ? `$${tier.yearlyPrice}`: ''}
-                            {!isYearly && tier.monthlyPrice > 0 ? `$${tier.monthlyPrice}`: ''}
-                            {tier.monthlyPrice === 0 ? 'Free': ''}
-                        </span>
-                        {tier.monthlyPrice > 0 && (
-                          <span className="text-gray-300 text-lg sm:text-xl">/mo</span>
-                        )}
+                    {/* Corner Accent - Top Left */}
+                    <div className="absolute top-0 left-0 w-0 h-0 border-t-2 border-l-2 border-white/40 rounded-tl-3xl opacity-0 group-hover:w-full group-hover:h-full group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
+
+                    {/* Corner Accent - Bottom Right */}
+                    <div className="absolute bottom-0 right-0 w-0 h-0 border-b-2 border-r-2 border-white/40 rounded-br-3xl opacity-0 group-hover:w-full group-hover:h-full group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
+
+                    {/* Inner Glow on Hover */}
+                    <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{
+                      background: tier.isGradient
+                        ? INNER_GLOW.pro
+                        : tier.name === 'Business'
+                        ? INNER_GLOW.business
+                        : INNER_GLOW.free
+                    }}></div>
+
+                    {/* Enhanced Shadow Layer on Hover */}
+                    <div
+                      className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none -z-10"
+                      style={{
+                        boxShadow: tier.isGradient
+                          ? CARD_HOVER_SHADOWS.pro
+                          : tier.name === 'Business'
+                          ? CARD_HOVER_SHADOWS.business
+                          : CARD_HOVER_SHADOWS.free
+                      }}
+                    ></div>
+
+                    <div className="relative z-10 flex flex-col h-full">
+                      {tier.isFeatured && (
+                        <div className="absolute -top-6 sm:-top-8 -right-6 sm:-right-8 px-4 py-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-bold rounded-full shadow-lg">
+                          MOST POPULAR
+                        </div>
+                      )}
+
+                      <div className="mb-6 sm:mb-8">
+                        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-4">{tier.name}</h3>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white">
+                              {isYearly && tier.yearlyPrice > 0 ? `$${tier.yearlyPrice}`: ''}
+                              {!isYearly && tier.monthlyPrice > 0 ? `$${tier.monthlyPrice}`: ''}
+                              {tier.monthlyPrice === 0 ? 'Free': ''}
+                          </span>
+                          {tier.monthlyPrice > 0 && (
+                            <span className="text-gray-300 text-lg sm:text-xl">/mo</span>
+                          )}
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="mb-6 sm:mb-8 flex-grow">
-                      <h4 className="text-sm sm:text-base font-medium text-gray-300 mb-4 sm:mb-6">
-                        {tier.description}
-                      </h4>
-                      <ul className="space-y-3 sm:space-y-4">
-                        {tier.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-start gap-3">
-                            <span className="text-green-400 flex-shrink-0 mt-0.5">✔️</span>
-                            <span className="text-sm sm:text-base text-gray-200 leading-relaxed">
-                              {feature}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                      <div className="mb-6 sm:mb-8 flex-grow">
+                        <h4 className="text-sm sm:text-base font-medium text-gray-300 mb-4 sm:mb-6">
+                          {tier.description}
+                        </h4>
+                        <ul className="space-y-3 sm:space-y-4">
+                          {tier.features.map((feature, featureIndex) => (
+                            <li key={featureIndex} className="flex items-start gap-3">
+                              <span className="text-green-400 flex-shrink-0 mt-0.5">✔️</span>
+                              <span className="text-sm sm:text-base text-gray-200 leading-relaxed">
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                    <div className="mt-auto pt-6">
-                      <motion.button
-                        className="w-full py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base transition-all duration-200 bg-white text-black hover:bg-gray-100 hover:shadow-lg"
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        {tier.buttonText}
-                      </motion.button>
+                      <div className="mt-auto pt-6">
+                        <motion.button
+                          className={`w-full py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base transition-all duration-200 ${
+                            tier.isGradient
+                              ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 shadow-lg hover:shadow-xl'
+                              : tier.name === 'Business'
+                              ? 'bg-gradient-to-r from-slate-700 to-gray-700 text-white hover:from-slate-800 hover:to-gray-800 shadow-lg hover:shadow-xl'
+                              : 'bg-white text-black hover:bg-gray-100 shadow-lg hover:shadow-xl'
+                          }`}
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          {tier.buttonText}
+                        </motion.button>
+                      </div>
                     </div>
                   </motion.div>
               ))}
@@ -320,9 +409,9 @@ const renderFeatureValue = (value: boolean | string) => {
       </motion.section>
 
       {/* Feature Comparison Section */}
-      <motion.section 
+      <motion.section
         id="feature-comparison"
-        className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-16 sm:py-20 lg:py-32 bg-black"
+        className="relative z-10 w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-16 sm:py-20 lg:py-32 bg-black"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
@@ -334,7 +423,7 @@ const renderFeatureValue = (value: boolean | string) => {
               Compare Plans
             </h2>
             <p className="text-lg sm:text-xl lg:text-2xl text-gray-400 leading-relaxed">
-              See what's included in each plan
+              See what&apos;s included in each plan
             </p>
           </motion.div>
           
@@ -351,7 +440,7 @@ const renderFeatureValue = (value: boolean | string) => {
 
                 {/* Feature Rows */}
                 {category.features.map((feature, featureIndex) => (
-                  <div 
+                  <div
                     key={feature.name}
                     className="grid grid-cols-4 gap-0 border-t border-gray-800"
                   >
@@ -359,13 +448,13 @@ const renderFeatureValue = (value: boolean | string) => {
                       <span className="text-sm sm:text-base font-medium text-gray-200">{feature.name}</span>
                     </div>
                     <div className={`p-4 sm:p-6 text-center border-l border-gray-800 ${featureIndex % 2 === 0 ? 'bg-black' : 'bg-black'}`}>
-                      {renderFeatureValue(feature.free)}
+                      <FeatureValue value={feature.free} />
                     </div>
                     <div className="p-4 sm:p-6 text-center border-l border-gray-800 bg-purple-950/40">
-                      {renderFeatureValue(feature.pro)}
+                      <FeatureValue value={feature.pro} />
                     </div>
                     <div className={`p-4 sm:p-6 text-center border-l border-gray-800 ${featureIndex % 2 === 0 ? 'bg-black' : 'bg-black'}`}>
-                      {renderFeatureValue(feature.business)}
+                      <FeatureValue value={feature.business} />
                     </div>
                   </div>
                 ))}
