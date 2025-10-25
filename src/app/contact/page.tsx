@@ -89,20 +89,20 @@ export default function ContactPage() {
               {/* Hero Heading - Inside White Box */}
               <div className="text-center mb-12 pb-8 border-b border-gray-200">
                 <motion.div {...fadeInUp}>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-black">
+                  <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-black">
                     Get in Touch
                   </h1>
                 </motion.div>
 
                 <motion.p
                   {...fadeInUp}
-                  className="text-lg sm:text-xl text-gray-700 mb-3 leading-relaxed"
+                  className="text-xl sm:text-2xl lg:text-2xl text-gray-700 mb-3 leading-relaxed"
                 >
                   We'd love to hear from you. Have a question? Need support? Want to partner with us?
                 </motion.p>
                 <motion.p
                   {...fadeInUp}
-                  className="text-gray-600"
+                  className="text-lg text-gray-600"
                 >
                   Reach out and let's chat. We typically respond within 24 hours.
                 </motion.p>
@@ -117,21 +117,21 @@ export default function ContactPage() {
               {/* Email */}
               <div>
                 <div className="flex items-center mb-3">
-                  <Mail className="h-6 w-6 text-black mr-3" />
-                  <h3 className="text-xl font-bold text-black">Email</h3>
+                  <Mail className="h-7 w-7 text-black mr-3" />
+                  <h3 className="text-2xl lg:text-2xl font-bold text-black">Email</h3>
                 </div>
-                <p className="text-gray-600 text-lg">
+                <p className="text-gray-600 text-lg lg:text-xl">
                   <a href="mailto:hello@facadely.com" className="hover:text-black transition-colors">
                     hello@facadely.com
                   </a>
                 </p>
-                <p className="text-gray-500 text-sm mt-2">We usually respond within 24 hours</p>
+                <p className="text-gray-500 text-base lg:text-base mt-2">We usually respond within 24 hours</p>
               </div>
 
               {/* Quick Response */}
               <div className="bg-gray-50 p-6 rounded-lg border-2 border-gray-200">
-                <h4 className="font-bold text-black mb-2">Quick Responses</h4>
-                <ul className="space-y-2 text-sm text-gray-600">
+                <h4 className="font-bold text-black mb-3 text-lg">Quick Responses</h4>
+                <ul className="space-y-2 text-base lg:text-base text-gray-600">
                   <li>✓ Support issues: 2-4 hours</li>
                   <li>✓ General inquiries: 24 hours</li>
                   <li>✓ Partnership proposals: 48 hours</li>
@@ -149,7 +149,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name */}
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-black mb-2">
+                    <label htmlFor="name" className="block text-base lg:text-lg font-semibold text-black mb-2">
                       Full Name
                     </label>
                     <input
@@ -160,13 +160,13 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       placeholder="John Doe"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-base text-black placeholder-gray-400"
                     />
                   </div>
 
                   {/* Email */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-black mb-2">
+                    <label htmlFor="email" className="block text-base lg:text-lg font-semibold text-black mb-2">
                       Email Address
                     </label>
                     <input
@@ -177,13 +177,13 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       placeholder="john@example.com"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-base text-black placeholder-gray-400"
                     />
                   </div>
 
                   {/* Type */}
                   <div>
-                    <label htmlFor="type" className="block text-sm font-semibold text-black mb-2">
+                    <label htmlFor="type" className="block text-base lg:text-lg font-semibold text-black mb-2">
                       Inquiry Type
                     </label>
                     <select
@@ -191,7 +191,7 @@ export default function ContactPage() {
                       name="type"
                       value={formData.type}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-base text-black"
                     >
                       <option value="general">General Inquiry</option>
                       <option value="support">Customer Support</option>
@@ -203,7 +203,7 @@ export default function ContactPage() {
 
                   {/* Message */}
                   <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-black mb-2">
+                    <label htmlFor="message" className="block text-base lg:text-lg font-semibold text-black mb-2">
                       Message
                     </label>
                     <textarea
@@ -214,7 +214,7 @@ export default function ContactPage() {
                       required
                       rows={6}
                       placeholder="Tell us how we can help..."
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400 resize-none"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-base text-black placeholder-gray-400 resize-none"
                     />
                   </div>
 
@@ -223,7 +223,7 @@ export default function ContactPage() {
                     type="submit"
                     disabled={isLoading}
                     whileTap={{ scale: 0.95 }}
-                    className="w-full flex items-center justify-center px-6 py-4 bg-black text-white font-bold rounded-lg hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center px-6 py-4 bg-black text-white font-bold text-lg rounded-lg hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isLoading ? (
                       <>
