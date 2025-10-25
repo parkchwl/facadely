@@ -64,32 +64,50 @@ export default function AboutPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+          {/* About Label */}
+          <motion.div
+            {...fadeInUp}
+            className="mb-6 flex items-center justify-center gap-3"
+          >
+            <div className="h-px w-8 bg-white/60"></div>
+            <span className="text-sm sm:text-base font-semibold text-white/80 tracking-widest uppercase">About facadely</span>
+            <div className="h-px w-8 bg-white/60"></div>
+          </motion.div>
+
           <motion.div {...fadeInUp}>
-            <h1 className={`${dmSerif.className} text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight mb-6`}>
+            <h1 className={`${dmSerif.className} text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight mb-8`}>
               We focus on essence
             </h1>
           </motion.div>
 
           <motion.p
             {...fadeInUp}
-            className="text-xl sm:text-2xl text-gray-300 mb-8 leading-relaxed"
+            className="text-lg sm:text-xl text-gray-200 mb-12 leading-relaxed max-w-3xl mx-auto"
           >
-            At facadely, we believe that everyone should have the power to create beautiful, professional websites without needing to code.
+            At facadely, we believe that everyone should have the power to create <span className="text-white font-semibold">beautiful, professional websites</span> without needing to code.
           </motion.p>
+
+          {/* Button Decorative Line */}
+          <motion.div
+            {...fadeInUp}
+            className="mb-8 flex justify-center"
+          >
+            <div className="h-px w-12 bg-white/40"></div>
+          </motion.div>
 
           <motion.div
             {...fadeInUp}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-6 justify-center"
           >
             <Link
               href="/login"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center justify-center px-10 py-4 bg-white text-black font-bold text-lg rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105"
             >
               Get Started <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-all duration-300"
+              className="inline-flex items-center justify-center px-10 py-4 border-2 border-white text-white font-bold text-lg rounded-lg hover:bg-white hover:text-black transition-all duration-300"
             >
               Get in Touch
             </Link>
