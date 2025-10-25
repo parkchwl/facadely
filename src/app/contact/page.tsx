@@ -62,7 +62,7 @@ export default function ContactPage() {
           src="/image/Contact.webp"
           alt="Contact us background"
           fill
-          quality={85}
+          quality={100}
           priority
           className="object-cover"
         />
