@@ -59,7 +59,7 @@ export default function ContactPage() {
       <section className="relative min-h-screen flex items-center justify-center text-white overflow-hidden pt-20 pb-24">
         {/* Background Image */}
         <Image
-          src="/image/Contact.jpg"
+          src="/image/Contact.webp"
           alt="Contact us background"
           fill
           quality={85}
