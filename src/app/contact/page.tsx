@@ -16,13 +16,6 @@ export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
-    viewport: { once: true }
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -102,31 +95,28 @@ export default function ContactPage() {
               <div className="mb-12 pb-8 border-b border-gray-200">
                 {/* Left: Hero Heading */}
                 <div>
-                  <motion.div {...fadeInUp}>
+                  <div>
                     <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-black">
                       Get in Touch
                     </h1>
-                  </motion.div>
+                  </div>
 
-                  <motion.p
-                    {...fadeInUp}
+                  <p
                     className="text-xl sm:text-2xl lg:text-2xl text-gray-700 mb-3 leading-relaxed"
                   >
                     We&apos;d love to hear from you. Have a question? Need support? Want to partner with us?
-                  </motion.p>
-                  <motion.p
-                    {...fadeInUp}
+                  </p>
+                  <p
                     className="text-lg text-gray-600"
                   >
                     Reach out and let&apos;s chat. We typically respond within 24 hours.
-                  </motion.p>
+                  </p>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             {/* Contact Info */}
-            <motion.div
-              {...fadeInUp}
+            <div
               className="lg:col-span-1 space-y-8"
             >
               {/* Email */}
@@ -152,12 +142,10 @@ export default function ContactPage() {
                   <li>✓ Partnership proposals: 48 hours</li>
                 </ul>
               </div>
-            </motion.div>
+            </div>
 
             {/* Contact Form */}
-            <motion.div
-              {...fadeInUp}
-              transition={{ duration: 0.6, delay: 0.1 }}
+            <div
               className="lg:col-span-2"
             >
               {!isSubmitted ? (
@@ -272,7 +260,7 @@ export default function ContactPage() {
                   </button>
                 </motion.div>
               )}
-            </motion.div>
+            </div>
               </div>
             </div>
           </motion.div>
