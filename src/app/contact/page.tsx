@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Mail, Send, CheckCircle } from 'lucide-react';
 
@@ -218,25 +219,36 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  {/* Submit Button */}
-                  <motion.button
-                    type="submit"
-                    disabled={isLoading}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-full flex items-center justify-center px-6 py-4 bg-black text-white font-bold text-lg rounded-lg hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? (
-                      <>
-                        <div className="animate-spin h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full"></div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-5 w-5 mr-2" />
-                        Send Message
-                      </>
-                    )}
-                  </motion.button>
+                  {/* Button Group */}
+                  <div className="flex gap-4">
+                    {/* Submit Button */}
+                    <motion.button
+                      type="submit"
+                      disabled={isLoading}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex-1 flex items-center justify-center px-6 py-4 bg-black text-white font-bold text-lg rounded-lg hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isLoading ? (
+                        <>
+                          <div className="animate-spin h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full"></div>
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="h-5 w-5 mr-2" />
+                          Send Message
+                        </>
+                      )}
+                    </motion.button>
+
+                    {/* Home Button */}
+                    <Link
+                      href="/"
+                      className="flex-1 flex items-center justify-center px-6 py-4 bg-gray-100 text-black font-bold text-lg rounded-lg hover:bg-gray-200 transition-all duration-300"
+                    >
+                      ✦ facadely
+                    </Link>
+                  </div>
                 </form>
               ) : (
                 <motion.div
