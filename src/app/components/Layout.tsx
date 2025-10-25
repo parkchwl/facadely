@@ -286,8 +286,8 @@ export default function Layout({ children }: LayoutProps) {
           <div>
             <h4 className="font-semibold mb-3 text-white">Company</h4>
             <ul className="space-y-2 text-neutral-400 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">About us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About us</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
         </div>
