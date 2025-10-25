@@ -78,16 +78,6 @@ export default function ContactPage() {
 
         {/* Content Container */}
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
-          {/* Home Button - Outside White Box, Top Left */}
-          <div className="flex justify-start mb-6">
-            <Link
-              href="/"
-              className="text-black font-bold text-4xl transition-all duration-300 hover:opacity-70"
-            >
-              ✦ facadely
-            </Link>
-          </div>
-
           {/* Contact Form in White Rounded Box */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -97,6 +87,16 @@ export default function ContactPage() {
             className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-16"
           >
             <div className="max-w-5xl mx-auto">
+              {/* Home Button - Top Left */}
+              <div className="flex justify-start mb-8">
+                <Link
+                  href="/"
+                  className="text-black font-bold text-4xl transition-all duration-300 hover:opacity-70"
+                >
+                  ✦ facadely
+                </Link>
+              </div>
+
               {/* Hero Heading - Inside White Box */}
               <div className="mb-12 pb-8 border-b border-gray-200">
                 {/* Left: Hero Heading */}
