@@ -58,12 +58,6 @@ export default function AboutPage() {
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
 
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-        </div>
-
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           {/* About Label */}
           <motion.div
