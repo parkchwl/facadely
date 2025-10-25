@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Mail, Send, CheckCircle } from 'lucide-react';
 
@@ -54,9 +55,22 @@ export default function ContactPage() {
   return (
     <div className="w-full bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden pt-20">
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-30">
+      <section className="relative min-h-screen flex items-center justify-center text-white overflow-hidden pt-20">
+        {/* Background Image */}
+        <Image
+          src="/image/Contact.jpg"
+          alt="Contact us background"
+          fill
+          quality={85}
+          priority
+          className="object-cover"
+        />
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/60"></div>
+
+        {/* Accent Elements */}
+        <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
           <div className="absolute bottom-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
         </div>
