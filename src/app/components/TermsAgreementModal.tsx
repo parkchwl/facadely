@@ -24,7 +24,7 @@ export default function TermsAgreementModal({ isOpen, onClose, onAgree, provider
           <X size={20} strokeWidth={1.5} />
         </button>
 
-        <h2 className="text-2xl font-light text-black mb-2 tracking-tight">Welcome to Facadely</h2>
+        <h2 className="text-2xl font-light text-black mb-2 tracking-tight">Welcome to facadely</h2>
         <p className="text-sm text-gray-400 mb-8 font-light">
           Complete your {provider} signup
         </p>

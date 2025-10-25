@@ -36,12 +36,12 @@ const SOLUTION_DATA = [
 
 const FAQS = [
   {
-    question: 'Do I need coding skills to use Facadely?',
-    answer: 'No! Facadely is designed for everyone.\n\nOur intuitive drag-and-drop interface makes it easy to create professional websites without any coding knowledge.'
+    question: 'Do I need coding skills to use facadely?',
+    answer: 'No! facadely is designed for everyone.\n\nOur intuitive drag-and-drop interface makes it easy to create professional websites without any coding knowledge.'
   },
   {
     question: 'Can I use my own domain name?',
-    answer: 'Yes, you can connect your custom domain or purchase a new one directly through Facadely.\n\nWe handle all the technical setup for you.'
+    answer: 'Yes, you can connect your custom domain or purchase a new one directly through facadely.\n\nWe handle all the technical setup for you.'
   },
   {
     question: 'Are the templates mobile-responsive?',
@@ -62,7 +62,7 @@ const FAQS = [
 ];
 
 const STYLES = {
-  containerClasses: "w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
+  containerClasses: "w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
   heroContainerClasses: "w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
   sectionSpacing: "py-16 sm:py-20 lg:py-24 xl:py-28 2xl:py-32"
 };
@@ -170,7 +170,7 @@ export default function HomePage() {
             priority
             quality={75}
             sizes="100vw"
-            className="object-cover brightness-200"
+            className="object-cover brightness-150"
             onLoad={() => setImagesLoaded(prev => prev + 1)}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
@@ -249,44 +249,65 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-black/40"></div>
 
           <div className={`${STYLES.containerClasses} py-12 sm:py-16 lg:py-20 xl:py-24 relative z-10`}>
-            <div className="flex flex-col items-center gap-12 lg:gap-20">
-              {/* Top Section - Headline & CTA */}
-              <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="w-full text-center"
-              >
-                <h2 className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-extrabold text-white tracking-tight leading-[0.9] mb-10 lg:mb-12 ${dmSerif.className}`}>
-                  Why<br />Website<br />Matters
-                </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-start">
+              {/* Left Section - Headline & CTA */}
+              <div className="flex flex-col gap-8 lg:gap-12 justify-start lg:col-span-1">
+                {/* Title - Staggered */}
+                <motion.div
+                  initial={{ opacity: 0, y: -50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="w-full mb-8"
+                >
+                  <h2 className={`text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[110px] 2xl:text-[130px] font-extrabold tracking-tight leading-[0.9] text-white ${dmSerif.className}`}>
+                    Why<br />Website<br />Matters
+                  </h2>
+                </motion.div>
 
-                <motion.p
+                {/* Description */}
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="text-2xl lg:text-3xl xl:text-4xl text-gray-200 leading-relaxed font-light max-w-5xl mx-auto"
+                  className="w-full"
                 >
-                  In today&apos;s digital world, your website is your <span className="font-semibold text-white">first impression</span>, your <span className="font-semibold text-white">credibility</span>, and often your <span className="font-semibold text-white">main sales tool</span>.
-                </motion.p>
-              </motion.div>
+                  <p className="text-xl lg:text-2xl xl:text-3xl text-gray-200 leading-relaxed font-light max-w-xl">
+                    In today&apos;s digital world, your website is your <span className="font-semibold text-white">first impression</span>, your <span className="font-semibold text-white">credibility</span>, and often your <span className="font-semibold text-white">main sales tool</span>.
+                  </p>
+                </motion.div>
 
-              {/* Bottom Section - 6 Equal Cards */}
+                {/* CTA Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  className="w-fit"
+                >
+                  <Link href="/generate">
+                    <button className="bg-white text-black px-12 py-6 lg:px-14 lg:py-7 rounded-full hover:bg-gray-100 transition-all duration-200 text-xl lg:text-2xl font-bold shadow-2xl hover:scale-105 hover:-translate-y-0.5 active:scale-95">
+                      Build Your Site Today
+                    </button>
+                  </Link>
+                </motion.div>
+              </div>
+
+              {/* Right Section - 6 Stats Cards */}
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="w-full"
+                className="w-full lg:col-span-2"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                   {STATS_DATA.map((item, index) => {
                     return (
                       <div
                         key={index}
-                        className="relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-8 lg:p-10 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02]"
+                        className={`relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-6 lg:p-8 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02] ${index >= 4 ? 'hidden md:block' : ''}`}
                         style={{
                           boxShadow: `
                             inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
@@ -299,16 +320,16 @@ export default function HomePage() {
                         {/* Inner Glow on Hover - CSS 클래스 사용 */}
                         <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none stat-card-inner-glow"></div>
 
-                        {/* Vertical Layout: Number on top, text below */}
-                        <div className="relative z-10">
-                          {/* Stat Number - Top aligned, very large */}
-                          <h3 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 lg:mb-5">
+                        {/* Vertical Layout - Number on top, text below */}
+                        <div className="relative z-10 flex flex-col gap-4">
+                          {/* Stat Number */}
+                          <h3 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white">
                             {item.stat}
                           </h3>
 
-                          {/* Description - Bottom aligned */}
+                          {/* Description */}
                           <div>
-                            <p className="text-lg lg:text-xl xl:text-2xl text-white leading-relaxed mb-3 font-light">
+                            <p className="text-base lg:text-lg xl:text-xl text-white leading-relaxed mb-3 font-light">
                               <span className="font-medium">{item.highlight}</span> {item.text}
                             </p>
                             <p className="text-sm lg:text-base text-gray-400">
@@ -321,21 +342,6 @@ export default function HomePage() {
                   })}
                 </div>
               </motion.div>
-
-              {/* CTA Button - Below Cards */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <Link href="/generate">
-                  <button className="bg-white text-black px-10 py-5 lg:px-12 lg:py-6 rounded-full hover:bg-gray-100 transition-all duration-200 text-xl font-bold shadow-2xl hover:scale-105 hover:-translate-y-0.5 active:scale-95">
-                    Build Your Site Today
-                  </button>
-                </Link>
-              </motion.div>
             </div>
           </div>
         </div>
@@ -343,11 +349,11 @@ export default function HomePage() {
 
       <ScrollingBanner />
 
-      {/* Facadely Solution Section */}
+      {/* facadely Solution Section */}
       <section className="relative border-t border-gray-800 overflow-hidden">
         <Image
           src="/image/Solution.webp"
-          alt="Facadely solution background"
+          alt="facadely solution background"
           fill
           quality={75}
           sizes="100vw"
@@ -365,7 +371,7 @@ export default function HomePage() {
               viewport={{ once: true }}
               className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-black mb-16 lg:mb-20 text-center ${dmSerif.className}`}
             >
-              Facadely solves the problems
+              facadely solves the problems
             </motion.h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
@@ -451,7 +457,7 @@ export default function HomePage() {
 
                   {/* 프로그레스 바 - CSS animation으로 최적화 */}
                   {activeFaqIndex === index && !isPaused && (
-                    <div className="mt-4 h-1 bg-gray-200 rounded-full overflow-hidden">
+                    <div key={`progress-${activeFaqIndex}`} className="mt-4 h-1 bg-gray-200 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-black animate-progress"
                         style={{
@@ -543,7 +549,7 @@ export default function HomePage() {
               Ready to build your dream website?
             </h2>
             <p className="text-xl lg:text-2xl text-gray-400 mb-12 leading-relaxed">
-              Join thousands of happy users who transformed their online presence with Facadely
+              Join thousands of happy users who transformed their online presence with facadely
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link href="/templates" className="inline-block bg-white text-black px-10 py-5 lg:px-12 lg:py-6 rounded-full hover:bg-gray-100 transition-all duration-200 text-lg lg:text-xl font-bold shadow-2xl hover:scale-105">

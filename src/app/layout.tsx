@@ -13,14 +13,14 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: {
-    default: "Facadely - No-Code Website Builder",
-    template: "%s | Facadely"
+    default: "facadely - No-Code Website Builder",
+    template: "%s | facadely"
   },
   description: "Build a professional website in minutes — No code, no hassle. Choose from 100+ templates and launch your site today.",
   keywords: ["website builder", "no-code", "templates", "web design", "landing page", "website maker"],
-  authors: [{ name: "Facadely Team" }],
-  creator: "Facadely Corp.",
-  publisher: "Facadely Corp.",
+  authors: [{ name: "facadely Team" }],
+  creator: "facadely Corp.",
+  publisher: "facadely Corp.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://facadely.com'),
   alternates: {
     canonical: '/',
@@ -29,19 +29,19 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: '/',
-    title: 'Facadely - No-Code Website Builder',
+    title: 'facadely - No-Code Website Builder',
     description: 'Build a professional website in minutes — No code, no hassle',
-    siteName: 'Facadely',
+    siteName: 'facadely',
     images: [{
       url: '/og-image.png',
       width: 1200,
       height: 630,
-      alt: 'Facadely Website Builder',
+      alt: 'facadely Website Builder',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Facadely - No-Code Website Builder',
+    title: 'facadely - No-Code Website Builder',
     description: 'Build a professional website in minutes — No code, no hassle',
     images: ['/twitter-image.png'],
   },

@@ -51,7 +51,7 @@ export default function AboutPage() {
             {...fadeInUp}
             className="text-xl sm:text-2xl text-gray-300 mb-8 leading-relaxed"
           >
-            At Facadely, we believe that everyone should have the power to create beautiful, professional websites without needing to code.
+            At facadely, we believe that everyone should have the power to create beautiful, professional websites without needing to code.
           </motion.p>
 
           <motion.div

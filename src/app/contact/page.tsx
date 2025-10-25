@@ -253,16 +253,16 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                q: 'How long does it take to build a website on Facadely?',
+                q: 'How long does it take to build a website on facadely?',
                 a: 'Most users create their first website in under 30 minutes. Our intuitive interface gets you up and running fast.'
               },
               {
                 q: 'Do I need coding skills?',
-                a: 'Not at all! Facadely is designed for everyone. No coding knowledge required.'
+                a: 'Not at all! facadely is designed for everyone. No coding knowledge required.'
               },
               {
                 q: 'Can I use my own domain?',
-                a: 'Yes! You can connect your custom domain or purchase a new one directly through Facadely.'
+                a: 'Yes! You can connect your custom domain or purchase a new one directly through facadely.'
               },
               {
                 q: 'Is there a free trial?',

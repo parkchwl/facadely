@@ -19,10 +19,10 @@ export default function TermsPage() {
           <section className="mb-16">
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">1. Agreement to Terms</h2>
             <p className="text-gray-600 leading-relaxed mb-4 font-light">
-              Welcome to Facadely. By accessing or using our website builder platform (&quot;Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you disagree with any part of these terms, you may not access the Service.
+              Welcome to facadely. By accessing or using our website builder platform (&quot;Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you disagree with any part of these terms, you may not access the Service.
             </p>
             <p className="text-gray-600 leading-relaxed font-light">
-              Facadely provides a no-code website building platform that allows users to create, customize, and publish professional websites without technical knowledge. These Terms apply to all users of the Service, including without limitation users who are browsers, builders, and contributors of content.
+              facadely provides a no-code website building platform that allows users to create, customize, and publish professional websites without technical knowledge. These Terms apply to all users of the Service, including without limitation users who are browsers, builders, and contributors of content.
             </p>
           </section>
 
@@ -44,7 +44,7 @@ export default function TermsPage() {
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">3. Service Usage and Limitations</h2>
             <h3 className="text-xl font-light text-black mt-8 mb-4">3.1 Acceptable Use</h3>
             <p className="text-gray-600 leading-relaxed mb-4 font-light">
-              You agree to use Facadely only for lawful purposes. You are prohibited from:
+              You agree to use facadely only for lawful purposes. You are prohibited from:
             </p>
             <ul className="space-y-2 text-gray-600 font-light mb-6">
               <li className="pl-6 border-l border-gray-200">Publishing content that is illegal, harmful, threatening, abusive, or discriminatory</li>
@@ -79,12 +79,12 @@ export default function TermsPage() {
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">5. Intellectual Property Rights</h2>
             <h3 className="text-xl font-light text-black mt-8 mb-4">5.1 Your Content</h3>
             <p className="text-gray-600 leading-relaxed mb-4 font-light">
-              You retain all rights to the content you create and publish using Facadely. By using our Service, you grant us a limited license to host, store, and display your content as necessary to provide the Service.
+              You retain all rights to the content you create and publish using facadely. By using our Service, you grant us a limited license to host, store, and display your content as necessary to provide the Service.
             </p>
 
-            <h3 className="text-xl font-light text-black mt-8 mb-4">5.2 Facadely Content</h3>
+            <h3 className="text-xl font-light text-black mt-8 mb-4">5.2 facadely Content</h3>
             <p className="text-gray-600 leading-relaxed font-light">
-              All templates, designs, features, and functionality provided by Facadely remain our intellectual property. You receive a license to use these elements only as part of creating websites through our Service.
+              All templates, designs, features, and functionality provided by facadely remain our intellectual property. You receive a license to use these elements only as part of creating websites through our Service.
             </p>
           </section>
 
@@ -92,7 +92,7 @@ export default function TermsPage() {
           <section className="mb-16">
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">6. Data and Privacy</h2>
             <p className="text-gray-600 leading-relaxed mb-4 font-light">
-              Your use of the Service is also governed by our Privacy Policy. We collect and use your data as described in our Privacy Policy. By using Facadely, you consent to such collection and use.
+              Your use of the Service is also governed by our Privacy Policy. We collect and use your data as described in our Privacy Policy. By using facadely, you consent to such collection and use.
             </p>
             <p className="text-gray-600 leading-relaxed font-light">
               We implement industry-standard security measures to protect your data. However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security.

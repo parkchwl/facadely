@@ -19,7 +19,7 @@ export default function PrivacyPage() {
           <section className="mb-16">
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">Introduction</h2>
             <p className="text-gray-600 leading-relaxed font-light">
-              At Facadely, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website building platform.
+              At facadely, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website building platform.
             </p>
           </section>
 
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
 
             <h3 className="text-xl font-light text-black mt-8 mb-4">1.2 Information Automatically Collected</h3>
             <p className="text-gray-600 leading-relaxed mb-4 font-light">
-              When you use Facadely, we automatically collect certain information:
+              When you use facadely, we automatically collect certain information:
             </p>
             <ul className="space-y-3 text-gray-600 font-light mb-6">
               <li className="pl-6 border-l border-gray-200"><span className="text-black">Usage Data:</span> Pages visited, features used, time spent on platform</li>
@@ -155,7 +155,7 @@ export default function PrivacyPage() {
           <section className="mb-16">
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">8. International Data Transfers</h2>
             <p className="text-gray-600 leading-relaxed mb-4 font-light">
-              Facadely is based in South Korea. If you access our Service from outside South Korea, your information may be transferred to, stored, and processed in South Korea or other countries where our service providers operate.
+              facadely is based in South Korea. If you access our Service from outside South Korea, your information may be transferred to, stored, and processed in South Korea or other countries where our service providers operate.
             </p>
             <p className="text-gray-600 leading-relaxed font-light">
               We ensure appropriate safeguards are in place for international transfers, including Standard Contractual Clauses approved by regulatory authorities.
@@ -166,7 +166,7 @@ export default function PrivacyPage() {
           <section className="mb-16">
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">9. Children&apos;s Privacy</h2>
             <p className="text-gray-600 leading-relaxed font-light">
-              Facadely is not intended for users under 18 years of age. We do not knowingly collect personal information from children. If we become aware that we have collected data from a child without parental consent, we will take steps to delete that information promptly.
+              facadely is not intended for users under 18 years of age. We do not knowingly collect personal information from children. If we become aware that we have collected data from a child without parental consent, we will take steps to delete that information promptly.
             </p>
           </section>
 
@@ -218,7 +218,7 @@ export default function PrivacyPage() {
             <div className="border border-gray-200 rounded-none p-8">
               <p className="text-gray-600 font-light mb-2"><span className="text-black">General Inquiries:</span> privacy@facadely.com</p>
               <p className="text-gray-600 font-light mb-2"><span className="text-black">Data Protection Officer:</span> dpo@facadely.com</p>
-              <p className="text-gray-600 font-light"><span className="text-black">Address:</span> Facadely Corp., Seoul, South Korea</p>
+              <p className="text-gray-600 font-light"><span className="text-black">Address:</span> facadely Corp., Seoul, South Korea</p>
             </div>
           </section>
         </div>

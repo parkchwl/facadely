@@ -1,33 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { DM_Serif_Display } from 'next/font/google';
 import {
   Zap,
   Palette,
-  Wrench,
   Smartphone,
   Search,
   TrendingUp,
   Globe,
   Lock,
-  ShoppingCart,
-  Camera,
-  Dumbbell,
-  GraduationCap,
-  Hotel,
-  Utensils,
-  Briefcase,
   Monitor,
   ChevronDown,
   Check,
   ArrowRight,
   Users,
-  Award,
-  Clock,
-  Star
+  Award
 } from 'lucide-react';
 
 const dmSerif = DM_Serif_Display({
@@ -35,28 +26,6 @@ const dmSerif = DM_Serif_Display({
   weight: '400',
   display: 'swap',
 });
-
-// Service Overview Data
-const services = [
-  {
-    icon: Monitor,
-    title: 'Website Builder',
-    description: 'Drag & drop editor with real-time preview. Build professional websites without writing a single line of code.',
-    features: ['Drag & Drop Interface', 'Real-time Preview', 'No Coding Required']
-  },
-  {
-    icon: Palette,
-    title: 'Premium Templates',
-    description: '500+ professionally designed templates covering all industries. Fully customizable to match your brand.',
-    features: ['500+ Templates', 'All Industries', 'Fully Customizable']
-  },
-  {
-    icon: Wrench,
-    title: 'Business Tools',
-    description: 'Everything you need to run your online business. Forms, analytics, SEO, and e-commerce built right in.',
-    features: ['Form Builder', 'Analytics Dashboard', 'SEO Optimization']
-  }
-];
 
 // Hero Features - Extended
 const heroFeatures = [
@@ -92,7 +61,7 @@ const heroFeatures = [
   }
 ];
 
-// Features Data
+// Features Data - Reduced to 4 key features
 const features = [
   {
     icon: Zap,
@@ -106,7 +75,7 @@ const features = [
     title: 'Professional Design',
     description: 'Every template is crafted by professional designers. Modern, trendy, and conversion-optimized designs that make your brand shine.',
     highlights: ['Designer-made templates', 'Trendy & modern', 'Brand customization'],
-    image: '/image/InMatters.webp'
+    image: '/image/Matters.webp'
   },
   {
     icon: Smartphone,
@@ -116,25 +85,11 @@ const features = [
     image: '/image/Generate.webp'
   },
   {
-    icon: Search,
-    title: 'Built-in SEO Tools',
-    description: 'Rank higher on Google with our advanced SEO tools. Meta tags, sitemaps, and optimization suggestions included.',
-    highlights: ['SEO optimization', 'Meta tag editor', 'Auto-generated sitemap'],
-    image: '/image/InMatters.webp'
-  },
-  {
-    icon: TrendingUp,
-    title: 'Real-time Analytics',
-    description: 'Track your website performance with built-in analytics. Understand your visitors and make data-driven decisions.',
-    highlights: ['Visitor tracking', 'Traffic insights', 'Conversion metrics'],
-    image: '/image/Generate.webp'
-  },
-  {
     icon: Lock,
     title: '24/7 Security & Support',
     description: 'SSL certificates, automatic backups, and 99.9% uptime guaranteed. Our support team is here to help anytime.',
     highlights: ['SSL included', 'Auto backups', '24/7 support'],
-    image: '/image/InMatters.webp'
+    image: '/image/Matters.webp'
   }
 ];
 
@@ -160,26 +115,6 @@ const steps = [
   }
 ];
 
-// Use Cases / Industries
-const industries = [
-  { icon: ShoppingCart, name: 'E-commerce', description: 'Online Stores' },
-  { icon: Briefcase, name: 'Business', description: 'Corporate Sites' },
-  { icon: Palette, name: 'Portfolio', description: 'Creative Work' },
-  { icon: Camera, name: 'Photography', description: 'Galleries' },
-  { icon: Utensils, name: 'Restaurant', description: 'Menus & Booking' },
-  { icon: Dumbbell, name: 'Fitness', description: 'Gyms & Trainers' },
-  { icon: GraduationCap, name: 'Education', description: 'Schools & Courses' },
-  { icon: Hotel, name: 'Hospitality', description: 'Hotels & Travel' }
-];
-
-// Stats
-const stats = [
-  { number: '100K+', label: 'Websites Created', icon: Globe },
-  { number: '500+', label: 'Templates', icon: Palette },
-  { number: '99.9%', label: 'Uptime', icon: Clock },
-  { number: '4.9★', label: 'Average Rating', icon: Star }
-];
-
 // FAQ Data
 const faqs = [
   {
@@ -188,11 +123,11 @@ const faqs = [
   },
   {
     question: 'Do I need coding skills?',
-    answer: 'Absolutely not! Facadely is designed for everyone. Our intuitive visual editor lets you create stunning websites without writing a single line of code.'
+    answer: 'Absolutely not! facadely is designed for everyone. Our intuitive visual editor lets you create stunning websites without writing a single line of code.'
   },
   {
     question: 'Can I use my own domain name?',
-    answer: 'Yes! You can connect your existing domain or purchase a new one directly through Facadely. We handle all the technical setup automatically.'
+    answer: 'Yes! You can connect your existing domain or purchase a new one directly through facadely. We handle all the technical setup automatically.'
   },
   {
     question: 'Are websites mobile-responsive?',
@@ -209,13 +144,96 @@ const faqs = [
 ];
 
 export default function ServicePage() {
-  const [activeFaq, setActiveFaq] = useState<number | null>(0);
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
+  // SEO - Update document metadata
+  useEffect(() => {
+    // Update title
+    document.title = 'Our Services - Professional Website Builder | facadely';
+
+    // Update meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Build a professional website in minutes with facadely. No coding required. Lightning fast setup, premium templates, mobile-responsive design, and 24/7 support.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Build a professional website in minutes with facadely. No coding required. Lightning fast setup, premium templates, mobile-responsive design, and 24/7 support.';
+      document.head.appendChild(meta);
+    }
+
+    // Update keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', 'website builder, no code website, professional website design, responsive websites, website templates, web design service');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'keywords';
+      meta.content = 'website builder, no code website, professional website design, responsive websites, website templates, web design service';
+      document.head.appendChild(meta);
+    }
+
+    // Open Graph tags
+    const updateOgTag = (property: string, content: string) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (tag) {
+        tag.setAttribute('content', content);
+      } else {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        tag.setAttribute('content', content);
+        document.head.appendChild(tag);
+      }
+    };
+
+    updateOgTag('og:title', 'Our Services - Professional Website Builder | facadely');
+    updateOgTag('og:description', 'Create stunning websites in 5 minutes. No coding skills needed. 500+ templates, built-in SEO, and enterprise security.');
+    updateOgTag('og:type', 'website');
+    updateOgTag('og:url', 'https://facadely.com/service');
+    updateOgTag('og:image', 'https://facadely.com/image/Service.webp');
+    updateOgTag('og:image:width', '1200');
+    updateOgTag('og:image:height', '630');
+    updateOgTag('og:image:alt', 'facadely Website Builder Services');
+
+    // Twitter Card tags
+    const updateTwitterTag = (name: string, content: string) => {
+      let tag = document.querySelector(`meta[name="${name}"]`);
+      if (tag) {
+        tag.setAttribute('content', content);
+      } else {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        tag.setAttribute('content', content);
+        document.head.appendChild(tag);
+      }
+    };
+
+    updateTwitterTag('twitter:card', 'summary_large_image');
+    updateTwitterTag('twitter:title', 'Our Services - Professional Website Builder | facadely');
+    updateTwitterTag('twitter:description', 'Build a professional website in minutes. No coding required.');
+    updateTwitterTag('twitter:image', 'https://facadely.com/image/Service.webp');
+
+    // Cleanup function to reset title when component unmounts
+    return () => {
+      document.title = 'facadely';
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-white -mt-16 sm:-mt-20 lg:-mt-24">
       {/* Hero Section - Option 2 Layout with Option 4 Headline Style */}
       <section className="relative min-h-[80vh] max-h-[1000px] flex items-center justify-center overflow-hidden bg-black py-12 sm:py-16 lg:py-20 xl:py-24">
-        <div className="absolute inset-0 bg-[url('/image/Service.webp')] bg-cover bg-center opacity-30"></div>
+        <div className="absolute inset-0">
+          <Image
+            src="/image/Service.webp"
+            alt="Service hero background"
+            fill
+            priority
+            quality={75}
+            sizes="100vw"
+            className="object-cover opacity-30"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -238,7 +256,7 @@ export default function ServicePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl sm:text-2xl lg:text-3xl text-gray-300 leading-relaxed mb-10 font-light"
+                className="text-xl sm:text-2xl lg:text-3xl text-gray-200 leading-relaxed mb-10 font-light"
               >
                 Build a professional website in minutes — No code, No hassle
               </motion.p>
@@ -254,6 +272,7 @@ export default function ServicePage() {
                   <motion.button
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label="Start building your website for free"
                     className="bg-white text-black px-8 py-4 lg:px-10 lg:py-5 rounded-full font-bold text-lg shadow-2xl hover:bg-gray-100 transition-all duration-200 w-full sm:w-auto"
                   >
                     Start Building Free
@@ -263,6 +282,7 @@ export default function ServicePage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label="Browse website templates"
                     className="border-2 border-white/30 text-white px-8 py-4 lg:px-10 lg:py-5 rounded-full font-bold text-lg hover:bg-white/10 hover:border-white/50 transition-all duration-200 backdrop-blur-sm w-full sm:w-auto"
                   >
                     Browse Templates
@@ -293,7 +313,7 @@ export default function ServicePage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex-1 w-full"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-5 lg:gap-6">
                 {heroFeatures.map((feature, index) => (
                   <motion.div
                     key={index}
@@ -301,16 +321,16 @@ export default function ServicePage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.4 + index * 0.08 }}
                     whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                    className="flex items-start gap-4 p-6 lg:p-7 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer group"
+                    className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 lg:p-7 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer group"
                   >
-                    <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      <feature.icon className="w-7 h-7 text-black" />
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 text-black" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold text-white mb-2">
+                    <div className="w-full">
+                      <h3 className="text-sm sm:text-lg font-bold text-white mb-1 sm:mb-2 break-words">
                         {feature.title}
                       </h3>
-                      <p className="text-sm text-gray-400 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-gray-400 leading-relaxed break-words">
                         {feature.description}
                       </p>
                     </div>
@@ -356,11 +376,15 @@ export default function ServicePage() {
                   {/* Image */}
                   <div className="flex-1 w-full">
                     <div className="relative rounded-2xl overflow-hidden shadow-lg bg-white p-4">
-                      <img
-                        src={feature.image}
-                        alt={feature.title}
-                        className="w-full h-auto rounded-lg"
-                      />
+                      <div className="relative w-full aspect-video">
+                        <Image
+                          src={feature.image}
+                          alt={`${feature.title} feature screenshot`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover rounded-lg"
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -407,7 +431,7 @@ export default function ServicePage() {
               Frequently Asked Questions
             </h2>
             <p className="text-xl text-gray-600">
-              Everything you need to know about Facadely
+              Everything you need to know about facadely
             </p>
           </motion.div>
 
@@ -423,6 +447,8 @@ export default function ServicePage() {
               >
                 <button
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  aria-expanded={activeFaq === index}
+                  aria-controls={`faq-answer-${index}`}
                   className="w-full px-6 py-6 flex items-center justify-between text-left hover:bg-gray-50 transition-colors duration-200"
                 >
                   <span className="text-lg font-bold text-gray-900 pr-8">
@@ -432,9 +458,11 @@ export default function ServicePage() {
                     className={`w-6 h-6 text-gray-600 flex-shrink-0 transition-transform duration-300 ${
                       activeFaq === index ? 'rotate-180' : ''
                     }`}
+                    aria-hidden="true"
                   />
                 </button>
                 <motion.div
+                  id={`faq-answer-${index}`}
                   initial={false}
                   animate={{
                     height: activeFaq === index ? 'auto' : 0,
@@ -442,6 +470,7 @@ export default function ServicePage() {
                   }}
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
+                  role="region"
                 >
                   <div className="px-6 pb-6 text-gray-600 leading-relaxed">
                     {faq.answer}
@@ -468,7 +497,16 @@ export default function ServicePage() {
 
       {/* Final CTA Section */}
       <section className="py-20 sm:py-24 lg:py-32 bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/image/InMatters.webp')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0">
+          <Image
+            src="/image/InMatters.webp"
+            alt="Final CTA background"
+            fill
+            quality={75}
+            sizes="100vw"
+            className="object-cover opacity-10"
+          />
+        </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -480,8 +518,8 @@ export default function ServicePage() {
             <h2 className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 ${dmSerif.className}`}>
               Ready to Build Your<br />Dream Website?
             </h2>
-            <p className="text-xl lg:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Join thousands of successful businesses who trust Facadely.<br />
+            <p className="text-xl lg:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Join thousands of successful businesses who trust facadely.<br />
               Start for free. No credit card required.
             </p>
 
@@ -490,15 +528,17 @@ export default function ServicePage() {
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="Start building your website for free"
                   className="bg-white text-black px-10 py-5 rounded-full font-bold text-lg shadow-2xl hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2"
                 >
-                  Start Building Now <ArrowRight size={20} />
+                  Start Building Free <ArrowRight size={20} aria-hidden="true" />
                 </motion.button>
               </Link>
               <Link href="/templates">
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="Browse all website templates"
                   className="border-2 border-white text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-200"
                 >
                   Browse Templates

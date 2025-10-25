@@ -230,7 +230,7 @@ export default function CookiePage() {
             </p>
             <div className="border border-gray-200 rounded-none p-8">
               <p className="text-gray-600 font-light mb-2"><span className="text-black">Email:</span> privacy@facadely.com</p>
-              <p className="text-gray-600 font-light"><span className="text-black">Address:</span> Facadely Corp., Seoul, South Korea</p>
+              <p className="text-gray-600 font-light"><span className="text-black">Address:</span> facadely Corp., Seoul, South Korea</p>
             </div>
           </section>
         </div>
