@@ -66,7 +66,7 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <motion.div {...fadeInUp}>
             <h1 className={`${dmSerif.className} text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight mb-6`}>
-              We focus on <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">essence</span>
+              We focus on essence
             </h1>
           </motion.div>
 
