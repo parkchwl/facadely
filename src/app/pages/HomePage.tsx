@@ -260,7 +260,7 @@ export default function HomePage() {
                   viewport={{ once: true }}
                   className="w-full mb-8"
                 >
-                  <h2 className={`text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[110px] 2xl:text-[130px] font-extrabold tracking-tight leading-[0.9] text-white ${dmSerif.className}`}>
+                  <h2 className={`text-5xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[110px] 2xl:text-[130px] font-extrabold tracking-tight leading-[0.9] text-white ${dmSerif.className}`}>
                     Why<br />Website<br />Matters
                   </h2>
                 </motion.div>
