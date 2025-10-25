@@ -111,13 +111,13 @@ export default function ContactPage() {
                     {...fadeInUp}
                     className="text-xl sm:text-2xl lg:text-2xl text-gray-700 mb-3 leading-relaxed"
                   >
-                    We'd love to hear from you. Have a question? Need support? Want to partner with us?
+                    We&apos;d love to hear from you. Have a question? Need support? Want to partner with us?
                   </motion.p>
                   <motion.p
                     {...fadeInUp}
                     className="text-lg text-gray-600"
                   >
-                    Reach out and let's chat. We typically respond within 24 hours.
+                    Reach out and let&apos;s chat. We typically respond within 24 hours.
                   </motion.p>
                 </div>
               </div>
@@ -261,7 +261,7 @@ export default function ContactPage() {
                   <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
                   <h3 className="text-3xl font-bold text-black mb-2">Message Sent!</h3>
                   <p className="text-gray-600 mb-6">
-                    Thank you for reaching out. We'll get back to you as soon as possible.
+                    Thank you for reaching out. We&apos;ll get back to you as soon as possible.
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}

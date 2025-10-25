@@ -110,13 +110,13 @@ export default function AboutPage() {
                 Facadely was born from a simple frustration. Our founder noticed something obvious yet overlooked: talented individuals with incredible ideas were being held back by the complexity of web development.
               </p>
               <p>
-                Whether you're an artist, entrepreneur, freelancer, or business owner, you shouldn't need to spend months learning to code just to get your vision online. That gap between imagination and execution was too wide.
+                Whether you&apos;re an artist, entrepreneur, freelancer, or business owner, you shouldn&apos;t need to spend months learning to code just to get your vision online. That gap between imagination and execution was too wide.
               </p>
               <p>
                 So we asked ourselves: What if building a website was as easy as telling a story? What if design and functionality could be intuitive, beautiful, and powerful all at once?
               </p>
               <p>
-                That question led us here. We're building the tools we wished existed. Tools that respect your time, honor your creativity, and turn ideas into reality—faster than ever before.
+                That question led us here. We&apos;re building the tools we wished existed. Tools that respect your time, honor your creativity, and turn ideas into reality—faster than ever before.
               </p>
             </div>
           </motion.div>
