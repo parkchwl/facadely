@@ -54,8 +54,8 @@ export default function ContactPage() {
 
   return (
     <div className="w-full bg-white">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center text-white overflow-hidden pt-20">
+      {/* Hero + Contact Combined Section */}
+      <section className="relative min-h-screen flex items-center justify-center text-white overflow-hidden pt-20 pb-24">
         {/* Background Image */}
         <Image
           src="/image/Contact.jpg"
@@ -75,32 +75,40 @@ export default function ContactPage() {
           <div className="absolute bottom-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center py-24">
-          <motion.div {...fadeInUp}>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-              Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Touch</span>
-            </h1>
-          </motion.div>
+        {/* Content Container */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
+          {/* Hero Heading */}
+          <div className="text-center mb-16">
+            <motion.div {...fadeInUp}>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+                Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Touch</span>
+              </h1>
+            </motion.div>
 
-          <motion.p
-            {...fadeInUp}
-            className="text-xl sm:text-2xl text-gray-300 mb-4 leading-relaxed"
-          >
-            We'd love to hear from you. Have a question? Need support? Want to partner with us?
-          </motion.p>
-          <motion.p
-            {...fadeInUp}
-            className="text-lg text-gray-400"
-          >
-            Reach out and let's chat. We typically respond within 24 hours.
-          </motion.p>
-        </div>
-      </section>
+            <motion.p
+              {...fadeInUp}
+              className="text-xl sm:text-2xl text-gray-300 mb-4 leading-relaxed"
+            >
+              We'd love to hear from you. Have a question? Need support? Want to partner with us?
+            </motion.p>
+            <motion.p
+              {...fadeInUp}
+              className="text-lg text-gray-400"
+            >
+              Reach out and let's chat. We typically respond within 24 hours.
+            </motion.p>
+          </div>
 
-      {/* Contact Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+          {/* Contact Form in White Rounded Box */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-16"
+          >
+            <div className="max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             {/* Contact Info */}
             <motion.div
               {...fadeInUp}
@@ -250,7 +258,9 @@ export default function ContactPage() {
                 </motion.div>
               )}
             </motion.div>
-          </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
