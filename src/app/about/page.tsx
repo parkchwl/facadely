@@ -61,7 +61,9 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           {/* About Label */}
           <motion.div
-            {...fadeInUp}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             className="mb-6 flex items-center justify-center gap-3"
           >
             <div className="h-px w-8 bg-white/60"></div>
@@ -69,14 +71,20 @@ export default function AboutPage() {
             <div className="h-px w-8 bg-white/60"></div>
           </motion.div>
 
-          <motion.div {...fadeInUp}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <h1 className={`${dmSerif.className} text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight mb-8`}>
               We focus on essence
             </h1>
           </motion.div>
 
           <motion.p
-            {...fadeInUp}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg sm:text-xl text-gray-200 mb-12 leading-relaxed max-w-3xl mx-auto"
           >
             At facadely, we believe that everyone should have the power to create <span className="text-white font-semibold">beautiful, professional websites</span> without needing to code.
@@ -84,14 +92,18 @@ export default function AboutPage() {
 
           {/* Button Decorative Line */}
           <motion.div
-            {...fadeInUp}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-8 flex justify-center"
           >
             <div className="h-px w-12 bg-white/40"></div>
           </motion.div>
 
           <motion.div
-            {...fadeInUp}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-6 justify-center"
           >
             <Link
