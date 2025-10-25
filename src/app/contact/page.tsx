@@ -64,7 +64,9 @@ export default function ContactPage() {
           fill
           quality={100}
           priority
+          sizes="100vw"
           className="object-cover"
+          placeholder="empty"
         />
 
         {/* Dark Overlay */}
@@ -80,10 +82,9 @@ export default function ContactPage() {
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
           {/* Contact Form in White Rounded Box */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
             className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-16"
           >
             <div className="max-w-5xl mx-auto">
