@@ -78,8 +78,8 @@ export default function ContactPage() {
 
         {/* Content Container */}
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
-          {/* Home Button - Outside White Box, Top Right */}
-          <div className="flex justify-end mb-6">
+          {/* Home Button - Outside White Box, Top Left */}
+          <div className="flex justify-start mb-6">
             <Link
               href="/"
               className="text-black font-bold text-4xl transition-all duration-300 hover:opacity-70"
