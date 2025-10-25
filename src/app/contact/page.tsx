@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -15,6 +15,9 @@ export default function ContactPage() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Memoize form data to prevent unnecessary re-renders
+  const memoizedFormData = useMemo(() => formData, [formData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -59,6 +62,8 @@ export default function ContactPage() {
           quality={75}
           sizes="100vw"
           className="object-cover"
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwABmQAAA//9k="
         />
 
         {/* Dark Overlay */}
@@ -74,9 +79,9 @@ export default function ContactPage() {
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
           {/* Contact Form in White Rounded Box */}
           <motion.div
-            initial={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-16"
           >
             <div className="max-w-5xl mx-auto">
@@ -158,7 +163,7 @@ export default function ContactPage() {
                       type="text"
                       id="name"
                       name="name"
-                      value={formData.name}
+                      value={memoizedFormData.name}
                       onChange={handleChange}
                       required
                       placeholder="John Doe"
@@ -175,7 +180,7 @@ export default function ContactPage() {
                       type="email"
                       id="email"
                       name="email"
-                      value={formData.email}
+                      value={memoizedFormData.email}
                       onChange={handleChange}
                       required
                       placeholder="john@example.com"
@@ -191,7 +196,7 @@ export default function ContactPage() {
                     <select
                       id="type"
                       name="type"
-                      value={formData.type}
+                      value={memoizedFormData.type}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-base text-black"
                     >
@@ -211,7 +216,7 @@ export default function ContactPage() {
                     <textarea
                       id="message"
                       name="message"
-                      value={formData.message}
+                      value={memoizedFormData.message}
                       onChange={handleChange}
                       required
                       rows={6}
