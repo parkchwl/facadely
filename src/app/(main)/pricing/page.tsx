@@ -4,44 +4,6 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 
-// 카드 스타일 상수
-const CARD_SHADOWS = {
-  pro: `inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-       0 8px 16px -2px rgba(0, 0, 0, 0.4),
-       0 4px 8px -2px rgba(0, 0, 0, 0.3),
-       0 0 60px rgba(147, 51, 234, 0.4),
-       0 0 100px rgba(99, 102, 241, 0.2)`,
-  business: `inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
-            0 6px 12px -2px rgba(0, 0, 0, 0.5),
-            0 3px 6px -2px rgba(0, 0, 0, 0.4),
-            0 0 45px rgba(148, 163, 184, 0.2),
-            0 0 70px rgba(203, 213, 225, 0.1)`,
-  free: `inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-        0 4px 6px -1px rgba(0, 0, 0, 0.3),
-        0 2px 4px -1px rgba(0, 0, 0, 0.2)`
-};
-
-const CARD_HOVER_SHADOWS = {
-  pro: `0 20px 25px -5px rgba(0, 0, 0, 0.4),
-       0 10px 10px -5px rgba(0, 0, 0, 0.3),
-       0 0 50px rgba(147, 51, 234, 0.3),
-       0 0 80px rgba(147, 51, 234, 0.2)`,
-  business: `0 20px 25px -5px rgba(0, 0, 0, 0.5),
-            0 10px 10px -5px rgba(0, 0, 0, 0.4),
-            0 0 50px rgba(148, 163, 184, 0.25),
-            0 0 80px rgba(203, 213, 225, 0.15)`,
-  free: `0 20px 25px -5px rgba(0, 0, 0, 0.4),
-        0 10px 10px -5px rgba(0, 0, 0, 0.3),
-        0 0 50px rgba(255, 255, 255, 0.1),
-        0 0 80px rgba(255, 255, 255, 0.05)`
-};
-
-const INNER_GLOW = {
-  pro: 'radial-gradient(circle at center, rgba(147, 51, 234, 0.15) 0%, transparent 70%)',
-  business: 'radial-gradient(circle at center, rgba(203, 213, 225, 0.12) 0%, transparent 70%)',
-  free: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%)'
-};
-
 const pricingTiers = [
   {
     name: 'Free',
@@ -307,19 +269,13 @@ FeatureValue.displayName = 'FeatureValue';
                     variants={fadeIn}
                     className={`relative group rounded-3xl p-8 sm:p-10 lg:p-12 h-full transition-all duration-300 flex flex-col cursor-pointer overflow-hidden hover:-translate-y-2 hover:scale-[1.02] ${
                       tier.isGradient
-                        ? 'bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-transparent backdrop-blur-xl border-2 border-purple-500/30 hover:border-purple-400/50 lg:scale-105 lg:-mt-8 lg:mb-8'
+                        ? 'bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-transparent backdrop-blur-xl lg:scale-105 lg:-mt-8 lg:mb-8'
                         : tier.name === 'Business'
-                        ? 'bg-gradient-to-br from-slate-800/50 via-gray-800/40 to-transparent backdrop-blur-xl border-2 border-slate-400/40 hover:border-slate-300/60 lg:scale-102 lg:-mt-4 lg:mb-4'
-                        : 'bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg border-2 border-white/10 hover:border-white/30'
+                        ? 'bg-gradient-to-br from-slate-800/50 via-gray-800/40 to-transparent backdrop-blur-xl lg:scale-102 lg:-mt-4 lg:mb-4'
+                        : 'bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg'
+                    } ${
+                      tier.isGradient ? 'pricing-card-pro' : tier.name === 'Business' ? 'pricing-card-business' : 'pricing-card-free'
                     }`}
-                    style={{
-                      boxShadow: tier.isGradient
-                        ? CARD_SHADOWS.pro
-                        : tier.name === 'Business'
-                        ? CARD_SHADOWS.business
-                        : CARD_SHADOWS.free,
-                      transform: 'translateZ(0)'
-                    }}
                   >
                     {/* Corner Accent - Top Left */}
                     <div className="absolute top-0 left-0 w-0 h-0 border-t-2 border-l-2 border-white/40 rounded-tl-3xl opacity-0 group-hover:w-full group-hover:h-full group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
@@ -327,26 +283,6 @@ FeatureValue.displayName = 'FeatureValue';
                     {/* Corner Accent - Bottom Right */}
                     <div className="absolute bottom-0 right-0 w-0 h-0 border-b-2 border-r-2 border-white/40 rounded-br-3xl opacity-0 group-hover:w-full group-hover:h-full group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
 
-                    {/* Inner Glow on Hover */}
-                    <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{
-                      background: tier.isGradient
-                        ? INNER_GLOW.pro
-                        : tier.name === 'Business'
-                        ? INNER_GLOW.business
-                        : INNER_GLOW.free
-                    }}></div>
-
-                    {/* Enhanced Shadow Layer on Hover */}
-                    <div
-                      className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none -z-10"
-                      style={{
-                        boxShadow: tier.isGradient
-                          ? CARD_HOVER_SHADOWS.pro
-                          : tier.name === 'Business'
-                          ? CARD_HOVER_SHADOWS.business
-                          : CARD_HOVER_SHADOWS.free
-                      }}
-                    ></div>
 
                     <div className="relative z-10 flex flex-col h-full">
                       {tier.isFeatured && (

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -15,9 +15,6 @@ export default function ContactPage() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  // Memoize form data to prevent unnecessary re-renders
-  const memoizedFormData = useMemo(() => formData, [formData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -155,7 +152,7 @@ export default function ContactPage() {
                       type="text"
                       id="name"
                       name="name"
-                      value={memoizedFormData.name}
+                      value={formData.name}
                       onChange={handleChange}
                       required
                       placeholder="John Doe"
@@ -172,7 +169,7 @@ export default function ContactPage() {
                       type="email"
                       id="email"
                       name="email"
-                      value={memoizedFormData.email}
+                      value={formData.email}
                       onChange={handleChange}
                       required
                       placeholder="john@example.com"
@@ -188,7 +185,7 @@ export default function ContactPage() {
                     <select
                       id="type"
                       name="type"
-                      value={memoizedFormData.type}
+                      value={formData.type}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-base text-black"
                     >
@@ -208,7 +205,7 @@ export default function ContactPage() {
                     <textarea
                       id="message"
                       name="message"
-                      value={memoizedFormData.message}
+                      value={formData.message}
                       onChange={handleChange}
                       required
                       rows={6}

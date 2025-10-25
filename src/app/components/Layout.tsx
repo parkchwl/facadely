@@ -34,11 +34,19 @@ export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 0);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -54,8 +62,7 @@ export default function Layout({ children }: LayoutProps) {
           ? {
               backgroundImage: 'url(/image/Template.webp)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundAttachment: 'fixed'
+              backgroundPosition: 'center'
             }
           : undefined
       }

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useMemo } from 'react';
 import { DM_Serif_Display } from 'next/font/google';
 import { ArrowRight, Target, Lightbulb, Heart } from 'lucide-react';
 
@@ -12,31 +13,33 @@ const dmSerif = DM_Serif_Display({
   display: 'swap',
 });
 
-export default function AboutPage() {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
-    viewport: { once: true }
-  };
+const VALUES_DATA = [
+  {
+    icon: Target,
+    title: 'Simplicity',
+    description: 'We believe great design is invisible. Our tools should feel intuitive, not complicated.'
+  },
+  {
+    icon: Lightbulb,
+    title: 'Empowerment',
+    description: 'Everyone deserves the tools to bring their ideas to life, regardless of technical skills.'
+  },
+  {
+    icon: Heart,
+    title: 'Excellence',
+    description: 'We obsess over details because small things matter. Quality is non-negotiable.'
+  }
+];
 
-  const values = [
-    {
-      icon: Target,
-      title: 'Simplicity',
-      description: 'We believe great design is invisible. Our tools should feel intuitive, not complicated.'
-    },
-    {
-      icon: Lightbulb,
-      title: 'Empowerment',
-      description: 'Everyone deserves the tools to bring their ideas to life, regardless of technical skills.'
-    },
-    {
-      icon: Heart,
-      title: 'Excellence',
-      description: 'We obsess over details because small things matter. Quality is non-negotiable.'
-    }
-  ];
+const FADE_IN_UP = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+  viewport: { once: true }
+};
+
+export default function AboutPage() {
+  const fadeInUp = useMemo(() => FADE_IN_UP, []);
 
   return (
     <div className="w-full bg-white">
@@ -182,7 +185,7 @@ export default function AboutPage() {
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {values.map((value, index) => {
+            {VALUES_DATA.map((value, index) => {
               const Icon = value.icon;
               return (
                 <motion.div

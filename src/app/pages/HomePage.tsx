@@ -20,7 +20,7 @@ const STATS_DATA = [
   { stat: '94%', highlight: 'of first impressions', text: 'are design-related.', source: 'Northumbria University UX Lab' },
   { stat: '88%', highlight: 'of online consumers', text: 'are less likely to return to a site after a bad experience.', source: 'Econsultancy / Adobe' },
   { stat: '81%', highlight: 'of consumers', text: 'visit a website before making a purchase decision.', source: 'GE Capital Retail Bank / Google Think Insights' },
-  { stat: '75%+', highlight: 'of users', text: "judge a company's credibility based on its website.", source: 'Stanford Web Credibility Research' },
+  { stat: '75%', highlight: 'of users', text: "judge a company's credibility based on its website.", source: 'Stanford Web Credibility Research' },
   { stat: '~70%', highlight: 'lose trust', text: "if a website doesn't look professional.", source: 'Adobe & Sweor' },
   { stat: '69%', highlight: 'of mobile users', text: 'interact with the website as their first brand experience.', source: 'Think with Google' }
 ];
