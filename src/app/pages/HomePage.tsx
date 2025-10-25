@@ -251,14 +251,14 @@ export default function HomePage() {
           <div className={`${STYLES.containerClasses} py-12 sm:py-16 lg:py-20 xl:py-24 relative z-10`}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-start">
               {/* Left Section - Headline & CTA */}
-              <div className="flex flex-col gap-8 lg:gap-12 justify-start lg:col-span-1">
+              <div className="flex flex-col gap-6 lg:gap-10 justify-start lg:col-span-1">
                 {/* Title - Staggered */}
                 <motion.div
                   initial={{ opacity: 0, y: -50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                   viewport={{ once: true }}
-                  className="w-full mb-8"
+                  className="w-full mb-4"
                 >
                   <h2 className={`text-7xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[110px] 2xl:text-[130px] font-extrabold tracking-tight leading-[0.9] text-white ${dmSerif.className}`}>
                     Why<br />Website<br />Matters
