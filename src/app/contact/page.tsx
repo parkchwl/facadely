@@ -67,12 +67,6 @@ export default function ContactPage() {
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/30"></div>
 
-        {/* Accent Elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-          <div className="absolute bottom-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-        </div>
-
         {/* Content Container */}
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
           {/* Contact Form in White Rounded Box */}
