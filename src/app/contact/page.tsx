@@ -88,7 +88,7 @@ export default function ContactPage() {
           >
             <div className="max-w-5xl mx-auto">
               {/* Home Button - Top Left */}
-              <div className="flex justify-start mb-4">
+              <div className="flex justify-start mb-2">
                 <Link
                   href="/"
                   className="text-black font-bold text-4xl transition-all duration-300 hover:opacity-70"
