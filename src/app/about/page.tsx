@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Target, Lightbulb, Heart } from 'lucide-react';
 
 export default function AboutPage() {
@@ -33,9 +34,24 @@ export default function AboutPage() {
   return (
     <div className="w-full bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center text-white overflow-hidden">
+        {/* Background Image */}
+        <Image
+          src="/image/About.jpg"
+          alt="About us background"
+          fill
+          quality={85}
+          priority
+          sizes="100vw"
+          className="object-cover"
+          placeholder="empty"
+        />
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
+
         {/* Background Elements */}
-        <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
           <div className="absolute bottom-20 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
         </div>
