@@ -114,7 +114,7 @@ export default function ContactPage() {
                 {/* Right: Home Button */}
                 <Link
                   href="/"
-                  className="flex-shrink-0 ml-6 px-6 py-3 bg-gray-100 text-black font-bold rounded-lg hover:bg-gray-200 transition-all duration-300 h-fit"
+                  className="flex-shrink-0 ml-6 px-6 py-3 text-black font-bold transition-all duration-300 h-fit hover:opacity-70"
                 >
                   ✦ facadely
                 </Link>
