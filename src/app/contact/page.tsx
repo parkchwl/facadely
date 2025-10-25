@@ -78,6 +78,16 @@ export default function ContactPage() {
 
         {/* Content Container */}
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
+          {/* Home Button - Outside White Box, Top Right */}
+          <div className="flex justify-end mb-6">
+            <Link
+              href="/"
+              className="text-black font-bold text-4xl transition-all duration-300 hover:opacity-70"
+            >
+              ✦ facadely
+            </Link>
+          </div>
+
           {/* Contact Form in White Rounded Box */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -87,10 +97,10 @@ export default function ContactPage() {
             className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-16"
           >
             <div className="max-w-5xl mx-auto">
-              {/* Hero Heading with Home Button - Inside White Box */}
-              <div className="flex items-start justify-between mb-12 pb-8 border-b border-gray-200">
+              {/* Hero Heading - Inside White Box */}
+              <div className="mb-12 pb-8 border-b border-gray-200">
                 {/* Left: Hero Heading */}
-                <div className="flex-1">
+                <div>
                   <motion.div {...fadeInUp}>
                     <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-black">
                       Get in Touch
@@ -110,14 +120,6 @@ export default function ContactPage() {
                     Reach out and let's chat. We typically respond within 24 hours.
                   </motion.p>
                 </div>
-
-                {/* Right: Home Button */}
-                <Link
-                  href="/"
-                  className="flex-shrink-0 ml-6 px-6 py-3 text-black font-bold text-4xl transition-all duration-300 h-fit hover:opacity-70"
-                >
-                  ✦ facadely
-                </Link>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
