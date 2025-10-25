@@ -77,28 +77,6 @@ export default function ContactPage() {
 
         {/* Content Container */}
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
-          {/* Hero Heading */}
-          <div className="text-center mb-16">
-            <motion.div {...fadeInUp}>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-                Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Touch</span>
-              </h1>
-            </motion.div>
-
-            <motion.p
-              {...fadeInUp}
-              className="text-xl sm:text-2xl text-gray-300 mb-4 leading-relaxed"
-            >
-              We'd love to hear from you. Have a question? Need support? Want to partner with us?
-            </motion.p>
-            <motion.p
-              {...fadeInUp}
-              className="text-lg text-gray-400"
-            >
-              Reach out and let's chat. We typically respond within 24 hours.
-            </motion.p>
-          </div>
-
           {/* Contact Form in White Rounded Box */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -108,6 +86,28 @@ export default function ContactPage() {
             className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-16"
           >
             <div className="max-w-5xl mx-auto">
+              {/* Hero Heading - Inside White Box */}
+              <div className="text-center mb-12 pb-8 border-b border-gray-200">
+                <motion.div {...fadeInUp}>
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-black">
+                    Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Touch</span>
+                  </h1>
+                </motion.div>
+
+                <motion.p
+                  {...fadeInUp}
+                  className="text-lg sm:text-xl text-gray-700 mb-3 leading-relaxed"
+                >
+                  We'd love to hear from you. Have a question? Need support? Want to partner with us?
+                </motion.p>
+                <motion.p
+                  {...fadeInUp}
+                  className="text-gray-600"
+                >
+                  Reach out and let's chat. We typically respond within 24 hours.
+                </motion.p>
+              </div>
+
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             {/* Contact Info */}
             <motion.div
