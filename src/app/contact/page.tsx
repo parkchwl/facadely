@@ -90,7 +90,7 @@ export default function ContactPage() {
               <div className="text-center mb-12 pb-8 border-b border-gray-200">
                 <motion.div {...fadeInUp}>
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-black">
-                    Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Touch</span>
+                    Get in Touch
                   </h1>
                 </motion.div>
 
