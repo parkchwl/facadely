@@ -278,48 +278,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* FAQ Preview Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
-          <motion.h2
-            {...fadeInUp}
-            className="text-5xl font-bold text-black text-center mb-16"
-          >
-            Frequently Asked Questions
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                q: 'How long does it take to build a website on facadely?',
-                a: 'Most users create their first website in under 30 minutes. Our intuitive interface gets you up and running fast.'
-              },
-              {
-                q: 'Do I need coding skills?',
-                a: 'Not at all! facadely is designed for everyone. No coding knowledge required.'
-              },
-              {
-                q: 'Can I use my own domain?',
-                a: 'Yes! You can connect your custom domain or purchase a new one directly through facadely.'
-              },
-              {
-                q: 'Is there a free trial?',
-                a: 'Yes, we offer a 14-day free trial. No credit card required to get started.'
-              }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                {...fadeInUp}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="p-6 bg-white rounded-lg border-2 border-gray-200"
-              >
-                <h3 className="font-bold text-black text-lg mb-3">{item.q}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.a}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
