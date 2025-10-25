@@ -87,26 +87,37 @@ export default function ContactPage() {
             className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-16"
           >
             <div className="max-w-5xl mx-auto">
-              {/* Hero Heading - Inside White Box */}
-              <div className="text-center mb-12 pb-8 border-b border-gray-200">
-                <motion.div {...fadeInUp}>
-                  <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-black">
-                    Get in Touch
-                  </h1>
-                </motion.div>
+              {/* Hero Heading with Home Button - Inside White Box */}
+              <div className="flex items-start justify-between mb-12 pb-8 border-b border-gray-200">
+                {/* Left: Hero Heading */}
+                <div className="flex-1">
+                  <motion.div {...fadeInUp}>
+                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-black">
+                      Get in Touch
+                    </h1>
+                  </motion.div>
 
-                <motion.p
-                  {...fadeInUp}
-                  className="text-xl sm:text-2xl lg:text-2xl text-gray-700 mb-3 leading-relaxed"
+                  <motion.p
+                    {...fadeInUp}
+                    className="text-xl sm:text-2xl lg:text-2xl text-gray-700 mb-3 leading-relaxed"
+                  >
+                    We'd love to hear from you. Have a question? Need support? Want to partner with us?
+                  </motion.p>
+                  <motion.p
+                    {...fadeInUp}
+                    className="text-lg text-gray-600"
+                  >
+                    Reach out and let's chat. We typically respond within 24 hours.
+                  </motion.p>
+                </div>
+
+                {/* Right: Home Button */}
+                <Link
+                  href="/"
+                  className="flex-shrink-0 ml-6 px-6 py-3 bg-gray-100 text-black font-bold rounded-lg hover:bg-gray-200 transition-all duration-300 h-fit"
                 >
-                  We'd love to hear from you. Have a question? Need support? Want to partner with us?
-                </motion.p>
-                <motion.p
-                  {...fadeInUp}
-                  className="text-lg text-gray-600"
-                >
-                  Reach out and let's chat. We typically respond within 24 hours.
-                </motion.p>
+                  ✦ facadely
+                </Link>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
@@ -219,36 +230,25 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  {/* Button Group */}
-                  <div className="flex gap-4">
-                    {/* Submit Button */}
-                    <motion.button
-                      type="submit"
-                      disabled={isLoading}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex-1 flex items-center justify-center px-6 py-4 bg-black text-white font-bold text-lg rounded-lg hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isLoading ? (
-                        <>
-                          <div className="animate-spin h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full"></div>
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="h-5 w-5 mr-2" />
-                          Send Message
-                        </>
-                      )}
-                    </motion.button>
-
-                    {/* Home Button */}
-                    <Link
-                      href="/"
-                      className="flex-1 flex items-center justify-center px-6 py-4 bg-gray-100 text-black font-bold text-lg rounded-lg hover:bg-gray-200 transition-all duration-300"
-                    >
-                      ✦ facadely
-                    </Link>
-                  </div>
+                  {/* Submit Button */}
+                  <motion.button
+                    type="submit"
+                    disabled={isLoading}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full flex items-center justify-center px-6 py-4 bg-black text-white font-bold text-lg rounded-lg hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isLoading ? (
+                      <>
+                        <div className="animate-spin h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full"></div>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-5 w-5 mr-2" />
+                        Send Message
+                      </>
+                    )}
+                  </motion.button>
                 </form>
               ) : (
                 <motion.div
