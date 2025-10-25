@@ -47,11 +47,10 @@ export default function AboutPage() {
           src="/image/About.jpg"
           alt="About us background"
           fill
-          quality={85}
           priority
+          quality={75}
           sizes="100vw"
           className="object-cover"
-          placeholder="empty"
         />
 
         {/* Dark Overlay */}

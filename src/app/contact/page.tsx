@@ -55,11 +55,10 @@ export default function ContactPage() {
           src="/image/Contact.webp"
           alt="Contact us background"
           fill
-          quality={100}
           priority
+          quality={75}
           sizes="100vw"
           className="object-cover"
-          placeholder="empty"
         />
 
         {/* Dark Overlay */}
