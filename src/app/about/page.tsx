@@ -3,7 +3,14 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { DM_Serif_Display } from 'next/font/google';
 import { ArrowRight, Target, Lightbulb, Heart } from 'lucide-react';
+
+const dmSerif = DM_Serif_Display({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+});
 
 export default function AboutPage() {
   const fadeInUp = {
@@ -56,9 +63,9 @@ export default function AboutPage() {
           <div className="absolute bottom-20 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
           <motion.div {...fadeInUp}>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+            <h1 className={`${dmSerif.className} text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight mb-6`}>
               We focus on <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">essence</span>
             </h1>
           </motion.div>
