@@ -3,7 +3,7 @@
 import { useState, useEffect, ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Globe, Check, Menu, X, Instagram, Facebook, Twitter } from 'lucide-react';
+import { Globe, Check, Menu, X, Instagram, Facebook } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cardo } from 'next/font/google';
 
@@ -320,7 +320,6 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center gap-x-5 order-1 sm:order-2">
             <a href="#" aria-label="Instagram" className="text-neutral-400 hover:text-white transition-colors"><Instagram size={20} /></a>
             <a href="#" aria-label="Facebook" className="text-neutral-400 hover:text-white transition-colors"><Facebook size={20} /></a>
-            <a href="#" aria-label="X/Twitter" className="text-neutral-400 hover:text-white transition-colors"><Twitter size={20} /></a>
           </div>
         </div>
         </div>
