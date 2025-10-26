@@ -184,7 +184,7 @@ export default function StatusPage() {
             System Status
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mb-8">
-            Real-time status of all facadely services and infrastructure. Check here for service updates and incident history.
+            Real-time status of all facadely services and infrastructure.<br />Check here for service updates and incident history.
           </p>
 
           {/* Status Summary */}
