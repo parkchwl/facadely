@@ -282,7 +282,7 @@ export default function Layout({ children }: LayoutProps) {
           <div>
             <h4 className="font-semibold mb-3 text-white">Support</h4>
             <ul className="space-y-2 text-neutral-400 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">Customer Service</a></li>
+              <li><Link href="/customer-service" className="hover:text-white transition-colors">Customer Service</Link></li>
               <li><Link href="/qa" className="hover:text-white transition-colors">Q&A</Link></li>
               <li><Link href="/status" className="hover:text-white transition-colors">Server Status</Link></li>
             </ul>
