@@ -310,7 +310,7 @@ export default function Layout({ children }: LayoutProps) {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-sm text-neutral-400 border-t border-neutral-700">
           <div className="flex flex-col sm:flex-row items-center gap-x-6 gap-y-3 text-xs order-2 sm:order-1 mt-4 sm:mt-0">
-            <p className="text-neutral-500">Powered by facadely • All rights reserved.</p>
+            <p className="text-neutral-500">Powered by facadely ✦ All rights reserved.</p>
             <div className="flex items-center gap-x-6">
               <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
