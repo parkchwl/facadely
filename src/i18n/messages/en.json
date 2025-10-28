@@ -1,0 +1,877 @@
+{
+  "navigation": {
+    "templates": "Templates",
+    "generate": "Generate",
+    "service": "Service",
+    "pricing": "Pricing",
+    "signup": "Sign up",
+    "signupFree": "It's free!"
+  },
+  "mobileNav": {
+    "templates": "Templates",
+    "generate": "Generate",
+    "service": "Service",
+    "pricing": "Pricing",
+    "signup": "SIGN UP",
+    "signupFree": "It's free to get started"
+  },
+  "languageSelector": {
+    "title": "Choose your Country/Region"
+  },
+  "footer": {
+    "brand": {
+      "name": "facadely",
+      "tagline": "We focus on essence",
+      "copyright": "© 2025 facadely, Corp."
+    },
+    "platform": {
+      "title": "Platform",
+      "generator": "Website Generator",
+      "template": "Template",
+      "domain": "Domain"
+    },
+    "support": {
+      "title": "Support",
+      "customerService": "Customer Service",
+      "qa": "Q&A",
+      "serverStatus": "Server Status"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About us",
+      "contact": "Contact"
+    },
+    "legal": {
+      "poweredBy": "Powered by facadely ✦ All rights reserved.",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookie": "Cookie Policy"
+    },
+    "headline": "BLOOM YOUR DREAM"
+  },
+  "homePage": {
+    "hero": {
+      "title": "Customers are<br />Searching for you",
+      "subtitle": "Build a professional website in minutes —<br />No code, No hassle",
+      "templatesLink": "Templates",
+      "signupButton": "Sign up",
+      "signupFreeText": "It's free!"
+    },
+    "whyMatters": {
+      "title": "Why<br />Website<br />Matters",
+      "description": "In today's digital world, your website is your <strong>first impression</strong>, your <strong>credibility</strong>, and often your <strong>main sales tool</strong>.",
+      "ctaButton": "Build Your Site Today",
+      "stats": [
+        { "stat": "94%", "highlight": "of first impressions", "text": "are design-related.", "source": "Northumbria University UX Lab" },
+        { "stat": "88%", "highlight": "of online consumers", "text": "are less likely to return to a site after a bad experience.", "source": "Econsultancy / Adobe" },
+        { "stat": "81%", "highlight": "of consumers", "text": "visit a website before making a purchase decision.", "source": "GE Capital Retail Bank / Google Think Insights" },
+        { "stat": "75%", "highlight": "of users", "text": "judge a company's credibility based on its website.", "source": "Stanford Web Credibility Research" },
+        { "stat": "~70%", "highlight": "lose trust", "text": "if a website doesn't look professional.", "source": "Adobe & Sweor" },
+        { "stat": "69%", "highlight": "of mobile users", "text": "interact with the website as their first brand experience.", "source": "Think with Google" }
+      ]
+    },
+    "solution": {
+      "title": "facadely solves the problems",
+      "items": [
+        { "title": "Launch in 5 minutes, no setup", "desc": "Start instantly with ready-made templates.\nNo coding or installation required." },
+        { "title": "Mobile-ready by default", "desc": "All templates are fully responsive.\nYour site looks great on any device—automatically." },
+        { "title": "Professional design, made easy", "desc": "Built by designers to earn trust and credibility.\nCreate a polished site without design skills." },
+        { "title": "Tools for bookings and customer management", "desc": "Everything you need—forms, scheduling, CRM—built in.\nNo plugins or third-party tools required." },
+        { "title": "Real-time analytics included", "desc": "Track visits, traffic, and user behavior.\nMake smarter decisions with live data." },
+        { "title": "Security built-in", "desc": "SSL and encryption applied automatically.\nStay protected with continuous updates." }
+      ],
+      "cta_text": "Create a lasting first impression and build a trusted brand that customers remember.",
+      "cta_button": "Start Building Your Business"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Got questions? We've got answers",
+      "questionLabel": "Question {current} of {total}",
+      "questions": [
+        {
+          "question": "Do I need coding skills to use facadely?",
+          "answer": "No! facadely is designed for everyone.\n\nOur intuitive drag-and-drop interface makes it easy to create professional websites without any coding knowledge."
+        },
+        {
+          "question": "Can I use my own domain name?",
+          "answer": "Yes, you can connect your custom domain or purchase a new one directly through facadely.\n\nWe handle all the technical setup for you."
+        },
+        {
+          "question": "Are the templates mobile-responsive?",
+          "answer": "Absolutely! All our templates are fully responsive and optimized for mobile, tablet, and desktop devices.\n\nYour site will look perfect on any screen size."
+        },
+        {
+          "question": "Can I switch templates after launching my site?",
+          "answer": "Yes, you can change your template at any time without losing your content.\n\nYour text, images, and settings will transfer seamlessly."
+        },
+        {
+          "question": "Is there a free trial?",
+          "answer": "Yes! You can start building your website for free.\n\nNo credit card required. Upgrade when you're ready to publish."
+        },
+        {
+          "question": "What kind of support do you offer?",
+          "answer": "We provide 24/7 customer support via chat and email.\n\nOur help center also includes tutorials, guides, and FAQs to help you succeed."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Ready to build your dream website?",
+      "subtitle": "Join thousands of happy users who transformed their online presence with facadely",
+      "browseButton": "Browse Templates",
+      "startButton": "Start for Free"
+    },
+    "loadingScreen": {
+      "brandName": "facadely"
+    }
+  },
+  "pricingPage": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the perfect plan for your business",
+    "toggle": {
+      "monthly": "MONTHLY",
+      "yearly": "YEARLY",
+      "save": "SAVE 20%"
+    },
+    "tiers": {
+      "free": {
+        "name": "Free",
+        "price": "Free",
+        "perMonth": "",
+        "description": "Perfect for getting started with your first website.",
+        "features": [
+          "1 Website",
+          "Basic Templates",
+          "500 MB Storage",
+          "Standard Support",
+          "SSL Certificate"
+        ],
+        "buttonText": "Start for Free"
+      },
+      "pro": {
+        "name": "Pro",
+        "monthlyPrice": "$15",
+        "yearlyPrice": "$12",
+        "perMonth": "/mo",
+        "description": "Everything you need for professional websites.",
+        "features": [
+          "Unlimited Websites",
+          "Premium Templates",
+          "10 GB Storage",
+          "Priority Support",
+          "Custom Domain",
+          "Advanced Analytics",
+          "SEO Tools",
+          "Social Media Integration"
+        ],
+        "buttonText": "Choose Pro",
+        "badge": "MOST POPULAR"
+      },
+      "business": {
+        "name": "Business",
+        "monthlyPrice": "$30",
+        "yearlyPrice": "$24",
+        "perMonth": "/mo",
+        "description": "Advanced features for growing businesses.",
+        "features": [
+          "Everything in Pro",
+          "50 GB Storage",
+          "E-commerce Features",
+          "Team Collaboration",
+          "Dedicated Support",
+          "White-label Solution",
+          "API Access",
+          "Advanced Security"
+        ],
+        "buttonText": "Choose Business"
+      }
+    },
+    "featureComparison": {
+      "title": "Compare Plans",
+      "subtitle": "See what's included in each plan",
+      "categories": {
+        "basic": {
+          "name": "Basic Features",
+          "features": {
+            "pages": { "name": "Pages", "free": "5 pages", "pro": "Unlimited pages", "business": "Unlimited pages" },
+            "customDomain": { "name": "Custom Domain", "free": false, "pro": true, "business": true },
+            "storage": { "name": "Storage", "free": "500 MB", "pro": "10 GB", "business": "50 GB" },
+            "bandwidth": { "name": "Bandwidth", "free": "1 GB", "pro": "10 GB", "business": "100 GB" },
+            "monthlyVisits": { "name": "Monthly Visits", "free": "1K visits", "pro": "25K visits", "business": "100K visits" }
+          }
+        },
+        "design": {
+          "name": "Design & Content",
+          "features": {
+            "templates": { "name": "Templates", "free": "Basic templates", "pro": "Premium templates", "business": "All templates + Custom" },
+            "customCode": { "name": "Custom Code", "free": false, "pro": true, "business": true },
+            "fontUpload": { "name": "Font Upload", "free": false, "pro": true, "business": true },
+            "designMode": { "name": "Design Mode", "free": false, "pro": true, "business": true }
+          }
+        },
+        "ecommerce": {
+          "name": "E-commerce",
+          "features": {
+            "products": { "name": "Products", "free": false, "pro": "10 products", "business": "Unlimited products" },
+            "paymentGateway": { "name": "Payment Gateway", "free": false, "pro": true, "business": true },
+            "inventory": { "name": "Inventory Management", "free": false, "pro": true, "business": true },
+            "coupons": { "name": "Coupons & Discounts", "free": false, "pro": "3 coupons", "business": "Unlimited coupons" },
+            "orderManagement": { "name": "Order Management", "free": false, "pro": true, "business": true }
+          }
+        },
+        "marketing": {
+          "name": "Marketing & SEO",
+          "features": {
+            "seoTools": { "name": "SEO Tools", "free": "Basic SEO", "pro": "Advanced SEO", "business": "Premium SEO + Analytics" },
+            "googleAnalytics": { "name": "Google Analytics", "free": false, "pro": true, "business": true },
+            "socialMedia": { "name": "Social Media Integration", "free": false, "pro": true, "business": true },
+            "emailMarketing": { "name": "Email Marketing", "free": false, "pro": "100 emails/month", "business": "Unlimited emails" }
+          }
+        },
+        "support": {
+          "name": "Support & Security",
+          "features": {
+            "support": { "name": "Support", "free": "Community support", "pro": "Priority support", "business": "Dedicated support" },
+            "ssl": { "name": "SSL Certificate", "free": true, "pro": true, "business": true },
+            "passwordProtection": { "name": "Password Protection", "free": false, "pro": true, "business": true },
+            "backup": { "name": "Backup & Recovery", "free": false, "pro": "Weekly backups", "business": "Daily backups" }
+          }
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to get started?",
+      "startTrial": "Start Free Trial",
+      "contactSales": "Contact Sales"
+    }
+  },
+  "templatesPage": {
+    "title": "Choose Your Template",
+    "subtitle": "Select a beautiful template to start building your website.<br />All templates are fully customizable and responsive.",
+    "searchPlaceholder": "Search templates...",
+    "sortOptions": {
+      "latest": "Latest",
+      "popular": "Popular",
+      "nameAZ": "Name A-Z"
+    },
+    "categories": {
+      "all": "All",
+      "business": "Business",
+      "portfolio": "Portfolio",
+      "ecommerce": "E-commerce",
+      "blog": "Blog",
+      "landingPage": "Landing Page"
+    },
+    "results": "{count} template(s) found",
+    "useTemplate": "Use This Template",
+    "preview": "Template Preview",
+    "emptyState": {
+      "title": "No templates found",
+      "subtitle": "Try adjusting your search or filters"
+    }
+  },
+  "loginPage": {
+    "back": "Back",
+    "title": "facadely",
+    "subtitle": "Sign in or create an account",
+    "google": "Continue with Google",
+    "apple": "Continue with Apple",
+    "facebook": "Continue with Facebook",
+    "terms": "By continuing, you agree to our {terms} and have read and understood the {privacy}.",
+    "termsLinkText": "Terms of Service",
+    "privacyLinkText": "Privacy Policy",
+    "captcha": "Secure Login with reCAPTCHA subject to Google"
+  },
+  "termsModal": {
+    "title": "Welcome to facadely",
+    "subtitle": "Complete your {provider} signup",
+    "agreement": "By creating an account, you agree to our {terms} and have read and understood the {privacy}.",
+    "termsLinkText": "Terms of Service",
+    "privacyLinkText": "Privacy Policy",
+    "agreeButton": "Complete Signup",
+    "footerNote": "You can review our policies anytime in the footer"
+  },
+  "servicePage": {
+    "hero": {
+      "title": "We Service<br />for your Dream",
+      "subtitle": "Build a professional website in minutes — No code, No hassle",
+      "startBuildingFree": "Start Building Free",
+      "browseTemplates": "Browse Templates",
+      "noCreditCard": "No credit card required",
+      "templates": "500+ templates",
+      "launchTime": "Launch in 5 minutes"
+    },
+    "heroFeatures": [
+      { "title": "Professional Design", "description": "Designer-made templates optimized for conversion" },
+      { "title": "Built-in SEO", "description": "Rank higher on Google with advanced SEO tools" },
+      { "title": "Enterprise Security", "description": "SSL certificates, auto-backups, 99.9% uptime" },
+      { "title": "Custom Domain", "description": "Connect your domain or get a free one" },
+      { "title": "Mobile Responsive", "description": "Perfect on all devices automatically" },
+      { "title": "Real-time Analytics", "description": "Track visitors and make data-driven decisions" }
+    ],
+    "features": {
+      "title": "Powerful Features, Simple Interface",
+      "subtitle": "Everything you need to create, launch, and grow your online presence",
+      "items": [
+        {
+          "title": "Lightning Fast Setup",
+          "description": "Launch your website in just 5 minutes. No installation, no setup headaches. Choose a template and start editing immediately.",
+          "highlights": ["5-minute launch", "Instant start", "Zero setup required"]
+        },
+        {
+          "title": "Professional Design",
+          "description": "Every template is crafted by professional designers. Modern, trendy, and conversion-optimized designs that make your brand shine.",
+          "highlights": ["Designer-made templates", "Trendy & modern", "Brand customization"]
+        },
+        {
+          "title": "Mobile-First Responsive",
+          "description": "All websites are fully responsive by default. Your site looks perfect on every device - desktop, tablet, and mobile.",
+          "highlights": ["100% responsive", "Perfect on all devices", "Mobile optimized"]
+        },
+        {
+          "title": "24/7 Security & Support",
+          "description": "SSL certificates, automatic backups, and 99.9% uptime guaranteed. Our support team is here to help anytime.",
+          "highlights": ["SSL included", "Auto backups", "24/7 support"]
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "steps": [
+        { "number": "01", "title": "Choose Template", "description": "Browse 500+ professional templates and pick the one that fits your vision." },
+        { "number": "02", "title": "Customize Your Site", "description": "Use our drag & drop editor to personalize every element. No coding needed." },
+        { "number": "03", "title": "Launch & Grow", "description": "Hit publish and your website goes live instantly. Start growing your business today." }
+      ]
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything you need to know about facadely",
+      "items": [
+        {
+          "question": "How quickly can I launch my website?",
+          "answer": "You can launch a professional website in as little as 5 minutes. Simply choose a template, customize it with our drag & drop editor, and hit publish. No technical knowledge required."
+        },
+        {
+          "question": "Do I need coding skills?",
+          "answer": "Absolutely not! facadely is designed for everyone. Our intuitive visual editor lets you create stunning websites without writing a single line of code."
+        },
+        {
+          "question": "Can I use my own domain name?",
+          "answer": "Yes! You can connect your existing domain or purchase a new one directly through facadely. We handle all the technical setup automatically."
+        },
+        {
+          "question": "Are websites mobile-responsive?",
+          "answer": "Every template is fully responsive and optimized for all devices. Your website will look perfect on desktop, tablet, and mobile automatically."
+        },
+        {
+          "question": "What kind of support do you offer?",
+          "answer": "We provide 24/7 customer support via chat and email. Our extensive help center includes video tutorials, guides, and documentation to help you succeed."
+        },
+        {
+          "question": "Can I add e-commerce functionality?",
+          "answer": "Yes! Our Pro and Business plans include full e-commerce capabilities with payment processing, inventory management, and order tracking."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to Build Your<br />Dream Website?",
+      "subtitle": "Join thousands of successful businesses who trust facadely.<br />Start for free. No credit card required.",
+      "startBuilding": "Start Building Free",
+      "browseTemplates": "Browse Templates",
+      "sslSecured": "SSL Secured",
+      "noCreditCardRequired": "No Credit Card",
+      "users": "100K+ Users",
+      "awardWinning": "Award Winning"
+    }
+  },
+  "qaPage": {
+    "hero": {
+      "title": "Questions & Answers",
+      "subtitle": "Find answers to common questions about facadely, our features, pricing, and support. Can't find what you're looking for? Contact our support team.",
+      "searchPlaceholder": "Search questions..."
+    },
+    "filterLabel": "Filter by Category",
+    "allCategories": "All",
+    "results": "Showing {count} of {total} questions",
+    "noResults": "No questions found matching your search.",
+    "clearFilters": "Clear filters",
+    "categories": {
+      "gettingStarted": "Getting Started",
+      "features": "Features",
+      "customization": "Customization",
+      "support": "Support",
+      "billing": "Billing",
+      "security": "Security"
+    },
+    "questions": [
+      {
+        "id": 1,
+        "category": "gettingStarted",
+        "question": "How do I sign up for facadely?",
+        "answer": "Signing up is simple! Click the \"Sign up\" button on our homepage, enter your email address, create a password, and verify your email. You'll have instant access to all our templates and the builder."
+      },
+      {
+        "id": 2,
+        "category": "gettingStarted",
+        "question": "Do I need a credit card to start?",
+        "answer": "No! You can create an account and start building for free without providing any credit card information. You only need to add payment details if you want to upgrade to a paid plan or publish your site."
+      },
+      {
+        "id": 3,
+        "category": "gettingStarted",
+        "question": "How long does it take to build a website?",
+        "answer": "You can have a professional website live in as little as 5 minutes! Our pre-designed templates are ready to customize, and you can publish immediately. The time depends on how much customization you want to do."
+      },
+      {
+        "id": 4,
+        "category": "features",
+        "question": "Can I use my own domain name?",
+        "answer": "Yes! You can connect your existing domain or purchase a new one directly through facadely. We handle all the technical setup including DNS configuration and SSL certificates automatically."
+      },
+      {
+        "id": 5,
+        "category": "features",
+        "question": "Are the templates mobile-responsive?",
+        "answer": "Absolutely! All our templates are fully responsive and optimized for mobile, tablet, and desktop. Your website will look perfect on any device, and we automatically handle responsive design for you."
+      },
+      {
+        "id": 6,
+        "category": "features",
+        "question": "Can I add e-commerce functionality?",
+        "answer": "Yes! Our Pro and Business plans include full e-commerce capabilities with payment processing, inventory management, order tracking, and customer management tools built-in."
+      },
+      {
+        "id": 7,
+        "category": "customization",
+        "question": "Do I need coding skills to customize my site?",
+        "answer": "No! Our visual editor is designed for everyone. You can customize colors, fonts, layouts, and content by simply dragging and dropping elements. No coding knowledge required."
+      },
+      {
+        "id": 8,
+        "category": "customization",
+        "question": "Can I change templates after launching?",
+        "answer": "Yes! You can switch templates anytime without losing your content. Your text, images, and settings will transfer seamlessly to the new template."
+      },
+      {
+        "id": 9,
+        "category": "customization",
+        "question": "How can I add custom CSS or HTML?",
+        "answer": "Our Pro and Business plans include custom code functionality. You can add custom CSS, JavaScript, or HTML to specific sections of your website for advanced customization."
+      },
+      {
+        "id": 10,
+        "category": "support",
+        "question": "What kind of support do you offer?",
+        "answer": "We provide 24/7 customer support via chat and email. Our extensive help center includes video tutorials, guides, and FAQs. Pro and Business plans get priority support."
+      },
+      {
+        "id": 11,
+        "category": "support",
+        "question": "How long does it take to get a response from support?",
+        "answer": "Standard support typically responds within 24 hours. Priority support (available on Pro and Business plans) responds within 2 hours during business hours."
+      },
+      {
+        "id": 12,
+        "category": "billing",
+        "question": "How do I upgrade to a paid plan?",
+        "answer": "You can upgrade anytime from your account settings. Go to Billing > Plans, choose your desired plan, and complete the payment. Your upgrade takes effect immediately."
+      },
+      {
+        "id": 13,
+        "category": "billing",
+        "question": "Can I cancel my subscription anytime?",
+        "answer": "Yes! You can cancel your subscription anytime from your account settings. If you cancel mid-cycle, you won't be charged again, but you can use the service until your current period ends."
+      },
+      {
+        "id": 14,
+        "category": "security",
+        "question": "Is my website secure?",
+        "answer": "Yes! All facadely websites include SSL certificates, automatic backups, and 99.9% uptime SLA. We also provide DDoS protection and regular security audits."
+      },
+      {
+        "id": 15,
+        "category": "security",
+        "question": "Where is my data stored?",
+        "answer": "Your data is stored on secure, redundant servers in multiple geographic locations. We use enterprise-grade encryption and comply with GDPR and other data protection regulations."
+      }
+    ],
+    "stillHaveQuestions": {
+      "title": "Still Have Questions?",
+      "subtitle": "Our support team is here to help. Get in touch and we'll respond as quickly as we can.",
+      "emailSupport": "Email Support",
+      "contactUs": "Contact Us"
+    }
+  },
+  "privacyPage": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated: December 2024",
+    "introduction": {
+      "heading": "Introduction",
+      "content": "At facadely, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website building platform."
+    },
+    "informationWeCollect": {
+      "heading": "1. Information We Collect",
+      "provided": {
+        "heading": "1.1 Information You Provide",
+        "intro": "We collect information that you voluntarily provide when using our Service:",
+        "items": [
+          { "label": "Account Information", "description": "Name, email address, and profile information" },
+          { "label": "Payment Information", "description": "Billing details (processed securely through third-party providers)" },
+          { "label": "Website Content", "description": "Text, images, videos, and other content you upload" },
+          { "label": "Communications", "description": "Messages you send us through support channels" }
+        ]
+      },
+      "automatic": {
+        "heading": "1.2 Information Automatically Collected",
+        "intro": "When you use facadely, we automatically collect certain information:",
+        "items": [
+          { "label": "Usage Data", "description": "Pages visited, features used, time spent on platform" },
+          { "label": "Device Information", "description": "IP address, browser type, operating system" },
+          { "label": "Cookies", "description": "Session cookies, preference cookies, analytics cookies" }
+        ]
+      },
+      "socialLogin": {
+        "heading": "1.3 Social Login Information",
+        "content": "If you sign up using social login (Google, Apple, Facebook), we receive basic profile information including your name, email address, and profile picture."
+      }
+    },
+    "howWeUseYourInformation": {
+      "heading": "2. How We Use Your Information",
+      "intro": "We use the information we collect for the following purposes:",
+      "items": [
+        "Provide, maintain, and improve the website building platform",
+        "Process your website creations and publish them online",
+        "Manage your account and subscriptions",
+        "Process payments and prevent fraud",
+        "Send service updates, security alerts, and technical notices",
+        "Respond to your support requests and inquiries",
+        "Analyze usage patterns to improve features and user experience",
+        "Comply with legal obligations and regulatory requirements"
+      ]
+    },
+    "informationSharing": {
+      "heading": "3. How We Share Your Information",
+      "intro": "We do not sell your personal information. We may share your information in the following circumstances:",
+      "items": [
+        { "label": "Service Providers", "description": "Third-party vendors who perform services on our behalf (hosting, payment processing, email delivery, analytics)" },
+        { "label": "Business Transfers", "description": "In connection with a merger, acquisition, or sale of assets" },
+        { "label": "Legal Requirements", "description": "When required by law, subpoena, or government request" },
+        { "label": "With Your Consent", "description": "When you explicitly authorize us to share your information" }
+      ]
+    },
+    "dataSecurity": {
+      "heading": "4. Data Security",
+      "intro": "We implement robust security measures to protect your information:",
+      "items": [
+        "All data transmitted is encrypted using SSL/TLS protocols",
+        "Strict access controls ensure only authorized personnel can access sensitive data",
+        "Regular security assessments and penetration testing",
+        "Your data is regularly backed up to prevent loss"
+      ],
+      "disclaimer": "While we use industry-standard security measures, no method of transmission over the Internet is 100% secure. We cannot guarantee absolute security, but we continuously work to improve our security practices."
+    },
+    "cookies": {
+      "heading": "5. Cookies and Tracking Technologies",
+      "intro": "We use cookies and similar tracking technologies to enhance your experience. You can control cookies through your browser settings or our cookie preference tool.",
+      "note": "For detailed information about our use of cookies, please see our Cookie Policy."
+    },
+    "yourRights": {
+      "heading": "6. Your Privacy Rights",
+      "intro": "Depending on your location, you may have the following rights:",
+      "items": [
+        { "label": "Access and Portability", "description": "Request a copy of your personal data" },
+        { "label": "Correction", "description": "Update or correct inaccurate personal information" },
+        { "label": "Deletion", "description": "Request deletion of your personal data" },
+        { "label": "Objection", "description": "Object to or restrict certain processing activities" },
+        { "label": "Withdraw Consent", "description": "Withdraw consent for marketing communications" }
+      ],
+      "note": "To exercise your rights, contact us at privacy@facadely.com. We will respond within 30 days."
+    },
+    "dataRetention": {
+      "heading": "7. Data Retention",
+      "intro": "We retain your information for as long as necessary to provide our Service and comply with legal obligations:",
+      "items": [
+        "Active accounts: Data retained while your account is active",
+        "Closed accounts: Account data deleted within 30 days of closure",
+        "Legal requirements: Some data may be retained longer to comply with legal obligations"
+      ]
+    },
+    "internationalTransfers": {
+      "heading": "8. International Data Transfers",
+      "content": "facadely is based in South Korea. If you access our Service from outside South Korea, your information may be transferred to, stored, and processed in South Korea or other countries where our service providers operate.",
+      "safeguards": "We ensure appropriate safeguards are in place for international transfers, including Standard Contractual Clauses approved by regulatory authorities."
+    },
+    "childrenPrivacy": {
+      "heading": "9. Children's Privacy",
+      "content": "facadely is not intended for users under 18 years of age. We do not knowingly collect personal information from children. If we become aware that we have collected data from a child without parental consent, we will take steps to delete that information promptly."
+    },
+    "changes": {
+      "heading": "10. Changes to This Privacy Policy",
+      "intro": "We may update this Privacy Policy periodically. We will notify you of material changes by:",
+      "items": [
+        "Posting the updated policy on this page with a new \"Last Updated\" date",
+        "Sending an email notification to your registered email address",
+        "Displaying a prominent notice on our Service"
+      ]
+    },
+    "regionalCompliance": {
+      "heading": "11. Regional Privacy Information",
+      "gdpr": {
+        "title": "For EU/EEA Users (GDPR)",
+        "intro": "If you are located in the European Union or European Economic Area, you have additional rights under GDPR:",
+        "items": [
+          "Right to lodge a complaint with your local supervisory authority",
+          "Right to object to automated decision-making and profiling",
+          "Legal basis for processing: Consent, contractual necessity, legitimate interests"
+        ]
+      },
+      "ccpa": {
+        "title": "For California Users (CCPA)",
+        "intro": "California residents have specific rights under the California Consumer Privacy Act:",
+        "items": [
+          "Right to know what personal information is collected and how it's used",
+          "Right to delete personal information (with certain exceptions)",
+          "Right to opt-out of the sale of personal information (we do not sell personal information)",
+          "Right to non-discrimination for exercising CCPA rights"
+        ]
+      }
+    },
+    "contact": {
+      "heading": "12. Contact Us",
+      "intro": "If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:",
+      "generalInquiries": "General Inquiries: privacy@facadely.com",
+      "dpo": "Data Protection Officer: dpo@facadely.com",
+      "address": "Address: facadely Corp., Seoul, South Korea"
+    },
+    "footer": {
+      "message": "Your privacy is important to us. We're committed to protecting your data and being transparent about our practices.",
+      "getStarted": "Get Started",
+      "termsOfService": "Terms of Service"
+    }
+  },
+  "termsPage": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last Updated: December 2024",
+    "agreement": {
+      "heading": "1. Agreement to Terms",
+      "intro": "Welcome to facadely. By accessing or using our website builder platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "description": "facadely provides a no-code website building platform that allows users to create, customize, and publish professional websites without technical knowledge. These Terms apply to all users of the Service, including without limitation users who are browsers, builders, and contributors of content."
+    },
+    "accountTerms": {
+      "heading": "2. Account Terms",
+      "items": [
+        "You must be at least 18 years old to use this Service, or the age of majority in your jurisdiction.",
+        "You must provide accurate and complete information when creating your account.",
+        "You are responsible for maintaining the security of your account and password.",
+        "You are responsible for all activities that occur under your account.",
+        "You may not use the Service for any illegal or unauthorized purpose.",
+        "One person or legal entity may not maintain more than one free account."
+      ]
+    },
+    "serviceUsage": {
+      "heading": "3. Service Usage and Limitations",
+      "acceptable": {
+        "heading": "3.1 Acceptable Use",
+        "intro": "You agree to use facadely only for lawful purposes. You are prohibited from:",
+        "items": [
+          "Publishing content that is illegal, harmful, threatening, abusive, or discriminatory",
+          "Infringing on intellectual property rights of others",
+          "Distributing malware, viruses, or harmful code",
+          "Attempting to gain unauthorized access to the Service",
+          "Using the Service to send spam or unsolicited communications",
+          "Creating websites that promote illegal activities"
+        ]
+      },
+      "limits": {
+        "heading": "3.2 Service Limits",
+        "content": "Your use of the Service is subject to the limitations of your chosen plan (Free, Pro, or Business). These limitations include but are not limited to: number of websites, storage capacity, bandwidth, and feature access. Exceeding these limits may result in service interruption or additional charges."
+      }
+    },
+    "paymentBilling": {
+      "heading": "4. Payment and Billing",
+      "items": [
+        { "label": "Subscription Plans", "content": "Paid plans (Pro and Business) are billed on a monthly or annual basis as selected by you." },
+        { "label": "Auto-Renewal", "content": "Subscriptions automatically renew unless cancelled before the renewal date." },
+        { "label": "Cancellation", "content": "You may cancel your subscription at any time. Cancellation takes effect at the end of the current billing period." },
+        { "label": "Refunds", "content": "We offer a 14-day money-back guarantee for first-time annual subscriptions. Monthly subscriptions are non-refundable." },
+        { "label": "Price Changes", "content": "We reserve the right to modify pricing with 30 days notice to existing subscribers." },
+        { "label": "Taxes", "content": "Prices do not include applicable taxes, which will be added as required by local law." }
+      ]
+    },
+    "intellectualProperty": {
+      "heading": "5. Intellectual Property Rights",
+      "yourContent": {
+        "heading": "5.1 Your Content",
+        "content": "You retain all rights to the content you create and publish using facadely. By using our Service, you grant us a limited license to host, store, and display your content as necessary to provide the Service."
+      },
+      "facadelyCon": {
+        "heading": "5.2 facadely Content",
+        "content": "All templates, designs, features, and functionality provided by facadely remain our intellectual property. You receive a license to use these elements only as part of creating websites through our Service."
+      }
+    },
+    "dataPrivacy": {
+      "heading": "6. Data and Privacy",
+      "intro": "Your use of the Service is also governed by our Privacy Policy. We collect and use your data as described in our Privacy Policy. By using facadely, you consent to such collection and use.",
+      "security": "We implement industry-standard security measures to protect your data. However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security."
+    },
+    "serviceAvailability": {
+      "heading": "7. Service Availability and Support",
+      "items": [
+        "We strive for 99.9% uptime but do not guarantee uninterrupted service.",
+        "We may perform scheduled maintenance with advance notice when possible.",
+        "Support levels vary by plan: Community (Free), Priority (Pro), and Dedicated (Business).",
+        "We reserve the right to modify or discontinue features with reasonable notice."
+      ]
+    },
+    "limitation": {
+      "heading": "8. Limitation of Liability",
+      "content": "TO THE MAXIMUM EXTENT PERMITTED BY LAW, FACADELY SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES.",
+      "cap": "In no event shall our total liability to you for all damages exceed the amount you paid to Facadely in the 12 months prior to the claim, or $100, whichever is greater."
+    },
+    "termination": {
+      "heading": "9. Termination",
+      "intro": "We may terminate or suspend your account and access to the Service immediately, without prior notice or liability, for any reason, including breach of these Terms. Upon termination:",
+      "items": [
+        "Your right to use the Service will immediately cease",
+        "You will have 30 days to export your content",
+        "Your published websites will be taken offline",
+        "No refunds will be provided for remaining subscription time (except as required by law)"
+      ]
+    },
+    "changesTerms": {
+      "heading": "10. Changes to Terms",
+      "content": "We reserve the right to modify these Terms at any time. We will provide notice of material changes by email or through the Service at least 30 days before they take effect. Your continued use of the Service after changes constitute acceptance of the modified Terms."
+    },
+    "governingLaw": {
+      "heading": "11. Governing Law and Disputes",
+      "intro": "These Terms shall be governed by and construed in accordance with the laws of the Republic of Korea, without regard to its conflict of law provisions.",
+      "disputes": "Any disputes arising from these Terms or the Service shall be resolved through binding arbitration in Seoul, South Korea, except where prohibited by law."
+    },
+    "contactInformation": {
+      "heading": "12. Contact Information",
+      "intro": "If you have any questions about these Terms, please contact us at:",
+      "email": "Email: legal@facadely.com",
+      "address": "Address: Facadely Corp., Seoul, South Korea"
+    },
+    "severability": {
+      "heading": "13. Severability and Waiver",
+      "severabilityContent": "If any provision of these Terms is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary so that the Terms will otherwise remain in full force and effect.",
+      "waiver": "Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights."
+    },
+    "entireAgreement": {
+      "heading": "14. Entire Agreement",
+      "content": "These Terms, together with our Privacy Policy and any other legal notices published by us on the Service, constitute the entire agreement between you and Facadely concerning the Service."
+    },
+    "footer": {
+      "message": "By using Facadely, you acknowledge that you have read and understood these Terms of Service.",
+      "createAccount": "Create Account",
+      "privacyPolicy": "Privacy Policy"
+    }
+  },
+  "cookiePage": {
+    "title": "Cookie Policy",
+    "lastUpdated": "Last Updated: December 2024",
+    "introduction": {
+      "heading": "Introduction",
+      "content": "This Cookie Policy explains how facadely uses cookies and similar tracking technologies on our website and platform."
+    },
+    "whatAreCookies": {
+      "heading": "1. What Are Cookies?",
+      "content": "Cookies are small files stored on your device that contain information about your visit. They help us recognize you, remember your preferences, and understand how you use our Service."
+    },
+    "typesOfCookies": {
+      "heading": "2. Types of Cookies We Use",
+      "categories": [
+        {
+          "name": "Essential Cookies",
+          "description": "Required for the Service to function. These cannot be disabled without affecting site functionality."
+        },
+        {
+          "name": "Functional Cookies",
+          "description": "Remember your preferences and settings to enhance your experience."
+        },
+        {
+          "name": "Analytical Cookies",
+          "description": "Help us understand how you use the Service to improve features and performance."
+        },
+        {
+          "name": "Marketing Cookies",
+          "description": "Track your activity to deliver personalized advertisements and marketing content."
+        }
+      ]
+    },
+    "cookieDetails": {
+      "heading": "3. Cookie Details",
+      "table": "See detailed list of cookies used below"
+    },
+    "thirdPartyServices": {
+      "heading": "4. Third-Party Services",
+      "intro": "We use third-party services that may set their own cookies:",
+      "services": [
+        { "name": "Google Analytics", "purpose": "Website usage analytics" },
+        { "name": "Stripe", "purpose": "Payment processing" },
+        { "name": "Supabase", "purpose": "Authentication and database" }
+      ]
+    },
+    "yourChoices": {
+      "heading": "5. Your Choices",
+      "intro": "You have the following options regarding cookies:",
+      "options": [
+        "Browser Settings: Most browsers allow you to refuse cookies or alert you when cookies are being sent.",
+        "Cookie Preference Tool: Use our cookie preference center to manage your cookie choices.",
+        "Opt-Out Links: Third-party services typically provide opt-out mechanisms."
+      ],
+      "note": "Please note that disabling cookies may affect the functionality of our Service."
+    },
+    "contact": {
+      "heading": "6. Contact Us",
+      "content": "If you have questions about our use of cookies, please contact us at privacy@facadely.com"
+    }
+  },
+  "generatePage": {
+    "title": "Generate Your Website",
+    "subtitle": "Choose a template and customize it to create your perfect website"
+  },
+  "statusPage": {
+    "title": "Service Status",
+    "subtitle": "Check the current status of facadely services"
+  },
+  "customerServicePage": {
+    "title": "Customer Service",
+    "subtitle": "We're here to help. Get in touch with our support team"
+  },
+  "aboutPage": {
+    "title": "About facadely",
+    "subtitle": "Our mission is to democratize web design",
+    "mission": {
+      "heading": "Our Mission",
+      "content": "We believe everyone deserves a beautiful, professional website. facadely makes it simple for anyone to create and launch stunning websites without coding knowledge."
+    },
+    "vision": {
+      "heading": "Our Vision",
+      "content": "To be the world's most user-friendly website builder, empowering millions of people and businesses to succeed online."
+    },
+    "values": {
+      "heading": "Our Values",
+      "items": [
+        "Simplicity: Make web design accessible to everyone",
+        "Quality: Deliver beautiful, professional templates",
+        "Support: Be there for our users every step of the way",
+        "Innovation: Continuously improve our platform"
+      ]
+    }
+  },
+  "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "Have a question? We'd love to hear from you.",
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "subject": "Subject",
+      "message": "Your Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Thank you for your message!",
+      "error": "Failed to send message. Please try again."
+    }
+  }
+}

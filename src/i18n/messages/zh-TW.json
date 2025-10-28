@@ -1,0 +1,877 @@
+{
+  "navigation": {
+    "templates": "模板",
+    "generate": "生成",
+    "service": "服務",
+    "pricing": "價格",
+    "signup": "註冊",
+    "signupFree": "免費!"
+  },
+  "mobileNav": {
+    "templates": "模板",
+    "generate": "生成",
+    "service": "服務",
+    "pricing": "價格",
+    "signup": "註冊",
+    "signupFree": "免費開始"
+  },
+  "languageSelector": {
+    "title": "選擇您的國家/地區"
+  },
+  "footer": {
+    "brand": {
+      "name": "facadely",
+      "tagline": "我們專注於本質",
+      "copyright": "© 2025 facadely, Corp."
+    },
+    "platform": {
+      "title": "平台",
+      "generator": "網站生成器",
+      "template": "模板",
+      "domain": "域名"
+    },
+    "support": {
+      "title": "支持",
+      "customerService": "客戶服務",
+      "qa": "常見問題",
+      "serverStatus": "服務器狀態"
+    },
+    "company": {
+      "title": "公司",
+      "about": "關於我們",
+      "contact": "聯繫我們"
+    },
+    "legal": {
+      "poweredBy": "Powered by facadely ✦ 版權所有。",
+      "terms": "服務條款",
+      "privacy": "隱私政策",
+      "cookie": "Cookie政策"
+    },
+    "headline": "綻放您的夢想"
+  },
+  "homePage": {
+    "hero": {
+      "title": "客戶正在<br />尋找您",
+      "subtitle": "在幾分鐘內構建專業網站 —<br />無需代碼，無需麻煩",
+      "templatesLink": "模板",
+      "signupButton": "註冊",
+      "signupFreeText": "免費!"
+    },
+    "whyMatters": {
+      "title": "為什麼<br />網站<br />很重要",
+      "description": "在當今數字世界中，您的網站是您的 <strong>第一印象</strong>、您的 <strong>信譽</strong>，通常也是您的 <strong>主要銷售工具</strong>。",
+      "ctaButton": "今天構建您的網站",
+      "stats": [
+        { "stat": "94%", "highlight": "第一印象", "text": "與設計相關。", "source": "諾桑比亞大學用戶體驗實驗室" },
+        { "stat": "88%", "highlight": "在線消費者", "text": "在不良體驗後不太可能返回網站。", "source": "Econsultancy / Adobe" },
+        { "stat": "81%", "highlight": "消費者", "text": "在購買決策前訪問網站。", "source": "通用電氣資本零售銀行 / Google Think Insights" },
+        { "stat": "75%", "highlight": "用戶", "text": "根據網站評判公司的信譽。", "source": "斯坦福網絡信譽研究" },
+        { "stat": "~70%", "highlight": "失去信任", "text": "如果網站看起來不夠專業。", "source": "Adobe & Sweor" },
+        { "stat": "69%", "highlight": "移動用戶", "text": "作為首次品牌體驗與網站互動。", "source": "Google Think Insights" }
+      ]
+    },
+    "solution": {
+      "title": "facadely 解決問題",
+      "items": [
+        { "title": "5 分鐘內啟動，無需設置", "desc": "使用現成模板立即開始。\n無需編碼或安裝。" },
+        { "title": "默認移動就緒", "desc": "所有模板都是完全響應式的。\n您的網站在任何設備上看起來都很棒 — 自動。" },
+        { "title": "專業設計，輕鬆實現", "desc": "由設計師製作以贏得信任和信譽。\n無需設計技能即可創建精美網站。" },
+        { "title": "預訂和客戶管理工具", "desc": "您需要的一切 — 表單、日程安排、CRM — 內置。\n無需插件或第三方工具。" },
+        { "title": "包含實時分析", "desc": "跟踪訪問量、流量和用戶行為。\n使用實時數據做出更聰明的決定。" },
+        { "title": "內置安全性", "desc": "SSL 和加密自動應用。\n通過持續更新保持受保護。" }
+      ],
+      "cta_text": "打造持久的第一印象，構建客戶記得的受信任品牌。",
+      "cta_button": "開始構建您的業務"
+    },
+    "faq": {
+      "title": "常見問題解答",
+      "subtitle": "有問題嗎？我們有答案",
+      "questionLabel": "問題 {current} 共 {total}",
+      "questions": [
+        {
+          "question": "我需要編碼技能來使用 facadely 嗎?",
+          "answer": "不需要！facadely 專為所有人設計。\n\n我們的直觀拖放界面使無需任何編碼知識就能輕鬆創建專業網站。"
+        },
+        {
+          "question": "我可以使用自己的域名嗎?",
+          "answer": "可以，您可以連接自定義域或直接通過 facadely 購買新域。\n\n我們為您處理所有技術設置。"
+        },
+        {
+          "question": "模板是否對移動設備響應式?",
+          "answer": "絕對！我們的所有模板都完全響應式，針對移動、平板電腦和桌面設備進行了優化。\n\n您的網站在任何屏幕尺寸上都看起來完美。"
+        },
+        {
+          "question": "啟動網站後可以切換模板嗎?",
+          "answer": "可以，您可以隨時更改模板而不會丟失內容。\n\n您的文本、圖像和設置將無縫轉移。"
+        },
+        {
+          "question": "有免費試用嗎?",
+          "answer": "是的！您可以免費開始構建網站。\n\n無需信用卡。準備好後升級以發佈。"
+        },
+        {
+          "question": "你們提供什麼樣的支持?",
+          "answer": "我們通過聊天和電子郵件提供 24/7 客戶支持。\n\n我們的幫助中心還包括教程、指南和常見問題解答，幫助您成功。"
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "準備好構建您的夢想網站了嗎?",
+      "subtitle": "加入數千名通過 facadely 改變了在線形象的滿意用戶",
+      "browseButton": "瀏覽模板",
+      "startButton": "免費開始"
+    },
+    "loadingScreen": {
+      "brandName": "facadely"
+    }
+  },
+  "pricingPage": {
+    "title": "簡單透明的定價",
+    "subtitle": "為您的業務選擇完美的計劃",
+    "toggle": {
+      "monthly": "按月",
+      "yearly": "按年",
+      "save": "節省 20%"
+    },
+    "tiers": {
+      "free": {
+        "name": "免費",
+        "price": "免費",
+        "perMonth": "",
+        "description": "完美的個人和小型項目",
+        "features": [
+          "1 個網站",
+          "基本模板",
+          "500 MB 存儲",
+          "標準支持",
+          "SSL 證書"
+        ],
+        "buttonText": "免費開始"
+      },
+      "pro": {
+        "name": "Pro",
+        "monthlyPrice": "$15",
+        "yearlyPrice": "$12",
+        "perMonth": "/月",
+        "description": "專業網站所需的一切",
+        "features": [
+          "無限網站",
+          "高級模板",
+          "10 GB 存儲",
+          "優先支持",
+          "自定義域",
+          "高級分析",
+          "SEO 工具",
+          "社交媒體集成"
+        ],
+        "buttonText": "選擇 Pro",
+        "badge": "最受歡迎"
+      },
+      "business": {
+        "name": "Business",
+        "monthlyPrice": "$30",
+        "yearlyPrice": "$24",
+        "perMonth": "/月",
+        "description": "為成長中的企業的高級功能",
+        "features": [
+          "Pro 中的一切",
+          "50 GB 存儲",
+          "電子商務功能",
+          "團隊協作",
+          "專門支持",
+          "白標解決方案",
+          "API 訪問",
+          "高級安全"
+        ],
+        "buttonText": "選擇 Business"
+      }
+    },
+    "featureComparison": {
+      "title": "比較計劃",
+      "subtitle": "查看每個計劃中包含的內容",
+      "categories": {
+        "basic": {
+          "name": "基本功能",
+          "features": {
+            "pages": { "name": "頁面", "free": "5 頁", "pro": "無限頁面", "business": "無限頁面" },
+            "customDomain": { "name": "自定義域", "free": false, "pro": true, "business": true },
+            "storage": { "name": "存儲", "free": "500 MB", "pro": "10 GB", "business": "50 GB" },
+            "bandwidth": { "name": "帶寬", "free": "1 GB", "pro": "10 GB", "business": "100 GB" },
+            "monthlyVisits": { "name": "月訪問", "free": "1K 訪問", "pro": "25K 訪問", "business": "100K 訪問" }
+          }
+        },
+        "design": {
+          "name": "設計和內容",
+          "features": {
+            "templates": { "name": "模板", "free": "基本模板", "pro": "高級模板", "business": "所有模板 + 自定義" },
+            "customCode": { "name": "自定義代碼", "free": false, "pro": true, "business": true },
+            "fontUpload": { "name": "字體上傳", "free": false, "pro": true, "business": true },
+            "designMode": { "name": "設計模式", "free": false, "pro": true, "business": true }
+          }
+        },
+        "ecommerce": {
+          "name": "電子商務",
+          "features": {
+            "products": { "name": "產品", "free": false, "pro": "10 個產品", "business": "無限產品" },
+            "paymentGateway": { "name": "支付網關", "free": false, "pro": true, "business": true },
+            "inventory": { "name": "庫存管理", "free": false, "pro": true, "business": true },
+            "coupons": { "name": "優惠券和折扣", "free": false, "pro": "3 個優惠券", "business": "無限優惠券" },
+            "orderManagement": { "name": "訂單管理", "free": false, "pro": true, "business": true }
+          }
+        },
+        "marketing": {
+          "name": "營銷和 SEO",
+          "features": {
+            "seoTools": { "name": "SEO 工具", "free": "基本 SEO", "pro": "高級 SEO", "business": "高級 SEO + 分析" },
+            "googleAnalytics": { "name": "Google Analytics", "free": false, "pro": true, "business": true },
+            "socialMedia": { "name": "社交媒體集成", "free": false, "pro": true, "business": true },
+            "emailMarketing": { "name": "電子郵件營銷", "free": false, "pro": "100 封電子郵件/月", "business": "無限電子郵件" }
+          }
+        },
+        "support": {
+          "name": "支持和安全",
+          "features": {
+            "support": { "name": "支持", "free": "社區支持", "pro": "優先支持", "business": "專門支持" },
+            "ssl": { "name": "SSL 證書", "free": true, "pro": true, "business": true },
+            "passwordProtection": { "name": "密碼保護", "free": false, "pro": true, "business": true },
+            "backup": { "name": "備份和恢復", "free": false, "pro": "每週備份", "business": "每日備份" }
+          }
+        }
+      }
+    },
+    "cta": {
+      "title": "準備好開始了嗎?",
+      "startTrial": "開始免費試用",
+      "contactSales": "聯繫銷售團隊"
+    }
+  },
+  "templatesPage": {
+    "title": "選擇您的模板",
+    "subtitle": "選擇一個漂亮的模板開始構建您的網站。<br />所有模板都完全可自定義和響應式。",
+    "searchPlaceholder": "搜索模板...",
+    "sortOptions": {
+      "latest": "最新",
+      "popular": "最受歡迎",
+      "nameAZ": "名稱 A-Z"
+    },
+    "categories": {
+      "all": "全部",
+      "business": "商業",
+      "portfolio": "作品集",
+      "ecommerce": "電子商務",
+      "blog": "博客",
+      "landingPage": "著陸頁"
+    },
+    "results": "找到 {count} 個模板",
+    "useTemplate": "使用此模板",
+    "preview": "模板預覽",
+    "emptyState": {
+      "title": "未找到模板",
+      "subtitle": "嘗試調整您的搜索或篩選"
+    }
+  },
+  "loginPage": {
+    "back": "返回",
+    "title": "facadely",
+    "subtitle": "登錄或創建帳戶",
+    "google": "使用 Google 繼續",
+    "apple": "使用 Apple 繼續",
+    "facebook": "使用 Facebook 繼續",
+    "terms": "繼續即表示您同意我們的 {terms} 並已閱讀並理解 {privacy}。",
+    "termsLinkText": "服務條款",
+    "privacyLinkText": "隱私政策",
+    "captcha": "使用 Google reCAPTCHA 進行安全登錄"
+  },
+  "termsModal": {
+    "title": "歡迎來到 facadely",
+    "subtitle": "完成您的 {provider} 註冊",
+    "agreement": "創建帳戶即表示您同意我們的 {terms} 並已閱讀並理解 {privacy}。",
+    "termsLinkText": "服務條款",
+    "privacyLinkText": "隱私政策",
+    "agreeButton": "完成註冊",
+    "footerNote": "您可以隨時在頁腳中查看我們的政策"
+  },
+  "servicePage": {
+    "hero": {
+      "title": "我們為您的夢想<br />提供服務",
+      "subtitle": "在幾分鐘內構建專業網站 — 無需代碼，無需麻煩",
+      "startBuildingFree": "免費開始構建",
+      "browseTemplates": "瀏覽模板",
+      "noCreditCard": "無需信用卡",
+      "templates": "500+ 模板",
+      "launchTime": "5 分鐘內啟動"
+    },
+    "heroFeatures": [
+      { "title": "專業設計", "description": "為轉換優化的設計師模板" },
+      { "title": "內置 SEO", "description": "使用高級 SEO 工具在 Google 中排名更高" },
+      { "title": "企業安全", "description": "SSL 證書、自動備份、99.9% 正常運行時間" },
+      { "title": "自定義域", "description": "連接您的域或獲得免費域" },
+      { "title": "移動響應式", "description": "在所有設備上自動完美" },
+      { "title": "實時分析", "description": "跟踪訪問者並做出數據驅動的決策" }
+    ],
+    "features": {
+      "title": "強大的功能，簡單的界面",
+      "subtitle": "創建、啟動和發展您的在線形象所需的一切",
+      "items": [
+        {
+          "title": "閃電般的快速設置",
+          "description": "只需 5 分鐘即可啟動您的網站。無需安裝，無需設置麻煩。選擇模板並立即開始編輯。",
+          "highlights": ["5 分鐘啟動", "即時開始", "無需設置"]
+        },
+        {
+          "title": "專業設計",
+          "description": "每個模板都由專業設計師精心製作。現代、時尚且轉換優化的設計讓您的品牌閃閃發光。",
+          "highlights": ["設計師模板", "時尚現代", "品牌自定義"]
+        },
+        {
+          "title": "移動優先響應式",
+          "description": "所有網站默認都完全響應式。您的網站在每台設備上看起來完美 - 桌面、平板電腦和移動設備。",
+          "highlights": ["100% 響應式", "所有設備完美", "移動優化"]
+        },
+        {
+          "title": "24/7 安全和支持",
+          "description": "SSL 證書、自動備份和 99.9% 的正常運行時間保證。我們的支持團隊隨時準備幫助。",
+          "highlights": ["SSL 包含", "自動備份", "24/7 支持"]
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "它是如何工作的",
+      "steps": [
+        { "number": "01", "title": "選擇模板", "description": "瀏覽 500+ 專業模板並選擇符合您願景的模板。" },
+        { "number": "02", "title": "自定義您的網站", "description": "使用我們的拖放編輯器個性化每個元素。無需編碼。" },
+        { "number": "03", "title": "啟動和發展", "description": "點擊發佈，您的網站立即上線。立即開始發展您的業務。" }
+      ]
+    },
+    "faq": {
+      "title": "常見問題解答",
+      "subtitle": "有關 facadely 您需要了解的一切",
+      "items": [
+        {
+          "question": "我的網站啟動速度有多快?",
+          "answer": "您可以在短短 5 分鐘內啟動專業網站。只需選擇模板，使用我們的拖放編輯器自定義它，然後點擊發佈。無需技術知識。"
+        },
+        {
+          "question": "我需要編碼技能嗎?",
+          "answer": "絕對不需要！facadely 專為所有人設計。我們的直觀可視化編輯器讓您無需編寫任何代碼即可創建令人驚嘆的網站。"
+        },
+        {
+          "question": "我可以使用自己的域名嗎?",
+          "answer": "可以！您可以連接現有域或直接通過 facadely 購買新域。我們自動處理所有技術設置。"
+        },
+        {
+          "question": "網站是否對移動設備響應?",
+          "answer": "每個模板都完全響應式並針對所有設備進行優化。您的網站在桌面、平板電腦和移動設備上看起來完美。"
+        },
+        {
+          "question": "你們提供什麼樣的支持?",
+          "answer": "我們通過聊天和電子郵件提供 24/7 客戶支持。我們廣泛的幫助中心包括視頻教程、指南和文檔，幫助您成功。"
+        },
+        {
+          "question": "我可以添加電子商務功能嗎?",
+          "answer": "可以！我們的 Pro 和 Business 計劃包括完整的電子商務功能，包括支付處理、庫存管理和訂單跟踪。"
+        }
+      ]
+    },
+    "cta": {
+      "title": "準備好構建您的<br />夢想網站了嗎?",
+      "subtitle": "加入數千家信任 facadely 的成功企業。<br />免費開始。無需信用卡。",
+      "startBuilding": "免費開始構建",
+      "browseTemplates": "瀏覽模板",
+      "sslSecured": "SSL 安全",
+      "noCreditCardRequired": "無需信用卡",
+      "users": "100K+ 用戶",
+      "awardWinning": "獲獎"
+    }
+  },
+  "qaPage": {
+    "hero": {
+      "title": "問題和答案",
+      "subtitle": "找到有關 facadely、我們的功能、定價和支持的常見問題的答案。找不到您要找的內容？聯繫我們的支持團隊。",
+      "searchPlaceholder": "搜索問題..."
+    },
+    "filterLabel": "按類別篩選",
+    "allCategories": "全部",
+    "results": "顯示 {total} 個中的 {count} 個問題",
+    "noResults": "找不到與您的搜索相符的問題。",
+    "clearFilters": "清除篩選",
+    "categories": {
+      "gettingStarted": "入門",
+      "features": "功能",
+      "customization": "自定義",
+      "support": "支持",
+      "billing": "計費",
+      "security": "安全"
+    },
+    "questions": [
+      {
+        "id": 1,
+        "category": "gettingStarted",
+        "question": "我如何註冊 facadely?",
+        "answer": "註冊很簡單！點擊我們首頁上的「註冊」按鈕，輸入您的電子郵件地址，創建密碼，然後驗證您的電子郵件。您將立即獲得所有模板和構建器的訪問權限。"
+      },
+      {
+        "id": 2,
+        "category": "gettingStarted",
+        "question": "我需要信用卡才能開始嗎?",
+        "answer": "不需要！您可以創建帳戶並免費開始構建，無需提供任何信用卡信息。只有當您想升級到付費計劃或發佈您的網站時，您才需要添加付款詳細信息。"
+      },
+      {
+        "id": 3,
+        "category": "gettingStarted",
+        "question": "構建網站需要多長時間?",
+        "answer": "您可以在短短 5 分鐘內讓專業網站上線！我們的預先設計的模板已準備好自定義，您可以立即發佈。時間取決於您想進行多少自定義。"
+      },
+      {
+        "id": 4,
+        "category": "features",
+        "question": "我可以使用自己的域名嗎?",
+        "answer": "可以！您可以連接現有域或直接通過 facadely 購買新域。我們自動處理所有技術設置，包括 DNS 配置和 SSL 證書。"
+      },
+      {
+        "id": 5,
+        "category": "features",
+        "question": "模板是否對移動設備響應?",
+        "answer": "絕對！我們的所有模板都完全響應式並針對移動、平板電腦和桌面進行了優化。您的網站將在任何設備上看起來完美，我們自動為您處理響應式設計。"
+      },
+      {
+        "id": 6,
+        "category": "features",
+        "question": "我可以添加電子商務功能嗎?",
+        "answer": "可以！我們的 Pro 和 Business 計劃包括完整的電子商務功能，包括支付處理、庫存管理、訂單跟踪和客戶管理工具。"
+      },
+      {
+        "id": 7,
+        "category": "customization",
+        "question": "我需要編碼技能來自定義我的網站嗎?",
+        "answer": "不需要！我們的可視化編輯器專為所有人設計。您可以通過簡單地拖放元素來自定義顏色、字體、佈局和內容。無需編碼知識。"
+      },
+      {
+        "id": 8,
+        "category": "customization",
+        "question": "啟動後可以更改模板嗎?",
+        "answer": "可以！您可以隨時切換模板而不會丟失內容。您的文本、圖像和設置將無縫轉移到新模板。"
+      },
+      {
+        "id": 9,
+        "category": "customization",
+        "question": "我如何添加自定義 CSS 或 HTML?",
+        "answer": "我們的 Pro 和 Business 計劃包括自定義代碼功能。您可以將自定義 CSS、JavaScript 或 HTML 添加到您網站的特定部分進行高級自定義。"
+      },
+      {
+        "id": 10,
+        "category": "support",
+        "question": "你們提供什麼樣的支持?",
+        "answer": "我們通過聊天和電子郵件提供 24/7 客戶支持。我們廣泛的幫助中心包括視頻教程、指南和常見問題解答。Pro 和 Business 計劃獲得優先支持。"
+      },
+      {
+        "id": 11,
+        "category": "support",
+        "question": "從支持部門收到回复需要多長時間?",
+        "answer": "標準支持通常在 24 小時內回復。優先支持（可在 Pro 和 Business 計劃上使用）在營業時間內 2 小時內回復。"
+      },
+      {
+        "id": 12,
+        "category": "billing",
+        "question": "我如何升級到付費計劃?",
+        "answer": "您可以隨時從您的帳戶設置升級。轉到計費 > 計劃，選擇您想要的計劃，然後完成付款。您的升級立即生效。"
+      },
+      {
+        "id": 13,
+        "category": "billing",
+        "question": "我可以隨時取消我的訂閱嗎?",
+        "answer": "可以！您可以隨時從帳戶設置中取消訂閱。如果您在周期中途取消，將不會再次收費，但您可以在當前期間結束之前使用該服務。"
+      },
+      {
+        "id": 14,
+        "category": "security",
+        "question": "我的網站安全嗎?",
+        "answer": "可以！所有 facadely 網站都包括 SSL 證書、自動備份和 99.9% 的正常運行時間 SLA。我們也提供 DDoS 保護和定期安全審計。"
+      },
+      {
+        "id": 15,
+        "category": "security",
+        "question": "我的數據存儲在哪裡?",
+        "answer": "您的數據存儲在多個地理位置的安全冗餘服務器上。我們使用企業級加密並遵守 GDPR 和其他數據保護法規。"
+      }
+    ],
+    "stillHaveQuestions": {
+      "title": "仍有疑問?",
+      "subtitle": "我們的支持團隊隨時準備幫助。請與我們聯繫，我們會盡快回复。",
+      "emailSupport": "電子郵件支持",
+      "contactUs": "聯繫我們"
+    }
+  },
+  "privacyPage": {
+    "title": "隱私政策",
+    "lastUpdated": "最後更新：2024 年 12 月",
+    "introduction": {
+      "heading": "簡介",
+      "content": "在 facadely，我們認真對待您的隱私。本隱私政策解釋了當您使用我們的網站構建平台時我們如何收集、使用、披露和保護您的信息。"
+    },
+    "informationWeCollect": {
+      "heading": "1. 我們收集的信息",
+      "provided": {
+        "heading": "1.1 您提供的信息",
+        "intro": "在使用我們的服務時，我們會收集您自願提供的信息：",
+        "items": [
+          { "label": "帳戶信息", "description": "姓名、電子郵件地址和個人資料信息" },
+          { "label": "付款信息", "description": "計費詳細信息（通過第三方提供商安全處理）" },
+          { "label": "網站內容", "description": "您上傳的文本、圖像、視頻和其他內容" },
+          { "label": "通信", "description": "您通過支持渠道發送給我們的消息" }
+        ]
+      },
+      "automatic": {
+        "heading": "1.2 自動收集的信息",
+        "intro": "當您使用 facadely 時，我們會自動收集某些信息：",
+        "items": [
+          { "label": "使用數據", "description": "訪問的頁面、使用的功能、在平台上花費的時間" },
+          { "label": "設備信息", "description": "IP 地址、瀏覽器類型、操作系統" },
+          { "label": "Cookies", "description": "會話 cookie、偏好 cookie、分析 cookie" }
+        ]
+      },
+      "socialLogin": {
+        "heading": "1.3 社交登錄信息",
+        "content": "如果您使用社交登錄（Google、Apple、Facebook）註冊，我們會收到基本的個人資料信息，包括您的姓名、電子郵件地址和個人資料照片。"
+      }
+    },
+    "howWeUseYourInformation": {
+      "heading": "2. 我們如何使用您的信息",
+      "intro": "我們將收集的信息用於以下目的：",
+      "items": [
+        "提供、維護和改進網站構建平台",
+        "處理您的網站創建和在線發佈",
+        "管理您的帳戶和訂閱",
+        "處理付款並防止欺詐",
+        "發送服務更新、安全警報和技術通知",
+        "回復您的支持請求和查詢",
+        "分析使用模式以改進功能和用戶體驗",
+        "遵守法律義務和監管要求"
+      ]
+    },
+    "informationSharing": {
+      "heading": "3. 我們如何共享您的信息",
+      "intro": "我們不出售您的個人信息。我們可能在以下情況下共享您的信息：",
+      "items": [
+        { "label": "服務提供商", "description": "代表我們執行服務的第三方供應商（託管、支付處理、電子郵件發送、分析）" },
+        { "label": "業務轉移", "description": "與合併、收購或資產銷售有關" },
+        { "label": "法律要求", "description": "法律要求、傳票或政府請求時" },
+        { "label": "經您同意", "description": "當您明確授權我們共享您的信息時" }
+      ]
+    },
+    "dataSecurity": {
+      "heading": "4. 數據安全",
+      "intro": "我們實施強大的安全措施來保護您的信息：",
+      "items": [
+        "所有傳輸的數據都使用 SSL/TLS 協議加密",
+        "嚴格的訪問控制確保只有授權人員可以訪問敏感數據",
+        "定期安全評估和滲透測試",
+        "定期備份您的數據以防止丟失"
+      ],
+      "disclaimer": "雖然我們使用行業標準的安全措施，但互聯網傳輸方法不是 100% 安全的。我們無法保證絕對安全，但我們會持續努力改進我們的安全實踐。"
+    },
+    "cookies": {
+      "heading": "5. Cookies 和跟踪技術",
+      "intro": "我們使用 cookie 和類似的跟踪技術來增強您的體驗。您可以通過瀏覽器設置或我們的 cookie 偏好工具控制 cookie。",
+      "note": "有關我們使用 cookie 的詳細信息，請參閱我們的 Cookie 政策。"
+    },
+    "yourRights": {
+      "heading": "6. 您的隱私權",
+      "intro": "根據您的位置，您可能擁有以下權利：",
+      "items": [
+        { "label": "訪問和便攜性", "description": "請求獲得您個人數據的副本" },
+        { "label": "更正", "description": "更新或更正不準確的個人信息" },
+        { "label": "刪除", "description": "請求刪除您的個人數據" },
+        { "label": "異議", "description": "反對或限制某些處理活動" },
+        { "label": "撤回同意", "description": "撤回對營銷通信的同意" }
+      ],
+      "note": "要行使您的權利，請聯繫 privacy@facadely.com。我們將在 30 天內回复。"
+    },
+    "dataRetention": {
+      "heading": "7. 數據保留",
+      "intro": "我們保留您的信息的時間長度取決於提供服務和遵守法律義務的必要性：",
+      "items": [
+        "活躍帳戶：您的帳戶處於活躍狀態時保留數據",
+        "已關閉的帳戶：帳戶關閉後 30 天內刪除帳戶數據",
+        "法律要求：某些數據可能被保留更長時間以遵守法律義務"
+      ]
+    },
+    "internationalTransfers": {
+      "heading": "8. 國際數據轉移",
+      "content": "facadely 總部位於南韓。如果您從南韓以外訪問我們的服務，您的信息可能會被轉移、存儲和處理到南韓或我們的服務提供商運營的其他國家。",
+      "safeguards": "我們確保為國際轉移實施適當的保障措施，包括監管機構批准的標準合同條款。"
+    },
+    "childrenPrivacy": {
+      "heading": "9. 兒童隱私",
+      "content": "facadely 不適合 18 歲以下的用戶。我們不會故意從兒童那裡收集個人信息。如果我們發現在沒有父母同意的情況下收集了來自兒童的數據，我們將迅速採取措施刪除該信息。"
+    },
+    "changes": {
+      "heading": "10. 本隱私政策的更改",
+      "intro": "我們可能會定期更新本隱私政策。我們會通過以下方式通知您重大變更：",
+      "items": [
+        "在本頁上發佈更新的政策，附上新的「最後更新」日期",
+        "向您的註冊電子郵件地址發送電子郵件通知",
+        "在我們的服務上顯示突出通知"
+      ]
+    },
+    "regionalCompliance": {
+      "heading": "11. 區域隱私信息",
+      "gdpr": {
+        "title": "對於歐盟/歐洲經濟區用戶 (GDPR)",
+        "intro": "如果您位於歐盟或歐洲經濟區，您在 GDPR 下擁有額外的權利：",
+        "items": [
+          "向您當地的監管機構提出投訴的權利",
+          "反對自動決策和分析的權利",
+          "處理的法律基礎：同意、合同必要性、合法權益"
+        ]
+      },
+      "ccpa": {
+        "title": "對於加州用戶 (CCPA)",
+        "intro": "加州居民在加州消費者隱私法下擁有特定權利：",
+        "items": [
+          "知道收集了什麼個人信息及其使用方式的權利",
+          "刪除個人信息的權利（某些例外除外）",
+          "選擇退出銷售個人信息的權利（我們不出售個人信息）",
+          "因行使 CCPA 權利而不受歧視的權利"
+        ]
+      }
+    },
+    "contact": {
+      "heading": "12. 聯繫我們",
+      "intro": "如果您對本隱私政策或我們的數據實踐有任何疑問、疑慮或請求，請聯繫我們：",
+      "generalInquiries": "一般查詢：privacy@facadely.com",
+      "dpo": "數據保護官：dpo@facadely.com",
+      "address": "地址：facadely Corp.，首爾，南韓"
+    },
+    "footer": {
+      "message": "您的隱私對我們很重要。我們致力於保護您的數據並對我們的實踐保持透明。",
+      "getStarted": "立即開始",
+      "termsOfService": "服務條款"
+    }
+  },
+  "termsPage": {
+    "title": "服務條款",
+    "lastUpdated": "最後更新：2024 年 12 月",
+    "agreement": {
+      "heading": "1. 同意條款",
+      "intro": "歡迎來到 facadely。通過訪問或使用我們的網站構建平台「服務」，您同意受這些服務條款「條款」的約束。如果您不同意這些條款的任何部分，您可能無法訪問該服務。",
+      "description": "facadely 提供無代碼網站構建平台，允許用戶在沒有技術知識的情況下創建、自定義和發佈專業網站。這些條款適用於服務的所有用戶，包括但不限於瀏覽器、構建者和內容貢獻者。"
+    },
+    "accountTerms": {
+      "heading": "2. 帳戶條款",
+      "items": [
+        "您必須年滿 18 歲或達到您司法管轄區的法定年齡才能使用此服務。",
+        "您在創建帳戶時必須提供準確和完整的信息。",
+        "您負責維護您的帳戶和密碼的安全性。",
+        "您負責您帳戶下發生的所有活動。",
+        "您不得將本服務用於任何非法或未經授權的目的。",
+        "一個人或法人不得維護多個免費帳戶。"
+      ]
+    },
+    "serviceUsage": {
+      "heading": "3. 服務使用和限制",
+      "acceptable": {
+        "heading": "3.1 可接受的使用",
+        "intro": "您同意僅將 facadely 用於合法目的。禁止以下行為：",
+        "items": [
+          "發佈非法、有害、威脅、辱罵或歧視性的內容",
+          "侵犯他人的知識產權",
+          "分發惡意軟件、病毒或有害代碼",
+          "嘗試未經授權訪問該服務",
+          "使用該服務發送垃圾郵件或未經請求的通信",
+          "創建推廣非法活動的網站"
+        ]
+      },
+      "limits": {
+        "heading": "3.2 服務限制",
+        "content": "您對服務的使用受您選擇的計劃（免費、Pro 或 Business）的限制。這些限制包括但不限於：網站數量、存儲容量、帶寬和功能訪問。超過這些限制可能導致服務中斷或額外費用。"
+      }
+    },
+    "paymentBilling": {
+      "heading": "4. 付款和計費",
+      "items": [
+        { "label": "訂閱計劃", "content": "付費計劃（Pro 和 Business）按您選擇的月度或年度基礎計費。" },
+        { "label": "自動更新", "content": "除非在更新日期前取消，否則訂閱會自動更新。" },
+        { "label": "取消", "content": "您可以隨時取消您的訂閱。取消在當前計費期結束時生效。" },
+        { "label": "退款", "content": "我們為首次年度訂閱提供 14 天退款保證。月度訂閱不可退款。" },
+        { "label": "價格變更", "content": "我們保留在提前 30 天通知現有訂閱者的情況下修改定價的權利。" },
+        { "label": "稅金", "content": "價格不包括當地法律要求的適用稅金。" }
+      ]
+    },
+    "intellectualProperty": {
+      "heading": "5. 知識產權",
+      "yourContent": {
+        "heading": "5.1 您的內容",
+        "content": "您保留您通過 facadely 創建和發佈的內容的所有權利。通過使用我們的服務，您授予我們一個有限的許可證，以託管、存儲和顯示您的內容，以便根據需要提供服務。"
+      },
+      "facadelyCon": {
+        "heading": "5.2 facadely 內容",
+        "content": "facadely 提供的所有模板、設計、功能和功能都是我們的知識產權。您只能在通過我們的服務創建網站時使用這些元素。"
+      }
+    },
+    "dataPrivacy": {
+      "heading": "6. 數據和隱私",
+      "intro": "您對該服務的使用也受我們的隱私政策管轄。我們按照我們的隱私政策中的描述收集和使用您的數據。通過使用 facadely，您同意進行此類收集和使用。",
+      "security": "我們實施行業標準的安全措施來保護您的數據。但是，互聯網傳輸方法不是 100% 安全的，我們無法保證絕對安全。"
+    },
+    "serviceAvailability": {
+      "heading": "7. 服務可用性和支持",
+      "items": [
+        "我們力爭 99.9% 的正常運行時間，但不保證無中斷的服務。",
+        "我們可能會在可能的情況下提前通知進行計劃維護。",
+        "支持級別因計劃而異：社區（免費）、優先（Pro）和專門（Business）。",
+        "我們保留在合理通知下修改或停用功能的權利。"
+      ]
+    },
+    "limitation": {
+      "heading": "8. 責任限制",
+      "content": "在法律允許的最大範圍內，FACADELY 對於任何間接、附帶、特殊、後果性或懲罰性的損害，或任何利潤或收入損失、直接或間接發生、或任何數據、使用、商業信譽或其他無形損失的損失不承擔任何責任。",
+      "cap": "在任何情況下，我們對您的所有損害的總責任不超過您在索賠前 12 個月內支付給 Facadely 的金額或 $100（以較大者為準）。"
+    },
+    "termination": {
+      "heading": "9. 終止",
+      "intro": "我們可能會因任何原因（包括違反這些條款）立即無預先通知或責任地終止或暫停您的帳戶和對服務的訪問。終止時：",
+      "items": [
+        "您對服務的使用權將立即停止",
+        "您有 30 天的時間來導出您的內容",
+        "您發佈的網站將下線",
+        "不會為剩餘的訂閱時間提供退款（法律要求除外）"
+      ]
+    },
+    "changesTerms": {
+      "heading": "10. 條款變更",
+      "content": "我們保留隨時修改這些條款的權利。我們將至少在重大變更生效前 30 天通過電子郵件或通過服務通知您。變更後繼續使用服務視為對修訂條款的接受。"
+    },
+    "governingLaw": {
+      "heading": "11. 準據法和爭議",
+      "intro": "這些條款應根據並根據大韓民國法律進行解釋，不考慮其法律衝突條款。",
+      "disputes": "因這些條款或服務引起的任何爭議，應通過在首爾南韓進行的具有約束力的仲裁解決，除非法律禁止。"
+    },
+    "contactInformation": {
+      "heading": "12. 聯繫信息",
+      "intro": "如果您對這些條款有任何疑問，請聯繫我們：",
+      "email": "電子郵件：legal@facadely.com",
+      "address": "地址：Facadely Corp.，首爾，南韓"
+    },
+    "severability": {
+      "heading": "13. 可分割性和放棄",
+      "severabilityContent": "如果這些條款的任何條款被發現不可執行或無效，該條款將被限制或消除到最小必要範圍內，以便這些條款的其餘部分保持完全有效。",
+      "waiver": "我們不執行本條款的任何權利或條款不應視為對這些權利的放棄。"
+    },
+    "entireAgreement": {
+      "heading": "14. 完整協議",
+      "content": "這些條款連同我們的隱私政策和我們在服務上發佈的任何其他法律通知構成關於服務的您和 Facadely 之間的完整協議。"
+    },
+    "footer": {
+      "message": "通過使用 Facadely，您確認您已閱讀並理解這些服務條款。",
+      "createAccount": "創建帳戶",
+      "privacyPolicy": "隱私政策"
+    }
+  },
+  "cookiePage": {
+    "title": "Cookie 政策",
+    "lastUpdated": "最後更新：2024 年 12 月",
+    "introduction": {
+      "heading": "簡介",
+      "content": "此 Cookie 政策解釋了 facadely 如何在我們的網站和平台上使用 cookie 和類似的跟踪技術。"
+    },
+    "whatAreCookies": {
+      "heading": "1. 什麼是 Cookie？",
+      "content": "Cookie 是存儲在您設備上的小文件，包含有關您訪問的信息。它們幫助我們識別您、記住您的偏好並了解您使用我們的服務的方式。"
+    },
+    "typesOfCookies": {
+      "heading": "2. 我們使用的 Cookie 類型",
+      "categories": [
+        {
+          "name": "必要 Cookie",
+          "description": "服務運作所必需。如果不使用它們，網站功能將受到影響，因此無法禁用。"
+        },
+        {
+          "name": "功能性 Cookie",
+          "description": "記住您的偏好和設置以增強您的體驗。"
+        },
+        {
+          "name": "分析 Cookie",
+          "description": "幫助我們了解您如何使用該服務以改進功能和性能。"
+        },
+        {
+          "name": "營銷 Cookie",
+          "description": "跟踪您的活動以提供個性化廣告和營銷內容。"
+        }
+      ]
+    },
+    "cookieDetails": {
+      "heading": "3. Cookie 詳情",
+      "table": "見下文使用的 Cookie 的詳細列表"
+    },
+    "thirdPartyServices": {
+      "heading": "4. 第三方服務",
+      "intro": "我們使用可能設置自己的 cookie 的第三方服務：",
+      "services": [
+        { "name": "Google Analytics", "purpose": "網站使用分析" },
+        { "name": "Stripe", "purpose": "支付處理" },
+        { "name": "Supabase", "purpose": "身份驗證和數據庫" }
+      ]
+    },
+    "yourChoices": {
+      "heading": "5. 您的選擇",
+      "intro": "您對 cookie 有以下選項：",
+      "options": [
+        "瀏覽器設置：大多數瀏覽器允許您拒絕 cookie 或在發送 cookie 時發出警報。",
+        "Cookie 偏好工具：使用我們的 cookie 偏好中心來管理您的 cookie 選擇。",
+        "選擇退出鏈接：第三方服務通常提供選擇退出機制。"
+      ],
+      "note": "請注意，禁用 cookie 可能會影響我們的服務的功能。"
+    },
+    "contact": {
+      "heading": "6. 聯繫我們",
+      "content": "如果您對我們對 cookie 的使用有任何疑問，請通過 privacy@facadely.com 與我們聯繫"
+    }
+  },
+  "generatePage": {
+    "title": "生成您的網站",
+    "subtitle": "選擇一個模板並自定義它以創建您完美的網站"
+  },
+  "statusPage": {
+    "title": "服務狀態",
+    "subtitle": "檢查 facadely 服務的當前狀態"
+  },
+  "customerServicePage": {
+    "title": "客戶服務",
+    "subtitle": "我們在這裡幫助。與我們的支持團隊聯繫"
+  },
+  "aboutPage": {
+    "title": "關於 facadely",
+    "subtitle": "我們的使命是使網頁設計民主化",
+    "mission": {
+      "heading": "我們的使命",
+      "content": "我們相信每個人都應該擁有一個漂亮、專業的網站。facadely 使任何人都可以輕鬆地在沒有編碼知識的情況下創建和啟動令人驚嘆的網站。"
+    },
+    "vision": {
+      "heading": "我們的願景",
+      "content": "成為世界上最用戶友好的網站構建器，使數百萬人和企業在線成功。"
+    },
+    "values": {
+      "heading": "我們的價值觀",
+      "items": [
+        "簡單性：使網頁設計對每個人都無法訪問",
+        "品質：提供美麗、專業的模板",
+        "支持：在我們用戶的每一步都在那裡",
+        "創新：不斷改進我們的平台"
+      ]
+    }
+  },
+  "contactPage": {
+    "title": "聯繫我們",
+    "subtitle": "有問題？我們很樂意聽到您的意見。",
+    "form": {
+      "name": "您的姓名",
+      "email": "您的電子郵件",
+      "subject": "主題",
+      "message": "您的消息",
+      "send": "發送消息",
+      "sending": "正在發送...",
+      "success": "感謝您的消息！",
+      "error": "發送消息失敗。請重試。"
+    }
+  }
+}

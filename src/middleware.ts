@@ -1,7 +1,26 @@
-import { updateSession } from '@/lib/supabase/middleware';
 import { NextRequest, NextResponse } from 'next/server';
+import { i18n } from '@/i18n/config';
+import { updateSession } from '@/lib/supabase/middleware';
+
+function getLocale(request: NextRequest): string | undefined {
+  const pathname = request.nextUrl.pathname;
+  const pathnameIsMissingLocale = i18n.locales.every(
+    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  );
+
+  if (pathnameIsMissingLocale) {
+    return i18n.defaultLocale;
+  }
+}
 
 export async function middleware(request: NextRequest) {
+  const locale = getLocale(request);
+  if (locale) {
+    return NextResponse.redirect(
+      new URL(`/${locale}${request.nextUrl.pathname}`, request.url)
+    );
+  }
+
   // Protected routes that require authentication
   const protectedRoutes = ['/dashboard'];
 
@@ -14,7 +33,6 @@ export async function middleware(request: NextRequest) {
     return await updateSession(request);
   }
 
-  // For non-protected routes, just pass through
   return NextResponse.next();
 }
 

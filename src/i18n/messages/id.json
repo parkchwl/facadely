@@ -1,0 +1,877 @@
+{
+  "navigation": {
+    "templates": "Template",
+    "generate": "Buat",
+    "service": "Layanan",
+    "pricing": "Harga",
+    "signup": "Daftar",
+    "signupFree": "Gratis!"
+  },
+  "mobileNav": {
+    "templates": "Template",
+    "generate": "Buat",
+    "service": "Layanan",
+    "pricing": "Harga",
+    "signup": "DAFTAR",
+    "signupFree": "Gratis untuk memulai"
+  },
+  "languageSelector": {
+    "title": "Pilih Negara/Wilayah Anda"
+  },
+  "footer": {
+    "brand": {
+      "name": "facadely",
+      "tagline": "Kami fokus pada esensi",
+      "copyright": "© 2025 facadely, Corp."
+    },
+    "platform": {
+      "title": "Platform",
+      "generator": "Pembuat Situs Web",
+      "template": "Template",
+      "domain": "Domain"
+    },
+    "support": {
+      "title": "Dukungan",
+      "customerService": "Layanan Pelanggan",
+      "qa": "Tanya Jawab",
+      "serverStatus": "Status Server"
+    },
+    "company": {
+      "title": "Perusahaan",
+      "about": "Tentang Kami",
+      "contact": "Hubungi Kami"
+    },
+    "legal": {
+      "poweredBy": "Powered by facadely ✦ Semua hak dilindungi.",
+      "terms": "Syarat Layanan",
+      "privacy": "Kebijakan Privasi",
+      "cookie": "Kebijakan Cookie"
+    },
+    "headline": "WUJUDKAN IMPIAN ANDA"
+  },
+  "homePage": {
+    "hero": {
+      "title": "Pelanggan<br />Mencari Anda",
+      "subtitle": "Buat situs web profesional dalam hitungan menit —<br />Tanpa kode, Tanpa repot",
+      "templatesLink": "Template",
+      "signupButton": "Daftar",
+      "signupFreeText": "Gratis!"
+    },
+    "whyMatters": {
+      "title": "Mengapa<br />Situs Web<br />Penting",
+      "description": "Di dunia digital saat ini, situs web Anda adalah <strong>kesan pertama</strong>, <strong>kredibilitas</strong>, dan sering kali <strong>alat penjualan utama</strong> Anda.",
+      "ctaButton": "Bangun Situs Anda Hari Ini",
+      "stats": [
+        { "stat": "94%", "highlight": "dari kesan pertama", "text": "terkait dengan desain.", "source": "Northumbria University UX Lab" },
+        { "stat": "88%", "highlight": "dari konsumen online", "text": "tidak mungkin kembali ke situs setelah pengalaman buruk.", "source": "Econsultancy / Adobe" },
+        { "stat": "81%", "highlight": "dari konsumen", "text": "mengunjungi situs web sebelum membuat keputusan pembelian.", "source": "GE Capital Retail Bank / Google Think Insights" },
+        { "stat": "75%", "highlight": "dari pengguna", "text": "menilai kredibilitas perusahaan berdasarkan situs webnya.", "source": "Stanford Web Credibility Research" },
+        { "stat": "~70%", "highlight": "kehilangan kepercayaan", "text": "jika situs web tidak terlihat profesional.", "source": "Adobe & Sweor" },
+        { "stat": "69%", "highlight": "dari pengguna seluler", "text": "berinteraksi dengan situs web sebagai pengalaman merek pertama mereka.", "source": "Think with Google" }
+      ]
+    },
+    "solution": {
+      "title": "facadely menyelesaikan masalahnya",
+      "items": [
+        { "title": "Luncurkan dalam 5 menit, tidak ada setup", "desc": "Mulai langsung dengan template siap pakai.\nTidak perlu coding atau instalasi." },
+        { "title": "Siap mobile secara default", "desc": "Semua template sepenuhnya responsif.\nSitus Anda terlihat bagus di perangkat apa pun—secara otomatis." },
+        { "title": "Desain profesional, dibuat mudah", "desc": "Dibangun oleh desainer untuk mendapatkan kepercayaan dan kredibilitas.\nBuat situs yang dipoles tanpa keterampilan desain." },
+        { "title": "Alat untuk pemesanan dan manajemen pelanggan", "desc": "Semua yang Anda butuhkan—formulir, penjadwalan, CRM—tertanam.\nTidak ada plugin atau alat pihak ketiga yang diperlukan." },
+        { "title": "Analitik real-time disertakan", "desc": "Lacak kunjungan, lalu lintas, dan perilaku pengguna.\nBuat keputusan yang lebih cerdas dengan data langsung." },
+        { "title": "Keamanan tertanam", "desc": "SSL dan enkripsi diterapkan secara otomatis.\nTetap terlindungi dengan pembaruan berkelanjutan." }
+      ],
+      "cta_text": "Buat kesan pertama yang tahan lama dan bangun merek yang dipercaya yang diingat pelanggan.",
+      "cta_button": "Mulai Membangun Bisnis Anda"
+    },
+    "faq": {
+      "title": "Pertanyaan yang Sering Diajukan",
+      "subtitle": "Ada pertanyaan? Kami punya jawabannya",
+      "questionLabel": "Pertanyaan {current} dari {total}",
+      "questions": [
+        {
+          "question": "Apakah saya memerlukan keterampilan coding untuk menggunakan facadely?",
+          "answer": "Tidak! facadely dirancang untuk semua orang.\n\nAntarmuka drag-and-drop intuitif kami memudahkan membuat situs web profesional tanpa pengetahuan coding."
+        },
+        {
+          "question": "Bisakah saya menggunakan nama domain saya sendiri?",
+          "answer": "Ya, Anda dapat menghubungkan domain khusus Anda atau membeli yang baru langsung melalui facadely.\n\nKami menangani semua setup teknis untuk Anda."
+        },
+        {
+          "question": "Apakah template responsif seluler?",
+          "answer": "Tentu saja! Semua template kami sepenuhnya responsif dan dioptimalkan untuk seluler, tablet, dan desktop.\n\nSitus Anda akan terlihat sempurna di ukuran layar apa pun."
+        },
+        {
+          "question": "Bisakah saya mengganti template setelah meluncurkan situs saya?",
+          "answer": "Ya, Anda dapat mengubah template Anda kapan saja tanpa kehilangan konten.\n\nTeks, gambar, dan pengaturan Anda akan ditransfer dengan mulus."
+        },
+        {
+          "question": "Apakah ada uji coba gratis?",
+          "answer": "Ya! Anda dapat mulai membangun situs web Anda secara gratis.\n\nTidak ada kartu kredit yang diperlukan. Upgrade ketika Anda siap untuk dipublikasikan."
+        },
+        {
+          "question": "Dukungan apa yang Anda tawarkan?",
+          "answer": "Kami menyediakan dukungan pelanggan 24/7 melalui chat dan email.\n\nPusat bantuan kami juga mencakup tutorial, panduan, dan FAQ untuk membantu Anda berhasil."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Siap membangun situs web impian Anda?",
+      "subtitle": "Bergabunglah dengan ribuan pengguna bahagia yang mengubah kehadiran online mereka dengan facadely",
+      "browseButton": "Jelajahi Template",
+      "startButton": "Mulai Gratis"
+    },
+    "loadingScreen": {
+      "brandName": "facadely"
+    }
+  },
+  "pricingPage": {
+    "title": "Harga Sederhana, Transparan",
+    "subtitle": "Pilih paket yang sempurna untuk bisnis Anda",
+    "toggle": {
+      "monthly": "BULANAN",
+      "yearly": "TAHUNAN",
+      "save": "HEMAT 20%"
+    },
+    "tiers": {
+      "free": {
+        "name": "Gratis",
+        "price": "Gratis",
+        "perMonth": "",
+        "description": "Sempurna untuk memulai dengan situs web pertama Anda.",
+        "features": [
+          "1 Situs Web",
+          "Template Dasar",
+          "Penyimpanan 500 MB",
+          "Dukungan Standar",
+          "Sertifikat SSL"
+        ],
+        "buttonText": "Mulai Gratis"
+      },
+      "pro": {
+        "name": "Pro",
+        "monthlyPrice": "$15",
+        "yearlyPrice": "$12",
+        "perMonth": "/bln",
+        "description": "Semua yang Anda butuhkan untuk situs web profesional.",
+        "features": [
+          "Situs Web Tanpa Batas",
+          "Template Premium",
+          "Penyimpanan 10 GB",
+          "Dukungan Prioritas",
+          "Domain Kustom",
+          "Analitik Lanjutan",
+          "Alat SEO",
+          "Integrasi Media Sosial"
+        ],
+        "buttonText": "Pilih Pro",
+        "badge": "PALING POPULER"
+      },
+      "business": {
+        "name": "Business",
+        "monthlyPrice": "$30",
+        "yearlyPrice": "$24",
+        "perMonth": "/bln",
+        "description": "Fitur lanjutan untuk bisnis yang berkembang.",
+        "features": [
+          "Semua yang ada di Pro",
+          "Penyimpanan 50 GB",
+          "Fitur E-Commerce",
+          "Kolaborasi Tim",
+          "Dukungan Khusus",
+          "Solusi White-Label",
+          "Akses API",
+          "Keamanan Lanjutan"
+        ],
+        "buttonText": "Pilih Business"
+      }
+    },
+    "featureComparison": {
+      "title": "Bandingkan Paket",
+      "subtitle": "Lihat apa yang disertakan di setiap paket",
+      "categories": {
+        "basic": {
+          "name": "Fitur Dasar",
+          "features": {
+            "pages": { "name": "Halaman", "free": "5 halaman", "pro": "Halaman tanpa batas", "business": "Halaman tanpa batas" },
+            "customDomain": { "name": "Domain Kustom", "free": false, "pro": true, "business": true },
+            "storage": { "name": "Penyimpanan", "free": "500 MB", "pro": "10 GB", "business": "50 GB" },
+            "bandwidth": { "name": "Bandwidth", "free": "1 GB", "pro": "10 GB", "business": "100 GB" },
+            "monthlyVisits": { "name": "Kunjungan Bulanan", "free": "1K kunjungan", "pro": "25K kunjungan", "business": "100K kunjungan" }
+          }
+        },
+        "design": {
+          "name": "Desain & Konten",
+          "features": {
+            "templates": { "name": "Template", "free": "Template dasar", "pro": "Template premium", "business": "Semua template + Kustom" },
+            "customCode": { "name": "Kode Kustom", "free": false, "pro": true, "business": true },
+            "fontUpload": { "name": "Unggah Font", "free": false, "pro": true, "business": true },
+            "designMode": { "name": "Mode Desain", "free": false, "pro": true, "business": true }
+          }
+        },
+        "ecommerce": {
+          "name": "E-Commerce",
+          "features": {
+            "products": { "name": "Produk", "free": false, "pro": "10 produk", "business": "Produk tanpa batas" },
+            "paymentGateway": { "name": "Gateway Pembayaran", "free": false, "pro": true, "business": true },
+            "inventory": { "name": "Manajemen Inventaris", "free": false, "pro": true, "business": true },
+            "coupons": { "name": "Kupon & Diskon", "free": false, "pro": "3 kupon", "business": "Kupon tanpa batas" },
+            "orderManagement": { "name": "Manajemen Pesanan", "free": false, "pro": true, "business": true }
+          }
+        },
+        "marketing": {
+          "name": "Pemasaran & SEO",
+          "features": {
+            "seoTools": { "name": "Alat SEO", "free": "SEO Dasar", "pro": "SEO Lanjutan", "business": "SEO Premium + Analitik" },
+            "googleAnalytics": { "name": "Google Analytics", "free": false, "pro": true, "business": true },
+            "socialMedia": { "name": "Integrasi Media Sosial", "free": false, "pro": true, "business": true },
+            "emailMarketing": { "name": "Pemasaran Email", "free": false, "pro": "100 email/bulan", "business": "Email tanpa batas" }
+          }
+        },
+        "support": {
+          "name": "Dukungan & Keamanan",
+          "features": {
+            "support": { "name": "Dukungan", "free": "Dukungan komunitas", "pro": "Dukungan prioritas", "business": "Dukungan khusus" },
+            "ssl": { "name": "Sertifikat SSL", "free": true, "pro": true, "business": true },
+            "passwordProtection": { "name": "Perlindungan Kata Sandi", "free": false, "pro": true, "business": true },
+            "backup": { "name": "Backup & Pemulihan", "free": false, "pro": "Backup mingguan", "business": "Backup harian" }
+          }
+        }
+      }
+    },
+    "cta": {
+      "title": "Siap untuk memulai?",
+      "startTrial": "Mulai Uji Coba Gratis",
+      "contactSales": "Hubungi Penjualan"
+    }
+  },
+  "templatesPage": {
+    "title": "Pilih Template Anda",
+    "subtitle": "Pilih template indah untuk mulai membangun situs web Anda.<br />Semua template sepenuhnya dapat disesuaikan dan responsif.",
+    "searchPlaceholder": "Cari template...",
+    "sortOptions": {
+      "latest": "Terbaru",
+      "popular": "Populer",
+      "nameAZ": "Nama A-Z"
+    },
+    "categories": {
+      "all": "Semua",
+      "business": "Bisnis",
+      "portfolio": "Portofolio",
+      "ecommerce": "E-Commerce",
+      "blog": "Blog",
+      "landingPage": "Halaman Pendaratan"
+    },
+    "results": "{count} template ditemukan",
+    "useTemplate": "Gunakan Template Ini",
+    "preview": "Pratinjau Template",
+    "emptyState": {
+      "title": "Tidak ada template ditemukan",
+      "subtitle": "Coba sesuaikan pencarian atau filter Anda"
+    }
+  },
+  "loginPage": {
+    "back": "Kembali",
+    "title": "facadely",
+    "subtitle": "Masuk atau buat akun",
+    "google": "Lanjutkan dengan Google",
+    "apple": "Lanjutkan dengan Apple",
+    "facebook": "Lanjutkan dengan Facebook",
+    "terms": "Dengan melanjutkan, Anda setuju dengan {terms} kami dan telah membaca dan memahami {privacy}.",
+    "termsLinkText": "Syarat Layanan",
+    "privacyLinkText": "Kebijakan Privasi",
+    "captcha": "Masuk Aman dengan reCAPTCHA Google"
+  },
+  "termsModal": {
+    "title": "Selamat datang di facadely",
+    "subtitle": "Selesaikan pendaftaran {provider}",
+    "agreement": "Dengan membuat akun, Anda setuju dengan {terms} kami dan telah membaca dan memahami {privacy}.",
+    "termsLinkText": "Syarat Layanan",
+    "privacyLinkText": "Kebijakan Privasi",
+    "agreeButton": "Selesaikan Pendaftaran",
+    "footerNote": "Anda dapat meninjau kebijakan kami kapan saja di footer"
+  },
+  "servicePage": {
+    "hero": {
+      "title": "Kami Melayani<br />untuk Impian Anda",
+      "subtitle": "Buat situs web profesional dalam hitungan menit — Tanpa kode, Tanpa repot",
+      "startBuildingFree": "Mulai Membangun Gratis",
+      "browseTemplates": "Jelajahi Template",
+      "noCreditCard": "Tidak ada kartu kredit yang diperlukan",
+      "templates": "500+ template",
+      "launchTime": "Luncurkan dalam 5 menit"
+    },
+    "heroFeatures": [
+      { "title": "Desain Profesional", "description": "Template yang dibuat desainer dan dioptimalkan untuk konversi" },
+      { "title": "SEO Bawaan", "description": "Peringkat lebih tinggi di Google dengan alat SEO canggih" },
+      { "title": "Keamanan Tingkat Perusahaan", "description": "Sertifikat SSL, backup otomatis, uptime 99,9%" },
+      { "title": "Domain Kustom", "description": "Hubungkan domain Anda atau dapatkan yang gratis" },
+      { "title": "Responsif Seluler", "description": "Sempurna di semua perangkat secara otomatis" },
+      { "title": "Analitik Real-Time", "description": "Lacak pengunjung dan buat keputusan berdasarkan data" }
+    ],
+    "features": {
+      "title": "Fitur Kuat, Antarmuka Sederhana",
+      "subtitle": "Semua yang Anda butuhkan untuk membuat, meluncurkan, dan mengembangkan kehadiran online Anda",
+      "items": [
+        {
+          "title": "Setup Super Cepat",
+          "description": "Luncurkan situs web Anda hanya dalam 5 menit. Tidak ada instalasi, tidak ada repot setup. Pilih template dan mulai edit langsung.",
+          "highlights": ["Luncur 5 menit", "Mulai instan", "Nol setup"]
+        },
+        {
+          "title": "Desain Profesional",
+          "description": "Setiap template dirancang oleh desainer profesional. Desain modern, trendy, dan dioptimalkan untuk konversi yang membuat merek Anda bersinar.",
+          "highlights": ["Template desainer", "Modern & trendy", "Kustomisasi merek"]
+        },
+        {
+          "title": "Responsif Mobile-First",
+          "description": "Semua situs web sepenuhnya responsif secara default. Situs Anda terlihat sempurna di setiap perangkat - desktop, tablet, dan mobile.",
+          "highlights": ["100% responsif", "Sempurna di semua perangkat", "Dioptimalkan mobile"]
+        },
+        {
+          "title": "Keamanan & Dukungan 24/7",
+          "description": "Sertifikat SSL, backup otomatis, dan uptime 99,9% terjamin. Tim dukungan kami siap membantu kapan saja.",
+          "highlights": ["SSL termasuk", "Backup otomatis", "Dukungan 24/7"]
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "Cara Kerjanya",
+      "steps": [
+        { "number": "01", "title": "Pilih Template", "description": "Jelajahi 500+ template profesional dan pilih yang sesuai dengan visi Anda." },
+        { "number": "02", "title": "Sesuaikan Situs Anda", "description": "Gunakan editor drag & drop kami untuk mempersonalisasi setiap elemen. Tidak perlu coding." },
+        { "number": "03", "title": "Luncurkan & Tumbuh", "description": "Tekan publikasikan dan situs web Anda langsung aktif. Mulai berkembang hari ini." }
+      ]
+    },
+    "faq": {
+      "title": "Pertanyaan yang Sering Diajukan",
+      "subtitle": "Semua yang perlu Anda ketahui tentang facadely",
+      "items": [
+        {
+          "question": "Seberapa cepat saya dapat meluncurkan situs web saya?",
+          "answer": "Anda dapat meluncurkan situs web profesional hanya dalam 5 menit. Cukup pilih template, sesuaikan dengan editor drag & drop kami, dan tekan publikasikan. Tidak diperlukan pengetahuan teknis."
+        },
+        {
+          "question": "Apakah saya memerlukan keterampilan coding?",
+          "answer": "Sama sekali tidak! facadely dirancang untuk semua orang. Editor visual intuitif kami memungkinkan Anda membuat situs web yang menakjubkan tanpa menulis satu baris kode pun."
+        },
+        {
+          "question": "Bisakah saya menggunakan nama domain saya sendiri?",
+          "answer": "Ya! Anda dapat menghubungkan domain yang ada atau membeli yang baru langsung melalui facadely. Kami menangani semua setup teknis secara otomatis."
+        },
+        {
+          "question": "Apakah situs web responsif mobile?",
+          "answer": "Setiap template sepenuhnya responsif dan dioptimalkan untuk semua perangkat. Situs web Anda akan terlihat sempurna di desktop, tablet, dan mobile secara otomatis."
+        },
+        {
+          "question": "Dukungan apa yang Anda tawarkan?",
+          "answer": "Kami menyediakan dukungan pelanggan 24/7 melalui chat dan email. Pusat bantuan ekstensif kami mencakup tutorial video, panduan, dan dokumentasi untuk membantu Anda berhasil."
+        },
+        {
+          "question": "Bisakah saya menambahkan fungsionalitas e-commerce?",
+          "answer": "Ya! Paket Pro dan Business kami mencakup kemampuan e-commerce lengkap dengan pemrosesan pembayaran, manajemen inventaris, dan pelacakan pesanan."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Siap Membangun<br />Situs Web Impian Anda?",
+      "subtitle": "Bergabunglah dengan ribuan bisnis sukses yang mempercayai facadely.<br />Mulai gratis. Tidak ada kartu kredit yang diperlukan.",
+      "startBuilding": "Mulai Membangun Gratis",
+      "browseTemplates": "Jelajahi Template",
+      "sslSecured": "Diamankan SSL",
+      "noCreditCardRequired": "Tidak Ada Kartu Kredit",
+      "users": "100K+ Pengguna",
+      "awardWinning": "Pemenang Penghargaan"
+    }
+  },
+  "qaPage": {
+    "hero": {
+      "title": "Pertanyaan & Jawaban",
+      "subtitle": "Temukan jawaban atas pertanyaan umum tentang facadely, fitur kami, harga, dan dukungan. Tidak menemukan apa yang Anda cari? Hubungi tim dukungan kami.",
+      "searchPlaceholder": "Cari pertanyaan..."
+    },
+    "filterLabel": "Filter berdasarkan Kategori",
+    "allCategories": "Semua",
+    "results": "Menampilkan {count} dari {total} pertanyaan",
+    "noResults": "Tidak ada pertanyaan yang cocok dengan pencarian Anda.",
+    "clearFilters": "Bersihkan filter",
+    "categories": {
+      "gettingStarted": "Memulai",
+      "features": "Fitur",
+      "customization": "Kustomisasi",
+      "support": "Dukungan",
+      "billing": "Penagihan",
+      "security": "Keamanan"
+    },
+    "questions": [
+      {
+        "id": 1,
+        "category": "gettingStarted",
+        "question": "Bagaimana cara saya mendaftar untuk facadely?",
+        "answer": "Mendaftar sangat mudah! Klik tombol \"Daftar\" di beranda kami, masukkan alamat email Anda, buat kata sandi, dan verifikasi email Anda. Anda akan langsung mendapat akses ke semua template dan builder kami."
+      },
+      {
+        "id": 2,
+        "category": "gettingStarted",
+        "question": "Apakah saya memerlukan kartu kredit untuk memulai?",
+        "answer": "Tidak! Anda dapat membuat akun dan mulai membangun secara gratis tanpa memberikan informasi kartu kredit apa pun. Anda hanya perlu menambahkan detail pembayaran jika Anda ingin upgrade ke paket berbayar atau menerbitkan situs Anda."
+      },
+      {
+        "id": 3,
+        "category": "gettingStarted",
+        "question": "Berapa lama waktu yang dibutuhkan untuk membangun situs web?",
+        "answer": "Anda dapat memiliki situs web profesional yang aktif hanya dalam 5 menit! Template pra-desain kami siap untuk disesuaikan, dan Anda dapat menerbitkan secara instan. Waktu tergantung pada berapa banyak kustomisasi yang ingin Anda lakukan."
+      },
+      {
+        "id": 4,
+        "category": "features",
+        "question": "Bisakah saya menggunakan nama domain saya sendiri?",
+        "answer": "Ya! Anda dapat menghubungkan domain yang ada atau membeli yang baru langsung melalui facadely. Kami menangani semua setup teknis termasuk konfigurasi DNS dan sertifikat SSL secara otomatis."
+      },
+      {
+        "id": 5,
+        "category": "features",
+        "question": "Apakah template responsif mobile?",
+        "answer": "Tentu saja! Semua template kami sepenuhnya responsif dan dioptimalkan untuk mobile, tablet, dan desktop. Situs web Anda akan terlihat sempurna di perangkat apa pun, dan kami secara otomatis menangani desain responsif untuk Anda."
+      },
+      {
+        "id": 6,
+        "category": "features",
+        "question": "Bisakah saya menambahkan fungsionalitas e-commerce?",
+        "answer": "Ya! Paket Pro dan Business kami mencakup kemampuan e-commerce lengkap dengan pemrosesan pembayaran, manajemen inventaris, pelacakan pesanan, dan alat manajemen pelanggan bawaan."
+      },
+      {
+        "id": 7,
+        "category": "customization",
+        "question": "Apakah saya memerlukan keterampilan coding untuk menyesuaikan situs saya?",
+        "answer": "Tidak! Editor visual kami dirancang untuk semua orang. Anda dapat menyesuaikan warna, font, tata letak, dan konten dengan mudah dengan drag & drop. Tidak diperlukan pengetahuan coding."
+      },
+      {
+        "id": 8,
+        "category": "customization",
+        "question": "Bisakah saya mengganti template setelah meluncurkan?",
+        "answer": "Ya! Anda dapat mengganti template kapan saja tanpa kehilangan konten Anda. Teks, gambar, dan pengaturan Anda akan ditransfer dengan mulus ke template baru."
+      },
+      {
+        "id": 9,
+        "category": "customization",
+        "question": "Bagaimana cara menambahkan CSS atau HTML kustom?",
+        "answer": "Paket Pro dan Business kami mencakup fungsionalitas kode kustom. Anda dapat menambahkan CSS, JavaScript, atau HTML kustom ke bagian spesifik situs web Anda untuk kustomisasi lanjutan."
+      },
+      {
+        "id": 10,
+        "category": "support",
+        "question": "Dukungan apa yang Anda tawarkan?",
+        "answer": "Kami menyediakan dukungan pelanggan 24/7 melalui chat dan email. Pusat bantuan ekstensif kami mencakup tutorial video, panduan, dan FAQ. Paket Pro dan Business mendapatkan dukungan prioritas."
+      },
+      {
+        "id": 11,
+        "category": "support",
+        "question": "Berapa lama waktu untuk mendapatkan respons dari dukungan?",
+        "answer": "Dukungan standar biasanya merespons dalam 24 jam. Dukungan prioritas (tersedia di paket Pro dan Business) merespons dalam 2 jam selama jam kerja."
+      },
+      {
+        "id": 12,
+        "category": "billing",
+        "question": "Bagaimana cara upgrade ke paket berbayar?",
+        "answer": "Anda dapat upgrade kapan saja dari pengaturan akun Anda. Buka Penagihan > Paket, pilih paket yang Anda inginkan, dan selesaikan pembayaran. Upgrade akan segera berlaku."
+      },
+      {
+        "id": 13,
+        "category": "billing",
+        "question": "Bisakah saya membatalkan langganan saya kapan saja?",
+        "answer": "Ya! Anda dapat membatalkan langganan Anda kapan saja dari pengaturan akun. Jika Anda membatalkan di tengah siklus, Anda tidak akan ditagih lagi, tetapi Anda dapat menggunakan layanan hingga periode saat ini berakhir."
+      },
+      {
+        "id": 14,
+        "category": "security",
+        "question": "Apakah situs web saya aman?",
+        "answer": "Ya! Semua situs web facadely menyertakan sertifikat SSL, backup otomatis, dan SLA uptime 99,9%. Kami juga menyediakan perlindungan DDoS dan audit keamanan reguler."
+      },
+      {
+        "id": 15,
+        "category": "security",
+        "question": "Di mana data saya disimpan?",
+        "answer": "Data Anda disimpan di server yang aman dan redundan di berbagai lokasi geografis. Kami menggunakan enkripsi tingkat enterprise dan mematuhi GDPR dan peraturan perlindungan data lainnya."
+      }
+    ],
+    "stillHaveQuestions": {
+      "title": "Masih Ada Pertanyaan?",
+      "subtitle": "Tim dukungan kami siap membantu. Hubungi kami dan kami akan merespons secepat yang kami bisa.",
+      "emailSupport": "Email Dukungan",
+      "contactUs": "Hubungi Kami"
+    }
+  },
+  "privacyPage": {
+    "title": "Kebijakan Privasi",
+    "lastUpdated": "Terakhir Diperbarui: Desember 2024",
+    "introduction": {
+      "heading": "Pengenalan",
+      "content": "Di facadely, kami menganggap privasi Anda dengan serius. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, dan melindungi informasi Anda ketika Anda menggunakan platform pembangun situs web kami."
+    },
+    "informationWeCollect": {
+      "heading": "1. Informasi yang Kami Kumpulkan",
+      "provided": {
+        "heading": "1.1 Informasi yang Anda Berikan",
+        "intro": "Kami mengumpulkan informasi yang Anda berikan secara sukarela saat menggunakan Layanan kami:",
+        "items": [
+          { "label": "Informasi Akun", "description": "Nama, alamat email, dan informasi profil" },
+          { "label": "Informasi Pembayaran", "description": "Detail penagihan (diproses dengan aman melalui penyedia pihak ketiga)" },
+          { "label": "Konten Situs Web", "description": "Teks, gambar, video, dan konten lainnya yang Anda unggah" },
+          { "label": "Komunikasi", "description": "Pesan yang Anda kirimkan kepada kami melalui saluran dukungan" }
+        ]
+      },
+      "automatic": {
+        "heading": "1.2 Informasi yang Dikumpulkan Secara Otomatis",
+        "intro": "Ketika Anda menggunakan facadely, kami secara otomatis mengumpulkan informasi tertentu:",
+        "items": [
+          { "label": "Data Penggunaan", "description": "Halaman yang dikunjungi, fitur yang digunakan, waktu yang dihabiskan di platform" },
+          { "label": "Informasi Perangkat", "description": "Alamat IP, jenis browser, sistem operasi" },
+          { "label": "Cookie", "description": "Cookie sesi, cookie preferensi, cookie analitik" }
+        ]
+      },
+      "socialLogin": {
+        "heading": "1.3 Informasi Masuk Sosial",
+        "content": "Jika Anda mendaftar menggunakan login sosial (Google, Apple, Facebook), kami menerima informasi profil dasar termasuk nama, alamat email, dan foto profil Anda."
+      }
+    },
+    "howWeUseYourInformation": {
+      "heading": "2. Bagaimana Kami Menggunakan Informasi Anda",
+      "intro": "Kami menggunakan informasi yang dikumpulkan untuk tujuan berikut:",
+      "items": [
+        "Menyediakan, memelihara, dan meningkatkan platform pembangun situs web",
+        "Memproses pembuatan dan penerbitan situs web Anda",
+        "Mengelola akun dan langganan Anda",
+        "Memproses pembayaran dan mencegah penipuan",
+        "Mengirim pembaruan layanan, peringatan keamanan, dan pemberitahuan teknis",
+        "Merespons permintaan dukungan dan pertanyaan Anda",
+        "Menganalisis pola penggunaan untuk meningkatkan fitur dan pengalaman pengguna",
+        "Mematuhi kewajiban hukum dan persyaratan peraturan"
+      ]
+    },
+    "informationSharing": {
+      "heading": "3. Bagaimana Kami Membagikan Informasi Anda",
+      "intro": "Kami tidak menjual informasi pribadi Anda. Kami dapat membagikan informasi Anda dalam keadaan berikut:",
+      "items": [
+        { "label": "Penyedia Layanan", "description": "Vendor pihak ketiga yang melakukan layanan atas nama kami (hosting, pemrosesan pembayaran, pengiriman email, analitik)" },
+        { "label": "Transfer Bisnis", "description": "Sehubungan dengan merger, akuisisi, atau penjualan aset" },
+        { "label": "Persyaratan Hukum", "description": "Ketika diwajibkan oleh hukum, surat permohonan, atau permintaan pemerintah" },
+        { "label": "Dengan Persetujuan Anda", "description": "Ketika Anda secara eksplisit memberi otorisasi kepada kami untuk membagikan informasi Anda" }
+      ]
+    },
+    "dataSecurity": {
+      "heading": "4. Keamanan Data",
+      "intro": "Kami menerapkan langkah-langkah keamanan yang kuat untuk melindungi informasi Anda:",
+      "items": [
+        "Semua data yang ditransmisikan dienkripsi menggunakan protokol SSL/TLS",
+        "Kontrol akses yang ketat memastikan hanya personel yang berwenang dapat mengakses data sensitif",
+        "Penilaian keamanan dan pengujian penetrasi reguler",
+        "Data Anda secara teratur dicadangkan untuk mencegah kehilangan"
+      ],
+      "disclaimer": "Meskipun kami menggunakan langkah-langkah keamanan standar industri, tidak ada metode transmisi melalui Internet yang 100% aman. Kami tidak dapat menjamin keamanan absolut, tetapi kami terus bekerja untuk meningkatkan praktik keamanan kami."
+    },
+    "cookies": {
+      "heading": "5. Cookie dan Teknologi Pelacakan",
+      "intro": "Kami menggunakan cookie dan teknologi pelacakan serupa untuk meningkatkan pengalaman Anda. Anda dapat mengontrol cookie melalui pengaturan browser atau alat preferensi cookie kami.",
+      "note": "Untuk informasi detail tentang penggunaan cookie kami, silakan lihat Kebijakan Cookie kami."
+    },
+    "yourRights": {
+      "heading": "6. Hak Privasi Anda",
+      "intro": "Tergantung pada lokasi Anda, Anda mungkin memiliki hak berikut:",
+      "items": [
+        { "label": "Akses dan Portabilitas", "description": "Minta salinan data pribadi Anda" },
+        { "label": "Koreksi", "description": "Perbarui atau perbaiki informasi pribadi yang tidak akurat" },
+        { "label": "Penghapusan", "description": "Minta penghapusan data pribadi Anda" },
+        { "label": "Keberatan", "description": "Keberatan atau batasi aktivitas pemrosesan tertentu" },
+        { "label": "Tarik Kembali Persetujuan", "description": "Tarik kembali persetujuan untuk komunikasi pemasaran" }
+      ],
+      "note": "Untuk menggunakan hak Anda, hubungi privacy@facadely.com. Kami akan merespons dalam 30 hari."
+    },
+    "dataRetention": {
+      "heading": "7. Retensi Data",
+      "intro": "Kami menyimpan informasi Anda selama diperlukan untuk menyediakan Layanan dan mematuhi kewajiban hukum:",
+      "items": [
+        "Akun aktif: Data disimpan saat akun Anda aktif",
+        "Akun ditutup: Data akun dihapus dalam 30 hari setelah penutupan",
+        "Persyaratan hukum: Beberapa data dapat disimpan lebih lama untuk mematuhi kewajiban hukum"
+      ]
+    },
+    "internationalTransfers": {
+      "heading": "8. Transfer Data Internasional",
+      "content": "facadely berbasis di Indonesia. Jika Anda mengakses Layanan kami dari luar Indonesia, informasi Anda dapat ditransfer ke, disimpan, dan diproses di Indonesia atau negara lain tempat penyedia layanan kami beroperasi.",
+      "safeguards": "Kami memastikan perlindungan yang sesuai untuk transfer internasional, termasuk Klausul Kontrak Standar yang disetujui oleh otoritas peraturan."
+    },
+    "childrenPrivacy": {
+      "heading": "9. Privasi Anak-Anak",
+      "content": "facadely tidak dimaksudkan untuk pengguna di bawah 18 tahun. Kami tidak dengan sengaja mengumpulkan informasi pribadi dari anak-anak. Jika kami menyadari bahwa kami telah mengumpulkan data dari anak tanpa persetujuan orang tua, kami akan segera mengambil langkah untuk menghapus informasi tersebut."
+    },
+    "changes": {
+      "heading": "10. Perubahan Kebijakan Privasi Ini",
+      "intro": "Kami dapat memperbarui Kebijakan Privasi ini secara berkala. Kami akan memberi tahu Anda tentang perubahan material dengan cara berikut:",
+      "items": [
+        "Posting kebijakan yang diperbarui di halaman ini dengan tanggal \"Terakhir Diperbarui\" yang baru",
+        "Mengirim pemberitahuan email ke alamat email terdaftar Anda",
+        "Menampilkan pemberitahuan menonjol di Layanan kami"
+      ]
+    },
+    "regionalCompliance": {
+      "heading": "11. Informasi Privasi Regional",
+      "gdpr": {
+        "title": "Untuk Pengguna EU/EEA (GDPR)",
+        "intro": "Jika Anda berada di Uni Eropa atau Area Ekonomi Eropa, Anda memiliki hak tambahan di bawah GDPR:",
+        "items": [
+          "Hak untuk mengajukan keluhan kepada otoritas pengawas lokal Anda",
+          "Hak untuk membantah pengambilan keputusan otomatis dan penyusunan profil",
+          "Dasar hukum untuk pemrosesan: Persetujuan, keharusan kontrak, kepentingan sah"
+        ]
+      },
+      "ccpa": {
+        "title": "Untuk Pengguna California (CCPA)",
+        "intro": "Penduduk California memiliki hak khusus di bawah California Consumer Privacy Act:",
+        "items": [
+          "Hak untuk mengetahui informasi pribadi apa yang dikumpulkan dan bagaimana penggunaannya",
+          "Hak untuk menghapus informasi pribadi (dengan pengecualian tertentu)",
+          "Hak untuk menolak penjualan informasi pribadi (kami tidak menjual informasi pribadi)",
+          "Hak untuk non-diskriminasi atas pelaksanaan hak CCPA"
+        ]
+      }
+    },
+    "contact": {
+      "heading": "12. Hubungi Kami",
+      "intro": "Jika Anda memiliki pertanyaan, kekhawatiran, atau permintaan mengenai Kebijakan Privasi ini atau praktik data kami, silakan hubungi kami:",
+      "generalInquiries": "Pertanyaan Umum: privacy@facadely.com",
+      "dpo": "Petugas Perlindungan Data: dpo@facadely.com",
+      "address": "Alamat: facadely Corp., Indonesia"
+    },
+    "footer": {
+      "message": "Privasi Anda penting bagi kami. Kami berkomitmen untuk melindungi data Anda dan transparan tentang praktik kami.",
+      "getStarted": "Mulai Sekarang",
+      "termsOfService": "Syarat Layanan"
+    }
+  },
+  "termsPage": {
+    "title": "Syarat Layanan",
+    "lastUpdated": "Terakhir Diperbarui: Desember 2024",
+    "agreement": {
+      "heading": "1. Persetujuan Syarat",
+      "intro": "Selamat datang di facadely. Dengan mengakses atau menggunakan platform pembangun situs web kami (\"Layanan\"), Anda setuju untuk terikat oleh Syarat Layanan ini (\"Syarat\"). Jika Anda tidak setuju dengan bagian mana pun dari syarat-syarat ini, Anda tidak dapat mengakses Layanan.",
+      "description": "facadely menyediakan platform pembangun situs web tanpa kode yang memungkinkan pengguna membuat, menyesuaikan, dan menerbitkan situs web profesional tanpa pengetahuan teknis. Syarat-syarat ini berlaku untuk semua pengguna Layanan, termasuk tanpa batasan pengguna yang adalah browser, pembuat, dan kontributor konten."
+    },
+    "accountTerms": {
+      "heading": "2. Syarat Akun",
+      "items": [
+        "Anda harus berusia minimal 18 tahun atau mencapai usia dewasa di yurisdiksi Anda untuk menggunakan Layanan ini.",
+        "Anda harus memberikan informasi yang akurat dan lengkap saat membuat akun Anda.",
+        "Anda bertanggung jawab untuk memelihara keamanan akun dan kata sandi Anda.",
+        "Anda bertanggung jawab atas semua aktivitas yang terjadi di bawah akun Anda.",
+        "Anda tidak dapat menggunakan Layanan untuk tujuan ilegal atau tidak sah.",
+        "Satu orang atau entitas hukum tidak dapat mempertahankan lebih dari satu akun gratis."
+      ]
+    },
+    "serviceUsage": {
+      "heading": "3. Penggunaan Layanan dan Batasan",
+      "acceptable": {
+        "heading": "3.1 Penggunaan yang Dapat Diterima",
+        "intro": "Anda setuju untuk menggunakan facadely hanya untuk tujuan yang sah. Anda dilarang dari:",
+        "items": [
+          "Menerbitkan konten yang ilegal, berbahaya, mengancam, menyalahgunakan, atau diskriminatif",
+          "Melanggar hak kekayaan intelektual orang lain",
+          "Mendistribusikan malware, virus, atau kode berbahaya",
+          "Mencoba mendapatkan akses tidak sah ke Layanan",
+          "Menggunakan Layanan untuk mengirim spam atau komunikasi yang tidak diminta",
+          "Membuat situs web yang mempromosikan aktivitas ilegal"
+        ]
+      },
+      "limits": {
+        "heading": "3.2 Batasan Layanan",
+        "content": "Penggunaan Anda terhadap Layanan tunduk pada batasan paket pilihan Anda (Gratis, Pro, atau Business). Batasan ini mencakup tetapi tidak terbatas pada: jumlah situs web, kapasitas penyimpanan, bandwidth, dan akses fitur. Melampaui batasan ini dapat mengakibatkan gangguan layanan atau biaya tambahan."
+      }
+    },
+    "paymentBilling": {
+      "heading": "4. Pembayaran dan Penagihan",
+      "items": [
+        { "label": "Paket Berlangganan", "content": "Paket berbayar (Pro dan Business) ditagih setiap bulan atau per tahun sebagaimana dipilih oleh Anda." },
+        { "label": "Pembaruan Otomatis", "content": "Langganan secara otomatis diperbaharui kecuali Anda membatalkan sebelum tanggal pembaruan." },
+        { "label": "Pembatalan", "content": "Anda dapat membatalkan langganan Anda kapan saja. Pembatalan berlaku pada akhir periode penagihan saat ini." },
+        { "label": "Pengembalian Dana", "content": "Kami menawarkan jaminan uang kembali 14 hari untuk langganan tahunan pertama. Langganan bulanan tidak dapat dikembalikan." },
+        { "label": "Perubahan Harga", "content": "Kami berhak untuk memodifikasi harga dengan pemberitahuan 30 hari kepada pelanggan yang ada." },
+        { "label": "Pajak", "content": "Harga tidak termasuk pajak yang berlaku, yang akan ditambahkan sesuai kebutuhan oleh hukum lokal." }
+      ]
+    },
+    "intellectualProperty": {
+      "heading": "5. Hak Kekayaan Intelektual",
+      "yourContent": {
+        "heading": "5.1 Konten Anda",
+        "content": "Anda mempertahankan semua hak ke konten yang Anda buat dan terbitkan menggunakan facadely. Dengan menggunakan Layanan kami, Anda memberikan kami lisensi terbatas untuk meng-host, menyimpan, dan menampilkan konten Anda sesuai yang diperlukan untuk menyediakan Layanan."
+      },
+      "facadelyCon": {
+        "heading": "5.2 Konten facadely",
+        "content": "Semua template, desain, fitur, dan fungsionalitas yang disediakan oleh facadely tetap menjadi kekayaan intelektual kami. Anda menerima lisensi untuk hanya menggunakan elemen-elemen ini sebagai bagian dari pembuatan situs web melalui Layanan kami."
+      }
+    },
+    "dataPrivacy": {
+      "heading": "6. Data dan Privasi",
+      "intro": "Penggunaan Layanan Anda juga diatur oleh Kebijakan Privasi kami. Kami mengumpulkan dan menggunakan data Anda seperti yang dijelaskan dalam Kebijakan Privasi kami. Dengan menggunakan facadely, Anda menyetujui pengumpulan dan penggunaan tersebut.",
+      "security": "Kami menerapkan langkah-langkah keamanan standar industri untuk melindungi data Anda. Namun, tidak ada metode transmisi melalui Internet yang 100% aman, dan kami tidak dapat menjamin keamanan absolut."
+    },
+    "serviceAvailability": {
+      "heading": "7. Ketersediaan dan Dukungan Layanan",
+      "items": [
+        "Kami berusaha untuk uptime 99,9% tetapi tidak menjamin layanan yang tidak terputus.",
+        "Kami dapat melakukan pemeliharaan terjadwal dengan pemberitahuan sebelumnya jika memungkinkan.",
+        "Tingkat dukungan bervariasi menurut paket: Komunitas (Gratis), Prioritas (Pro), dan Khusus (Business).",
+        "Kami berhak untuk memodifikasi atau menghentikan fitur dengan pemberitahuan yang wajar."
+      ]
+    },
+    "limitation": {
+      "heading": "8. Batasan Tanggung Jawab",
+      "content": "SEJAUH YANG DIIZINKAN OLEH HUKUM, FACADELY TIDAK BERTANGGUNG JAWAB ATAS KERUGIAN TIDAK LANGSUNG, INSIDENTAL, KHUSUS, KONSEKUENSIAL, ATAU PUNITIF, ATAU KERUGIAN KEUNTUNGAN ATAU PENDAPATAN, BAIK TERJADI SECARA LANGSUNG MAUPUN TIDAK LANGSUNG, ATAU KERUGIAN DATA, PENGGUNAAN, GOODWILL, ATAU KERUGIAN INTANGIBEL LAINNYA.",
+      "cap": "Dalam hal apa pun, tanggung jawab total kami kepada Anda untuk semua kerusakan tidak akan melebihi jumlah yang Anda bayarkan kepada Facadely dalam 12 bulan sebelum klaim, atau $100, mana yang lebih besar."
+    },
+    "termination": {
+      "heading": "9. Penghentian",
+      "intro": "Kami dapat menghentikan atau menangguhkan akun Anda dan akses ke Layanan segera, tanpa pemberitahuan atau tanggung jawab sebelumnya, untuk alasan apa pun, termasuk pelanggaran Syarat-Syarat ini. Setelah penghentian:",
+      "items": [
+        "Hak Anda untuk menggunakan Layanan akan segera berhenti",
+        "Anda memiliki 30 hari untuk mengekspor konten Anda",
+        "Situs web yang diterbitkan akan diambil offline",
+        "Tidak ada pengembalian dana untuk waktu langganan yang tersisa (kecuali jika diperlukan oleh hukum)"
+      ]
+    },
+    "changesTerms": {
+      "heading": "10. Perubahan pada Syarat",
+      "content": "Kami berhak untuk memodifikasi Syarat-Syarat ini kapan saja. Kami akan memberikan pemberitahuan tentang perubahan material melalui email atau Layanan setidaknya 30 hari sebelum mulai berlaku. Penggunaan Layanan Anda yang berkelanjutan setelah perubahan merupakan penerimaan Syarat-Syarat yang dimodifikasi."
+    },
+    "governingLaw": {
+      "heading": "11. Hukum yang Berlaku dan Perselisihan",
+      "intro": "Syarat-Syarat ini harus diatur dan ditafsirkan sesuai dengan hukum Republik Indonesia, tanpa memperhatikan ketentuan konflik hukumnya.",
+      "disputes": "Setiap perselisihan yang timbul dari Syarat-Syarat atau Layanan ini harus diselesaikan melalui arbitrase mengikat di Jakarta, Indonesia, kecuali dilarang oleh hukum."
+    },
+    "contactInformation": {
+      "heading": "12. Informasi Kontak",
+      "intro": "Jika Anda memiliki pertanyaan tentang Syarat-Syarat ini, silakan hubungi kami di:",
+      "email": "Email: legal@facadely.com",
+      "address": "Alamat: Facadely Corp., Indonesia"
+    },
+    "severability": {
+      "heading": "13. Pemisahan dan Pengabaian",
+      "severabilityContent": "Jika ketentuan apa pun dari Syarat-Syarat ini ditemukan tidak dapat dilaksanakan atau tidak valid, ketentuan tersebut akan dibatasi atau dihilangkan sejauh yang diperlukan secara minimal sehingga Syarat-Syarat akan sebaliknya tetap berlaku penuh.",
+      "waiver": "Kegagalan kami untuk menegakkan hak atau ketentuan apa pun dari Syarat-Syarat ini tidak akan dianggap sebagai pengabaian hak-hak tersebut."
+    },
+    "entireAgreement": {
+      "heading": "14. Perjanjian Lengkap",
+      "content": "Syarat-Syarat ini, bersama-sama dengan Kebijakan Privasi kami dan pemberitahuan hukum lainnya yang kami terbitkan di Layanan, merupakan perjanjian lengkap antara Anda dan Facadely mengenai Layanan."
+    },
+    "footer": {
+      "message": "Dengan menggunakan Facadely, Anda mengakui bahwa Anda telah membaca dan memahami Syarat-Syarat Layanan ini.",
+      "createAccount": "Buat Akun",
+      "privacyPolicy": "Kebijakan Privasi"
+    }
+  },
+  "cookiePage": {
+    "title": "Kebijakan Cookie",
+    "lastUpdated": "Terakhir Diperbarui: Desember 2024",
+    "introduction": {
+      "heading": "Pengenalan",
+      "content": "Kebijakan Cookie ini menjelaskan bagaimana facadely menggunakan cookie dan teknologi pelacakan serupa di situs web dan platform kami."
+    },
+    "whatAreCookies": {
+      "heading": "1. Apa Itu Cookie?",
+      "content": "Cookie adalah file kecil yang disimpan di perangkat Anda yang berisi informasi tentang kunjungan Anda. Mereka membantu kami mengenali Anda, mengingat preferensi Anda, dan memahami bagaimana Anda menggunakan Layanan kami."
+    },
+    "typesOfCookies": {
+      "heading": "2. Jenis Cookie yang Kami Gunakan",
+      "categories": [
+        {
+          "name": "Cookie Penting",
+          "description": "Diperlukan untuk fungsi Layanan. Tidak dapat dinonaktifkan tanpa mempengaruhi fungsionalitas situs."
+        },
+        {
+          "name": "Cookie Fungsional",
+          "description": "Ingat preferensi dan pengaturan Anda untuk meningkatkan pengalaman Anda."
+        },
+        {
+          "name": "Cookie Analitik",
+          "description": "Bantu kami memahami bagaimana Anda menggunakan Layanan untuk meningkatkan fitur dan kinerja."
+        },
+        {
+          "name": "Cookie Pemasaran",
+          "description": "Lacak aktivitas Anda untuk memberikan iklan yang dipersonalisasi dan konten pemasaran."
+        }
+      ]
+    },
+    "cookieDetails": {
+      "heading": "3. Detail Cookie",
+      "table": "Lihat daftar terperinci cookie yang digunakan di bawah"
+    },
+    "thirdPartyServices": {
+      "heading": "4. Layanan Pihak Ketiga",
+      "intro": "Kami menggunakan layanan pihak ketiga yang dapat menetapkan cookie mereka sendiri:",
+      "services": [
+        { "name": "Google Analytics", "purpose": "Analisis penggunaan situs web" },
+        { "name": "Stripe", "purpose": "Pemrosesan pembayaran" },
+        { "name": "Supabase", "purpose": "Autentikasi dan database" }
+      ]
+    },
+    "yourChoices": {
+      "heading": "5. Pilihan Anda",
+      "intro": "Anda memiliki opsi berikut mengenai cookie:",
+      "options": [
+        "Pengaturan Browser: Sebagian besar browser memungkinkan Anda untuk menolak cookie atau memberi tahu Anda saat cookie sedang dikirim.",
+        "Alat Preferensi Cookie: Gunakan pusat preferensi cookie kami untuk mengelola pilihan cookie Anda.",
+        "Tautan Penolakan: Layanan pihak ketiga biasanya menyediakan mekanisme penolakan."
+      ],
+      "note": "Harap perhatikan bahwa menonaktifkan cookie dapat mempengaruhi fungsionalitas Layanan kami."
+    },
+    "contact": {
+      "heading": "6. Hubungi Kami",
+      "content": "Jika Anda memiliki pertanyaan tentang penggunaan cookie kami, silakan hubungi kami di privacy@facadely.com"
+    }
+  },
+  "generatePage": {
+    "title": "Buat Situs Web Anda",
+    "subtitle": "Pilih template dan sesuaikan untuk membuat situs web sempurna Anda"
+  },
+  "statusPage": {
+    "title": "Status Layanan",
+    "subtitle": "Periksa status layanan facadely saat ini"
+  },
+  "customerServicePage": {
+    "title": "Layanan Pelanggan",
+    "subtitle": "Kami di sini untuk membantu. Hubungi tim dukungan kami"
+  },
+  "aboutPage": {
+    "title": "Tentang facadely",
+    "subtitle": "Misi kami adalah mendemokratisasi desain web",
+    "mission": {
+      "heading": "Misi Kami",
+      "content": "Kami percaya bahwa setiap orang berhak memiliki situs web yang indah dan profesional. facadely membuat siapa saja dapat dengan mudah membuat dan meluncurkan situs web yang menakjubkan tanpa pengetahuan coding."
+    },
+    "vision": {
+      "heading": "Visi Kami",
+      "content": "Menjadi pembuat situs web paling ramah pengguna di dunia, memberdayakan jutaan orang dan bisnis untuk sukses secara online."
+    },
+    "values": {
+      "heading": "Nilai-Nilai Kami",
+      "items": [
+        "Kesederhanaan: Membuat desain web dapat diakses oleh semua orang",
+        "Kualitas: Berikan template yang indah dan profesional",
+        "Dukungan: Bersama pengguna kami di setiap langkah",
+        "Inovasi: Terus tingkatkan platform kami"
+      ]
+    }
+  },
+  "contactPage": {
+    "title": "Hubungi Kami",
+    "subtitle": "Ada pertanyaan? Kami ingin mendengar dari Anda.",
+    "form": {
+      "name": "Nama Anda",
+      "email": "Email Anda",
+      "subject": "Subjek",
+      "message": "Pesan Anda",
+      "send": "Kirim Pesan",
+      "sending": "Mengirim...",
+      "success": "Terima kasih atas pesan Anda!",
+      "error": "Gagal mengirim pesan. Silakan coba lagi."
+    }
+  }
+}
