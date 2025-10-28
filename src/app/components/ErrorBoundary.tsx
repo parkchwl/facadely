@@ -1,6 +1,7 @@
 'use client';
 
 import React, { Component, ReactNode } from 'react';
+import Link from 'next/link';
 
 interface Props {
   children: ReactNode;
@@ -51,12 +52,12 @@ export default class ErrorBoundary extends Component<Props, State> {
               >
                 Refresh Page
               </button>
-              <a
+              <Link
                 href="/"
                 className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-black transition-colors"
               >
                 Go to Homepage
-              </a>
+              </Link>
             </div>
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <div className="mt-8 p-4 bg-red-900/20 border border-red-500 rounded-lg text-left">

@@ -1,0 +1,501 @@
+'use client';
+import { useParams } from 'next/navigation';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { DM_Serif_Display } from 'next/font/google';
+import {
+  Zap,
+  Palette,
+  Smartphone,
+  Search,
+  TrendingUp,
+  Globe,
+  Lock,
+  Monitor,
+  ChevronDown,
+  Check,
+  ArrowRight,
+  Users,
+  Award
+} from 'lucide-react';
+
+const dmSerif = DM_Serif_Display({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+});
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Zap,
+  Palette,
+  Smartphone,
+  Search,
+  TrendingUp,
+  Globe,
+  Lock,
+  Monitor,
+};
+
+interface ServicePageClientProps {
+  dictionary: {
+    hero: {
+      title: string;
+      subtitle: string;
+      startBuildingFree: string;
+      browseTemplates: string;
+      noCreditCard: string;
+      templates: string;
+      launchTime: string;
+    };
+    heroFeatures: Array<{
+      title: string;
+      description: string;
+    }>;
+    features: {
+      title: string;
+      subtitle: string;
+      items: Array<{
+        title: string;
+        description: string;
+        highlights: string[];
+      }>;
+    };
+    howItWorks: {
+      title: string;
+      steps: Array<{
+        number: string;
+        title: string;
+        description: string;
+      }>;
+    };
+    faq: {
+      title: string;
+      subtitle: string;
+      items: Array<{
+        question: string;
+        answer: string;
+      }>;
+    };
+    cta: {
+      title: string;
+      subtitle: string;
+      startBuilding: string;
+      browseTemplates: string;
+      sslSecured: string;
+      noCreditCardRequired: string;
+      users: string;
+      awardWinning: string;
+    };
+  };
+}
+
+export default function ServicePageClient({ dictionary }: ServicePageClientProps) {
+  const { lang } = useParams() as { lang: string };
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
+  const heroFeatures = [
+    {
+      icon: Palette,
+      title: dictionary.heroFeatures[0].title,
+      description: dictionary.heroFeatures[0].description
+    },
+    {
+      icon: Search,
+      title: dictionary.heroFeatures[1].title,
+      description: dictionary.heroFeatures[1].description
+    },
+    {
+      icon: Lock,
+      title: dictionary.heroFeatures[2].title,
+      description: dictionary.heroFeatures[2].description
+    },
+    {
+      icon: Globe,
+      title: dictionary.heroFeatures[3].title,
+      description: dictionary.heroFeatures[3].description
+    },
+    {
+      icon: Smartphone,
+      title: dictionary.heroFeatures[4].title,
+      description: dictionary.heroFeatures[4].description
+    },
+    {
+      icon: TrendingUp,
+      title: dictionary.heroFeatures[5].title,
+      description: dictionary.heroFeatures[5].description
+    }
+  ];
+
+  const features = dictionary.features.items.map((item, idx) => {
+    const images = ['/image/Generate.webp', '/image/Matters.webp', '/image/Generate.webp', '/image/Matters.webp'];
+    return {
+      ...item,
+      image: images[idx % images.length],
+      icon: [Zap, Palette, Smartphone, Lock][idx]
+    };
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const steps = dictionary.howItWorks.steps.map((step, idx) => ({
+    ...step,
+    icon: [Palette, Monitor, Zap][idx]
+  }));
+
+  return (
+    <div className="min-h-screen bg-white -mt-16 sm:-mt-20 lg:-mt-24">
+      {/* Hero Section */}
+      <section className="relative min-h-[80vh] max-h-[1000px] flex items-center justify-center overflow-hidden bg-black py-12 sm:py-16 lg:py-20 xl:py-24">
+        <div className="absolute inset-0">
+          <Image
+            src="/image/Service.webp"
+            alt="Service hero background"
+            fill
+            priority
+            quality={75}
+            sizes="100vw"
+            className="object-cover opacity-30"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            {/* Left Side - Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex-1 text-left"
+            >
+              {/* Main Headline */}
+              <h1
+                className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[100px] font-extrabold text-white tracking-tight leading-[0.9] mb-8 ${dmSerif.className}`}
+                style={{ textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)' }}
+                dangerouslySetInnerHTML={{ __html: dictionary.hero.title }}
+              />
+
+              {/* Sub Headline */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-xl sm:text-2xl lg:text-3xl text-gray-200 leading-relaxed mb-10 font-light"
+              >
+                {dictionary.hero.subtitle}
+              </motion.p>
+
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="flex flex-col sm:flex-row items-start gap-4 mb-10"
+              >
+                <Link href={`/${lang}/generate`}>
+                  <motion.button
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Start building your website for free"
+                    className="bg-white text-black px-8 py-4 lg:px-10 lg:py-5 rounded-full font-bold text-lg shadow-2xl hover:bg-gray-100 transition-all duration-200 w-full sm:w-auto"
+                  >
+                    {dictionary.hero.startBuildingFree}
+                  </motion.button>
+                </Link>
+                <Link href={`/${lang}/templates`}>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Browse website templates"
+                    className="border-2 border-white/30 text-white px-8 py-4 lg:px-10 lg:py-5 rounded-full font-bold text-lg hover:bg-white/10 hover:border-white/50 transition-all duration-200 backdrop-blur-sm w-full sm:w-auto"
+                  >
+                    {dictionary.hero.browseTemplates}
+                  </motion.button>
+                </Link>
+              </motion.div>
+
+              {/* Trust Indicators */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                className="flex flex-wrap items-center gap-3 text-sm text-gray-400"
+              >
+                <Check className="w-4 h-4 text-green-400" />
+                <span>{dictionary.hero.noCreditCard}</span>
+                <span className="text-gray-600">•</span>
+                <span>{dictionary.hero.templates}</span>
+                <span className="text-gray-600">•</span>
+                <span>{dictionary.hero.launchTime}</span>
+              </motion.div>
+            </motion.div>
+
+            {/* Right Side - Visual/Features */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex-1 w-full"
+            >
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-5 lg:gap-6">
+                {heroFeatures.map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.4 + index * 0.08 }}
+                    whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                    className="flex flex-col items-center text-center gap-3 sm:gap-4 p-4 sm:p-6 lg:p-7 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer group"
+                  >
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 text-black" />
+                    </div>
+                    <div className="w-full">
+                      <h3 className="text-sm sm:text-lg font-bold text-white mb-1 sm:mb-2 break-words">
+                        {feature.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-gray-400 leading-relaxed break-words">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Showcase Section */}
+      <section className="py-20 sm:py-24 lg:py-32 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16 lg:mb-20"
+          >
+            <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 ${dmSerif.className}`}>
+              {dictionary.features.title}
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {dictionary.features.subtitle}
+            </p>
+          </motion.div>
+
+          <div className="space-y-16 lg:space-y-24">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 hover:shadow-2xl transition-shadow duration-300 border border-gray-200"
+              >
+                <div className={`flex flex-col ${
+                  index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                } gap-12 lg:gap-16 items-center`}>
+                  {/* Image */}
+                  <div className="flex-1 w-full">
+                    <div className="relative rounded-2xl overflow-hidden shadow-lg bg-white p-4">
+                      <div className="relative w-full aspect-video">
+                        <Image
+                          src={feature.image}
+                          alt={`${feature.title} feature screenshot`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover rounded-lg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1">
+                    <div className="w-16 h-16 bg-black rounded-xl flex items-center justify-center mb-6">
+                      <feature.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className={`text-3xl lg:text-4xl font-bold text-gray-900 mb-4 ${dmSerif.className}`}>
+                      {feature.title}
+                    </h3>
+                    <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                      {feature.description}
+                    </p>
+                    <ul className="space-y-3">
+                      {feature.highlights.map((highlight, idx) => (
+                        <li key={idx} className="flex items-center gap-3">
+                          <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <Check className="w-4 h-4 text-white" />
+                          </div>
+                          <span className="text-gray-700 font-medium">{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 sm:py-24 lg:py-32 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 ${dmSerif.className}`}>
+              {dictionary.faq.title}
+            </h2>
+            <p className="text-xl text-gray-600">
+              {dictionary.faq.subtitle}
+            </p>
+          </motion.div>
+
+          <div className="space-y-4">
+            {dictionary.faq.items.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200"
+              >
+                <button
+                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  aria-expanded={activeFaq === index}
+                  aria-controls={`faq-answer-${index}`}
+                  className="w-full px-6 py-6 flex items-center justify-between text-left hover:bg-gray-50 transition-colors duration-200"
+                >
+                  <span className="text-lg font-bold text-gray-900 pr-8">
+                    {faq.question}
+                  </span>
+                  <ChevronDown
+                    className={`w-6 h-6 text-gray-600 flex-shrink-0 transition-transform duration-300 ${
+                      activeFaq === index ? 'rotate-180' : ''
+                    }`}
+                    aria-hidden="true"
+                  />
+                </button>
+                <motion.div
+                  id={`faq-answer-${index}`}
+                  initial={false}
+                  animate={{
+                    height: activeFaq === index ? 'auto' : 0,
+                    opacity: activeFaq === index ? 1 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                  role="region"
+                >
+                  <div className="px-6 pb-6 text-gray-600 leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <p className="text-gray-600 mb-4">Still have questions?</p>
+            <Link href={`/${lang}/contact`} className="text-black font-bold underline hover:text-gray-700 transition-colors">
+              Contact our support team
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-20 sm:py-24 lg:py-32 bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/image/InMatters.webp"
+            alt="Final CTA background"
+            fill
+            quality={75}
+            sizes="100vw"
+            className="object-cover opacity-10"
+          />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 ${dmSerif.className}`}
+              dangerouslySetInnerHTML={{ __html: dictionary.cta.title }}
+            />
+            <p
+              className="text-xl lg:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: dictionary.cta.subtitle }}
+            />
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+              <Link href={`/${lang}/generate`}>
+                <motion.button
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Start building your website for free"
+                  className="bg-white text-black px-10 py-5 rounded-full font-bold text-lg shadow-2xl hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2"
+                >
+                  {dictionary.cta.startBuilding} <ArrowRight size={20} aria-hidden="true" />
+                </motion.button>
+              </Link>
+              <Link href={`/${lang}/templates`}>
+                <motion.button
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Browse all website templates"
+                  className="border-2 border-white text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-200"
+                >
+                  {dictionary.cta.browseTemplates}
+                </motion.button>
+              </Link>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-gray-400">
+              <div className="flex items-center gap-2">
+                <Lock className="w-5 h-5" />
+                <span>{dictionary.cta.sslSecured}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5" />
+                <span>{dictionary.cta.noCreditCardRequired}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="w-5 h-5" />
+                <span>{dictionary.cta.users}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award className="w-5 h-5" />
+                <span>{dictionary.cta.awardWinning}</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}

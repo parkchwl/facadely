@@ -1,0 +1,877 @@
+{
+  "navigation": {
+    "templates": "Mẫu",
+    "generate": "Tạo",
+    "service": "Dịch vụ",
+    "pricing": "Giá cả",
+    "signup": "Đăng ký",
+    "signupFree": "Miễn phí!"
+  },
+  "mobileNav": {
+    "templates": "Mẫu",
+    "generate": "Tạo",
+    "service": "Dịch vụ",
+    "pricing": "Giá cả",
+    "signup": "ĐĂNG KÝ",
+    "signupFree": "Miễn phí để bắt đầu"
+  },
+  "languageSelector": {
+    "title": "Chọn Quốc gia/Khu vực của bạn"
+  },
+  "footer": {
+    "brand": {
+      "name": "facadely",
+      "tagline": "Chúng tôi tập trung vào bản chất",
+      "copyright": "© 2025 facadely, Corp."
+    },
+    "platform": {
+      "title": "Nền tảng",
+      "generator": "Trình tạo trang web",
+      "template": "Mẫu",
+      "domain": "Miền"
+    },
+    "support": {
+      "title": "Hỗ trợ",
+      "customerService": "Dịch vụ khách hàng",
+      "qa": "Câu hỏi & Trả lời",
+      "serverStatus": "Trạng thái máy chủ"
+    },
+    "company": {
+      "title": "Công ty",
+      "about": "Về chúng tôi",
+      "contact": "Liên hệ"
+    },
+    "legal": {
+      "poweredBy": "Powered by facadely ✦ Bảo lưu mọi quyền.",
+      "terms": "Điều khoản dịch vụ",
+      "privacy": "Chính sách bảo mật",
+      "cookie": "Chính sách cookie"
+    },
+    "headline": "THỰC HIỆN GIẤC MƠ CỦA BẠN"
+  },
+  "homePage": {
+    "hero": {
+      "title": "Khách hàng đang<br />tìm kiếm bạn",
+      "subtitle": "Tạo trang web chuyên nghiệp trong vài phút —<br />Không code, Không rắc rối",
+      "templatesLink": "Mẫu",
+      "signupButton": "Đăng ký",
+      "signupFreeText": "Miễn phí!"
+    },
+    "whyMatters": {
+      "title": "Tại sao<br />Trang Web<br />Quan trọng",
+      "description": "Trong thế giới kỹ thuật số ngày nay, trang web của bạn là <strong>ấn tượng đầu tiên</strong>, <strong>độ tin cậy</strong>, và thường là <strong>công cụ bán hàng chính</strong> của bạn.",
+      "ctaButton": "Xây dựng trang web của bạn hôm nay",
+      "stats": [
+        { "stat": "94%", "highlight": "ấn tượng đầu tiên", "text": "liên quan đến thiết kế.", "source": "Northumbria University UX Lab" },
+        { "stat": "88%", "highlight": "người tiêu dùng trực tuyến", "text": "ít có khả năng quay lại trang web sau trải nghiệm xấu.", "source": "Econsultancy / Adobe" },
+        { "stat": "81%", "highlight": "người tiêu dùng", "text": "ghé thăm trang web trước khi quyết định mua hàng.", "source": "GE Capital Retail Bank / Google Think Insights" },
+        { "stat": "75%", "highlight": "người dùng", "text": "đánh giá độ tin cậy của công ty dựa trên trang web.", "source": "Stanford Web Credibility Research" },
+        { "stat": "~70%", "highlight": "mất lòng tin", "text": "nếu trang web không trông chuyên nghiệp.", "source": "Adobe & Sweor" },
+        { "stat": "69%", "highlight": "người dùng di động", "text": "tương tác với trang web như trải nghiệm thương hiệu đầu tiên của họ.", "source": "Think with Google" }
+      ]
+    },
+    "solution": {
+      "title": "facadely giải quyết các vấn đề",
+      "items": [
+        { "title": "Khởi chạy trong 5 phút, không cần thiết lập", "desc": "Bắt đầu ngay với các mẫu sẵn sàng.\nKhông cần mã hóa hoặc cài đặt." },
+        { "title": "Sẵn sàng cho thiết bị di động theo mặc định", "desc": "Tất cả các mẫu hoàn toàn đáp ứng.\nTrang web của bạn trông tuyệt vời trên mọi thiết bị — tự động." },
+        { "title": "Thiết kế chuyên nghiệp, dễ dàng", "desc": "Được xây dựng bởi các nhà thiết kế để kiếm lòng tin và độ tin cậy.\nTạo trang web hoàn thiện mà không cần kỹ năng thiết kế." },
+        { "title": "Công cụ đặt chỗ và quản lý khách hàng", "desc": "Mọi thứ bạn cần — biểu mẫu, lập lịch, CRM — được tích hợp sẵn.\nKhông cần plugin hoặc công cụ bên thứ ba." },
+        { "title": "Phân tích thời gian thực được bao gồm", "desc": "Theo dõi lượt truy cập, lưu lượng truy cập và hành vi người dùng.\nGiúp đưa ra quyết định thông minh hơn với dữ liệu trực tiếp." },
+        { "title": "Bảo mật tích hợp sẵn", "desc": "SSL và mã hóa được áp dụng tự động.\nGiữ an toàn bằng các bản cập nhật liên tục." }
+      ],
+      "cta_text": "Tạo ấn tượng đầu tiên lâu dài và xây dựng thương hiệu đáng tin cậy mà khách hàng nhớ.",
+      "cta_button": "Bắt đầu xây dựng doanh nghiệp của bạn"
+    },
+    "faq": {
+      "title": "Các câu hỏi thường gặp",
+      "subtitle": "Có câu hỏi? Chúng tôi có câu trả lời",
+      "questionLabel": "Câu hỏi {current} của {total}",
+      "questions": [
+        {
+          "question": "Tôi có cần kỹ năng mã hóa để sử dụng facadely không?",
+          "answer": "Không! facadely được thiết kế cho mọi người.\n\nGiao diện kéo và thả trực quan của chúng tôi giúp dễ dàng tạo các trang web chuyên nghiệp mà không cần kiến thức mã hóa."
+        },
+        {
+          "question": "Tôi có thể sử dụng tên miền của riêng mình không?",
+          "answer": "Có, bạn có thể kết nối miền tùy chỉnh của mình hoặc mua một miền mới trực tiếp thông qua facadely.\n\nChúng tôi xử lý tất cả các thiết lập kỹ thuật cho bạn."
+        },
+        {
+          "question": "Có phải các mẫu phản ứng với di động không?",
+          "answer": "Chắc chắn! Tất cả các mẫu của chúng tôi hoàn toàn phản ứng và được tối ưu hóa cho di động, máy tính bảng và máy tính để bàn.\n\nTrang web của bạn sẽ trông hoàn hảo ở mọi kích thước màn hình."
+        },
+        {
+          "question": "Tôi có thể thay đổi mẫu sau khi khởi chạy trang web của mình không?",
+          "answer": "Có, bạn có thể thay đổi mẫu của mình bất kỳ lúc nào mà không mất nội dung.\n\nTekst, hình ảnh và cài đặt của bạn sẽ được chuyển một cách liền mạch."
+        },
+        {
+          "question": "Có dùng thử miễn phí không?",
+          "answer": "Có! Bạn có thể bắt đầu xây dựng trang web của mình miễn phí.\n\nKhông cần thẻ tín dụng. Nâng cấp khi bạn sẵn sàng xuất bản."
+        },
+        {
+          "question": "Bạn cung cấp loại hỗ trợ nào?",
+          "answer": "Chúng tôi cung cấp hỗ trợ khách hàng 24/7 qua trò chuyện và email.\n\nTrung tâm trợ giúp của chúng tôi cũng bao gồm hướng dẫn, hướng dẫn và Câu hỏi thường gặp để giúp bạn thành công."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Bạn đã sẵn sàng xây dựng trang web mơ ước của mình?",
+      "subtitle": "Tham gia với hàng nghìn người dùng hạnh phúc đã biến đổi sự hiện diện trực tuyến của họ với facadely",
+      "browseButton": "Duyệt mẫu",
+      "startButton": "Bắt đầu miễn phí"
+    },
+    "loadingScreen": {
+      "brandName": "facadely"
+    }
+  },
+  "pricingPage": {
+    "title": "Giá cả đơn giản, Minh bạch",
+    "subtitle": "Chọn gói hoàn hảo cho doanh nghiệp của bạn",
+    "toggle": {
+      "monthly": "HÀNG THÁNG",
+      "yearly": "HÀNG NĂM",
+      "save": "TIẾT KIỆM 20%"
+    },
+    "tiers": {
+      "free": {
+        "name": "Miễn phí",
+        "price": "Miễn phí",
+        "perMonth": "",
+        "description": "Hoàn hảo để bắt đầu với trang web đầu tiên của bạn.",
+        "features": [
+          "1 trang web",
+          "Mẫu cơ bản",
+          "Bộ nhớ 500 MB",
+          "Hỗ trợ tiêu chuẩn",
+          "Chứng chỉ SSL"
+        ],
+        "buttonText": "Bắt đầu miễn phí"
+      },
+      "pro": {
+        "name": "Pro",
+        "monthlyPrice": "$15",
+        "yearlyPrice": "$12",
+        "perMonth": "/tháng",
+        "description": "Mọi thứ bạn cần cho các trang web chuyên nghiệp.",
+        "features": [
+          "Trang web không giới hạn",
+          "Mẫu cao cấp",
+          "Bộ nhớ 10 GB",
+          "Hỗ trợ ưu tiên",
+          "Miền tùy chỉnh",
+          "Phân tích nâng cao",
+          "Công cụ SEO",
+          "Tích hợp Mạng xã hội"
+        ],
+        "buttonText": "Chọn Pro",
+        "badge": "PHỔ BIẾN NHẤT"
+      },
+      "business": {
+        "name": "Business",
+        "monthlyPrice": "$30",
+        "yearlyPrice": "$24",
+        "perMonth": "/tháng",
+        "description": "Các tính năng nâng cao cho doanh nghiệp phát triển.",
+        "features": [
+          "Mọi thứ trong Pro",
+          "Bộ nhớ 50 GB",
+          "Tính năng thương mại điện tử",
+          "Cộng tác nhóm",
+          "Hỗ trợ chuyên dụng",
+          "Giải pháp White-Label",
+          "Truy cập API",
+          "Bảo mật nâng cao"
+        ],
+        "buttonText": "Chọn Business"
+      }
+    },
+    "featureComparison": {
+      "title": "So sánh các gói",
+      "subtitle": "Xem những gì được bao gồm trong mỗi gói",
+      "categories": {
+        "basic": {
+          "name": "Tính năng cơ bản",
+          "features": {
+            "pages": { "name": "Trang", "free": "5 trang", "pro": "Trang không giới hạn", "business": "Trang không giới hạn" },
+            "customDomain": { "name": "Miền tùy chỉnh", "free": false, "pro": true, "business": true },
+            "storage": { "name": "Bộ nhớ", "free": "500 MB", "pro": "10 GB", "business": "50 GB" },
+            "bandwidth": { "name": "Băng thông", "free": "1 GB", "pro": "10 GB", "business": "100 GB" },
+            "monthlyVisits": { "name": "Lượt truy cập hàng tháng", "free": "1K lượt truy cập", "pro": "25K lượt truy cập", "business": "100K lượt truy cập" }
+          }
+        },
+        "design": {
+          "name": "Thiết kế & Nội dung",
+          "features": {
+            "templates": { "name": "Mẫu", "free": "Mẫu cơ bản", "pro": "Mẫu cao cấp", "business": "Tất cả mẫu + Tùy chỉnh" },
+            "customCode": { "name": "Mã tùy chỉnh", "free": false, "pro": true, "business": true },
+            "fontUpload": { "name": "Tải lên phông chữ", "free": false, "pro": true, "business": true },
+            "designMode": { "name": "Chế độ thiết kế", "free": false, "pro": true, "business": true }
+          }
+        },
+        "ecommerce": {
+          "name": "Thương mại điện tử",
+          "features": {
+            "products": { "name": "Sản phẩm", "free": false, "pro": "10 sản phẩm", "business": "Sản phẩm không giới hạn" },
+            "paymentGateway": { "name": "Cổng thanh toán", "free": false, "pro": true, "business": true },
+            "inventory": { "name": "Quản lý kho", "free": false, "pro": true, "business": true },
+            "coupons": { "name": "Phiếu & Chiết khấu", "free": false, "pro": "3 phiếu", "business": "Phiếu không giới hạn" },
+            "orderManagement": { "name": "Quản lý đơn hàng", "free": false, "pro": true, "business": true }
+          }
+        },
+        "marketing": {
+          "name": "Tiếp thị & SEO",
+          "features": {
+            "seoTools": { "name": "Công cụ SEO", "free": "SEO cơ bản", "pro": "SEO nâng cao", "business": "SEO cao cấp + Phân tích" },
+            "googleAnalytics": { "name": "Google Analytics", "free": false, "pro": true, "business": true },
+            "socialMedia": { "name": "Tích hợp Mạng xã hội", "free": false, "pro": true, "business": true },
+            "emailMarketing": { "name": "Tiếp thị qua email", "free": false, "pro": "100 email/tháng", "business": "Email không giới hạn" }
+          }
+        },
+        "support": {
+          "name": "Hỗ trợ & Bảo mật",
+          "features": {
+            "support": { "name": "Hỗ trợ", "free": "Hỗ trợ cộng đồng", "pro": "Hỗ trợ ưu tiên", "business": "Hỗ trợ chuyên dụng" },
+            "ssl": { "name": "Chứng chỉ SSL", "free": true, "pro": true, "business": true },
+            "passwordProtection": { "name": "Bảo vệ bằng mật khẩu", "free": false, "pro": true, "business": true },
+            "backup": { "name": "Sao lưu & Khôi phục", "free": false, "pro": "Sao lưu hàng tuần", "business": "Sao lưu hàng ngày" }
+          }
+        }
+      }
+    },
+    "cta": {
+      "title": "Bạn đã sẵn sàng để bắt đầu?",
+      "startTrial": "Bắt đầu dùng thử miễn phí",
+      "contactSales": "Liên hệ bộ phận bán hàng"
+    }
+  },
+  "templatesPage": {
+    "title": "Chọn mẫu của bạn",
+    "subtitle": "Chọn một mẫu đẹp để bắt đầu xây dựng trang web của bạn.<br />Tất cả các mẫu hoàn toàn có thể tùy chỉnh và đáp ứng.",
+    "searchPlaceholder": "Tìm kiếm mẫu...",
+    "sortOptions": {
+      "latest": "Mới nhất",
+      "popular": "Phổ biến",
+      "nameAZ": "Tên A-Z"
+    },
+    "categories": {
+      "all": "Tất cả",
+      "business": "Kinh doanh",
+      "portfolio": "Danh mục đầu tư",
+      "ecommerce": "Thương mại điện tử",
+      "blog": "Blog",
+      "landingPage": "Trang đích"
+    },
+    "results": "Tìm thấy {count} mẫu",
+    "useTemplate": "Sử dụng mẫu này",
+    "preview": "Xem trước mẫu",
+    "emptyState": {
+      "title": "Không tìm thấy mẫu",
+      "subtitle": "Thử điều chỉnh tìm kiếm hoặc bộ lọc của bạn"
+    }
+  },
+  "loginPage": {
+    "back": "Quay lại",
+    "title": "facadely",
+    "subtitle": "Đăng nhập hoặc tạo tài khoản",
+    "google": "Tiếp tục với Google",
+    "apple": "Tiếp tục với Apple",
+    "facebook": "Tiếp tục với Facebook",
+    "terms": "Bằng cách tiếp tục, bạn đồng ý với {terms} của chúng tôi và đã đọc cũng như hiểu được {privacy}.",
+    "termsLinkText": "Điều khoản dịch vụ",
+    "privacyLinkText": "Chính sách bảo mật",
+    "captcha": "Đăng nhập an toàn với reCAPTCHA của Google"
+  },
+  "termsModal": {
+    "title": "Chào mừng đến facadely",
+    "subtitle": "Hoàn tất đăng ký {provider}",
+    "agreement": "Bằng cách tạo tài khoản, bạn đồng ý với {terms} của chúng tôi và đã đọc cũng như hiểu được {privacy}.",
+    "termsLinkText": "Điều khoản dịch vụ",
+    "privacyLinkText": "Chính sách bảo mật",
+    "agreeButton": "Hoàn tất đăng ký",
+    "footerNote": "Bạn có thể xem lại chính sách của chúng tôi bất kỳ lúc nào ở chân trang"
+  },
+  "servicePage": {
+    "hero": {
+      "title": "Chúng tôi<br />phục vụ cho giấc mơ của bạn",
+      "subtitle": "Tạo trang web chuyên nghiệp trong vài phút — Không code, Không rắc rối",
+      "startBuildingFree": "Bắt đầu xây dựng miễn phí",
+      "browseTemplates": "Duyệt mẫu",
+      "noCreditCard": "Không cần thẻ tín dụng",
+      "templates": "500+ mẫu",
+      "launchTime": "Khởi chạy trong 5 phút"
+    },
+    "heroFeatures": [
+      { "title": "Thiết kế chuyên nghiệp", "description": "Mẫu được thiết kế bởi nhà thiết kế và tối ưu hóa cho chuyển đổi" },
+      { "title": "SEO tích hợp sẵn", "description": "Xếp hạng cao hơn trên Google với các công cụ SEO nâng cao" },
+      { "title": "Bảo mật cấp doanh nghiệp", "description": "Chứng chỉ SSL, sao lưu tự động, thời gian hoạt động 99,9%" },
+      { "title": "Miền tùy chỉnh", "description": "Kết nối miền của bạn hoặc nhận miền miễn phí" },
+      { "title": "Phản ứng di động", "description": "Hoàn hảo trên tất cả các thiết bị tự động" },
+      { "title": "Phân tích thời gian thực", "description": "Theo dõi khách truy cập và đưa ra quyết định dựa trên dữ liệu" }
+    ],
+    "features": {
+      "title": "Tính năng mạnh mẽ, Giao diện đơn giản",
+      "subtitle": "Mọi thứ bạn cần để tạo, khởi chạy và phát triển sự hiện diện trực tuyến của bạn",
+      "items": [
+        {
+          "title": "Thiết lập siêu nhanh",
+          "description": "Khởi chạy trang web của bạn chỉ trong 5 phút. Không cài đặt, không rắc rối. Chọn mẫu và bắt đầu chỉnh sửa ngay lập tức.",
+          "highlights": ["5 phút khởi chạy", "Bắt đầu tức thì", "Không cần cài đặt"]
+        },
+        {
+          "title": "Thiết kế chuyên nghiệp",
+          "description": "Mỗi mẫu được thiết kế bởi các nhà thiết kế chuyên nghiệp. Thiết kế hiện đại, xu hướng, và được tối ưu hóa cho chuyển đổi giúp thương hiệu của bạn tỏa sáng.",
+          "highlights": ["Mẫu nhà thiết kế", "Hiện đại & xu hướng", "Tùy chỉnh thương hiệu"]
+        },
+        {
+          "title": "Phản ứng Di động-First",
+          "description": "Tất cả các trang web hoàn toàn phản ứng theo mặc định. Trang web của bạn trông hoàn hảo trên mọi thiết bị - máy tính để bàn, máy tính bảng và điện thoại di động.",
+          "highlights": ["100% phản ứng", "Hoàn hảo trên tất cả thiết bị", "Tối ưu hóa di động"]
+        },
+        {
+          "title": "Bảo mật & Hỗ trợ 24/7",
+          "description": "Chứng chỉ SSL, sao lưu tự động, và thời gian hoạt động 99,9% được đảm bảo. Đội hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ.",
+          "highlights": ["SSL bao gồm", "Sao lưu tự động", "Hỗ trợ 24/7"]
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "Cách thức hoạt động",
+      "steps": [
+        { "number": "01", "title": "Chọn mẫu", "description": "Duyệt qua 500+ mẫu chuyên nghiệp và chọn một mẫu phù hợp với tầm nhìn của bạn." },
+        { "number": "02", "title": "Tùy chỉnh trang web của bạn", "description": "Sử dụng trình chỉnh sửa kéo & thả của chúng tôi để cá nhân hóa mọi phần tử. Không cần mã hóa." },
+        { "number": "03", "title": "Khởi chạy & Phát triển", "description": "Nhấn xuất bản và trang web của bạn sẽ trực tiếp hoạt động. Bắt đầu phát triển hôm nay." }
+      ]
+    },
+    "faq": {
+      "title": "Các câu hỏi thường gặp",
+      "subtitle": "Mọi thứ bạn cần biết về facadely",
+      "items": [
+        {
+          "question": "Tôi có thể khởi chạy trang web của mình nhanh như thế nào?",
+          "answer": "Bạn có thể khởi chạy một trang web chuyên nghiệp chỉ trong 5 phút. Chỉ cần chọn một mẫu, tùy chỉnh nó bằng trình chỉnh sửa kéo & thả của chúng tôi, và nhấn xuất bản. Không cần kiến thức kỹ thuật."
+        },
+        {
+          "question": "Tôi có cần kỹ năng mã hóa không?",
+          "answer": "Không nhất cả! facadely được thiết kế cho mọi người. Trình chỉnh sửa trực quan của chúng tôi cho phép bạn tạo các trang web tuyệt vời mà không cần viết một dòng mã."
+        },
+        {
+          "question": "Tôi có thể sử dụng tên miền của riêng mình không?",
+          "answer": "Có! Bạn có thể kết nối một miền hiện có hoặc mua một miền mới trực tiếp thông qua facadely. Chúng tôi xử lý tất cả các thiết lập kỹ thuật tự động."
+        },
+        {
+          "question": "Có phải trang web phản ứng di động?",
+          "answer": "Tất cả các mẫu hoàn toàn phản ứng và được tối ưu hóa cho tất cả các thiết bị. Trang web của bạn sẽ trông hoàn hảo trên máy tính để bàn, máy tính bảng và điện thoại di động tự động."
+        },
+        {
+          "question": "Bạn cung cấp loại hỗ trợ nào?",
+          "answer": "Chúng tôi cung cấp hỗ trợ khách hàng 24/7 qua trò chuyện và email. Trung tâm trợ giúp mở rộng của chúng tôi bao gồm hướng dẫn video, hướng dẫn và tài liệu."
+        },
+        {
+          "question": "Tôi có thể thêm chức năng thương mại điện tử không?",
+          "answer": "Có! Gói Pro và Business của chúng tôi bao gồm khả năng thương mại điện tử hoàn chỉnh với xử lý thanh toán, quản lý kho và theo dõi đơn hàng."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Bạn đã sẵn sàng xây dựng<br />trang web mơ ước của bạn?",
+      "subtitle": "Tham gia với hàng nghìn doanh nghiệp thành công tin tưởng facadely.<br />Bắt đầu miễn phí. Không cần thẻ tín dụng.",
+      "startBuilding": "Bắt đầu xây dựng miễn phí",
+      "browseTemplates": "Duyệt mẫu",
+      "sslSecured": "Được bảo mật SSL",
+      "noCreditCardRequired": "Không cần thẻ tín dụng",
+      "users": "100K+ người dùng",
+      "awardWinning": "Giải thưởng"
+    }
+  },
+  "qaPage": {
+    "hero": {
+      "title": "Câu hỏi & Trả lời",
+      "subtitle": "Tìm câu trả lời cho những câu hỏi phổ biến về facadely, các tính năng, giá cả và hỗ trợ của chúng tôi. Không tìm thấy những gì bạn đang tìm kiếm? Liên hệ với đội hỗ trợ của chúng tôi.",
+      "searchPlaceholder": "Tìm kiếm câu hỏi..."
+    },
+    "filterLabel": "Lọc theo Danh mục",
+    "allCategories": "Tất cả",
+    "results": "Hiển thị {count} của {total} câu hỏi",
+    "noResults": "Không tìm thấy câu hỏi phù hợp với tìm kiếm của bạn.",
+    "clearFilters": "Xóa bộ lọc",
+    "categories": {
+      "gettingStarted": "Bắt đầu",
+      "features": "Tính năng",
+      "customization": "Tùy chỉnh",
+      "support": "Hỗ trợ",
+      "billing": "Thanh toán",
+      "security": "Bảo mật"
+    },
+    "questions": [
+      {
+        "id": 1,
+        "category": "gettingStarted",
+        "question": "Tôi đăng ký facadely như thế nào?",
+        "answer": "Đăng ký rất dễ dàng! Nhấp vào nút \"Đăng ký\" trên trang chủ của chúng tôi, nhập địa chỉ email của bạn, tạo mật khẩu và xác minh email của bạn. Bạn sẽ có quyền truy cập tức thì vào tất cả các mẫu và công cụ xây dựng của chúng tôi."
+      },
+      {
+        "id": 2,
+        "category": "gettingStarted",
+        "question": "Tôi có cần thẻ tín dụng để bắt đầu không?",
+        "answer": "Không! Bạn có thể tạo tài khoản và bắt đầu xây dựng miễn phí mà không cần cung cấp thông tin thẻ tín dụng nào. Bạn chỉ cần thêm chi tiết thanh toán nếu bạn muốn nâng cấp lên gói trả phí hoặc xuất bản trang web của mình."
+      },
+      {
+        "id": 3,
+        "category": "gettingStarted",
+        "question": "Tôi mất bao lâu để xây dựng một trang web?",
+        "answer": "Bạn có thể có một trang web chuyên nghiệp hoạt động chỉ trong 5 phút! Các mẫu được thiết kế trước của chúng tôi sẵn sàng để tùy chỉnh, và bạn có thể xuất bản ngay lập tức. Thời gian tùy thuộc vào bạn muốn tùy chỉnh bao nhiêu."
+      },
+      {
+        "id": 4,
+        "category": "features",
+        "question": "Tôi có thể sử dụng tên miền của riêng mình không?",
+        "answer": "Có! Bạn có thể kết nối một miền hiện có hoặc mua một miền mới trực tiếp thông qua facadely. Chúng tôi xử lý tất cả các thiết lập kỹ thuật bao gồm cấu hình DNS và chứng chỉ SSL tự động."
+      },
+      {
+        "id": 5,
+        "category": "features",
+        "question": "Có phải các mẫu phản ứng di động không?",
+        "answer": "Chắc chắn! Tất cả các mẫu của chúng tôi hoàn toàn phản ứng và được tối ưu hóa cho di động, máy tính bảng và máy tính để bàn. Trang web của bạn sẽ trông hoàn hảo trên bất kỳ thiết bị nào, và chúng tôi tự động xử lý thiết kế phản ứng cho bạn."
+      },
+      {
+        "id": 6,
+        "category": "features",
+        "question": "Tôi có thể thêm chức năng thương mại điện tử không?",
+        "answer": "Có! Gói Pro và Business của chúng tôi bao gồm khả năng thương mại điện tử hoàn chỉnh với xử lý thanh toán, quản lý kho, theo dõi đơn hàng và các công cụ quản lý khách hàng tích hợp sẵn."
+      },
+      {
+        "id": 7,
+        "category": "customization",
+        "question": "Tôi có cần kỹ năng mã hóa để tùy chỉnh trang web của mình không?",
+        "answer": "Không! Trình chỉnh sửa trực quan của chúng tôi được thiết kế cho mọi người. Bạn có thể tùy chỉnh màu sắc, phông chữ, bố cục và nội dung một cách dễ dàng bằng cách kéo & thả. Không cần kiến thức mã hóa."
+      },
+      {
+        "id": 8,
+        "category": "customization",
+        "question": "Tôi có thể thay đổi mẫu sau khi khởi chạy không?",
+        "answer": "Có! Bạn có thể thay đổi mẫu bất kỳ lúc nào mà không mất nội dung của bạn. Văn bản, hình ảnh và cài đặt của bạn sẽ được chuyển một cách liền mạch sang mẫu mới."
+      },
+      {
+        "id": 9,
+        "category": "customization",
+        "question": "Làm cách nào để thêm CSS hoặc HTML tùy chỉnh?",
+        "answer": "Gói Pro và Business của chúng tôi bao gồm chức năng mã tùy chỉnh. Bạn có thể thêm CSS, JavaScript hoặc HTML tùy chỉnh vào các phần cụ thể của trang web của bạn để tùy chỉnh nâng cao."
+      },
+      {
+        "id": 10,
+        "category": "support",
+        "question": "Bạn cung cấp loại hỗ trợ nào?",
+        "answer": "Chúng tôi cung cấp hỗ trợ khách hàng 24/7 qua trò chuyện và email. Trung tâm trợ giúp mở rộng của chúng tôi bao gồm hướng dẫn video, hướng dẫn và Câu hỏi thường gặp. Gói Pro và Business có hỗ trợ ưu tiên."
+      },
+      {
+        "id": 11,
+        "category": "support",
+        "question": "Tôi mất bao lâu để nhận được phản hồi từ hỗ trợ?",
+        "answer": "Hỗ trợ tiêu chuẩn thường phản hồi trong 24 giờ. Hỗ trợ ưu tiên (có sẵn trong gói Pro và Business) phản hồi trong 2 giờ trong giờ làm việc."
+      },
+      {
+        "id": 12,
+        "category": "billing",
+        "question": "Tôi nâng cấp lên gói trả phí như thế nào?",
+        "answer": "Bạn có thể nâng cấp bất kỳ lúc nào từ cài đặt tài khoản của bạn. Đi tới Thanh toán > Gói, chọn gói mong muốn của bạn và hoàn tất thanh toán. Nâng cấp sẽ có hiệu lực ngay lập tức."
+      },
+      {
+        "id": 13,
+        "category": "billing",
+        "question": "Tôi có thể hủy đăng ký của mình bất kỳ lúc nào không?",
+        "answer": "Có! Bạn có thể hủy đăng ký của mình bất kỳ lúc nào từ cài đặt tài khoản. Nếu bạn hủy giữa chu kỳ, bạn sẽ không bị tính phí lại, nhưng bạn có thể sử dụng dịch vụ cho đến khi kỳ hiện tại kết thúc."
+      },
+      {
+        "id": 14,
+        "category": "security",
+        "question": "Trang web của tôi có an toàn không?",
+        "answer": "Có! Tất cả các trang web facadely bao gồm chứng chỉ SSL, sao lưu tự động và SLA thời gian hoạt động 99,9%. Chúng tôi cũng cung cấp bảo vệ DDoS và kiểm toán bảo mật thường xuyên."
+      },
+      {
+        "id": 15,
+        "category": "security",
+        "question": "Dữ liệu của tôi được lưu trữ ở đâu?",
+        "answer": "Dữ liệu của bạn được lưu trữ trên các máy chủ dự phòng an toàn ở nhiều vị trí địa lý. Chúng tôi sử dụng mã hóa cấp doanh nghiệp và tuân thủ GDPR và các quy định bảo vệ dữ liệu khác."
+      }
+    ],
+    "stillHaveQuestions": {
+      "title": "Vẫn còn câu hỏi?",
+      "subtitle": "Đội hỗ trợ của chúng tôi ở đây để giúp đỡ. Liên hệ với chúng tôi và chúng tôi sẽ phản hồi nhanh nhất có thể.",
+      "emailSupport": "Hỗ trợ Email",
+      "contactUs": "Liên hệ với chúng tôi"
+    }
+  },
+  "privacyPage": {
+    "title": "Chính sách bảo mật",
+    "lastUpdated": "Cập nhật lần cuối: Tháng 12 năm 2024",
+    "introduction": {
+      "heading": "Giới thiệu",
+      "content": "Tại facadely, chúng tôi coi trọng quyền riêng tư của bạn. Chính sách Bảo mật này giải thích cách chúng tôi thu thập, sử dụng, tiết lộ và bảo vệ thông tin của bạn khi bạn sử dụng nền tảng xây dựng trang web của chúng tôi."
+    },
+    "informationWeCollect": {
+      "heading": "1. Thông tin chúng tôi thu thập",
+      "provided": {
+        "heading": "1.1 Thông tin bạn cung cấp",
+        "intro": "Chúng tôi thu thập thông tin bạn tự nguyện cung cấp khi sử dụng Dịch vụ của chúng tôi:",
+        "items": [
+          { "label": "Thông tin tài khoản", "description": "Tên, địa chỉ email và thông tin hồ sơ" },
+          { "label": "Thông tin thanh toán", "description": "Chi tiết thanh toán (được xử lý an toàn thông qua các nhà cung cấp bên thứ ba)" },
+          { "label": "Nội dung trang web", "description": "Văn bản, hình ảnh, video và nội dung khác bạn tải lên" },
+          { "label": "Giao tiếp", "description": "Các tin nhắn bạn gửi cho chúng tôi thông qua các kênh hỗ trợ" }
+        ]
+      },
+      "automatic": {
+        "heading": "1.2 Thông tin được thu thập tự động",
+        "intro": "Khi bạn sử dụng facadely, chúng tôi tự động thu thập một số thông tin nhất định:",
+        "items": [
+          { "label": "Dữ liệu sử dụng", "description": "Các trang được ghé thăm, các tính năng được sử dụng, thời gian dành trên nền tảng" },
+          { "label": "Thông tin thiết bị", "description": "Địa chỉ IP, loại trình duyệt, hệ điều hành" },
+          { "label": "Cookie", "description": "Cookie phiên, cookie tùy chỉnh, cookie phân tích" }
+        ]
+      },
+      "socialLogin": {
+        "heading": "1.3 Thông tin Đăng nhập Xã hội",
+        "content": "Nếu bạn đăng ký bằng cách sử dụng đăng nhập xã hội (Google, Apple, Facebook), chúng tôi sẽ nhận được thông tin hồ sơ cơ bản bao gồm tên, địa chỉ email và ảnh hồ sơ của bạn."
+      }
+    },
+    "howWeUseYourInformation": {
+      "heading": "2. Cách chúng tôi sử dụng thông tin của bạn",
+      "intro": "Chúng tôi sử dụng thông tin được thu thập cho các mục đích sau:",
+      "items": [
+        "Cung cấp, duy trì và cải thiện nền tảng xây dựng trang web",
+        "Xử lý tạo và xuất bản trang web của bạn",
+        "Quản lý tài khoản và đăng ký của bạn",
+        "Xử lý thanh toán và ngăn chặn gian lận",
+        "Gửi cập nhật dịch vụ, cảnh báo bảo mật và thông báo kỹ thuật",
+        "Trả lời các yêu cầu hỗ trợ và truy vấn của bạn",
+        "Phân tích các mô hình sử dụng để cải thiện các tính năng và trải nghiệm người dùng",
+        "Tuân thủ các nghĩa vụ pháp lý và yêu cầu quy định"
+      ]
+    },
+    "informationSharing": {
+      "heading": "3. Cách chúng tôi chia sẻ thông tin của bạn",
+      "intro": "Chúng tôi không bán thông tin cá nhân của bạn. Chúng tôi có thể chia sẻ thông tin của bạn trong các trường hợp sau:",
+      "items": [
+        { "label": "Nhà cung cấp dịch vụ", "description": "Các nhà cung cấp bên thứ ba thực hiện dịch vụ thay mặt chúng tôi (lưu trữ, xử lý thanh toán, gửi email, phân tích)" },
+        { "label": "Chuyển giao kinh doanh", "description": "Liên quan đến sáp nhập, mua lại hoặc bán tài sản" },
+        { "label": "Yêu cầu pháp lý", "description": "Khi được yêu cầu bởi luật pháp, trát tòa hoặc yêu cầu của chính phủ" },
+        { "label": "Với sự đồng ý của bạn", "description": "Khi bạn rõ ràng phê chuẩn cho chúng tôi chia sẻ thông tin của bạn" }
+      ]
+    },
+    "dataSecurity": {
+      "heading": "4. Bảo mật dữ liệu",
+      "intro": "Chúng tôi thực hiện các biện pháp bảo mật mạnh mẽ để bảo vệ thông tin của bạn:",
+      "items": [
+        "Tất cả dữ liệu được truyền được mã hóa bằng giao thức SSL/TLS",
+        "Các kiểm soát truy cập nghiêm ngặt đảm bảo chỉ nhân viên được phép truy cập dữ liệu nhạy cảm",
+        "Đánh giá bảo mật thường xuyên và kiểm tra xâm nhập",
+        "Dữ liệu của bạn được sao lưu thường xuyên để ngăn mất mát"
+      ],
+      "disclaimer": "Mặc dù chúng tôi sử dụng các biện pháp bảo mật tiêu chuẩn công nghiệp, không có phương pháp truyền qua Internet nào là 100% an toàn. Chúng tôi không thể đảm bảo bảo mật tuyệt đối, nhưng chúng tôi tiếp tục làm việc để cải thiện các thực tiễn bảo mật của chúng tôi."
+    },
+    "cookies": {
+      "heading": "5. Cookie và Công nghệ Theo dõi",
+      "intro": "Chúng tôi sử dụng cookie và công nghệ theo dõi tương tự để nâng cao trải nghiệm của bạn. Bạn có thể kiểm soát cookie thông qua cài đặt trình duyệt hoặc công cụ tùy chỉnh cookie của chúng tôi.",
+      "note": "Để biết thông tin chi tiết về cách sử dụng cookie của chúng tôi, vui lòng xem Chính sách Cookie của chúng tôi."
+    },
+    "yourRights": {
+      "heading": "6. Quyền bảo mật của bạn",
+      "intro": "Tùy thuộc vào vị trí của bạn, bạn có thể có các quyền sau:",
+      "items": [
+        { "label": "Quyền Truy cập và Tính di động", "description": "Yêu cầu bản sao dữ liệu cá nhân của bạn" },
+        { "label": "Sửa chữa", "description": "Cập nhật hoặc sửa thông tin cá nhân không chính xác" },
+        { "label": "Xóa", "description": "Yêu cầu xóa dữ liệu cá nhân của bạn" },
+        { "label": "Phản đối", "description": "Phản đối hoặc giới hạn một số hoạt động xử lý" },
+        { "label": "Rút lại Sự đồng ý", "description": "Rút lại sự đồng ý cho các thông tin liên lạc tiếp thị" }
+      ],
+      "note": "Để thực hiện các quyền của bạn, vui lòng liên hệ privacy@facadely.com. Chúng tôi sẽ phản hồi trong 30 ngày."
+    },
+    "dataRetention": {
+      "heading": "7. Giữ lại dữ liệu",
+      "intro": "Chúng tôi giữ lại thông tin của bạn miễn là cần thiết để cung cấp Dịch vụ và tuân thủ các nghĩa vụ pháp lý:",
+      "items": [
+        "Tài khoản hoạt động: Dữ liệu được giữ lại trong khi tài khoản của bạn hoạt động",
+        "Tài khoản đóng: Dữ liệu tài khoản bị xóa trong vòng 30 ngày kể từ khi đóng",
+        "Yêu cầu pháp lý: Một số dữ liệu có thể được giữ lại lâu hơn để tuân thủ các nghĩa vụ pháp lý"
+      ]
+    },
+    "internationalTransfers": {
+      "heading": "8. Chuyển giao dữ liệu quốc tế",
+      "content": "facadely có trụ sở tại Việt Nam. Nếu bạn truy cập Dịch vụ của chúng tôi từ bên ngoài Việt Nam, thông tin của bạn có thể được chuyển, lưu trữ và xử lý ở Việt Nam hoặc các quốc gia khác nơi các nhà cung cấp dịch vụ của chúng tôi hoạt động.",
+      "safeguards": "Chúng tôi đảm bảo các biện pháp bảo vệ thích hợp cho các chuyển giao quốc tế, bao gồm các Điều khoản Hợp đồng Tiêu chuẩn được phê duyệt bởi cơ quan quản lý."
+    },
+    "childrenPrivacy": {
+      "heading": "9. Quyền riêng tư của trẻ em",
+      "content": "facadely không được dự định cho những người dùng dưới 18 tuổi. Chúng tôi không cố ý thu thập thông tin cá nhân từ trẻ em. Nếu chúng tôi phát hiện ra rằng chúng tôi đã thu thập dữ liệu từ một đứa trẻ mà không có sự đồng ý của cha mẹ, chúng tôi sẽ ngay lập tức thực hiện các bước để xóa thông tin đó."
+    },
+    "changes": {
+      "heading": "10. Thay đổi đối với Chính sách Bảo mật này",
+      "intro": "Chúng tôi có thể cập nhật Chính sách Bảo mật này theo định kỳ. Chúng tôi sẽ thông báo cho bạn về những thay đổi quan trọng bằng cách:",
+      "items": [
+        "Đăng chính sách được cập nhật trên trang này với ngày \"Cập nhật lần cuối\" mới",
+        "Gửi thông báo qua email đến địa chỉ email đã đăng ký của bạn",
+        "Hiển thị thông báo nổi bật trên Dịch vụ của chúng tôi"
+      ]
+    },
+    "regionalCompliance": {
+      "heading": "11. Thông tin bảo mật khu vực",
+      "gdpr": {
+        "title": "Dành cho Người dùng EU/EEA (GDPR)",
+        "intro": "Nếu bạn ở Liên minh Châu Âu hoặc Khu vực Kinh tế Châu Âu, bạn có các quyền bổ sung theo GDPR:",
+        "items": [
+          "Quyền nộp đơn khiếu nại với cơ quan giám sát địa phương của bạn",
+          "Quyền phản đối quyết định tự động và lập hồ sơ",
+          "Cơ sở pháp lý cho xử lý: Sự đồng ý, sự cần thiết của hợp đồng, lợi ích hợp pháp"
+        ]
+      },
+      "ccpa": {
+        "title": "Dành cho Người dùng California (CCPA)",
+        "intro": "Cư dân California có các quyền cụ thể theo Đạo luật Bảo vệ Quyền riêng tư của Người tiêu dùng California:",
+        "items": [
+          "Quyền biết thông tin cá nhân nào được thu thập và cách sử dụng",
+          "Quyền xóa thông tin cá nhân (với một số ngoại lệ)",
+          "Quyền từ chối bán thông tin cá nhân (chúng tôi không bán thông tin cá nhân)",
+          "Quyền không phân biệt đối xử vì thực hiện quyền CCPA"
+        ]
+      }
+    },
+    "contact": {
+      "heading": "12. Liên hệ chúng tôi",
+      "intro": "Nếu bạn có bất kỳ câu hỏi, lo ngại hoặc yêu cầu liên quan đến Chính sách Bảo mật này hoặc các hoạt động dữ liệu của chúng tôi, vui lòng liên hệ với chúng tôi:",
+      "generalInquiries": "Các cuộc thăm dò chung: privacy@facadely.com",
+      "dpo": "Sỹ quan Bảo vệ Dữ liệu: dpo@facadely.com",
+      "address": "Địa chỉ: facadely Corp., Việt Nam"
+    },
+    "footer": {
+      "message": "Quyền riêng tư của bạn rất quan trọng với chúng tôi. Chúng tôi cam kết bảo vệ dữ liệu của bạn và minh bạch về các thực tiễn của chúng tôi.",
+      "getStarted": "Bắt đầu",
+      "termsOfService": "Điều khoản dịch vụ"
+    }
+  },
+  "termsPage": {
+    "title": "Điều khoản dịch vụ",
+    "lastUpdated": "Cập nhật lần cuối: Tháng 12 năm 2024",
+    "agreement": {
+      "heading": "1. Thỏa thuận với các Điều khoản",
+      "intro": "Chào mừng đến facadely. Bằng cách truy cập hoặc sử dụng nền tảng xây dựng trang web của chúng tôi (\"Dịch vụ\"), bạn đồng ý bị ràng buộc bởi Điều khoản Dịch vụ này (\"Điều khoản\"). Nếu bạn không đồng ý với bất kỳ phần nào của các điều khoản này, bạn không thể truy cập Dịch vụ.",
+      "description": "facadely cung cấp nền tảng xây dựng trang web không mã cho phép người dùng tạo, tùy chỉnh và xuất bản các trang web chuyên nghiệp mà không cần kiến thức kỹ thuật. Các Điều khoản này áp dụng cho tất cả những người dùng của Dịch vụ, bao gồm những người là trình duyệt, người tạo và những người đóng góp nội dung."
+    },
+    "accountTerms": {
+      "heading": "2. Điều khoản tài khoản",
+      "items": [
+        "Bạn phải đủ 18 tuổi trở lên hoặc đạt tuổi trưởng thành ở khu vực pháp lý của bạn để sử dụng Dịch vụ này.",
+        "Bạn phải cung cấp thông tin chính xác và đầy đủ khi tạo tài khoản của bạn.",
+        "Bạn chịu trách nhiệm duy trì bảo mật tài khoản và mật khẩu của bạn.",
+        "Bạn chịu trách nhiệm cho tất cả hoạt động xảy ra theo tài khoản của bạn.",
+        "Bạn không thể sử dụng Dịch vụ cho bất kỳ mục đích bất hợp pháp hoặc trái phép nào.",
+        "Một người hoặc thực thể pháp lý không thể duy trì hơn một tài khoản miễn phí."
+      ]
+    },
+    "serviceUsage": {
+      "heading": "3. Sử dụng Dịch vụ và Giới hạn",
+      "acceptable": {
+        "heading": "3.1 Sử dụng có thể chấp nhận",
+        "intro": "Bạn đồng ý sử dụng facadely chỉ cho mục đích hợp pháp. Bạn bị cấm từ:",
+        "items": [
+          "Xuất bản nội dung bất hợp pháp, có hại, đe dọa, lạm dụng hoặc phân biệt đối xử",
+          "Vi phạm các quyền kỳ hạn sở hữu trí tuệ của người khác",
+          "Phân phối phần mềm độc hại, virus hoặc mã có hại",
+          "Cố gắng truy cập trái phép vào Dịch vụ",
+          "Sử dụng Dịch vụ để gửi thư rác hoặc thông tin liên lạc không được yêu cầu",
+          "Tạo các trang web quảng bá các hoạt động bất hợp pháp"
+        ]
+      },
+      "limits": {
+        "heading": "3.2 Giới hạn dịch vụ",
+        "content": "Việc sử dụng Dịch vụ của bạn tuân theo các giới hạn của gói bạn chọn (Miễn phí, Pro hoặc Business). Những giới hạn này bao gồm nhưng không giới hạn ở: số lượng trang web, dung lượng lưu trữ, băng thông và truy cập tính năng. Vượt quá những giới hạn này có thể dẫn đến gián đoạn dịch vụ hoặc các khoản phí bổ sung."
+      }
+    },
+    "paymentBilling": {
+      "heading": "4. Thanh toán và Hóa đơn",
+      "items": [
+        { "label": "Gói đăng ký", "content": "Các gói trả phí (Pro và Business) được tính phí hàng tháng hoặc hàng năm như bạn chọn." },
+        { "label": "Tự động gia hạn", "content": "Đăng ký tự động gia hạn trừ khi bạn hủy trước ngày gia hạn." },
+        { "label": "Hủy", "content": "Bạn có thể hủy đăng ký của bạn bất kỳ lúc nào. Hủy có hiệu lực vào cuối kỳ thanh toán hiện tại." },
+        { "label": "Hoàn tiền", "content": "Chúng tôi cung cấp đảm bảo hoàn lại tiền trong 14 ngày cho đăng ký hàng năm lần đầu. Đăng ký hàng tháng không thể hoàn lại." },
+        { "label": "Thay đổi giá", "content": "Chúng tôi bảo lưu quyền sửa đổi giá cả với thông báo 30 ngày cho các thuê bao hiện có." },
+        { "label": "Thuế", "content": "Giá không bao gồm thuế áp dụng, sẽ được thêm vào theo yêu cầu của luật pháp địa phương." }
+      ]
+    },
+    "intellectualProperty": {
+      "heading": "5. Quyền Sở hữu Trí tuệ",
+      "yourContent": {
+        "heading": "5.1 Nội dung của bạn",
+        "content": "Bạn giữ lại tất cả các quyền đối với nội dung bạn tạo và xuất bản bằng cách sử dụng facadely. Bằng cách sử dụng Dịch vụ của chúng tôi, bạn cấp cho chúng tôi một giấy phép giới hạn để lưu trữ, lưu trữ và hiển thị nội dung của bạn theo yêu cầu để cung cấp Dịch vụ."
+      },
+      "facadelyCon": {
+        "heading": "5.2 Nội dung facadely",
+        "content": "Tất cả các mẫu, thiết kế, tính năng và chức năng được cung cấp bởi facadely vẫn là sở hữu trí tuệ của chúng tôi. Bạn nhận được giấy phép để chỉ sử dụng các yếu tố này như một phần của việc tạo trang web thông qua Dịch vụ của chúng tôi."
+      }
+    },
+    "dataPrivacy": {
+      "heading": "6. Dữ liệu và Quyền riêng tư",
+      "intro": "Việc sử dụng Dịch vụ của bạn cũng được điều chỉnh bởi Chính sách Bảo mật của chúng tôi. Chúng tôi thu thập và sử dụng dữ liệu của bạn như được mô tả trong Chính sách Bảo mật của chúng tôi. Bằng cách sử dụng facadely, bạn đồng ý với việc thu thập và sử dụng như vậy.",
+      "security": "Chúng tôi thực hiện các biện pháp bảo mật tiêu chuẩn ngành để bảo vệ dữ liệu của bạn. Tuy nhiên, không có phương pháp truyền qua Internet nào là 100% an toàn, và chúng tôi không thể đảm bảo bảo mật tuyệt đối."
+    },
+    "serviceAvailability": {
+      "heading": "7. Tính khả dụng và Hỗ trợ Dịch vụ",
+      "items": [
+        "Chúng tôi phấn đấu để đạt thời gian hoạt động 99,9% nhưng không đảm bảo dịch vụ không bị gián đoạn.",
+        "Chúng tôi có thể thực hiện bảo trì theo lịch với thông báo trước nếu có thể.",
+        "Các mức hỗ trợ khác nhau theo gói: Cộng đồng (Miễn phí), Ưu tiên (Pro) và Chuyên dụng (Business).",
+        "Chúng tôi bảo lưu quyền sửa đổi hoặc ngừng các tính năng với thông báo hợp lý."
+      ]
+    },
+    "limitation": {
+      "heading": "8. Giới hạn Trách nhiệm",
+      "content": "TRONG ĐỊA HẠT TỐI ĐA CÓ PHÉP BẰNG LUẬT PHÁP, FACADELY KHÔNG CHỊU TRÁCH NHIỆM ĐỐI VỚI NHỮNG THIỆT HẠI GIÁN TIẾP, HỖ TRỢ, ĐẶC BIỆT, HỆ LỤA HOẶC PHẠT, HOẶC BẤT KỲ HỔ TRỢ VỀ LỢI NHUẬN HOẶC DOANH THU, DÙ PHÁT SINH TRỰC TIẾP HAY GIÁN TIẾP, HOẶC BẤT KỲ MẤT MÁT DỮ LIỆU, SỬ DỤNG, THIỆN CHÍ HOẶC CÁC TỔNG HỢP MẤT MÁT KHÁC.",
+      "cap": "Trong mọi trường hợp, trách nhiệm bổ sung của chúng tôi đối với bạn cho tất cả thiệt hại không được vượt quá số tiền bạn đã trả cho Facadely trong 12 tháng trước đơn kiện hoặc 100 đô la, tùy theo số nào lớn hơn."
+    },
+    "termination": {
+      "heading": "9. Chấm dứt",
+      "intro": "Chúng tôi có thể chấm dứt hoặc tạm dừng tài khoản của bạn và truy cập vào Dịch vụ ngay lập tức, không có thông báo hoặc trách nhiệm sơ cấp, vì bất kỳ lý do gì, bao gồm vi phạm Điều khoản này. Khi chấm dứt:",
+      "items": [
+        "Quyền sử dụng Dịch vụ của bạn sẽ ngay lập tức dừng lại",
+        "Bạn có 30 ngày để xuất nội dung của mình",
+        "Các trang web được xuất bản sẽ được đưa ngoại tuyến",
+        "Không có hoàn tiền cho thời gian đăng ký còn lại (ngoại trừ theo yêu cầu của luật pháp)"
+      ]
+    },
+    "changesTerms": {
+      "heading": "10. Thay đổi đối với Điều khoản",
+      "content": "Chúng tôi bảo lưu quyền sửa đổi Điều khoản này bất kỳ lúc nào. Chúng tôi sẽ thông báo cho bạn về những thay đổi quan trọng qua email hoặc Dịch vụ ít nhất 30 ngày trước khi có hiệu lực. Việc tiếp tục sử dụng Dịch vụ sau những thay đổi cấu thành sự chấp nhận Điều khoản đã sửa đổi."
+    },
+    "governingLaw": {
+      "heading": "11. Luật Điều chỉnh và Tranh chấp",
+      "intro": "Các Điều khoản này sẽ được điều chỉnh bởi và giải thích theo luật pháp của Cộng hòa Xã hội chủ nghĩa Việt Nam, không xem xét các quy định xung đột luật pháp của nó.",
+      "disputes": "Bất kỳ tranh chấp nào phát sinh từ Điều khoản hoặc Dịch vụ này sẽ được giải quyết thông qua trọng tài ràng buộc ở Hà Nội, Việt Nam, trừ khi bị cấm bởi luật pháp."
+    },
+    "contactInformation": {
+      "heading": "12. Thông tin liên hệ",
+      "intro": "Nếu bạn có câu hỏi về Điều khoản này, vui lòng liên hệ chúng tôi:",
+      "email": "Email: legal@facadely.com",
+      "address": "Địa chỉ: Facadely Corp., Việt Nam"
+    },
+    "severability": {
+      "heading": "13. Tách rời và Từ chối",
+      "severabilityContent": "Nếu bất kỳ điều khoản nào của các Điều khoản này bị coi là không thể thi hành hoặc không hợp lệ, điều khoản đó sẽ bị hạn chế hoặc loại bỏ đến mức tối thiểu cần thiết để các Điều khoản sẽ tiếp tục có hiệu lực đầy đủ.",
+      "waiver": "Sự không thực thi bất kỳ quyền hoặc điều khoản nào của Điều khoản này không được coi là từ chối quyền đó."
+    },
+    "entireAgreement": {
+      "heading": "14. Toàn bộ Thỏa thuận",
+      "content": "Các Điều khoản này, cùng với Chính sách Bảo mật của chúng tôi và bất kỳ thông báo pháp lý khác mà chúng tôi xuất bản trên Dịch vụ, cấu thành toàn bộ thỏa thuận giữa bạn và Facadely liên quan đến Dịch vụ."
+    },
+    "footer": {
+      "message": "Bằng cách sử dụng Facadely, bạn xác nhận rằng bạn đã đọc và hiểu Điều khoản Dịch vụ này.",
+      "createAccount": "Tạo tài khoản",
+      "privacyPolicy": "Chính sách bảo mật"
+    }
+  },
+  "cookiePage": {
+    "title": "Chính sách Cookie",
+    "lastUpdated": "Cập nhật lần cuối: Tháng 12 năm 2024",
+    "introduction": {
+      "heading": "Giới thiệu",
+      "content": "Chính sách Cookie này giải thích cách facadely sử dụng cookie và công nghệ theo dõi tương tự trên trang web và nền tảng của chúng tôi."
+    },
+    "whatAreCookies": {
+      "heading": "1. Cookie là gì?",
+      "content": "Cookie là những tệp nhỏ được lưu trữ trên thiết bị của bạn chứa thông tin về lượt truy cập của bạn. Chúng giúp chúng tôi nhận ra bạn, ghi nhớ tùy chỉnh của bạn và hiểu cách bạn sử dụng Dịch vụ của chúng tôi."
+    },
+    "typesOfCookies": {
+      "heading": "2. Các loại Cookie chúng tôi sử dụng",
+      "categories": [
+        {
+          "name": "Cookie thiết yếu",
+          "description": "Cần thiết cho chức năng của Dịch vụ. Không thể bị vô hiệu hóa mà không ảnh hưởng đến chức năng trang web."
+        },
+        {
+          "name": "Cookie chức năng",
+          "description": "Nhớ tùy chỉnh và cài đặt của bạn để nâng cao trải nghiệm của bạn."
+        },
+        {
+          "name": "Cookie phân tích",
+          "description": "Giúp chúng tôi hiểu cách bạn sử dụng Dịch vụ để cải thiện các tính năng và hiệu suất."
+        },
+        {
+          "name": "Cookie tiếp thị",
+          "description": "Theo dõi hoạt động của bạn để cung cấp quảng cáo được cá nhân hóa và nội dung tiếp thị."
+        }
+      ]
+    },
+    "cookieDetails": {
+      "heading": "3. Chi tiết Cookie",
+      "table": "Xem danh sách chi tiết cookie được sử dụng dưới đây"
+    },
+    "thirdPartyServices": {
+      "heading": "4. Dịch vụ bên thứ ba",
+      "intro": "Chúng tôi sử dụng các dịch vụ bên thứ ba có thể đặt cookie riêng của họ:",
+      "services": [
+        { "name": "Google Analytics", "purpose": "Phân tích cách sử dụng trang web" },
+        { "name": "Stripe", "purpose": "Xử lý thanh toán" },
+        { "name": "Supabase", "purpose": "Xác thực và cơ sở dữ liệu" }
+      ]
+    },
+    "yourChoices": {
+      "heading": "5. Lựa chọn của bạn",
+      "intro": "Bạn có các lựa chọn sau liên quan đến cookie:",
+      "options": [
+        "Cài đặt trình duyệt: Hầu hết các trình duyệt cho phép bạn từ chối cookie hoặc cảnh báo bạn khi cookie được gửi.",
+        "Công cụ tùy chỉnh cookie: Sử dụng trung tâm tùy chỉnh cookie của chúng tôi để quản lý lựa chọn cookie của bạn.",
+        "Liên kết từ chối: Các dịch vụ bên thứ ba thường cung cấp các cơ chế từ chối."
+      ],
+      "note": "Vui lòng lưu ý rằng vô hiệu hóa cookie có thể ảnh hưởng đến chức năng của Dịch vụ của chúng tôi."
+    },
+    "contact": {
+      "heading": "6. Liên hệ chúng tôi",
+      "content": "Nếu bạn có câu hỏi về cách sử dụng cookie của chúng tôi, vui lòng liên hệ chúng tôi tại privacy@facadely.com"
+    }
+  },
+  "generatePage": {
+    "title": "Tạo trang web của bạn",
+    "subtitle": "Chọn một mẫu và tùy chỉnh nó để tạo trang web hoàn hảo của bạn"
+  },
+  "statusPage": {
+    "title": "Trạng thái dịch vụ",
+    "subtitle": "Kiểm tra trạng thái dịch vụ facadely hiện tại"
+  },
+  "customerServicePage": {
+    "title": "Dịch vụ khách hàng",
+    "subtitle": "Chúng tôi ở đây để giúp đỡ. Liên hệ với đội hỗ trợ của chúng tôi"
+  },
+  "aboutPage": {
+    "title": "Về facadely",
+    "subtitle": "Sứ mệnh của chúng tôi là dân chủ hóa thiết kế web",
+    "mission": {
+      "heading": "Sứ mệnh của chúng tôi",
+      "content": "Chúng tôi tin rằng mọi người đều xứng đáng có một trang web đẹp và chuyên nghiệp. facadely giúp bất kỳ ai có thể dễ dàng tạo và khởi chạy các trang web tuyệt vời mà không cần kiến thức mã hóa."
+    },
+    "vision": {
+      "heading": "Tầm nhìn của chúng tôi",
+      "content": "Trở thành trình xây dựng trang web thân thiện với người dùng nhất thế giới, trao quyền cho hàng triệu người và doanh nghiệp để thành công trực tuyến."
+    },
+    "values": {
+      "heading": "Các giá trị của chúng tôi",
+      "items": [
+        "Đơn giản: Làm cho thiết kế web có thể truy cập được cho mọi người",
+        "Chất lượng: Cung cấp các mẫu đẹp và chuyên nghiệp",
+        "Hỗ trợ: Ở đó cho những người dùng của chúng tôi ở mỗi bước",
+        "Đổi mới: Liên tục cải thiện nền tảng của chúng tôi"
+      ]
+    }
+  },
+  "contactPage": {
+    "title": "Liên hệ chúng tôi",
+    "subtitle": "Có một câu hỏi? Chúng tôi muốn nghe từ bạn.",
+    "form": {
+      "name": "Tên của bạn",
+      "email": "Email của bạn",
+      "subject": "Chủ đề",
+      "message": "Tin nhắn của bạn",
+      "send": "Gửi thư",
+      "sending": "Đang gửi...",
+      "success": "Cảm ơn vì tin nhắn của bạn!",
+      "error": "Không thể gửi thư. Vui lòng thử lại."
+    }
+  }
+}
