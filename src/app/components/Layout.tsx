@@ -299,6 +299,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/customer-service')} className="hover:text-white transition-colors">{footer.support.customerService}</Link></li>
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/qa')} className="hover:text-white transition-colors">{footer.support.qa}</Link></li>
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/status')} className="hover:text-white transition-colors">{footer.support.serverStatus}</Link></li>
+              <li><Link href={`/${currentLocale}/blog`} className="hover:text-white transition-colors">{footer.support.blog}</Link></li>
             </ul>
           </div>
           
@@ -308,6 +309,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
             <ul className="space-y-2 text-neutral-400 text-sm">
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/about')} className="hover:text-white transition-colors">{footer.company.about}</Link></li>
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/contact')} className="hover:text-white transition-colors">{footer.company.contact}</Link></li>
+              <li><Link href={`/${currentLocale}/blog`} className="hover:text-white transition-colors">{footer.company.blog}</Link></li>
             </ul>
           </div>
         </div>
