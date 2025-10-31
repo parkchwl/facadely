@@ -34,12 +34,14 @@
       "title": "Support",
       "customerService": "Customer Service",
       "qa": "Q&A",
-      "serverStatus": "Server Status"
+      "serverStatus": "Server Status",
+      "blog": "Blog"
     },
     "company": {
       "title": "Company",
       "about": "About us",
-      "contact": "Contact"
+      "contact": "Contact",
+      "blog": "Blog"
     },
     "legal": {
       "poweredBy": "Powered by facadely ✦ All rights reserved.",
@@ -873,5 +875,92 @@
       "success": "Thank you for your message!",
       "error": "Failed to send message. Please try again."
     }
+  },
+  "blogPage": {
+    "hero": {
+      "title": "Resources &<br />Blog",
+      "subtitle": "Learn how to build, grow, and optimize your website with expert tips, tutorials, and best practices."
+    },
+    "categories": {
+      "all": "All Articles",
+      "tutorials": "Tutorials",
+      "tips": "Tips & Tricks",
+      "guides": "Guides",
+      "design": "Design",
+      "marketing": "Marketing",
+      "business": "Business"
+    },
+    "posts": [
+      {
+        "id": 1,
+        "title": "Getting Started: How to Build Your First Website in 5 Minutes",
+        "excerpt": "Learn the basics of creating a professional website without any coding experience. We'll walk you through every step.",
+        "content": "Creating a website has never been easier. With facadely, you can have a professional-looking website up and running in just 5 minutes. In this guide, we'll show you exactly how to get started.\n\n## Step 1: Choose a Template\nStart by browsing our collection of beautiful, professionally designed templates. Each template is fully responsive and mobile-friendly.\n\n## Step 2: Customize Your Content\nAdd your own text, images, and branding to make your website unique. Drag and drop elements to arrange them exactly how you want.\n\n## Step 3: Publish Your Site\nOnce you're happy with your website, simply click publish. Your site will be live and accessible to your customers immediately.\n\nThat's it! You now have a professional website without spending thousands on developers.",
+        "category": "tutorials",
+        "author": "facadely Team",
+        "date": "2025-03-15",
+        "readTime": "5 min read",
+        "featured": true,
+        "image": ""
+      },
+      {
+        "id": 2,
+        "title": "10 Website Design Tips That Will Boost Your Conversions",
+        "excerpt": "Discover proven design principles that help convert visitors into customers. These simple tips can increase your sales.",
+        "content": "Design is not just about aesthetics—it's about creating an experience that converts. Here are 10 design tips that will help you boost your conversion rates.\n\n## 1. White Space is Your Friend\nDon't overcrowd your pages. Let elements breathe with plenty of white space.\n\n## 2. Clear Call-to-Action Buttons\nMake your CTA buttons stand out. Use contrasting colors and compelling text.\n\n## 3. Fast Loading Times\nEnsure your website loads quickly. Slow sites lead to high bounce rates.\n\n## 4. Mobile-First Design\nDesign for mobile first, then scale up. Most users browse on mobile devices.\n\n## 5. Consistent Branding\nUse the same colors, fonts, and style throughout your site for a professional look.\n\nFollowing these tips will help you create a website that not only looks great but also converts visitors into customers.",
+        "category": "design",
+        "author": "Design Expert",
+        "date": "2025-03-12",
+        "readTime": "8 min read",
+        "featured": true,
+        "image": ""
+      },
+      {
+        "id": 3,
+        "title": "SEO Basics: How to Get Your Website Ranked on Google",
+        "excerpt": "Master the fundamentals of SEO and start getting organic traffic from search engines. A complete beginner's guide.",
+        "content": "Search Engine Optimization (SEO) is crucial for getting your website noticed. Here's how to optimize your site for search engines.\n\n## Keyword Research\nStart by researching keywords related to your business. These are the terms your customers use to find you.\n\n## On-Page Optimization\nOptimize your page titles, meta descriptions, and content for your target keywords.\n\n## Quality Content\nCreate valuable content that answers your customers' questions. Google rewards fresh, relevant content.\n\n## Build Backlinks\nGain links from reputable websites to improve your domain authority.\n\n## Technical SEO\nEnsure your website is properly structured and easily crawlable by search engines.\n\nWith consistent effort on these SEO basics, you'll start seeing improvements in your search engine rankings.",
+        "category": "guides",
+        "author": "SEO Specialist",
+        "date": "2025-03-10",
+        "readTime": "12 min read",
+        "featured": false,
+        "image": ""
+      },
+      {
+        "id": 4,
+        "title": "Email Marketing Strategies That Actually Work",
+        "excerpt": "Learn effective email marketing tactics to grow your business and keep customers engaged.",
+        "content": "Email marketing remains one of the most effective ways to reach your customers. Here are proven strategies that work.\n\n## Build Your List\nStart collecting email addresses from day one. Offer a valuable incentive to encourage signups.\n\n## Segment Your Audience\nDivide your email list into segments based on interests and behavior. Send targeted messages to each group.\n\n## Craft Compelling Subject Lines\nYour subject line is the first thing people see. Make it count with clear, compelling text.\n\n## Focus on Value\nProvide real value in every email. Tips, discounts, and valuable content keep people engaged.\n\n## Test and Optimize\nAlways test different approaches and optimize based on results. Track open rates and click-through rates.",
+        "category": "marketing",
+        "author": "Marketing Manager",
+        "date": "2025-03-08",
+        "readTime": "7 min read",
+        "featured": false,
+        "image": ""
+      },
+      {
+        "id": 5,
+        "title": "5 Common Website Mistakes and How to Avoid Them",
+        "excerpt": "Discover the most common mistakes people make when building websites and how to prevent them.",
+        "content": "Many new website owners make the same mistakes. Learn how to avoid them from the start.\n\n## 1. Poor Navigation\nMake it easy for visitors to find what they're looking for. Clear, intuitive navigation is essential.\n\n## 2. Outdated Content\nKeep your content fresh and updated. Outdated information damages credibility.\n\n## 3. Slow Performance\nOptimize images and minimize code to improve page speed. Users won't wait for slow websites.\n\n## 4. Not Mobile Responsive\nYour site must work perfectly on mobile devices. Mobile traffic is crucial.\n\n## 5. Weak Security\nProtect your website and your visitors. Use HTTPS and keep software updated.\n\nAvoiding these mistakes will help you create a website that works well for both you and your visitors.",
+        "category": "tips",
+        "author": "facadely Team",
+        "date": "2025-03-05",
+        "readTime": "6 min read",
+        "featured": false,
+        "image": ""
+      }
+    ],
+    "filters": {
+      "searchPlaceholder": "Search articles...",
+      "noResults": "No articles found. Try different search terms or browse all categories."
+    },
+    "readMore": "Read More",
+    "relatedPosts": "Related Articles",
+    "shareArticle": "Share This Article",
+    "author": "Author",
+    "published": "Published",
+    "backToArticles": "Back to Articles"
   }
 }
