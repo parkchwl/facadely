@@ -3,22 +3,21 @@
 import React from 'react';
 import Link from 'next/link';
 import { X } from 'lucide-react';
+import type { TermsModalDictionary } from '@/types/dictionary';
 
 interface TermsAgreementModalProps {
   isOpen: boolean;
   onClose: () => void;
   onAgree: () => void;
   provider: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dictionary: any;
+  dictionary: TermsModalDictionary;
 }
 
 export default function TermsAgreementModal({ isOpen, onClose, onAgree, provider, dictionary }: TermsAgreementModalProps) {
   if (!isOpen) return null;
 
   // A simple helper to parse the string with placeholders
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const parseText = (text: string, replacements: { [key: string]: any }) => {
+  const parseText = (text: string, replacements: { [key: string]: React.ReactNode }) => {
     let result: (string | React.ReactNode)[] = [text];
     for (const key in replacements) {
       const newResult: (string | React.ReactNode)[] = [];

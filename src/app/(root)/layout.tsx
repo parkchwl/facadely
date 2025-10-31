@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import "../../globals.css";
-import Layout from "../../components/Layout";
-import ErrorBoundary from "../../components/ErrorBoundary";
+import "../globals.css";
+import Layout from "../components/Layout";
+import ErrorBoundary from "../components/ErrorBoundary";
 import { getDictionary } from "@/lib/get-dictionary";
+import { i18n } from "@/i18n/config";
 
 type LayoutProps = Readonly<{
   children: React.ReactNode;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params: Promise<any>;
 }>;
 
 export const metadata: Metadata = {
@@ -17,9 +16,8 @@ export const metadata: Metadata = {
 
 export default async function MainLayout({
   children,
-  params,
 }: LayoutProps) {
-  const { lang } = await params;
+  const lang = i18n.defaultLocale;
   const dictionary = await getDictionary(lang);
   return (
     <ErrorBoundary>

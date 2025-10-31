@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
+import type { HomePageDictionary } from '@/types/dictionary';
 
 const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
@@ -47,8 +48,12 @@ const iconMap: { [key: string]: React.ElementType } = {
   Shield
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function HomePage({ dictionary, lang }: { dictionary: any; lang?: string }) {
+interface HomePageProps {
+  dictionary: HomePageDictionary;
+  lang?: string;
+}
+
+export default function HomePage({ dictionary, lang }: HomePageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);

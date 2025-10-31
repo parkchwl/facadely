@@ -5,11 +5,11 @@ import BlogPostDetailClient from '../BlogPostDetailClient';
 export default async function BlogPostPage({
   params
 }: {
-  params: Promise<{ lang: Locale; id: string }>
+  params: Promise<{ id: string }>
 }) {
-  const { lang, id } = await params;
+  const { id } = await params;
+  const lang = i18n.defaultLocale;
   const dictionary = await getDictionary(lang);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <BlogPostDetailClient dictionary={(dictionary as any).blogPage} postId={parseInt(id)} />;
+  return <BlogPostDetailClient dictionary={dictionary.blogPage} postId={parseInt(id)} />;
 }
