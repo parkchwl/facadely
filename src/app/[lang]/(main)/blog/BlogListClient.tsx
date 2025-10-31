@@ -62,7 +62,7 @@ export default function BlogListClient({ dictionary }: { dictionary: BlogDiction
       <section
         className="w-full text-white relative overflow-hidden"
         style={{
-          backgroundImage: 'url(/image/Blog.webp)',
+          backgroundImage: 'url(/image/Blog.avif)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',

@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { DM_Serif_Display } from 'next/font/google';
 import { Rocket, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
+import OptimizedImage, { ImageType } from '../components/OptimizedImage';
 
 const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
@@ -23,19 +23,19 @@ const STYLES = {
 
 // Base templates - this would ideally be fetched from a database
 const BASE_TEMPLATES = [
-  { id: 1, title: 'Beauty & Cosmetics', category: 'E-commerce', image: '/image/1.webp' },
-  { id: 2, title: 'Minimal Portfolio', category: 'Creative', image: '/image/2.webp' },
-  { id: 3, title: 'Luxury Fragrance', category: 'Product', image: '/image/3.webp' },
-  { id: 4, title: 'Modern Studio', category: 'Business', image: '/image/4.webp' },
-  { id: 5, title: 'Restaurant Menu', category: 'Food & Dining', image: '/image/5.webp' },
-  { id: 6, title: 'Tech Startup', category: 'Technology', image: '/image/6.webp' },
-  { id: 7, title: 'Travel Blog', category: 'Lifestyle', image: '/image/7.webp' },
-  { id: 8, title: 'Fitness App', category: 'Health', image: '/image/8.webp' },
-  { id: 9, title: 'Real Estate', category: 'Business', image: '/image/9.webp' },
-  { id: 10, title: 'Online Course', category: 'Education', image: '/image/10.webp' },
-  { id: 11, title: 'Template 11', category: 'Category', image: '/image/11.webp' },
-  { id: 12, title: 'Template 12', category: 'Category', image: '/image/12.webp' },
-  { id: 13, title: 'Template 13', category: 'Category', image: '/image/13.webp' }
+  { id: 1, title: 'Beauty & Cosmetics', category: 'E-commerce', image: '/image/1.avif' },
+  { id: 2, title: 'Minimal Portfolio', category: 'Creative', image: '/image/2.avif' },
+  { id: 3, title: 'Luxury Fragrance', category: 'Product', image: '/image/3.avif' },
+  { id: 4, title: 'Modern Studio', category: 'Business', image: '/image/4.avif' },
+  { id: 5, title: 'Restaurant Menu', category: 'Food & Dining', image: '/image/5.avif' },
+  { id: 6, title: 'Tech Startup', category: 'Technology', image: '/image/6.avif' },
+  { id: 7, title: 'Travel Blog', category: 'Lifestyle', image: '/image/7.avif' },
+  { id: 8, title: 'Fitness App', category: 'Health', image: '/image/8.avif' },
+  { id: 9, title: 'Real Estate', category: 'Business', image: '/image/9.avif' },
+  { id: 10, title: 'Online Course', category: 'Education', image: '/image/10.avif' },
+  { id: 11, title: 'Template 11', category: 'Category', image: '/image/11.avif' },
+  { id: 12, title: 'Template 12', category: 'Category', image: '/image/12.avif' },
+  { id: 13, title: 'Template 13', category: 'Category', image: '/image/13.avif' }
 ] as const;
 
 const iconMap: { [key: string]: React.ElementType } = {
@@ -112,13 +112,12 @@ export default function HomePage({ dictionary, lang }: { dictionary: any; lang?:
       <main className="bg-black min-h-screen">
         <section className="relative z-10 flex flex-col bg-black">
           <div className="relative text-left text-white h-[55vh] sm:h-[60vh] lg:h-[65vh] flex items-center overflow-hidden">
-            <Image
-              src="/image/Title.webp"
+            <OptimizedImage
+              src="/image/Title.avif"
               alt="Hero background"
+              type={ImageType.STATIC_BACKGROUND}
               fill
               priority
-              quality={75}
-              sizes="100vw"
               className="object-cover brightness-150"
               onLoad={() => setImagesLoaded(prev => prev + 1)}
             />
@@ -175,12 +174,11 @@ export default function HomePage({ dictionary, lang }: { dictionary: any; lang?:
           </section>
 
           <div className="relative flex items-center justify-center min-h-screen py-16 sm:py-20 lg:py-24 overflow-hidden">
-            <Image
-              src="/image/Matters.webp"
+            <OptimizedImage
+              src="/image/Matters.avif"
               alt="Why your website matters background"
+              type={ImageType.STATIC_BACKGROUND}
               fill
-              quality={75}
-              sizes="100vw"
               className="object-cover"
               onLoad={() => setImagesLoaded(prev => prev + 1)}
             />
@@ -265,12 +263,11 @@ export default function HomePage({ dictionary, lang }: { dictionary: any; lang?:
         <ScrollingBanner />
 
         <section className="relative border-t border-gray-800 overflow-hidden">
-          <Image
-            src="/image/Solution.webp"
+          <OptimizedImage
+            src="/image/Solution.avif"
             alt="facadely solution background"
+            type={ImageType.STATIC_BACKGROUND}
             fill
-            quality={75}
-            sizes="100vw"
             className="object-cover"
             onLoad={() => setImagesLoaded(prev => prev + 1)}
           />

@@ -71,7 +71,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
       style={
         pathname.endsWith('/templates')
           ? {
-              backgroundImage: 'url(/image/Template.webp)',
+              backgroundImage: 'url(/image/Template.avif)',
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }

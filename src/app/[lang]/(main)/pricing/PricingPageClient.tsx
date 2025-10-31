@@ -69,7 +69,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: any }) {
       <div
         className="fixed inset-0"
         style={{
-          backgroundImage: 'url(/image/Pricing.webp)',
+          backgroundImage: 'url(/image/Pricing.avif)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

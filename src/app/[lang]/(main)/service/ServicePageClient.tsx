@@ -3,8 +3,8 @@ import { useParams } from 'next/navigation';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import OptimizedImage, { ImageType } from '@/app/components/OptimizedImage';
 import { DM_Serif_Display } from 'next/font/google';
 import {
   Zap,
@@ -131,7 +131,7 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
   ];
 
   const features = dictionary.features.items.map((item, idx) => {
-    const images = ['/image/Generate.webp', '/image/Matters.webp', '/image/Generate.webp', '/image/Matters.webp'];
+    const images = ['/image/Generate.avif', '/image/Matters.avif', '/image/Generate.avif', '/image/Matters.avif'];
     return {
       ...item,
       image: images[idx % images.length],
@@ -150,13 +150,12 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
       {/* Hero Section */}
       <section className="relative min-h-[80vh] max-h-[1000px] flex items-center justify-center overflow-hidden bg-black py-12 sm:py-16 lg:py-20 xl:py-24">
         <div className="absolute inset-0">
-          <Image
-            src="/image/Service.webp"
+          <OptimizedImage
+            src="/image/Service.avif"
             alt="Service hero background"
+            type={ImageType.STATIC_BACKGROUND}
             fill
             priority
-            quality={75}
-            sizes="100vw"
             className="object-cover opacity-30"
           />
         </div>
@@ -304,11 +303,11 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
                   <div className="flex-1 w-full">
                     <div className="relative rounded-2xl overflow-hidden shadow-lg bg-white p-4">
                       <div className="relative w-full aspect-video">
-                        <Image
+                        <OptimizedImage
                           src={feature.image}
                           alt={`${feature.title} feature screenshot`}
+                          type={ImageType.STATIC_BACKGROUND}
                           fill
-                          sizes="(max-width: 768px) 100vw, 50vw"
                           className="object-cover rounded-lg"
                         />
                       </div>
@@ -425,12 +424,11 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
       {/* Final CTA Section */}
       <section className="py-20 sm:py-24 lg:py-32 bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white relative overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="/image/InMatters.webp"
+          <OptimizedImage
+            src="/image/Matters.avif"
             alt="Final CTA background"
+            type={ImageType.STATIC_BACKGROUND}
             fill
-            quality={75}
-            sizes="100vw"
             className="object-cover opacity-10"
           />
         </div>
