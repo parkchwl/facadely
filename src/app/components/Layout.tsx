@@ -29,17 +29,37 @@ export default function Layout({ children, dictionary }: LayoutProps) {
 
   const getLocaleFromPath = (path: string): Locale => {
     const segments = path.split('/');
-    const locale = segments[1] as Locale;
-    return i18n.locales.includes(locale) ? locale : i18n.defaultLocale;
+    const potentialLocale = segments[1] as Locale;
+    // If path starts with a known locale (excluding 'en'), return it
+    if (potentialLocale && i18n.locales.includes(potentialLocale) && potentialLocale !== 'en') {
+      return potentialLocale;
+    }
+    // Otherwise, it's English (root path)
+    return i18n.defaultLocale;
   };
 
   const currentLocale = getLocaleFromPath(pathname);
 
+  const createLocalizedPath = (locale: Locale, path: string): string => {
+    // If English, no prefix
+    if (locale === i18n.defaultLocale) {
+      return path;
+    }
+    // Other languages get prefix
+    return `/${locale}${path}`;
+  };
+
   const redirectedPathName = (locale: Locale) => {
-    if (!pathname) return '/';
-    const segments = pathname.split('/');
-    segments[1] = locale;
-    return segments.join('/');
+    if (!pathname) return createLocalizedPath(locale, '/');
+
+    // Remove current locale prefix if exists
+    let cleanPath = pathname;
+    const segments = pathname.split('/').filter(s => s);
+    if (segments[0] && i18n.locales.includes(segments[0] as Locale)) {
+      cleanPath = '/' + segments.slice(1).join('/');
+    }
+
+    return createLocalizedPath(locale, cleanPath || '/');
   };
 
   useEffect(() => {
@@ -87,7 +107,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
           {/* Left Side: Logo + Desktop Nav */}
           <div className="flex items-center space-x-8">
             <Link
-              href={`/${currentLocale}`}
+              href={createLocalizedPath(currentLocale, '/')}
               className="flex-shrink-0 flex items-center space-x-2 text-xl sm:text-2xl font-bold font-montserrat tracking-tight z-50"
             >
               ✦ {footer.brand.name}
@@ -95,10 +115,10 @@ export default function Layout({ children, dictionary }: LayoutProps) {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex space-x-8">
-              <Link href={`/${currentLocale}/templates`} className="font-semibold hover:text-blue-400 transition-colors">{navigation.templates}</Link>
-              <Link href={`/${currentLocale}/generate`} className="font-semibold hover:text-blue-400 transition-colors">{navigation.generate}</Link>
-              <Link href={`/${currentLocale}/service`} className="font-semibold hover:text-blue-400 transition-colors">{navigation.service}</Link>
-              <Link href={`/${currentLocale}/pricing`} className="font-semibold hover:text-blue-400 transition-colors">{navigation.pricing}</Link>
+              <Link href={createLocalizedPath(currentLocale, '/templates')} className="font-semibold hover:text-blue-400 transition-colors">{navigation.templates}</Link>
+              <Link href={createLocalizedPath(currentLocale, '/generate')} className="font-semibold hover:text-blue-400 transition-colors">{navigation.generate}</Link>
+              <Link href={createLocalizedPath(currentLocale, '/service')} className="font-semibold hover:text-blue-400 transition-colors">{navigation.service}</Link>
+              <Link href={createLocalizedPath(currentLocale, '/pricing')} className="font-semibold hover:text-blue-400 transition-colors">{navigation.pricing}</Link>
             </nav>
           </div>
 
@@ -154,7 +174,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
 
             {/* Sign Up Button */}
             <Link
-              href={`/${currentLocale}/login`}
+              href={createLocalizedPath(currentLocale, '/login')}
               className="bg-white text-black hover:bg-gray-200 py-2 px-4 rounded-lg transition shadow font-bold"
             >
               {navigation.signup} <span className="font-normal">{navigation.signupFree}</span>
@@ -192,25 +212,25 @@ export default function Layout({ children, dictionary }: LayoutProps) {
               {/* Navigation Links - Huge & Left Aligned */}
               <nav className="flex flex-col space-y-8 flex-1 justify-start pt-16">
                 <Link
-                  href={`/${currentLocale}/templates`}
+                  href={createLocalizedPath(currentLocale, '/templates')}
                   className="text-6xl sm:text-7xl font-light tracking-tight text-white/80 hover:text-white hover:drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300"
                 >
                   {mobileNav.templates}
                 </Link>
                 <Link
-                  href={`/${currentLocale}/generate`}
+                  href={createLocalizedPath(currentLocale, '/generate')}
                   className="text-6xl sm:text-7xl font-light tracking-tight text-white/80 hover:text-white hover:drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300"
                 >
                   {mobileNav.generate}
                 </Link>
                 <Link
-                  href={`/${currentLocale}/service`}
+                  href={createLocalizedPath(currentLocale, '/service')}
                   className="text-6xl sm:text-7xl font-light tracking-tight text-white/80 hover:text-white hover:drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300"
                 >
                   {mobileNav.service}
                 </Link>
                 <Link
-                  href={`/${currentLocale}/pricing`}
+                  href={createLocalizedPath(currentLocale, '/pricing')}
                   className="text-6xl sm:text-7xl font-light tracking-tight text-white/80 hover:text-white hover:drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300"
                 >
                   {mobileNav.pricing}
@@ -246,7 +266,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                 {/* Sign Up Button */}
                 <div className="flex flex-col space-y-3">
                   <Link
-                    href={`/${currentLocale}/login`}
+                    href={createLocalizedPath(currentLocale, '/login')}
                     className="inline-block px-10 py-4 border-2 border-white text-white font-medium text-lg tracking-wide shadow-[0_0_30px_rgba(255,255,255,0.5)] hover:bg-white hover:text-black hover:border-white transition-all duration-300 rounded-none text-center"
                   >
                     {mobileNav.signup}
@@ -299,7 +319,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/customer-service')} className="hover:text-white transition-colors">{footer.support.customerService}</Link></li>
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/qa')} className="hover:text-white transition-colors">{footer.support.qa}</Link></li>
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/status')} className="hover:text-white transition-colors">{footer.support.serverStatus}</Link></li>
-              <li><Link href={`/${currentLocale}/blog`} className="hover:text-white transition-colors">{footer.support.blog}</Link></li>
+              <li><Link href={createLocalizedPath(currentLocale, '/blog')} className="hover:text-white transition-colors">{footer.support.blog}</Link></li>
             </ul>
           </div>
           
@@ -309,7 +329,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
             <ul className="space-y-2 text-neutral-400 text-sm">
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/about')} className="hover:text-white transition-colors">{footer.company.about}</Link></li>
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/contact')} className="hover:text-white transition-colors">{footer.company.contact}</Link></li>
-              <li><Link href={`/${currentLocale}/blog`} className="hover:text-white transition-colors">{footer.company.blog}</Link></li>
+              <li><Link href={createLocalizedPath(currentLocale, '/blog')} className="hover:text-white transition-colors">{footer.company.blog}</Link></li>
             </ul>
           </div>
         </div>

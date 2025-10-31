@@ -2,23 +2,33 @@ import { NextRequest, NextResponse } from 'next/server';
 import { i18n } from '@/i18n/config';
 import { updateSession } from '@/lib/supabase/middleware';
 
-function getLocale(request: NextRequest): string | undefined {
+function getLocale(request: NextRequest): string {
   const pathname = request.nextUrl.pathname;
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  );
 
-  if (pathnameIsMissingLocale) {
-    return i18n.defaultLocale;
+  // Check if pathname starts with any non-default locale
+  for (const locale of i18n.locales) {
+    if (locale === i18n.defaultLocale) continue; // Skip default locale (en)
+    if (pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`) {
+      return locale;
+    }
   }
+
+  // If /en is used, redirect to path without /en
+  if (pathname.startsWith('/en/') || pathname === '/en') {
+    return 'redirect-to-default';
+  }
+
+  // Default to English for all other paths
+  return i18n.defaultLocale;
 }
 
 export async function middleware(request: NextRequest) {
   const locale = getLocale(request);
-  if (locale) {
-    return NextResponse.redirect(
-      new URL(`/${locale}${request.nextUrl.pathname}`, request.url)
-    );
+
+  // Redirect /en/* to /* (remove /en prefix for default locale)
+  if (locale === 'redirect-to-default') {
+    const newPath = request.nextUrl.pathname.replace(/^\/en\/?/, '/') || '/';
+    return NextResponse.redirect(new URL(newPath, request.url));
   }
 
   // Protected routes that require authentication
