@@ -63,7 +63,7 @@ export default function LoginPageClient({ dictionary }: { dictionary: any }) {
     <div
       className="min-h-screen flex flex-col"
       style={{
-        backgroundImage: 'url("/image/login.webp")',
+        backgroundImage: 'url("/image/login.avif")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

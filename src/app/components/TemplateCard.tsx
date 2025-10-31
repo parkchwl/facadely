@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import OptimizedImage, { ImageType } from './OptimizedImage';
 
 interface Template {
   id: number;
@@ -37,19 +37,16 @@ const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index 
       )}
 
       {/* 이미지 - 항상 렌더링 (IntersectionObserver 제거) */}
-      <Image
+      <OptimizedImage
         src={template.image}
         alt={template.title}
+        type={ImageType.TEMPLATE_THUMBNAIL}
         fill
-        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
         className={`object-cover transition-all duration-300 group-hover:scale-110 ${
           imageLoaded ? 'opacity-100' : 'opacity-0'
         }`}
-        quality={75}
         priority={index < 13}
         onLoad={() => setImageLoaded(true)}
-        placeholder="blur"
-        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQUEHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwABmQAAA//9k="
       />
 
       {/* Gradient Overlay - 항상 표시 */}
