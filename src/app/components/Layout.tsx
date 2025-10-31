@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Cardo } from 'next/font/google';
 import { i18n, type Locale } from '@/i18n/config';
 import { languageNames } from '@/i18n/utils';
+import type { Dictionary } from '@/types/dictionary';
 
 const cardo = Cardo({
   subsets: ['latin'],
@@ -17,8 +18,7 @@ const cardo = Cardo({
 
 interface LayoutProps {
   children: ReactNode;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dictionary: any;
+  dictionary: Dictionary;
 }
 
 export default function Layout({ children, dictionary }: LayoutProps) {

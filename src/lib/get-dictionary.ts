@@ -1,5 +1,6 @@
 import 'server-only';
 import type { Locale } from '@/i18n/config';
+import type { Dictionary } from '@/types/dictionary';
 
 const dictionaries = {
   en: () => import('@/i18n/messages/en.json').then((module) => module.default),
@@ -10,4 +11,5 @@ const dictionaries = {
   'zh-TW': () => import('@/i18n/messages/zh-TW.json').then((module) => module.default),
 };
 
-export const getDictionary = async (locale: Locale) => dictionaries[locale]();
+export const getDictionary = async (locale: Locale): Promise<Dictionary> =>
+  dictionaries[locale]() as unknown as Promise<Dictionary>;
