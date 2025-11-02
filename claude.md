@@ -291,10 +291,12 @@ npm run lint
 
 ### Environment Variables:
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://jvnyjsrrswrnciyvlhom.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+NEXT_PUBLIC_SUPABASE_URL=<your-supabase-project-url>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-anon-key>
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
+
+**Note:** Actual values are stored in `.env.local` (not committed to git). See `.env.example` for template.
 
 ---
 

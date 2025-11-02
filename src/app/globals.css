@@ -189,12 +189,16 @@ body {
 }
 
 /* FAQ Progress Bar Animation - CSS 최적화 */
+.animate-progress {
+  transform-origin: left;
+}
+
 @keyframes progressBar {
   from {
-    width: 0%;
+    transform: scaleX(0);
   }
   to {
-    width: 100%;
+    transform: scaleX(1);
   }
 }
 
