@@ -42,19 +42,6 @@ export default function Error({
             Go back home
           </Link>
         </div>
-
-        {process.env.NODE_ENV === 'development' && (
-          <div className="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg text-left">
-            <p className="text-sm font-mono text-red-800 break-all">
-              <strong>Error:</strong> {error.message}
-            </p>
-            {error.digest && (
-              <p className="text-sm font-mono text-red-600 mt-2">
-                <strong>Digest:</strong> {error.digest}
-              </p>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );
