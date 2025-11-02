@@ -27,7 +27,7 @@ export default function TermsAgreementModal({ isOpen, onClose, onAgree, provider
           split.forEach((textPart, j) => {
             if (textPart) newResult.push(textPart);
             if (j < split.length - 1) {
-              // @ts-ignore - cloneElement type issue
+              // @ts-expect-error - cloneElement type issue
               newResult.push(React.cloneElement(replacements[key], { key: `${key}-${i}-${j}` }));
             }
           });
