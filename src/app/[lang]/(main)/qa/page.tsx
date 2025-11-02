@@ -9,5 +9,6 @@ export default async function QAPage({
 }) {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
-  return <QAPageClient dictionary={dictionary.qaPage} />;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return <QAPageClient dictionary={dictionary.qaPage as any} />;
 }

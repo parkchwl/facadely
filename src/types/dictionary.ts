@@ -481,19 +481,13 @@ export interface ContactPageDictionary {
 // ==================== Blog ====================
 
 export interface BlogPostDictionary {
-  id: string;
+  id: number;
   title: string;
-  slug: string;
   excerpt: string;
   content: string;
-  author: {
-    name: string;
-    avatar: string;
-    bio: string;
-  };
+  author: string;
   category: string;
-  tags: string[];
-  publishedAt: string;
+  date: string;
   readTime: string;
   image: string;
   featured?: boolean;
