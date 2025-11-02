@@ -10,6 +10,5 @@ export default async function BlogPostPage({
   const { lang, id } = await params;
   const dictionary = await getDictionary(lang);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <BlogPostDetailClient dictionary={(dictionary as any).blogPage} postId={parseInt(id)} />;
+  return <BlogPostDetailClient dictionary={dictionary.blogPage} postId={parseInt(id)} />;
 }

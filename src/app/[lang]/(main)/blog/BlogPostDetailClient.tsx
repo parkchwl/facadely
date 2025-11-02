@@ -4,34 +4,14 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, User, Calendar, Share2, ChevronRight } from 'lucide-react';
-
-interface BlogPost {
-  id: number;
-  title: string;
-  excerpt: string;
-  content: string;
-  category: string;
-  author: string;
-  date: string;
-  readTime: string;
-  featured: boolean;
-  image: string;
-}
-
-interface BlogDictionary {
-  posts: BlogPost[];
-  relatedPosts: string;
-  readMore: string;
-  shareArticle: string;
-  backToArticles: string;
-}
+import { ArrowLeft, Clock, User, Calendar, Share2, ChevronRight} from 'lucide-react';
+import type { BlogPageDictionary } from '@/types/dictionary';
 
 export default function BlogPostDetailClient({
   dictionary,
   postId
 }: {
-  dictionary: BlogDictionary;
+  dictionary: BlogPageDictionary;
   postId: number;
 }) {
   const { lang: currentLang } = useParams() as { lang: string };
@@ -291,7 +271,7 @@ export default function BlogPostDetailClient({
         >
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-black mb-12">
-              {dictionary.relatedPosts}
+              {dictionary.relatedArticles}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {relatedPosts.map((post, index) => (
