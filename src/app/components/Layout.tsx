@@ -189,94 +189,159 @@ export default function Layout({ children, dictionary }: LayoutProps) {
           </div>
         </div>
 
-        {/* Mobile Menu - Arc Browser Dark Style (Left Slide) */}
+        {/* Mobile Menu - Modern Dropdown Style (Top to Bottom) */}
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <motion.div
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "spring", damping: 35, stiffness: 300 }}
-              className="fixed inset-0 bg-black z-50 flex flex-col justify-between p-8 lg:hidden"
-            >
-              {/* Close Button - Top Right */}
-              <div className="flex justify-end">
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-white/40 hover:text-white transition-colors"
-                >
-                  <X size={32} strokeWidth={1} />
-                </button>
-              </div>
+            <>
+              {/* Backdrop with fade */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
 
-              {/* Navigation Links - Huge & Left Aligned */}
-              <nav className="flex flex-col space-y-8 flex-1 justify-start pt-16">
-                <Link
-                  href={createLocalizedPath(currentLocale, '/templates')}
-                  className="text-6xl sm:text-7xl font-light tracking-tight text-white/80 hover:text-white hover:drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300"
-                >
-                  {mobileNav.templates}
-                </Link>
-                <Link
-                  href={createLocalizedPath(currentLocale, '/generate')}
-                  className="text-6xl sm:text-7xl font-light tracking-tight text-white/80 hover:text-white hover:drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300"
-                >
-                  {mobileNav.generate}
-                </Link>
-                <Link
-                  href={createLocalizedPath(currentLocale, '/service')}
-                  className="text-6xl sm:text-7xl font-light tracking-tight text-white/80 hover:text-white hover:drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300"
-                >
-                  {mobileNav.service}
-                </Link>
-                <Link
-                  href={createLocalizedPath(currentLocale, '/pricing')}
-                  className="text-6xl sm:text-7xl font-light tracking-tight text-white/80 hover:text-white hover:drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300"
-                >
-                  {mobileNav.pricing}
-                </Link>
-              </nav>
-
-              {/* Bottom Section - Language Selector & Sign Up */}
-              <div className="flex flex-col space-y-6">
-                {/* Divider */}
-                <div className="border-t border-white/10"></div>
-
-                {/* Language Grid */}
-                <div className="grid grid-cols-2 gap-3">
-                  {i18n.locales.map((locale) => {
-                    const lang = languageNames[locale];
-                    return (
-                      <Link
-                        key={locale}
-                        href={redirectedPathName(locale)}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={`px-10 py-4 border-2 text-lg font-medium tracking-wide text-white transition-all duration-300 ${
-                          currentLocale === locale
-                            ? 'border-white'
-                            : 'border-white/30 hover:border-white/50'
-                        }`}
-                      >
-                        {lang.language}
-                      </Link>
-                    );
-                  })}
-                </div>
-
-                {/* Sign Up Button */}
-                <div className="flex flex-col space-y-3">
-                  <Link
-                    href={createLocalizedPath(currentLocale, '/login')}
-                    className="inline-block px-10 py-4 border-2 border-white text-white font-medium text-lg tracking-wide shadow-[0_0_30px_rgba(255,255,255,0.5)] hover:bg-white hover:text-black hover:border-white transition-all duration-300 rounded-none text-center"
+              {/* Menu Panel */}
+              <motion.div
+                initial={{ y: "-100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "-100%", opacity: 0 }}
+                transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                className="fixed top-0 left-0 right-0 bg-black z-50 lg:hidden overflow-y-auto max-h-screen"
+              >
+                <div className="p-6 pb-8">
+                  {/* Header with Close Button */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.1 }}
+                    className="flex justify-between items-center mb-8"
                   >
-                    {mobileNav.signup}
-                  </Link>
-                  <p className="text-white/30 text-xs font-light tracking-wide">
-                    {mobileNav.signupFree}
-                  </p>
+                    <div className="font-bold text-xl text-white">✦ facadely</div>
+                    <button
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-white/60 hover:text-white transition-colors"
+                    >
+                      <X size={28} strokeWidth={1.5} />
+                    </button>
+                  </motion.div>
+
+                  {/* Navigation Links - Staggered Animation */}
+                  <nav className="flex flex-col space-y-1 mb-8">
+                    <motion.div
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.15 }}
+                    >
+                      <Link
+                        href={createLocalizedPath(currentLocale, '/templates')}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block text-3xl sm:text-4xl font-light tracking-tight text-white/80 hover:text-white hover:pl-4 transition-all duration-300 py-3"
+                      >
+                        {mobileNav.templates}
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <Link
+                        href={createLocalizedPath(currentLocale, '/generate')}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block text-3xl sm:text-4xl font-light tracking-tight text-white/80 hover:text-white hover:pl-4 transition-all duration-300 py-3"
+                      >
+                        {mobileNav.generate}
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.25 }}
+                    >
+                      <Link
+                        href={createLocalizedPath(currentLocale, '/service')}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block text-3xl sm:text-4xl font-light tracking-tight text-white/80 hover:text-white hover:pl-4 transition-all duration-300 py-3"
+                      >
+                        {mobileNav.service}
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <Link
+                        href={createLocalizedPath(currentLocale, '/pricing')}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block text-3xl sm:text-4xl font-light tracking-tight text-white/80 hover:text-white hover:pl-4 transition-all duration-300 py-3"
+                      >
+                        {mobileNav.pricing}
+                      </Link>
+                    </motion.div>
+                  </nav>
+
+                  {/* Divider */}
+                  <motion.div
+                    initial={{ opacity: 0, scaleX: 0 }}
+                    animate={{ opacity: 1, scaleX: 1 }}
+                    transition={{ delay: 0.35 }}
+                    className="border-t border-white/10 mb-6 origin-left"
+                  />
+
+                  {/* Language Selector */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="mb-6"
+                  >
+                    <h3 className="text-white/60 text-sm font-medium mb-3 tracking-wide">LANGUAGE</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {i18n.locales.map((locale) => {
+                        const lang = languageNames[locale];
+                        return (
+                          <Link
+                            key={locale}
+                            href={redirectedPathName(locale)}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className={`px-4 py-3 border text-sm font-medium tracking-wide text-white transition-all duration-300 text-center ${
+                              currentLocale === locale
+                                ? 'border-white bg-white/10'
+                                : 'border-white/20 hover:border-white/40'
+                            }`}
+                          >
+                            {lang.language}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+
+                  {/* Sign Up Button */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.45 }}
+                    className="space-y-2"
+                  >
+                    <Link
+                      href={createLocalizedPath(currentLocale, '/login')}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block w-full px-6 py-4 border-2 border-white text-white font-medium text-base tracking-wide hover:bg-white hover:text-black transition-all duration-300 text-center"
+                    >
+                      {mobileNav.signup}
+                    </Link>
+                    <p className="text-white/40 text-xs font-light tracking-wide text-center">
+                      {mobileNav.signupFree}
+                    </p>
+                  </motion.div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </header>
