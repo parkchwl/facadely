@@ -319,7 +319,6 @@ export default function Layout({ children, dictionary }: LayoutProps) {
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/customer-service')} className="hover:text-white transition-colors">{footer.support.customerService}</Link></li>
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/qa')} className="hover:text-white transition-colors">{footer.support.qa}</Link></li>
               <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/status')} className="hover:text-white transition-colors">{footer.support.serverStatus}</Link></li>
-              <li><Link href={createLocalizedPath(currentLocale, '/blog')} className="hover:text-white transition-colors">{footer.support.blog}</Link></li>
             </ul>
           </div>
           
