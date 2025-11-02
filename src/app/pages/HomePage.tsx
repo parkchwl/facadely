@@ -381,7 +381,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/20 p-8 lg:p-10 shadow-2xl"
                   >
                     <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold text-white mb-4">
-                      {/* @ts-ignore - replace type issue */}
+                      {/* @ts-expect-error - replace type issue */}
                       {faq.questionLabel.replace('{current}', activeFaqIndex + 1).replace('{total}', FAQS.length)}
                     </div>
                     <h3 className="text-2xl lg:text-3xl font-bold text-white mb-6 leading-tight">
