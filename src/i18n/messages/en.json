@@ -75,12 +75,12 @@
     "solution": {
       "title": "facadely solves the problems",
       "items": [
-        { "title": "Launch in 5 minutes, no setup", "desc": "Start instantly with ready-made templates.\nNo coding or installation required." },
-        { "title": "Mobile-ready by default", "desc": "All templates are fully responsive.\nYour site looks great on any device—automatically." },
-        { "title": "Professional design, made easy", "desc": "Built by designers to earn trust and credibility.\nCreate a polished site without design skills." },
-        { "title": "Tools for bookings and customer management", "desc": "Everything you need—forms, scheduling, CRM—built in.\nNo plugins or third-party tools required." },
-        { "title": "Real-time analytics included", "desc": "Track visits, traffic, and user behavior.\nMake smarter decisions with live data." },
-        { "title": "Security built-in", "desc": "SSL and encryption applied automatically.\nStay protected with continuous updates." }
+        { "icon": "Zap", "title": "Launch in 5 minutes, no setup", "desc": "Start instantly with ready-made templates.\nNo coding or installation required." },
+        { "icon": "Smartphone", "title": "Mobile-ready by default", "desc": "All templates are fully responsive.\nYour site looks great on any device—automatically." },
+        { "icon": "Palette", "title": "Professional design, made easy", "desc": "Built by designers to earn trust and credibility.\nCreate a polished site without design skills." },
+        { "icon": "Settings", "title": "Tools for bookings and customer management", "desc": "Everything you need—forms, scheduling, CRM—built in.\nNo plugins or third-party tools required." },
+        { "icon": "BarChart3", "title": "Real-time analytics included", "desc": "Track visits, traffic, and user behavior.\nMake smarter decisions with live data." },
+        { "icon": "Shield", "title": "Security built-in", "desc": "SSL and encryption applied automatically.\nStay protected with continuous updates." }
       ],
       "cta_text": "Create a lasting first impression and build a trusted brand that customers remember.",
       "cta_button": "Start Building Your Business"

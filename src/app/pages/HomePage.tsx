@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { DM_Serif_Display } from 'next/font/google';
-import { Rocket, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
+import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
@@ -40,7 +40,7 @@ const BASE_TEMPLATES = [
 ] as const;
 
 const iconMap: { [key: string]: React.ElementType } = {
-  Rocket,
+  Zap,
   Smartphone,
   Palette,
   Settings,
@@ -291,7 +291,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {SOLUTION_DATA.map((item: any, index: number) => {
-                  const IconComponent = iconMap[item.icon] || Rocket;
+                  const IconComponent = iconMap[item.icon] || Zap;
                   return (
                     <div
                       key={index}
