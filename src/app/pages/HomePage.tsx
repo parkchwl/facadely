@@ -116,7 +116,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     <>
       <main className="bg-black min-h-screen">
         <section className="relative z-10 flex flex-col bg-black">
-          <div className="relative text-left text-white h-[55vh] sm:h-[60vh] lg:h-[65vh] flex items-center overflow-hidden">
+          <div className="relative text-left text-white h-[55vh] sm:h-[60vh] lg:h-[65vh] flex items-center justify-center overflow-hidden">
             <OptimizedImage
               src="/image/Title.avif"
               alt="Hero background"
@@ -131,7 +131,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className={`${STYLES.heroContainerClasses} py-12 sm:py-16 lg:py-20 xl:py-24 relative z-10`}
+              className={`${STYLES.heroContainerClasses} py-12 sm:py-16 lg:py-20 xl:py-24 relative z-10 w-full`}
             >
               <h1
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-extrabold text-white tracking-tight leading-[0.9] mb-8 lg:mb-20 xl:mb-20"
