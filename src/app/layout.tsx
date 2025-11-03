@@ -13,7 +13,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: {
-    default: "facadely - No-Code Website Builder",
+    default: "facadely - No Code Website Builder",
     template: "%s | facadely"
   },
   description: "Build a professional website in minutes — No code, no hassle. Choose from 100+ templates and launch your site today.",
@@ -29,11 +29,11 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: '/',
-    title: 'facadely - No-Code Website Builder',
+    title: 'facadely - No Code Website Builder',
     description: 'Build a professional website in minutes — No code, no hassle',
     siteName: 'facadely',
     images: [{
-      url: '/og-image.png',
+      url: '/image/og-image.jpg',
       width: 1200,
       height: 630,
       alt: 'facadely Website Builder',
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'facadely - No-Code Website Builder',
+    title: 'facadely - No Code Website Builder',
     description: 'Build a professional website in minutes — No code, no hassle',
-    images: ['/twitter-image.png'],
+    images: ['/image/og-image.jpg'],
   },
   robots: {
     index: true,
