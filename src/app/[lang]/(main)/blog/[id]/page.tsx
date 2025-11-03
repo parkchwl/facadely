@@ -1,6 +1,6 @@
 import { getDictionary } from '@/lib/get-dictionary';
 import { Locale } from '@/i18n/config';
-import BlogPostDetailClient from '../BlogPostDetailClient';
+import BlogPostDetailClient from '@/app/components/shared/BlogPostDetailClient';
 
 export default async function BlogPostPage({
   params

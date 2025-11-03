@@ -1,5 +1,6 @@
 'use client';
 import { useParams } from 'next/navigation';
+import type { TemplatesPageDictionary } from '@/types/dictionary';
 
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
@@ -21,8 +22,7 @@ const templates = [
   { id: 12, name: 'Photography', category: 'Portfolio' },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function TemplatesPageClient({ dictionary }: { dictionary: any }) {
+export default function TemplatesPageClient({ dictionary }: { dictionary: TemplatesPageDictionary }) {
   useParams() as { lang: string };
   const [selectedCategory, setSelectedCategory] = useState(dictionary.categories.all);
   const [searchQuery, setSearchQuery] = useState('');

@@ -1,5 +1,5 @@
 import { Locale } from '@/i18n/config';
-import CookiePageClient from './CookiePageClient';
+import CookiePageClient from '@/app/components/shared/CookiePageClient';
 
 export default async function CookiePage({
   params

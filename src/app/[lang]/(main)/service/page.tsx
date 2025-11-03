@@ -1,6 +1,6 @@
 import { getDictionary } from '@/lib/get-dictionary';
 import { Locale } from '@/i18n/config';
-import ServicePageClient from './ServicePageClient';
+import ServicePageClient from '@/app/components/shared/ServicePageClient';
 
 export default async function ServicePage({
   params

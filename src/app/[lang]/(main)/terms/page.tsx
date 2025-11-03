@@ -1,6 +1,6 @@
 import { getDictionary } from '@/lib/get-dictionary';
 import { Locale } from '@/i18n/config';
-import TermsPageClient from './TermsPageClient';
+import TermsPageClient from '@/app/components/shared/TermsPageClient';
 
 export default async function TermsPage({
   params
