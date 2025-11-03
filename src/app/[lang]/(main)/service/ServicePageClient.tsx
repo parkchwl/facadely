@@ -162,7 +162,7 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          <div className="flex flex-col items-center gap-8 sm:gap-12 lg:gap-20">
             {/* Left Side - Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
