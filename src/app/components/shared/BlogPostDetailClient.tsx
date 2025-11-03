@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, User, Calendar, Share2, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Clock, User, Calendar, Share2, ChevronRight} from 'lucide-react';
 import type { BlogPageDictionary } from '@/types/dictionary';
 
 export default function BlogPostDetailClient({

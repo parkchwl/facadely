@@ -1,6 +1,6 @@
 import { getDictionary } from '@/lib/get-dictionary';
 import { Locale } from '@/i18n/config';
-import PrivacyPageClient from './PrivacyPageClient';
+import PrivacyPageClient from '@/app/components/shared/PrivacyPageClient';
 
 export default async function PrivacyPage({
   params

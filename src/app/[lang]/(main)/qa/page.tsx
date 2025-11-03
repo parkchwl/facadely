@@ -1,6 +1,6 @@
 import { getDictionary } from '@/lib/get-dictionary';
 import { Locale } from '@/i18n/config';
-import QAPageClient from './QAPageClient';
+import QAPageClient from '@/app/components/shared/QAPageClient';
 
 export default async function QAPage({
   params

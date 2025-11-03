@@ -1,5 +1,6 @@
 'use client';
 import { useParams } from 'next/navigation';
+import type { PricingPageDictionary } from '@/types/dictionary';
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
@@ -18,8 +19,7 @@ const FeatureValue = React.memo(({ value }: { value: boolean | string }) => {
 });
 FeatureValue.displayName = 'FeatureValue';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function PricingPageClient({ dictionary }: { dictionary: any }) {
+export default function PricingPageClient({ dictionary }: { dictionary: PricingPageDictionary }) {
   useParams() as { lang: string };
   const [isYearly, setIsYearly] = useState(true);
   const [stickyPlan, setStickyPlan] = useState(false);
@@ -77,7 +77,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: any }) {
           zIndex: 0
         }}
       ></div>
-      <div 
+      <div
         ref={stickyHeaderRef}
         className={`fixed top-0 left-0 right-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-50 transition-transform duration-300 ease-out ${
           stickyPlan ? 'transform translate-y-0' : 'transform -translate-y-full'
@@ -87,8 +87,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: any }) {
         <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-4 h-full flex items-center">
           <div className="grid grid-cols-4 gap-4 sm:gap-6 lg:gap-8 w-full">
               <div className="col-span-1"></div>
-              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-              {pricingTiers.map((tier: any) => (
+              {pricingTiers.map((tier) => (
                   <div key={tier.name} className="text-center">
                   <div className="text-sm text-gray-400 mb-1">{tier.name}</div>
                   <div className="text-base sm:text-lg font-bold">
@@ -151,8 +150,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: any }) {
             </motion.div>
 
             <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-12">
-              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-              {pricingTiers.map((tier: any) => {
+              {pricingTiers.map((tier) => {
                   const isPro = tier.name === dictionary.tiers.pro.name;
                   const isBusiness = tier.name === dictionary.tiers.business.name;
                   return (
@@ -248,10 +246,9 @@ export default function PricingPageClient({ dictionary }: { dictionary: any }) {
               {dictionary.featureComparison.subtitle}
             </p>
           </motion.div>
-          
+
           <motion.div variants={fadeIn} className="bg-black rounded-2xl sm:rounded-3xl border border-gray-800 overflow-hidden">
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-            {featureCategories.map((category: any) => (
+            {featureCategories.map((category) => (
               <React.Fragment key={category.name}>
                 <div className="grid grid-cols-1 border-t border-gray-800">
                    <div className="col-span-1 p-4 sm:p-6 bg-gray-950/70">
@@ -259,8 +256,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: any }) {
                    </div>
                 </div>
 
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {Object.values(category.features).map((feature: any, featureIndex: number) => (
+                {Object.values(category.features).map((feature, featureIndex: number) => (
                   <div
                     key={feature.name}
                     className="grid grid-cols-4 gap-0 border-t border-gray-800"
@@ -283,20 +279,20 @@ export default function PricingPageClient({ dictionary }: { dictionary: any }) {
             ))}
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="text-center mt-12 sm:mt-16 lg:mt-24"
             variants={fadeIn}
           >
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-6 sm:mb-8 lg:mb-12 text-white">{dictionary.cta.title}</h3>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 justify-center items-center">
-              <motion.button 
+              <motion.button
                 className="w-full sm:w-auto px-6 sm:px-8 lg:px-12 py-3 sm:py-4 bg-white text-black font-bold text-sm sm:text-base lg:text-lg rounded-full shadow-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-xl"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 {dictionary.cta.startTrial}
               </motion.button>
-              <motion.button 
+              <motion.button
                 className="w-full sm:w-auto px-6 sm:px-8 lg:px-12 py-3 sm:py-4 border-2 border-white text-white font-bold text-sm sm:text-base lg:text-lg rounded-full hover:bg-white hover:text-black transition-all duration-200"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}

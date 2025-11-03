@@ -13,29 +13,38 @@ function getLocale(request: NextRequest): string {
     }
   }
 
-  // If /en is used, redirect to path without /en
-  if (pathname.startsWith('/en/') || pathname === '/en') {
-    return 'redirect-to-default';
-  }
-
   // Default to English for all other paths
   return i18n.defaultLocale;
 }
 
 export async function middleware(request: NextRequest) {
-  const locale = getLocale(request);
+  const pathname = request.nextUrl.pathname;
 
-  // Redirect /en/* to /* (remove /en prefix for default locale)
-  if (locale === 'redirect-to-default') {
-    const newPath = request.nextUrl.pathname.replace(/^\/en\/?/, '/') || '/';
-    return NextResponse.redirect(new URL(newPath, request.url));
+  // Rewrite root paths to /en internally (no redirect - invisible to user)
+  // This allows "/" to work while serving from "/en" route
+  const isLocaleRoute = i18n.locales.some(
+    locale => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
+  );
+
+  if (!isLocaleRoute && pathname !== '/' && !pathname.startsWith('/_next') && !pathname.startsWith('/api')) {
+    // This is a root path that should be rewritten to /en
+    const url = request.nextUrl.clone();
+    url.pathname = `/en${pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
+  if (pathname === '/') {
+    // Rewrite "/" to "/en" internally
+    const url = request.nextUrl.clone();
+    url.pathname = '/en';
+    return NextResponse.rewrite(url);
   }
 
   // Protected routes that require authentication
   const protectedRoutes = ['/dashboard'];
 
   const isProtectedRoute = protectedRoutes.some(route =>
-    request.nextUrl.pathname.startsWith(route)
+    pathname.startsWith(route)
   );
 
   // If it's a protected route, check authentication

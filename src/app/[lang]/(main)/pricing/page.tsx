@@ -1,6 +1,6 @@
 import { getDictionary } from '@/lib/get-dictionary';
 import { Locale } from '@/i18n/config';
-import PricingPageClient from './PricingPageClient';
+import PricingPageClient from '@/app/components/shared/PricingPageClient';
 
 export default async function PricingPage({
   params
