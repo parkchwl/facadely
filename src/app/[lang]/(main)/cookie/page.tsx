@@ -6,6 +6,6 @@ export default async function CookiePage({
 }: {
   params: Promise<{ lang: Locale }>
 }) {
-  const { lang } = await params;
+  await params;
   return <CookiePageClient />;
 }
