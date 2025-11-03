@@ -148,7 +148,7 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
   return (
     <div className="min-h-screen bg-white -mt-16 sm:-mt-20 lg:-mt-24">
       {/* Hero Section */}
-      <section className="relative h-screen sm:min-h-[80vh] sm:max-h-[1000px] flex items-center justify-center overflow-hidden bg-black py-12 sm:py-16 lg:py-20 xl:py-24">
+      <section className="relative min-h-[80vh] max-h-[1000px] flex items-center justify-center overflow-hidden bg-black py-12 sm:py-16 lg:py-20 xl:py-24">
         <div className="absolute inset-0">
           <OptimizedImage
             src="/image/Service.avif"
@@ -162,13 +162,13 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-8 sm:gap-12 lg:gap-20">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             {/* Left Side - Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex-1 text-left"
+              className="flex-1 text-left pt-12 sm:pt-0"
             >
               {/* Main Headline */}
               <h1
