@@ -2,20 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { i18n } from '@/i18n/config';
 import { updateSession } from '@/lib/supabase/middleware';
 
-function getLocale(request: NextRequest): string {
-  const pathname = request.nextUrl.pathname;
-
-  // Check if pathname starts with any non-default locale
-  for (const locale of i18n.locales) {
-    if (locale === i18n.defaultLocale) continue; // Skip default locale (en)
-    if (pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`) {
-      return locale;
-    }
-  }
-
-  // Default to English for all other paths
-  return i18n.defaultLocale;
-}
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
