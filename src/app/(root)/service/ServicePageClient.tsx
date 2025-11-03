@@ -148,7 +148,7 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
   return (
     <div className="min-h-screen bg-white -mt-16 sm:-mt-20 lg:-mt-24">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] max-h-[1000px] flex items-center justify-center overflow-hidden bg-black py-12 sm:py-16 lg:py-20 xl:py-24">
+      <section className="relative h-screen sm:min-h-[80vh] sm:max-h-[1000px] flex items-center justify-center overflow-hidden bg-black py-12 sm:py-16 lg:py-20 xl:py-24">
         <div className="absolute inset-0">
           <OptimizedImage
             src="/image/Service.avif"
