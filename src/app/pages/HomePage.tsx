@@ -16,11 +16,298 @@ const dmSerif = DM_Serif_Display({
   display: 'swap',
 });
 
+// ================================================================================
+// CONFIGURATION CONSTANTS
+// ================================================================================
+const CONFIG = {
+  // Timing & Intervals
+  FAQ_ROTATION_INTERVAL: 15000,      // FAQ auto-cycle interval (ms)
+  INTERSECTION_THRESHOLD: 0.3,        // IntersectionObserver threshold
+  CRITICAL_IMAGES: 3,                 // Images needed before showing page
+  MIN_LOADING_TIME: 500,              // Minimum loading screen duration
+  MAX_LOADING_TIME: 1500,             // Maximum loading screen duration
+
+  // Animation Durations (seconds)
+  ANIMATION_DURATION_FAST: 0.3,       // Quick transitions
+  ANIMATION_DURATION_NORMAL: 0.6,     // Standard transitions
+  ANIMATION_DURATION_SLOW: 0.8,       // Slow transitions
+
+  // Animation Delays
+  ANIMATION_DELAY_SMALL: 0.2,         // Small delay
+  ANIMATION_DELAY_MEDIUM: 0.4,        // Medium delay
+
+  // Image Quality & Format
+  IMAGE_QUALITY: 75,                  // Next.js image quality
+  IMAGE_FORMAT: 'webp' as const,      // Image format
+
+  // Scales & Transforms
+  HOVER_SCALE: 1.05,                  // Hover scale effect
+  ACTIVE_SCALE: 0.95,                 // Active/tap scale
+  CARD_HOVER_SCALE: 1.02,             // Card hover scale
+  HOVER_TRANSLATE_Y: -0.5,            // Hover vertical offset (rem units)
+
+  // Display Counts
+  STATS_DISPLAY_THRESHOLD: 4,         // Hide stats after this index on mobile
+} as const;
+
+// ================================================================================
+// ANIMATION PRESETS
+// ================================================================================
+const ANIMATIONS = {
+  // Hero Section
+  heroFadeInUp: {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: CONFIG.ANIMATION_DURATION_SLOW }
+  },
+
+  // Section Headings
+  headingFadeInUp: {
+    initial: { opacity: 0, y: -50 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: CONFIG.ANIMATION_DURATION_SLOW },
+    viewport: { once: true }
+  },
+
+  // Section Descriptions
+  descriptionFadeInUp: {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: CONFIG.ANIMATION_DURATION_SLOW, delay: CONFIG.ANIMATION_DELAY_SMALL },
+    viewport: { once: true }
+  },
+
+  // CTA Buttons
+  ctaButtonFadeInUp: {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: CONFIG.ANIMATION_DURATION_SLOW, delay: CONFIG.ANIMATION_DELAY_MEDIUM },
+    viewport: { once: true }
+  },
+
+  // Stats Cards
+  statsContainerFadeInUp: {
+    initial: { opacity: 0, y: 50 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: CONFIG.ANIMATION_DURATION_SLOW, delay: CONFIG.ANIMATION_DELAY_SMALL },
+    viewport: { once: true }
+  },
+
+  // Solution Section
+  solutionFadeInUp: {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: CONFIG.ANIMATION_DURATION_NORMAL },
+    viewport: { once: true }
+  },
+
+  // FAQ Section
+  faqFadeInUp: {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: CONFIG.ANIMATION_DURATION_NORMAL },
+    viewport: { once: true }
+  },
+
+  // Button Hover Effects
+  buttonHover: {
+    whileHover: { scale: CONFIG.HOVER_SCALE, y: `${CONFIG.HOVER_TRANSLATE_Y}rem` },
+    whileTap: { scale: CONFIG.ACTIVE_SCALE },
+  },
+
+  // Card Hover Effects
+  cardHover: {
+    whileHover: { scale: CONFIG.CARD_HOVER_SCALE, y: `${CONFIG.HOVER_TRANSLATE_Y}rem` },
+  }
+} as const;
+
+// ================================================================================
+// STYLES & TAILWIND CLASSES
+// ================================================================================
 const STYLES = {
+  // Container & Layout
   containerClasses: "w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
   heroContainerClasses: "w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
-  sectionSpacing: "py-16 sm:py-20 lg:py-24 xl:py-28 2xl:py-32"
+  sectionSpacing: "py-16 sm:py-20 lg:py-24 xl:py-28 2xl:py-32",
+
+  // Hero Section
+  heroSection: "relative z-10 flex flex-col bg-black",
+  heroImageContainer: "relative text-left text-white h-[55vh] sm:h-[60vh] lg:h-[65vh] flex items-center justify-center overflow-hidden",
+  heroGradient: "absolute inset-0 bg-gradient-to-r from-black/60 to-transparent",
+  heroTitle: "text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-extrabold text-white tracking-tight leading-[0.9] mb-8 lg:mb-20 xl:mb-20",
+  heroSubtitle: "text-xl sm:text-2xl lg:text-3xl text-gray-200 leading-relaxed max-w-2xl font-light",
+  heroButtonGroup: "flex items-center gap-4 lg:gap-6 flex-shrink-0",
+  heroLink: "font-semibold text-white hover:text-blue-400 transition-colors border-b-2 border-transparent hover:border-blue-400 pb-1 text-lg",
+  heroButton: "bg-white text-black hover:bg-gray-100 py-4 px-8 lg:py-5 lg:px-10 rounded-xl transition-all shadow-lg font-bold text-lg hover:shadow-2xl hover:scale-105",
+
+  // Template Carousel
+  carouselSection: "relative bg-black overflow-hidden space-y-8 py-16",
+  carouselContainer: "overflow-hidden",
+  scrollContainer: "scroll-container scroll-left",
+  scrollContainerReverse: "scroll-container scroll-right",
+  templateCardWrapper: "flex-shrink-0 w-72 sm:w-80 lg:w-96 mx-4",
+
+  // Why Matters Section
+  whyMattersContainer: "relative flex items-center justify-center min-h-screen py-16 sm:py-20 lg:py-24 overflow-hidden",
+  whyMattersGradient: "absolute inset-0 bg-black/40",
+  whyMattersGrid: "grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-start",
+  whyMattersLeftColumn: "flex flex-col gap-4 lg:gap-6 justify-start lg:col-span-1",
+  whyMattersTitle: "text-7xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[110px] 2xl:text-[130px] font-extrabold tracking-tight leading-[0.9] text-white",
+  whyMattersDescription: "text-xl lg:text-2xl xl:text-3xl text-gray-200 leading-relaxed font-light max-w-xl",
+  whyMattersButton: "bg-white text-black px-12 py-6 lg:px-14 lg:py-7 rounded-full hover:bg-gray-100 transition-all duration-200 text-xl lg:text-2xl font-bold shadow-2xl hover:scale-105 hover:-translate-y-0.5 active:scale-95",
+  statsGrid: "grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8",
+  statCard: "relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-6 lg:p-8 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02]",
+  statCardGlow: "absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none stat-card-inner-glow",
+  statCardContent: "relative z-10 flex flex-col gap-4",
+  statNumber: "text-5xl lg:text-6xl xl:text-7xl font-bold text-white",
+  statHighlight: "font-medium",
+  statText: "text-base lg:text-lg xl:text-xl text-white leading-relaxed mb-3 font-light",
+  statSource: "text-sm lg:text-base text-gray-400",
+
+  // Solution Section
+  solutionSection: "relative border-t border-gray-800 overflow-hidden",
+  solutionGradient: "absolute inset-0 bg-black/10",
+  solutionCard: "bg-white rounded-3xl shadow-2xl px-8 sm:px-12 lg:px-16 py-20 lg:py-24",
+  solutionTitle: "text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-black mb-16 lg:mb-20 text-center",
+  solutionGrid: "grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10",
+  solutionItem: "bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-lg p-8 lg:p-10 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] border border-gray-200",
+  solutionIcon: "w-12 h-12 lg:w-14 lg:h-14 mb-6 text-black",
+  solutionItemTitle: "text-xl lg:text-2xl font-bold text-black mb-4",
+  solutionItemDesc: "text-gray-700 text-base lg:text-lg whitespace-pre-line leading-relaxed",
+  solutionCta: "mt-20 text-center",
+  solutionCtaText: "text-xl lg:text-2xl xl:text-3xl text-gray-800 mb-10 max-w-3xl mx-auto leading-relaxed font-light",
+  solutionCtaButton: "inline-block px-10 py-5 lg:px-12 lg:py-6 bg-black text-white font-bold rounded-full hover:bg-gray-900 transition-all duration-200 text-lg lg:text-xl shadow-xl hover:scale-105",
+
+  // FAQ Section
+  faqSection: "relative bg-black py-20 lg:py-28 border-t border-gray-800",
+  faqGrid: "grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12",
+  faqLeftColumn: "space-y-3",
+  faqButton: "w-full text-left p-6 rounded-xl transition-all duration-300",
+  faqButtonText: "text-base lg:text-lg font-semibold leading-relaxed",
+  faqChevron: "w-5 h-5 flex-shrink-0 transition-all duration-300",
+  faqProgressBar: "mt-4 h-1 bg-gray-200 rounded-full overflow-hidden",
+  faqProgressFill: "h-full bg-black animate-progress",
+  faqRightColumn: "lg:sticky lg:top-24 h-fit",
+  faqAnswerCard: "bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/20 p-8 lg:p-10 shadow-2xl",
+  faqQuestionLabel: "inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold text-white mb-4",
+  faqQuestionTitle: "text-2xl lg:text-3xl font-bold text-white mb-6 leading-tight",
+  faqAnswerContainer: "space-y-4",
+  faqAnswerParagraph: "text-lg lg:text-xl text-gray-200 leading-relaxed",
+  faqDivider: "h-px bg-gradient-to-r from-transparent via-white/30 to-transparent my-8",
+  faqDots: "flex items-center gap-2",
+  faqDot: "h-2 rounded-full transition-all duration-300",
+
+  // Final CTA Section
+  finalCtaSection: "relative bg-gradient-to-t from-gray-900 to-black py-20 lg:py-32 border-t border-gray-800",
+  finalCtaContainer: "text-center max-w-4xl mx-auto",
+  finalCtaTitle: "text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-8",
+  finalCtaSubtitle: "text-xl lg:text-2xl text-gray-400 mb-12 leading-relaxed",
+  finalCtaButtonGroup: "flex flex-col sm:flex-row gap-6 justify-center items-center",
+  finalCtaButtonPrimary: "inline-block bg-white text-black px-10 py-5 lg:px-12 lg:py-6 rounded-full hover:bg-gray-100 transition-all duration-200 text-lg lg:text-xl font-bold shadow-2xl hover:scale-105",
+  finalCtaButtonSecondary: "inline-block bg-transparent border-2 border-white text-white px-10 py-5 lg:px-12 lg:py-6 rounded-full hover:bg-white hover:text-black transition-all duration-200 text-lg lg:text-xl font-bold hover:scale-105",
+
+  // Loading Screen
+  loadingScreen: "fixed inset-0 bg-black z-50 flex flex-col items-center justify-center",
+  loadingBrand: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white font-montserrat tracking-tight animate-pulse-glow",
 };
+
+// ================================================================================
+// CUSTOM HOOKS
+// ================================================================================
+
+/**
+ * useFaqRotation Hook
+ * Handles automatic FAQ rotation logic with pause on interaction
+ * Returns current FAQ index and handlers for user interaction
+ */
+function useFaqRotation(faqCount: number) {
+  const [activeFaqIndex, setActiveFaqIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isFaqInView, setIsFaqInView] = useState(false);
+  const faqSectionRef = React.useRef<HTMLDivElement>(null);
+
+  // Setup intersection observer to detect when FAQ section is in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsFaqInView(entry.isIntersecting);
+    }, { threshold: CONFIG.INTERSECTION_THRESHOLD });
+
+    const currentRef = faqSectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
+  // Auto-cycle FAQ items when in view and not paused
+  useEffect(() => {
+    if (isPaused || !isFaqInView) return;
+    const timer = setTimeout(() => {
+      setActiveFaqIndex((current) => (current + 1) % faqCount);
+    }, CONFIG.FAQ_ROTATION_INTERVAL);
+    return () => clearTimeout(timer);
+  }, [isPaused, activeFaqIndex, isFaqInView, faqCount]);
+
+  const handleFaqIndexChange = useCallback((index: number) => {
+    setActiveFaqIndex(index);
+    setIsPaused(false);
+  }, []);
+
+  const handleFaqMouseEnter = useCallback(() => {
+    setIsPaused(true);
+  }, []);
+
+  const handleFaqMouseLeave = useCallback(() => {
+    setIsPaused(false);
+  }, []);
+
+  return {
+    activeFaqIndex,
+    isPaused,
+    faqSectionRef,
+    handleFaqIndexChange,
+    handleFaqMouseEnter,
+    handleFaqMouseLeave,
+  };
+}
+
+/**
+ * useImageLoading Hook
+ * Handles image loading state and minimum loading screen duration
+ * Returns loading state and image load handler
+ */
+function useImageLoading(criticalImageCount: number = CONFIG.CRITICAL_IMAGES) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(0);
+  const loadStartTime = React.useRef(Date.now());
+
+  // Manage loading screen timing
+  useEffect(() => {
+    if (imagesLoaded >= criticalImageCount) {
+      const elapsed = Date.now() - loadStartTime.current;
+      const remainingDelay = Math.max(0, CONFIG.MIN_LOADING_TIME - elapsed);
+      setTimeout(() => setIsLoaded(true), remainingDelay);
+    } else {
+      const maxTimer = setTimeout(() => setIsLoaded(true), CONFIG.MAX_LOADING_TIME);
+      return () => clearTimeout(maxTimer);
+    }
+  }, [imagesLoaded, criticalImageCount]);
+
+  const handleImageLoad = useCallback(() => {
+    setImagesLoaded(prev => prev + 1);
+  }, []);
+
+  return {
+    isLoaded,
+    imagesLoaded,
+    handleImageLoad,
+  };
+}
 
 // Base templates - this would ideally be fetched from a database
 const BASE_TEMPLATES = [
@@ -59,81 +346,27 @@ interface HomePageProps {
 }
 
 export default function HomePage({ dictionary, lang }: HomePageProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState(0);
-  const [activeFaqIndex, setActiveFaqIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isFaqInView, setIsFaqInView] = useState(false);
-  const faqSectionRef = React.useRef<HTMLDivElement>(null);
-  const loadStartTime = React.useRef(Date.now());
+  // Initialize custom hooks for state management
+  const { isLoaded, handleImageLoad } = useImageLoading();
+  const {
+    activeFaqIndex,
+    isPaused,
+    faqSectionRef,
+    handleFaqIndexChange,
+    handleFaqMouseEnter,
+    handleFaqMouseLeave,
+  } = useFaqRotation(dictionary.faq.questions.length);
 
+  // Extract dictionary data
   const { hero, whyMatters, solution, faq, finalCta, loadingScreen } = dictionary;
   const FAQS = faq.questions;
   const langPrefix = lang ? `/${lang}` : '';
   const STATS_DATA = whyMatters.stats;
   const SOLUTION_DATA = solution.items;
 
-  useEffect(() => {
-    const CRITICAL_IMAGES = 3;
-    const MIN_LOADING_TIME = 500;
-    const MAX_LOADING_TIME = 1500;
-
-    if (imagesLoaded >= CRITICAL_IMAGES) {
-      const elapsed = Date.now() - loadStartTime.current;
-      const remainingDelay = Math.max(0, MIN_LOADING_TIME - elapsed);
-      setTimeout(() => setIsLoaded(true), remainingDelay);
-    } else {
-      const maxTimer = setTimeout(() => setIsLoaded(true), MAX_LOADING_TIME);
-      return () => clearTimeout(maxTimer);
-    }
-  }, [imagesLoaded]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsFaqInView(entry.isIntersecting);
-    }, { threshold: 0.3 });
-
-    const currentRef = faqSectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
-
+  // Memoize duplicated template rows for carousel
   const duplicatedRow1 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
   const duplicatedRow2 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
-
-  // Event handlers with useCallback to prevent unnecessary re-renders
-  const handleImageLoad = useCallback(() => {
-    setImagesLoaded(prev => prev + 1);
-  }, []);
-
-  const handleFaqIndexChange = useCallback((index: number) => {
-    setActiveFaqIndex(index);
-    setIsPaused(false);
-  }, []);
-
-  const handleFaqMouseEnter = useCallback(() => {
-    setIsPaused(true);
-  }, []);
-
-  const handleFaqMouseLeave = useCallback(() => {
-    setIsPaused(false);
-  }, []);
-
-  useEffect(() => {
-    if (isPaused || !isFaqInView) return;
-    const duration = 15000;
-    const timer = setTimeout(() => {
-      setActiveFaqIndex((current) => (current + 1) % FAQS.length);
-    }, duration);
-    return () => clearTimeout(timer);
-  }, [isPaused, activeFaqIndex, isFaqInView, FAQS.length]);
 
   return (
     <>
@@ -151,9 +384,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              {...ANIMATIONS.heroFadeInUp}
               className={`${STYLES.heroContainerClasses} py-12 sm:py-16 lg:py-20 xl:py-24 relative z-10 w-full`}
             >
               <h1
@@ -215,10 +446,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-start">
                 <div className="flex flex-col gap-4 lg:gap-6 justify-start lg:col-span-1">
                   <motion.div
-                    initial={{ opacity: 0, y: -50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
+                    {...ANIMATIONS.headingFadeInUp}
                     className="w-full mb-2"
                   >
                     <h2
@@ -227,20 +455,14 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     />
                   </motion.div>
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    viewport={{ once: true }}
+                    {...ANIMATIONS.descriptionFadeInUp}
                     className="w-full"
                   >
                     <p className="text-xl lg:text-2xl xl:text-3xl text-gray-200 leading-relaxed font-light max-w-xl"
                        dangerouslySetInnerHTML={{ __html: whyMatters.description }} />
                   </motion.div>
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    viewport={{ once: true }}
+                    {...ANIMATIONS.ctaButtonFadeInUp}
                     className="w-fit"
                   >
                     <Link href={`${langPrefix}/generate`}>
@@ -251,17 +473,14 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                   </motion.div>
                 </div>
                 <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  viewport={{ once: true }}
+                  {...ANIMATIONS.statsContainerFadeInUp}
                   className="w-full lg:col-span-2"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                     {STATS_DATA.map((item, index: number) => (
                       <div
                         key={index}
-                        className={`relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-6 lg:p-8 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02] ${index >= 4 ? 'hidden md:block' : ''}`}
+                        className={`relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-6 lg:p-8 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02] ${index >= CONFIG.STATS_DISPLAY_THRESHOLD ? 'hidden md:block' : ''}`}
                         style={{ boxShadow: `inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)`, transform: 'translateZ(0)' }}
                       >
                         <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none stat-card-inner-glow"></div>
@@ -302,10 +521,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
           <div className={`${STYLES.containerClasses} ${STYLES.sectionSpacing} relative z-10`}>
             <div className="bg-white rounded-3xl shadow-2xl px-8 sm:px-12 lg:px-16 py-20 lg:py-24">
               <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
+                {...ANIMATIONS.solutionFadeInUp}
                 className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-black mb-16 lg:mb-20 text-center ${dmSerif.className}`}
               >
                 {solution.title}
@@ -343,10 +559,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
         <section ref={faqSectionRef} className="relative bg-black py-20 lg:py-28 border-t border-gray-800">
           <div className={STYLES.containerClasses}>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
+              {...ANIMATIONS.faqFadeInUp}
               className="text-center mb-16"
             >
               <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 ${dmSerif.className}`}
@@ -380,7 +593,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     </div>
                     {activeFaqIndex === index && !isPaused && (
                       <div key={`progress-${activeFaqIndex}`} className="mt-4 h-1 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-black animate-progress" style={{ animation: 'progressBar 15s linear forwards' }} />
+                        <div className="h-full bg-black animate-progress" style={{ animation: `progressBar ${CONFIG.FAQ_ROTATION_INTERVAL}ms linear forwards` }} />
                       </div>
                     )}
                     {activeFaqIndex === index && isPaused && (
@@ -398,7 +611,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4 }}
+                    transition={{ duration: CONFIG.ANIMATION_DURATION_FAST }}
                     className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/20 p-8 lg:p-10 shadow-2xl"
                   >
                     <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold text-white mb-4">
@@ -435,10 +648,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
         <section className="relative bg-gradient-to-t from-gray-900 to-black py-20 lg:py-32 border-t border-gray-800">
           <div className={STYLES.containerClasses}>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
+              {...ANIMATIONS.faqFadeInUp}
               className="text-center max-w-4xl mx-auto"
             >
               <h2 className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-8 ${dmSerif.className}`}
