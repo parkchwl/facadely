@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import SocialLoginButton from '../components/SocialLoginButton';
-import TermsAgreementModal from '../components/TermsAgreementModal';
+import SocialLoginButton from './SocialLoginButton';
+import TermsAgreementModal from './TermsAgreementModal';
 
 // Helper to render text with links
 const TextWithLinks = ({ text, links }: { text: string, links: { [key: string]: { href: string, text: string } } }) => {
@@ -34,6 +34,8 @@ const TextWithLinks = ({ text, links }: { text: string, links: { [key: string]: 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function LoginPageClient({ dictionary }: { dictionary: any }) {
   const router = useRouter();
+  const params = useParams() as { lang: string };
+  const { lang } = params;
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState('');
 
@@ -55,8 +57,8 @@ export default function LoginPageClient({ dictionary }: { dictionary: any }) {
   };
 
   const termLinks = {
-    terms: { href: '/terms', text: dictionary.termsLinkText },
-    privacy: { href: '/privacy', text: dictionary.privacyLinkText },
+    terms: { href: `/${lang}/terms`, text: dictionary.termsLinkText },
+    privacy: { href: `/${lang}/privacy`, text: dictionary.privacyLinkText },
   };
 
   return (
