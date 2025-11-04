@@ -116,7 +116,8 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           opacity: CONFIG.BACKGROUND_OPACITY,
-          zIndex: 0
+          zIndex: 0,
+          minHeight: '100dvh'
         }}
       ></div>
       <div
