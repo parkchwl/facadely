@@ -460,22 +460,36 @@ export interface AboutPageDictionary {
   values: AboutValuesDictionary;
 }
 
+export interface ContactPageFAQItemDictionary {
+  question: string;
+  answer: string;
+}
+
+export interface ContactPageInquiryOptionsDictionary {
+  general: string;
+  support: string;
+  partnership: string;
+  feedback: string;
+  other: string;
+}
+
 export interface ContactPageDictionary {
   title: string;
   subtitle: string;
-  form: {
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-    submit?: string;
-    send?: string;
-  };
-  info?: {
-    email: string;
-    phone: string;
-    address: string;
-  };
+  description: string;
+  emailLabel: string;
+  emailAddress: string;
+  emailHint: string;
+  inquiryLabel: string;
+  inquiryOptions: ContactPageInquiryOptionsDictionary;
+  messageLabel: string;
+  messagePlaceholder: string;
+  sendButton: string;
+  successTitle: string;
+  successMessage: string;
+  sendAnother: string;
+  faqTitle: string;
+  faqItems: ContactPageFAQItemDictionary[];
 }
 
 // ==================== Blog ====================

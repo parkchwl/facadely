@@ -84,7 +84,12 @@ export default function LoginPageClient({ dictionary }: { dictionary: any }) {
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-md bg-white p-12 rounded-3xl shadow-2xl">
           <div className="text-center mb-12">
-            <div className="text-6xl text-black mb-3 font-montserrat font-bold">✦</div>
+            <Link
+              href={`/${lang}`}
+              className="inline-block text-6xl font-montserrat font-bold text-gray-900 animate-pulse-glow-dark hover:animate-none transition-all mb-6"
+            >
+              ✦
+            </Link>
             <h1 className="text-4xl font-montserrat font-bold text-gray-900 tracking-tight">
               {dictionary.title}
             </h1>

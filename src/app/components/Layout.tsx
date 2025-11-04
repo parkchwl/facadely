@@ -198,7 +198,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
                 className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden overflow-hidden"
                 style={{ height: '100dvh' }}
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -209,7 +209,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                 initial={{ y: "-100%", opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: "-100%", opacity: 0 }}
-                transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                transition={{ type: "spring", damping: 25, stiffness: 200, mass: 1.2 }}
                 className="fixed top-0 left-0 right-0 bg-black z-50 lg:hidden overflow-y-auto"
                 style={{ height: '100dvh' }}
               >
@@ -218,10 +218,16 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.1 }}
+                    transition={{ delay: 0.25, duration: 0.5 }}
                     className="flex justify-between items-center mb-8"
                   >
-                    <div className="font-bold text-xl text-white">✦ facadely</div>
+                    <Link
+                      href={createLocalizedPath(currentLocale, '/')}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="font-bold text-xl text-white hover:text-white/80 transition-colors"
+                    >
+                      ✦ facadely
+                    </Link>
                     <button
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="text-white/60 hover:text-white transition-colors"
@@ -235,7 +241,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                     <motion.div
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.15 }}
+                      transition={{ delay: 0.35, duration: 0.5 }}
                     >
                       <Link
                         href={createLocalizedPath(currentLocale, '/templates')}
@@ -248,7 +254,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                     <motion.div
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
+                      transition={{ delay: 0.45, duration: 0.5 }}
                     >
                       <Link
                         href={createLocalizedPath(currentLocale, '/generate')}
@@ -261,7 +267,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                     <motion.div
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.25 }}
+                      transition={{ delay: 0.55, duration: 0.5 }}
                     >
                       <Link
                         href={createLocalizedPath(currentLocale, '/service')}
@@ -274,7 +280,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                     <motion.div
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
+                      transition={{ delay: 0.65, duration: 0.5 }}
                     >
                       <Link
                         href={createLocalizedPath(currentLocale, '/pricing')}
@@ -290,7 +296,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                   <motion.div
                     initial={{ opacity: 0, scaleX: 0 }}
                     animate={{ opacity: 1, scaleX: 1 }}
-                    transition={{ delay: 0.35 }}
+                    transition={{ delay: 0.75, duration: 0.5 }}
                     className="border-t border-white/10 mb-6 origin-left"
                   />
 
@@ -298,7 +304,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.85, duration: 0.5 }}
                     className="mb-6"
                   >
                     <h3 className="text-white/60 text-sm font-medium mb-3 tracking-wide">LANGUAGE</h3>
@@ -327,7 +333,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.45 }}
+                    transition={{ delay: 0.95, duration: 0.5 }}
                     className="space-y-2"
                   >
                     <Link

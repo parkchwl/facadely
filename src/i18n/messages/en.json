@@ -863,18 +863,45 @@
     }
   },
   "contactPage": {
-    "title": "Contact Us",
-    "subtitle": "Have a question? We'd love to hear from you.",
-    "form": {
-      "name": "Your Name",
-      "email": "Your Email",
-      "subject": "Subject",
-      "message": "Your Message",
-      "send": "Send Message",
-      "sending": "Sending...",
-      "success": "Thank you for your message!",
-      "error": "Failed to send message. Please try again."
-    }
+    "title": "Get in Touch",
+    "subtitle": "We'd love to hear from you. Have a question? Need support? Want to partner with us?",
+    "description": "Reach out and let's chat. We typically respond within 24 hours.",
+    "emailLabel": "Email Address",
+    "emailAddress": "hello@facadely.com",
+    "emailHint": "We usually respond within 24 hours",
+    "inquiryLabel": "Inquiry Type",
+    "inquiryOptions": {
+      "general": "General Inquiry",
+      "support": "Customer Support",
+      "partnership": "Partnership Proposal",
+      "feedback": "Feedback",
+      "other": "Other"
+    },
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us how we can help...",
+    "sendButton": "Send Message",
+    "successTitle": "Message Sent!",
+    "successMessage": "Thank you for reaching out. We'll get back to you as soon as possible.",
+    "sendAnother": "Send Another Message",
+    "faqTitle": "Frequently Asked Questions",
+    "faqItems": [
+      {
+        "question": "How long does it take to build a website on Facadely?",
+        "answer": "Most users create their first website in under 30 minutes. Our intuitive interface gets you up and running fast."
+      },
+      {
+        "question": "Do I need coding skills?",
+        "answer": "Not at all! Facadely is designed for everyone. No coding knowledge required."
+      },
+      {
+        "question": "Can I use my own domain?",
+        "answer": "Yes! You can connect your custom domain or purchase a new one directly through Facadely."
+      },
+      {
+        "question": "Is there a free trial?",
+        "answer": "Yes, we offer a 14-day free trial. No credit card required to get started."
+      }
+    ]
   },
   "blogPage": {
     "hero": {
