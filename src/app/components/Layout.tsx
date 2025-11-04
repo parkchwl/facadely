@@ -199,8 +199,8 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden w-full"
-                style={{ minHeight: '100dvh' }}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden overflow-hidden"
+                style={{ height: '100dvh' }}
                 onClick={() => setIsMobileMenuOpen(false)}
               />
 
@@ -211,7 +211,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                 exit={{ y: "-100%", opacity: 0 }}
                 transition={{ type: "spring", damping: 30, stiffness: 300 }}
                 className="fixed top-0 left-0 right-0 bg-black z-50 lg:hidden overflow-y-auto"
-                style={{ minHeight: '100dvh' }}
+                style={{ height: '100dvh' }}
               >
                 <div className="p-6 pb-8">
                   {/* Header with Close Button */}
