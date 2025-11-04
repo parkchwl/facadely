@@ -207,7 +207,7 @@ const STYLES = {
   finalCtaButtonSecondary: "inline-block bg-transparent border-2 border-white text-white px-10 py-5 lg:px-12 lg:py-6 rounded-full hover:bg-white hover:text-black transition-all duration-200 text-lg lg:text-xl font-bold hover:scale-105",
 
   // Loading Screen
-  loadingScreen: "fixed inset-0 bg-black z-50 flex flex-col items-center justify-center",
+  loadingScreen: "fixed inset-0 bg-black z-50 flex flex-col items-center justify-center w-full",
   loadingBrand: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white font-montserrat tracking-tight animate-pulse-glow",
 };
 
