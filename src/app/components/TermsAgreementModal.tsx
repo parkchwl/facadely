@@ -42,8 +42,8 @@ export default function TermsAgreementModal({ isOpen, onClose, onAgree, provider
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-      style={{ minHeight: '100dvh' }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-hidden"
+      style={{ height: '100dvh' }}
     >
       <div className="bg-white rounded-none max-w-md w-full p-8 relative">
         <button

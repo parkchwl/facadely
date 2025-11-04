@@ -109,7 +109,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
   return (
     <main className="relative bg-black min-h-screen text-white">
       <div
-        className="fixed inset-0"
+        className="fixed inset-0 overflow-hidden"
         style={{
           backgroundImage: `url(${CONFIG.BACKGROUND_IMAGE})`,
           backgroundSize: 'cover',
@@ -117,7 +117,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
           backgroundRepeat: 'no-repeat',
           opacity: CONFIG.BACKGROUND_OPACITY,
           zIndex: 0,
-          minHeight: '100dvh'
+          height: '100dvh'
         }}
       ></div>
       <div
