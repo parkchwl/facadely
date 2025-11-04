@@ -218,13 +218,14 @@ const STYLES = {
 /**
  * useFaqRotation Hook
  * Handles automatic FAQ rotation logic with pause on interaction
- * Returns current FAQ index and handlers for user interaction
+ * Uses CSS animation-play-state to pause progress bar without re-rendering
  */
 function useFaqRotation(faqCount: number) {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isFaqInView, setIsFaqInView] = useState(false);
   const faqSectionRef = React.useRef<HTMLDivElement>(null);
+  const pauseTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   // Setup intersection observer to detect when FAQ section is in view
   useEffect(() => {
@@ -259,11 +260,18 @@ function useFaqRotation(faqCount: number) {
   }, []);
 
   const handleFaqMouseEnter = useCallback(() => {
+    // Clear any existing pause timeout
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+    }
     setIsPaused(true);
   }, []);
 
   const handleFaqMouseLeave = useCallback(() => {
-    setIsPaused(false);
+    // Delay unpause slightly to allow CSS animation to resume smoothly
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 100);
   }, []);
 
   return {
@@ -591,14 +599,15 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                         className={`w-5 h-5 flex-shrink-0 transition-all duration-300 ${activeFaqIndex === index ? 'rotate-180 text-black' : 'text-gray-400'}`}
                       />
                     </div>
-                    {activeFaqIndex === index && !isPaused && (
+                    {activeFaqIndex === index && (
                       <div key={`progress-${activeFaqIndex}`} className="mt-4 h-1 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-black animate-progress" style={{ animation: `progressBar ${CONFIG.FAQ_ROTATION_INTERVAL}ms linear forwards` }} />
-                      </div>
-                    )}
-                    {activeFaqIndex === index && isPaused && (
-                      <div className="mt-4 h-1 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-black w-0" />
+                        <div
+                          className="h-full bg-black animate-progress"
+                          style={{
+                            animation: `progressBar ${CONFIG.FAQ_ROTATION_INTERVAL}ms linear forwards`,
+                            animationPlayState: isPaused ? 'paused' : 'running'
+                          }}
+                        />
                       </div>
                     )}
                   </button>
