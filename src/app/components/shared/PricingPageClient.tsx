@@ -2,7 +2,7 @@
 import { useParams } from 'next/navigation';
 import type { PricingPageDictionary } from '@/types/dictionary';
 
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 
@@ -18,6 +18,53 @@ const FeatureValue = React.memo(({ value }: { value: boolean | string }) => {
   return <span className="text-sm text-center">{value}</span>;
 });
 FeatureValue.displayName = 'FeatureValue';
+
+// Configuration Constants
+const CONFIG = {
+  STICKY_HEADER_HEIGHT: '128px',
+  ANIMATION_DURATION_FAST: 0.3,
+  ANIMATION_DURATION_MEDIUM: 0.6,
+  STAGGER_DELAY: 0.1,
+  STAGGER_CHILDREN_DELAY: 0.2,
+  BACKGROUND_IMAGE: '/image/Pricing.avif',
+  BACKGROUND_OPACITY: 0.6,
+  INTERSECTION_THRESHOLD: 0,
+  INTERSECTION_ROOT_MARGIN: '-120px 0px 0px 0px',
+  INTERSECTION_AMOUNT: 0.1,
+} as const;
+
+// Animation Variants
+const ANIMATIONS = {
+  fadeIn: {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: CONFIG.ANIMATION_DURATION_MEDIUM } },
+  },
+  staggerContainer: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: CONFIG.STAGGER_DELAY,
+        delayChildren: CONFIG.STAGGER_CHILDREN_DELAY
+      }
+    }
+  },
+  buttonHover: { scale: 1.02, y: -2 },
+  buttonTap: { scale: 0.98 },
+  cardHover: { scale: 1.02 },
+  cardTap: { scale: 0.95 },
+} as const;
+
+// Style Classes
+const STYLES = {
+  stickyHeader: 'fixed top-0 left-0 right-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-50 transition-transform duration-300 ease-out',
+  pricingCard: 'relative group rounded-3xl p-8 sm:p-10 lg:p-12 h-full transition-all duration-300 flex flex-col cursor-pointer overflow-hidden hover:-translate-y-2 hover:scale-[1.02]',
+  pricingCardPro: 'bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-transparent backdrop-blur-xl lg:scale-105 lg:-mt-8 lg:mb-8',
+  pricingCardBusiness: 'bg-gradient-to-br from-slate-800/50 via-gray-800/40 to-transparent backdrop-blur-xl lg:scale-102 lg:-mt-4 lg:mb-4',
+  pricingCardFree: 'bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg',
+  buttonPrimary: 'w-full sm:w-auto px-6 sm:px-8 lg:px-12 py-3 sm:py-4 bg-white text-black font-bold text-sm sm:text-base lg:text-lg rounded-full shadow-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-xl',
+  buttonSecondary: 'w-full sm:w-auto px-6 sm:px-8 lg:px-12 py-3 sm:py-4 border-2 border-white text-white font-bold text-sm sm:text-base lg:text-lg rounded-full hover:bg-white hover:text-black transition-all duration-200',
+} as const;
 
 export default function PricingPageClient({ dictionary }: { dictionary: PricingPageDictionary }) {
   useParams() as { lang: string };
@@ -39,8 +86,8 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
         setStickyPlan(!entry.isIntersecting);
       },
       {
-        threshold: 0,
-        rootMargin: '-120px 0px 0px 0px'
+        threshold: CONFIG.INTERSECTION_THRESHOLD,
+        rootMargin: CONFIG.INTERSECTION_ROOT_MARGIN
       }
     );
 
@@ -48,41 +95,36 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
     return () => observer.disconnect();
   }, []);
 
-  const fadeIn = useMemo(() => ({
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }), []);
+  const fadeIn = ANIMATIONS.fadeIn;
+  const staggerContainer = ANIMATIONS.staggerContainer;
 
-  const staggerContainer = useMemo(() => ({
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  }), []);
+  const handleMonthlyToggle = useCallback(() => {
+    setIsYearly(false);
+  }, []);
+
+  const handleYearlyToggle = useCallback(() => {
+    setIsYearly(true);
+  }, []);
 
   return (
     <main className="relative bg-black min-h-screen text-white">
       <div
         className="fixed inset-0"
         style={{
-          backgroundImage: 'url(/image/Pricing.avif)',
+          backgroundImage: `url(${CONFIG.BACKGROUND_IMAGE})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          opacity: 0.6,
+          opacity: CONFIG.BACKGROUND_OPACITY,
           zIndex: 0
         }}
       ></div>
       <div
         ref={stickyHeaderRef}
-        className={`fixed top-0 left-0 right-0 bg-black/95 backdrop-blur-sm border-b border-gray-800 z-50 transition-transform duration-300 ease-out ${
+        className={`${STYLES.stickyHeader} ${
           stickyPlan ? 'transform translate-y-0' : 'transform -translate-y-full'
         }`}
-        style={{ height: '128px' }}
+        style={{ height: CONFIG.STICKY_HEADER_HEIGHT }}
       >
         <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-4 h-full flex items-center">
           <div className="grid grid-cols-4 gap-4 sm:gap-6 lg:gap-8 w-full">
@@ -123,7 +165,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
               <div className="flex items-center justify-start">
                 <div className="flex items-center bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-lg rounded-full p-1.5 border-2 border-white/20 shadow-xl">
                   <button
-                      onClick={() => setIsYearly(false)}
+                      onClick={handleMonthlyToggle}
                       className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm font-bold transition-all duration-300 ${
                       !isYearly
                           ? 'bg-white text-black shadow-lg'
@@ -133,7 +175,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
                       {dictionary.toggle.monthly}
                   </button>
                   <button
-                      onClick={() => setIsYearly(true)}
+                      onClick={handleYearlyToggle}
                       className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
                       isYearly
                           ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg'
@@ -157,12 +199,12 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
                   <motion.div
                     key={tier.name}
                     variants={fadeIn}
-                    className={`relative group rounded-3xl p-8 sm:p-10 lg:p-12 h-full transition-all duration-300 flex flex-col cursor-pointer overflow-hidden hover:-translate-y-2 hover:scale-[1.02] ${
+                    className={`${STYLES.pricingCard} ${
                       isPro
-                        ? 'bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-transparent backdrop-blur-xl lg:scale-105 lg:-mt-8 lg:mb-8'
+                        ? STYLES.pricingCardPro
                         : isBusiness
-                        ? 'bg-gradient-to-br from-slate-800/50 via-gray-800/40 to-transparent backdrop-blur-xl lg:scale-102 lg:-mt-4 lg:mb-4'
-                        : 'bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg'
+                        ? STYLES.pricingCardBusiness
+                        : STYLES.pricingCardFree
                     } ${
                       isPro ? 'pricing-card-pro' : isBusiness ? 'pricing-card-business' : 'pricing-card-free'
                     }`}
@@ -286,16 +328,16 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-6 sm:mb-8 lg:mb-12 text-white">{dictionary.cta.title}</h3>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 justify-center items-center">
               <motion.button
-                className="w-full sm:w-auto px-6 sm:px-8 lg:px-12 py-3 sm:py-4 bg-white text-black font-bold text-sm sm:text-base lg:text-lg rounded-full shadow-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-xl"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                className={STYLES.buttonPrimary}
+                whileHover={ANIMATIONS.buttonHover}
+                whileTap={ANIMATIONS.buttonTap}
               >
                 {dictionary.cta.startTrial}
               </motion.button>
               <motion.button
-                className="w-full sm:w-auto px-6 sm:px-8 lg:px-12 py-3 sm:py-4 border-2 border-white text-white font-bold text-sm sm:text-base lg:text-lg rounded-full hover:bg-white hover:text-black transition-all duration-200"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                className={STYLES.buttonSecondary}
+                whileHover={ANIMATIONS.buttonHover}
+                whileTap={ANIMATIONS.buttonTap}
               >
                 {dictionary.cta.contactSales}
               </motion.button>
