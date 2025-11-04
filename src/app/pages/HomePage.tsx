@@ -686,7 +686,10 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center w-full"
+            style={{
+              minHeight: '100dvh' // Dynamic viewport height for iPhone
+            }}
           >
             <div className="text-center">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white font-montserrat tracking-tight animate-pulse-glow">
