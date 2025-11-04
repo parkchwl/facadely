@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { DM_Serif_Display } from 'next/font/google';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
@@ -47,6 +47,11 @@ const iconMap: { [key: string]: React.ElementType } = {
   BarChart3,
   Shield
 };
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
 
 interface HomePageProps {
   dictionary: HomePageDictionary;
@@ -103,6 +108,24 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const duplicatedRow1 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
   const duplicatedRow2 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
 
+  // Event handlers with useCallback to prevent unnecessary re-renders
+  const handleImageLoad = useCallback(() => {
+    setImagesLoaded(prev => prev + 1);
+  }, []);
+
+  const handleFaqIndexChange = useCallback((index: number) => {
+    setActiveFaqIndex(index);
+    setIsPaused(false);
+  }, []);
+
+  const handleFaqMouseEnter = useCallback(() => {
+    setIsPaused(true);
+  }, []);
+
+  const handleFaqMouseLeave = useCallback(() => {
+    setIsPaused(false);
+  }, []);
+
   useEffect(() => {
     if (isPaused || !isFaqInView) return;
     const duration = 15000;
@@ -124,7 +147,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               fill
               priority
               className="object-cover brightness-150"
-              onLoad={() => setImagesLoaded(prev => prev + 1)}
+              onLoad={handleImageLoad}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
             <motion.div
@@ -185,7 +208,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               type={ImageType.STATIC_BACKGROUND}
               fill
               className="object-cover"
-              onLoad={() => setImagesLoaded(prev => prev + 1)}
+              onLoad={handleImageLoad}
             />
             <div className="absolute inset-0 bg-black/40"></div>
             <div className={`${STYLES.containerClasses} py-12 sm:py-16 lg:py-20 xl:py-24 relative z-10`}>
@@ -235,8 +258,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                   className="w-full lg:col-span-2"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                    {STATS_DATA.map((item: any, index: number) => (
+                    {STATS_DATA.map((item, index: number) => (
                       <div
                         key={index}
                         className={`relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-6 lg:p-8 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02] ${index >= 4 ? 'hidden md:block' : ''}`}
@@ -274,7 +296,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             type={ImageType.STATIC_BACKGROUND}
             fill
             className="object-cover"
-            onLoad={() => setImagesLoaded(prev => prev + 1)}
+            onLoad={handleImageLoad}
           />
           <div className="absolute inset-0 bg-black/10"></div>
           <div className={`${STYLES.containerClasses} ${STYLES.sectionSpacing} relative z-10`}>
@@ -289,9 +311,9 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                 {solution.title}
               </motion.h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {SOLUTION_DATA.map((item: any, index: number) => {
-                  const IconComponent = iconMap[item.icon] || Zap;
+                {SOLUTION_DATA.map((item, index: number) => {
+                  const iconKeys = Object.keys(iconMap) as Array<keyof typeof iconMap>;
+                  const IconComponent = iconMap[iconKeys[index % iconKeys.length]] || Zap;
                   return (
                     <div
                       key={index}
@@ -337,13 +359,12 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               <div className="space-y-3">
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {FAQS.map((faqItem: any, index: number) => (
+                {FAQS.map((faqItem: FAQItem, index: number) => (
                   <button
                     key={index}
-                    onClick={() => { setActiveFaqIndex(index); setIsPaused(false); }}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
+                    onClick={() => handleFaqIndexChange(index)}
+                    onMouseEnter={handleFaqMouseEnter}
+                    onMouseLeave={handleFaqMouseLeave}
                     className={`w-full text-left p-6 rounded-xl transition-all duration-300 ${activeFaqIndex === index
                       ? 'bg-white text-black shadow-2xl scale-105'
                       : 'bg-white/5 text-white hover:bg-white/10'}`}
@@ -381,8 +402,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/20 p-8 lg:p-10 shadow-2xl"
                   >
                     <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold text-white mb-4">
-                      {/* @ts-expect-error - replace type issue */}
-                      {faq.questionLabel.replace('{current}', activeFaqIndex + 1).replace('{total}', FAQS.length)}
+                      {(faq.questionLabel as string).replace('{current}', String(activeFaqIndex + 1)).replace('{total}', String(FAQS.length))}
                     </div>
                     <h3 className="text-2xl lg:text-3xl font-bold text-white mb-6 leading-tight">
                       {FAQS[activeFaqIndex].question}
@@ -396,11 +416,10 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     </div>
                     <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent my-8" />
                     <div className="flex items-center gap-2">
-                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                      {FAQS.map((_: any, index: number) => (
+                      {FAQS.map((_: FAQItem, index: number) => (
                         <button
                           key={index}
-                          onClick={() => { setActiveFaqIndex(index); setIsPaused(false); }}
+                          onClick={() => handleFaqIndexChange(index)}
                           className={`h-2 rounded-full transition-all duration-300 ${activeFaqIndex === index ? 'bg-white w-8' : 'bg-white/30 w-2 hover:bg-white/50'}`}
                           aria-label={`Go to question ${index + 1}`}
                         />
