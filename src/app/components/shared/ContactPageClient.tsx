@@ -84,7 +84,14 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
   return (
     <div className="w-full bg-white">
       {/* Hero Section with Contact Form */}
-      <section className="relative min-h-screen flex items-center justify-center bg-white text-white overflow-hidden pt-20 pb-20">
+      <section
+        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/image/Contact.avif)'
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
           {/* Contact Info & Form - White Card */}
           <motion.div
