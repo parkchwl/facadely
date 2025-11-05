@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   creator: "facadely Corp.",
   publisher: "facadely Corp.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://facadely.com'),
+  manifest: '/manifest.json',
   alternates: {
     canonical: '/',
   },
