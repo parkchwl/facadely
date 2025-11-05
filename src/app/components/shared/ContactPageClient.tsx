@@ -164,7 +164,7 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        placeholder="john@example.com"
+                        placeholder="jane@example.com"
                         className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400"
                       />
                     </div>
