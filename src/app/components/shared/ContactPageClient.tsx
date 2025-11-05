@@ -85,7 +85,7 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
     <div className="w-full bg-white">
       {/* Hero Section with Contact Form */}
       <section
-        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center bg-no-repeat"
+        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center bg-no-repeat pt-20 sm:pt-24"
         style={{
           backgroundImage: 'url(/image/Contact.avif)'
         }}
