@@ -83,39 +83,23 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
 
   return (
     <div className="w-full bg-white">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden pt-20">
+      {/* Hero Section with Contact Form */}
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden pt-20 pb-20">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
           <div className="absolute bottom-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center py-24">
-          <motion.div {...fadeInUp}>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
+          {/* Title */}
+          <motion.div {...fadeInUp} className="text-center mb-20">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
               Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Touch</span>
             </h1>
           </motion.div>
 
-          <motion.p
-            {...fadeInUp}
-            className="text-xl sm:text-2xl text-gray-300 mb-4 leading-relaxed"
-          >
-            {dictionary.subtitle}
-          </motion.p>
-          <motion.p
-            {...fadeInUp}
-            className="text-lg text-gray-400"
-          >
-            {dictionary.description}
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-white">
-        <div className="max-w-5xl mx-auto">
+          {/* Contact Info & Form */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             {/* Contact Info */}
             <motion.div
@@ -125,11 +109,11 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
               {/* Email */}
               <div>
                 <div className="flex items-center mb-3">
-                  <Mail className="h-6 w-6 text-black mr-3" />
-                  <h3 className="text-xl font-bold text-black">Email</h3>
+                  <Mail className="h-6 w-6 text-blue-400 mr-3" />
+                  <h3 className="text-xl font-bold text-white">Email</h3>
                 </div>
-                <p className="text-gray-600 text-lg">
-                  <a href="mailto:hello@facadely.com" className="hover:text-black transition-colors">
+                <p className="text-gray-300 text-lg">
+                  <a href="mailto:hello@facadely.com" className="hover:text-blue-400 transition-colors">
                     {dictionary.emailAddress}
                   </a>
                 </p>
@@ -137,9 +121,9 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
               </div>
 
               {/* Quick Response */}
-              <div className="bg-gray-50 p-6 rounded-lg border-2 border-gray-200">
-                <h4 className="font-bold text-black mb-2">Quick Responses</h4>
-                <ul className="space-y-2 text-sm text-gray-600">
+              <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg border-2 border-white/20">
+                <h4 className="font-bold text-white mb-2">Quick Responses</h4>
+                <ul className="space-y-2 text-sm text-gray-300">
                   <li>✓ Support issues: 2-4 hours</li>
                   <li>✓ General inquiries: 24 hours</li>
                   <li>✓ Partnership proposals: 48 hours</li>
@@ -157,7 +141,7 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name */}
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-black mb-2">
+                    <label htmlFor="name" className="block text-sm font-semibold text-white mb-2">
                       Full Name
                     </label>
                     <input
@@ -168,13 +152,13 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                       onChange={handleChange}
                       required
                       placeholder="John Doe"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400"
+                      className="w-full px-4 py-3 border-2 border-white/30 rounded-lg focus:outline-none focus:border-blue-400 transition-colors bg-white/10 backdrop-blur-sm text-white placeholder-gray-400"
                     />
                   </div>
 
                   {/* Email */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-black mb-2">
+                    <label htmlFor="email" className="block text-sm font-semibold text-white mb-2">
                       {dictionary.emailLabel}
                     </label>
                     <input
@@ -185,13 +169,13 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                       onChange={handleChange}
                       required
                       placeholder="john@example.com"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400"
+                      className="w-full px-4 py-3 border-2 border-white/30 rounded-lg focus:outline-none focus:border-blue-400 transition-colors bg-white/10 backdrop-blur-sm text-white placeholder-gray-400"
                     />
                   </div>
 
                   {/* Type */}
                   <div>
-                    <label htmlFor="type" className="block text-sm font-semibold text-black mb-2">
+                    <label htmlFor="type" className="block text-sm font-semibold text-white mb-2">
                       {dictionary.inquiryLabel}
                     </label>
                     <select
@@ -199,7 +183,7 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                       name="type"
                       value={formData.type}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black"
+                      className="w-full px-4 py-3 border-2 border-white/30 rounded-lg focus:outline-none focus:border-blue-400 transition-colors bg-white/10 backdrop-blur-sm text-white"
                     >
                       <option value="general">{dictionary.inquiryOptions.general}</option>
                       <option value="support">{dictionary.inquiryOptions.support}</option>
@@ -211,7 +195,7 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
 
                   {/* Message */}
                   <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-black mb-2">
+                    <label htmlFor="message" className="block text-sm font-semibold text-white mb-2">
                       {dictionary.messageLabel}
                     </label>
                     <textarea
@@ -222,7 +206,7 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                       required
                       rows={6}
                       placeholder={dictionary.messagePlaceholder}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400 resize-none"
+                      className="w-full px-4 py-3 border-2 border-white/30 rounded-lg focus:outline-none focus:border-blue-400 transition-colors bg-white/10 backdrop-blur-sm text-white placeholder-gray-400 resize-none"
                     />
                   </div>
 
@@ -231,7 +215,7 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                     type="submit"
                     disabled={isLoading}
                     whileTap={{ scale: 0.95 }}
-                    className="w-full flex items-center justify-center px-6 py-4 bg-black text-white font-bold rounded-lg hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isLoading ? (
                       <>
@@ -252,14 +236,14 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center justify-center py-16 text-center"
                 >
-                  <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
-                  <h3 className="text-3xl font-bold text-black mb-2">{dictionary.successTitle}</h3>
-                  <p className="text-gray-600 mb-6">
+                  <CheckCircle className="h-16 w-16 text-green-400 mb-4" />
+                  <h3 className="text-3xl font-bold text-white mb-2">{dictionary.successTitle}</h3>
+                  <p className="text-gray-300 mb-6">
                     {dictionary.successMessage}
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
-                    className="px-6 py-3 border-2 border-black text-black font-bold rounded-lg hover:bg-black hover:text-white transition-all duration-300"
+                    className="px-6 py-3 border-2 border-white/30 text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300"
                   >
                     {dictionary.sendAnother}
                   </button>
@@ -271,11 +255,11 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
       </section>
 
       {/* FAQ Preview Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gray-50">
+      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-gray-900 to-black">
         <div className="max-w-5xl mx-auto">
           <motion.h2
             {...fadeInUp}
-            className="text-5xl font-bold text-black text-center mb-16"
+            className="text-5xl font-bold text-white text-center mb-16"
           >
             {dictionary.faqTitle}
           </motion.h2>
@@ -286,10 +270,10 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                 key={index}
                 {...fadeInUp}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="p-6 bg-white rounded-lg border-2 border-gray-200"
+                className="p-6 bg-white/10 backdrop-blur-md rounded-lg border-2 border-white/20"
               >
-                <h3 className="font-bold text-black text-lg mb-3">{item.question}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.answer}</p>
+                <h3 className="font-bold text-white text-lg mb-3">{item.question}</h3>
+                <p className="text-gray-300 leading-relaxed">{item.answer}</p>
               </motion.div>
             ))}
           </div>
