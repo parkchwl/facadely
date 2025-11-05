@@ -692,8 +692,6 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               left: 0,
               right: 0,
               bottom: 0,
-              width: '100%',
-              height: '100dvh',
               overflow: 'hidden'
             }}
           >
