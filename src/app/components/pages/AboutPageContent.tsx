@@ -44,12 +44,20 @@ export default function AboutPageContent({ dictionary }: AboutPageContentProps) 
       <section className="relative min-h-screen flex items-center justify-center px-6 py-20 pt-32">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black z-0" />
         <motion.div
-          className="relative z-10 max-w-5xl mx-auto text-center"
+          className="relative z-10 max-w-5xl mx-auto text-center space-y-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <p className="inline-block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent text-3xl sm:text-4xl font-bold mb-8">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-8xl sm:text-9xl lg:text-10xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400"
+          >
+            ✦
+          </motion.div>
+          <p className="inline-block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent text-3xl sm:text-4xl font-bold">
             {dictionary.brandStory.intro}
           </p>
           <div className="space-y-8 text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
