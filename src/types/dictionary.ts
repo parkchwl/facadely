@@ -447,17 +447,53 @@ export interface AboutVisionDictionary {
   content: string;
 }
 
+export interface AboutValueItem {
+  title: string;
+  description: string;
+}
+
 export interface AboutValuesDictionary {
   heading: string;
-  items: string[];
+  items: AboutValueItem[];
+}
+
+export interface AboutBrandStoryDictionary {
+  heading: string;
+  intro: string;
+  description: string;
+}
+
+export interface AboutImpactStatDictionary {
+  number: string;
+  label: string;
+}
+
+export interface AboutImpactDictionary {
+  heading: string;
+  stats: AboutImpactStatDictionary[];
+}
+
+export interface AboutTeamDictionary {
+  heading: string;
+  subtitle: string;
+}
+
+export interface AboutCtaDictionary {
+  heading: string;
+  subtitle: string;
+  button: string;
 }
 
 export interface AboutPageDictionary {
   title: string;
   subtitle: string;
+  brandStory: AboutBrandStoryDictionary;
   mission: AboutMissionDictionary;
   vision: AboutVisionDictionary;
   values: AboutValuesDictionary;
+  team: AboutTeamDictionary;
+  impact: AboutImpactDictionary;
+  cta: AboutCtaDictionary;
 }
 
 export interface ContactPageFAQItemDictionary {

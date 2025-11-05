@@ -843,23 +843,78 @@
   },
   "aboutPage": {
     "title": "About facadely",
-    "subtitle": "Our mission is to democratize web design",
+    "subtitle": "Simplifying complex digital creation, one elegant interface at a time",
+    "brandStory": {
+      "heading": "Our Brand Story",
+      "intro": "facadely",
+      "description": "\"Facade\" means the exterior or front of a building, and in programming, the Facade Pattern refers to a design pattern that simplifies complex systems by providing a unified interface.\n\nInspired by both meanings, Facadely aims to make complex digital creation as simple and elegant as a beautiful facade — providing a no-code platform that lets anyone build sophisticated websites effortlessly."
+    },
     "mission": {
       "heading": "Our Mission",
-      "content": "We believe everyone deserves a beautiful, professional website. facadely makes it simple for anyone to create and launch stunning websites without coding knowledge."
+      "content": "We believe everyone deserves a beautiful, professional website. Facadely makes it simple for anyone to create and launch stunning websites without coding knowledge. We empower creators, entrepreneurs, and businesses to turn their ideas into reality with confidence."
     },
     "vision": {
       "heading": "Our Vision",
-      "content": "To be the world's most user-friendly website builder, empowering millions of people and businesses to succeed online."
+      "content": "To be the world's most user-friendly website builder, empowering millions of people and businesses to succeed online. We envision a world where web presence is no longer a technical barrier, but a creative opportunity available to all."
     },
     "values": {
-      "heading": "Our Values",
+      "heading": "Our Core Values",
       "items": [
-        "Simplicity: Make web design accessible to everyone",
-        "Quality: Deliver beautiful, professional templates",
-        "Support: Be there for our users every step of the way",
-        "Innovation: Continuously improve our platform"
+        {
+          "title": "Simplicity",
+          "description": "We obsess over making complex things simple. Every feature is designed with elegance in mind."
+        },
+        {
+          "title": "Quality",
+          "description": "We deliver beautiful, professional templates crafted by world-class designers."
+        },
+        {
+          "title": "Empowerment",
+          "description": "We put creative control in your hands without technical complexity."
+        },
+        {
+          "title": "Support",
+          "description": "We're here for you every step of the way with dedicated customer success."
+        },
+        {
+          "title": "Innovation",
+          "description": "We continuously evolve our platform to meet tomorrow's challenges today."
+        },
+        {
+          "title": "Trust",
+          "description": "We earn your trust through transparency, security, and consistent reliability."
+        }
       ]
+    },
+    "team": {
+      "heading": "Meet Our Team",
+      "subtitle": "Built by designers, engineers, and creators who believe in making web design accessible"
+    },
+    "impact": {
+      "heading": "Our Impact",
+      "stats": [
+        {
+          "number": "100K+",
+          "label": "Websites Created"
+        },
+        {
+          "number": "50+ Countries",
+          "label": "Global Reach"
+        },
+        {
+          "number": "99.9%",
+          "label": "Uptime"
+        },
+        {
+          "number": "24/7",
+          "label": "Support"
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Ready to Build?",
+      "subtitle": "Join thousands of creators and entrepreneurs building their dream websites with facadely.",
+      "button": "Start Creating Free"
     }
   },
   "contactPage": {
