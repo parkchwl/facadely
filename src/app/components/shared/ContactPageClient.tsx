@@ -98,6 +98,11 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
             {...fadeInUp}
             className="bg-white rounded-xl p-12 shadow-lg"
           >
+            {/* Card Header */}
+            <div className="mb-8 pb-6 border-b border-gray-200">
+              <h2 className="text-2xl font-bold text-black">✦ facadely</h2>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
               {/* Contact Info */}
               <div className="lg:col-span-1 space-y-8">
