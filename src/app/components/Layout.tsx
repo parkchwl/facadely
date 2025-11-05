@@ -108,7 +108,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
           <div className="flex items-center space-x-8">
             <Link
               href={createLocalizedPath(currentLocale, '/')}
-              className="flex-shrink-0 flex items-center space-x-2 text-xl sm:text-2xl font-bold font-montserrat tracking-tight z-50"
+              className="flex-shrink-0 flex items-center space-x-1 text-xl sm:text-2xl font-bold font-montserrat tracking-tight z-50"
             >
               ✦ {footer.brand.name}
             </Link>
@@ -355,7 +355,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className={`flex-grow ${['/', '/pricing', '/templates'].some(p => pathname.endsWith(p)) ? '' : 'pt-20 sm:pt-24'}`}>
+      <main className={`flex-grow ${['/', '/pricing', '/templates', '/about', '/qa'].some(p => pathname.endsWith(p)) ? '' : 'pt-20 sm:pt-24'}`}>
         {children}
       </main>
 
