@@ -99,158 +99,156 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
             </h1>
           </motion.div>
 
-          {/* Contact Info & Form */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            {/* Contact Info */}
-            <motion.div
-              {...fadeInUp}
-              className="lg:col-span-1 space-y-8"
-            >
-              {/* Email */}
-              <div>
-                <div className="flex items-center mb-3">
-                  <Mail className="h-6 w-6 text-blue-400 mr-3" />
-                  <h3 className="text-xl font-bold text-white">Email</h3>
-                </div>
-                <p className="text-gray-300 text-lg">
-                  <a href="mailto:hello@facadely.com" className="hover:text-blue-400 transition-colors">
-                    {dictionary.emailAddress}
-                  </a>
-                </p>
-                <p className="text-gray-500 text-sm mt-2">{dictionary.emailHint}</p>
-              </div>
-
-              {/* Quick Response */}
-              <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg border-2 border-white/20">
-                <h4 className="font-bold text-white mb-2">Quick Responses</h4>
-                <ul className="space-y-2 text-sm text-gray-300">
-                  <li>✓ Support issues: 2-4 hours</li>
-                  <li>✓ General inquiries: 24 hours</li>
-                  <li>✓ Partnership proposals: 48 hours</li>
-                </ul>
-              </div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div
-              {...fadeInUp}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="lg:col-span-2"
-            >
-              {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Name */}
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-white mb-2">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="John Doe"
-                      className="w-full px-4 py-3 border-2 border-white/30 rounded-lg focus:outline-none focus:border-blue-400 transition-colors bg-white/10 backdrop-blur-sm text-white placeholder-gray-400"
-                    />
+          {/* Contact Info & Form - White Card */}
+          <motion.div
+            {...fadeInUp}
+            className="bg-white rounded-xl p-12 shadow-lg"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+              {/* Contact Info */}
+              <div className="lg:col-span-1 space-y-8">
+                {/* Email */}
+                <div>
+                  <div className="flex items-center mb-3">
+                    <Mail className="h-6 w-6 text-black mr-3" />
+                    <h3 className="text-xl font-bold text-black">Email</h3>
                   </div>
-
-                  {/* Email */}
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-white mb-2">
-                      {dictionary.emailLabel}
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="john@example.com"
-                      className="w-full px-4 py-3 border-2 border-white/30 rounded-lg focus:outline-none focus:border-blue-400 transition-colors bg-white/10 backdrop-blur-sm text-white placeholder-gray-400"
-                    />
-                  </div>
-
-                  {/* Type */}
-                  <div>
-                    <label htmlFor="type" className="block text-sm font-semibold text-white mb-2">
-                      {dictionary.inquiryLabel}
-                    </label>
-                    <select
-                      id="type"
-                      name="type"
-                      value={formData.type}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-white/30 rounded-lg focus:outline-none focus:border-blue-400 transition-colors bg-white/10 backdrop-blur-sm text-white"
-                    >
-                      <option value="general">{dictionary.inquiryOptions.general}</option>
-                      <option value="support">{dictionary.inquiryOptions.support}</option>
-                      <option value="partnership">{dictionary.inquiryOptions.partnership}</option>
-                      <option value="feedback">{dictionary.inquiryOptions.feedback}</option>
-                      <option value="other">{dictionary.inquiryOptions.other}</option>
-                    </select>
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-white mb-2">
-                      {dictionary.messageLabel}
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={6}
-                      placeholder={dictionary.messagePlaceholder}
-                      className="w-full px-4 py-3 border-2 border-white/30 rounded-lg focus:outline-none focus:border-blue-400 transition-colors bg-white/10 backdrop-blur-sm text-white placeholder-gray-400 resize-none"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <motion.button
-                    type="submit"
-                    disabled={isLoading}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? (
-                      <>
-                        <div className="animate-spin h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full"></div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-5 w-5 mr-2" />
-                        {dictionary.sendButton}
-                      </>
-                    )}
-                  </motion.button>
-                </form>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center py-16 text-center"
-                >
-                  <CheckCircle className="h-16 w-16 text-green-400 mb-4" />
-                  <h3 className="text-3xl font-bold text-white mb-2">{dictionary.successTitle}</h3>
-                  <p className="text-gray-300 mb-6">
-                    {dictionary.successMessage}
+                  <p className="text-gray-600 text-lg">
+                    <a href="mailto:hello@facadely.com" className="hover:text-black transition-colors">
+                      {dictionary.emailAddress}
+                    </a>
                   </p>
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="px-6 py-3 border-2 border-white/30 text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300"
+                  <p className="text-gray-500 text-sm mt-2">{dictionary.emailHint}</p>
+                </div>
+
+                {/* Quick Response */}
+                <div className="bg-gray-50 p-6 rounded-lg border-2 border-gray-200">
+                  <h4 className="font-bold text-black mb-2">Quick Responses</h4>
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    <li>✓ Support issues: 2-4 hours</li>
+                    <li>✓ General inquiries: 24 hours</li>
+                    <li>✓ Partnership proposals: 48 hours</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Contact Form */}
+              <div className="lg:col-span-2">
+                {!isSubmitted ? (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Name */}
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-semibold text-black mb-2">
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        placeholder="John Doe"
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400"
+                      />
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-semibold text-black mb-2">
+                        {dictionary.emailLabel}
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        placeholder="john@example.com"
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400"
+                      />
+                    </div>
+
+                    {/* Type */}
+                    <div>
+                      <label htmlFor="type" className="block text-sm font-semibold text-black mb-2">
+                        {dictionary.inquiryLabel}
+                      </label>
+                      <select
+                        id="type"
+                        name="type"
+                        value={formData.type}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black"
+                      >
+                        <option value="general">{dictionary.inquiryOptions.general}</option>
+                        <option value="support">{dictionary.inquiryOptions.support}</option>
+                        <option value="partnership">{dictionary.inquiryOptions.partnership}</option>
+                        <option value="feedback">{dictionary.inquiryOptions.feedback}</option>
+                        <option value="other">{dictionary.inquiryOptions.other}</option>
+                      </select>
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-semibold text-black mb-2">
+                        {dictionary.messageLabel}
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        rows={6}
+                        placeholder={dictionary.messagePlaceholder}
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400 resize-none"
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <motion.button
+                      type="submit"
+                      disabled={isLoading}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full flex items-center justify-center px-6 py-4 bg-black text-white font-bold rounded-lg hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isLoading ? (
+                        <>
+                          <div className="animate-spin h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full"></div>
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="h-5 w-5 mr-2" />
+                          {dictionary.sendButton}
+                        </>
+                      )}
+                    </motion.button>
+                  </form>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col items-center justify-center py-16 text-center"
                   >
-                    {dictionary.sendAnother}
-                  </button>
-                </motion.div>
-              )}
-            </motion.div>
-          </div>
+                    <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
+                    <h3 className="text-3xl font-bold text-black mb-2">{dictionary.successTitle}</h3>
+                    <p className="text-gray-600 mb-6">
+                      {dictionary.successMessage}
+                    </p>
+                    <button
+                      onClick={() => setIsSubmitted(false)}
+                      className="px-6 py-3 border-2 border-black text-black font-bold rounded-lg hover:bg-black hover:text-white transition-all duration-300"
+                    >
+                      {dictionary.sendAnother}
+                    </button>
+                  </motion.div>
+                )}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
