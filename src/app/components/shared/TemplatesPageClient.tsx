@@ -55,7 +55,7 @@ export default function TemplatesPageClient({ dictionary }: { dictionary: Templa
 
   return (
     <div className="min-h-screen relative">
-      <div className="max-w-7xl mx-auto bg-white min-h-screen px-4 sm:px-6 lg:px-12 xl:px-16 pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-20 shadow-2xl">
+      <div className="max-w-7xl mx-auto bg-white min-h-screen px-4 sm:px-6 lg:px-12 xl:px-16 pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 shadow-2xl">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
