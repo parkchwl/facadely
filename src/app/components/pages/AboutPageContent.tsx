@@ -40,7 +40,7 @@ export default function AboutPageContent({ dictionary }: AboutPageContentProps) 
 
   return (
     <main className="relative bg-black text-white overflow-hidden">
-      {/* Hero Section */}
+      {/* Hero Section - Brand Story */}
       <section className="relative min-h-screen flex items-center justify-center px-6 py-20 pt-32">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black z-0" />
         <motion.div
@@ -49,42 +49,17 @@ export default function AboutPageContent({ dictionary }: AboutPageContentProps) 
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            {dictionary.title}
-          </h1>
-          <p className="text-xl sm:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-            {dictionary.subtitle}
+          <p className="inline-block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent text-3xl sm:text-4xl font-bold mb-8">
+            {dictionary.brandStory.intro}
           </p>
+          <div className="space-y-8 text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
+            {dictionary.brandStory.description.split('\n\n').map((paragraph, idx) => (
+              <p key={idx} className="text-base sm:text-xl leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </motion.div>
-      </section>
-
-      {/* Brand Story Section */}
-      <section className="relative py-20 lg:py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="space-y-12"
-          >
-            <motion.div variants={itemVariants} className="text-center">
-              <h2 className="text-4xl sm:text-5xl font-bold mb-8">
-                {dictionary.brandStory.heading}
-              </h2>
-              <div className="space-y-6 text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto">
-                <p className="inline-block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent text-2xl font-bold mb-4">
-                  {dictionary.brandStory.intro}
-                </p>
-                {dictionary.brandStory.description.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx} className="text-base sm:text-lg">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
       </section>
 
       {/* Mission Section */}
