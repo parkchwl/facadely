@@ -355,7 +355,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className={`flex-grow ${['/', '/pricing', '/templates', '/about', '/qa'].some(p => pathname.endsWith(p)) ? '' : 'pt-20 sm:pt-24'}`}>
+      <main className="flex-grow">
         {children}
       </main>
 

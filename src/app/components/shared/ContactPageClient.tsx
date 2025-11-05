@@ -85,14 +85,14 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
     <div className="w-full bg-white">
       {/* Hero Section with Contact Form */}
       <section
-        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center bg-no-repeat -mt-20 sm:-mt-24"
+        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: 'url(/image/Contact.avif)'
         }}
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 w-full pt-20 sm:pt-24">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
           {/* Contact Info & Form - White Card */}
           <motion.div
             {...fadeInUp}
