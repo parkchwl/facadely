@@ -40,121 +40,92 @@ export default function AboutPageContent({ dictionary }: AboutPageContentProps) 
 
   return (
     <main className="relative bg-black text-white overflow-hidden">
-      {/* Hero Section - Brand Story */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 py-20 pt-32">
+      {/* Hero Section - Brand Story + Mission + Vision + Values */}
+      <section className="relative px-6 py-20 lg:py-24">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black z-0" />
         <motion.div
-          className="relative z-10 max-w-5xl mx-auto text-center space-y-8"
+          className="relative z-10 max-w-5xl mx-auto space-y-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-8xl sm:text-9xl lg:text-10xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400"
-          >
-            ✦
-          </motion.div>
-          <p className="inline-block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent text-3xl sm:text-4xl font-bold">
-            {dictionary.brandStory.intro}
-          </p>
-          <div className="space-y-8 text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
-            {dictionary.brandStory.description.split('\n\n').map((paragraph, idx) => (
-              <p key={idx} className="text-base sm:text-xl leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
+          {/* Brand Story */}
+          <div className="text-center space-y-6">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-7xl sm:text-8xl lg:text-9xl font-bold text-white"
+            >
+              ✦
+            </motion.div>
+            <p className="text-white text-2xl sm:text-3xl font-bold">
+              {dictionary.brandStory.intro}
+            </p>
+            <div className="space-y-4 text-gray-300 leading-relaxed max-w-3xl mx-auto">
+              {dictionary.brandStory.description.split('\n\n').map((paragraph, idx) => (
+                <p key={idx} className="text-sm sm:text-base leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
-        </motion.div>
-      </section>
 
-      {/* Mission Section */}
-      <section className="relative py-20 lg:py-32 px-6 border-t border-gray-800">
-        <div className="max-w-5xl mx-auto">
+          {/* Mission */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="grid md:grid-cols-2 gap-12 items-center"
+            animate="visible"
+            className="space-y-4 text-center"
           >
-            <motion.div variants={itemVariants}>
-              <h2 className="text-4xl font-bold mb-6">{dictionary.mission.heading}</h2>
-              <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                {dictionary.mission.content}
-              </p>
-            </motion.div>
-            <motion.div
-              variants={itemVariants}
-              className="relative h-80 bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-2xl border border-purple-500/20 backdrop-blur-sm"
-            />
+            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl font-bold">
+              {dictionary.mission.heading}
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
+              {dictionary.mission.content}
+            </motion.p>
           </motion.div>
-        </div>
-      </section>
 
-      {/* Vision Section */}
-      <section className="relative py-20 lg:py-32 px-6 border-t border-gray-800">
-        <div className="max-w-5xl mx-auto">
+          {/* Vision */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="grid md:grid-cols-2 gap-12 items-center"
+            animate="visible"
+            className="space-y-4 text-center"
           >
-            <motion.div
-              variants={itemVariants}
-              className="relative h-80 bg-gradient-to-br from-blue-900/30 to-cyan-900/30 rounded-2xl border border-blue-500/20 backdrop-blur-sm order-2 md:order-1"
-            />
-            <motion.div variants={itemVariants} className="order-1 md:order-2">
-              <h2 className="text-4xl font-bold mb-6">{dictionary.vision.heading}</h2>
-              <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                {dictionary.vision.content}
-              </p>
-            </motion.div>
+            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl font-bold">
+              {dictionary.vision.heading}
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
+              {dictionary.vision.content}
+            </motion.p>
           </motion.div>
-        </div>
-      </section>
 
-      {/* Values Section */}
-      <section className="relative py-20 lg:py-32 px-6 border-t border-gray-800">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="text-center mb-16"
-          >
-            <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold mb-6">
+          {/* Values */}
+          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
+            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl font-bold text-center mb-8">
               {dictionary.values.heading}
             </motion.h2>
+            <motion.div
+              variants={containerVariants}
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {dictionary.values.items.map((value, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  className="group relative p-6 rounded-xl border border-gray-800 hover:border-purple-500/50 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-900/20 hover:to-blue-900/20"
+                >
+                  <div className="text-purple-400 mb-3 group-hover:scale-110 transition-transform duration-300">
+                    {valueIcons[value.title] || <Zap className="w-6 h-6" />}
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">{value.title}</h3>
+                  <p className="text-sm text-gray-400">{value.description}</p>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {dictionary.values.items.map((value, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                className="group relative p-8 rounded-2xl border border-gray-800 hover:border-purple-500/50 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-900/20 hover:to-blue-900/20"
-              >
-                <div className="text-purple-400 mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {valueIcons[value.title] || <Zap className="w-8 h-8" />}
-                </div>
-                <h3 className="text-xl font-bold mb-3">{value.title}</h3>
-                <p className="text-gray-400">{value.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Impact Stats Section */}
