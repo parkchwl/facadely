@@ -1,0 +1,84 @@
+{
+  "name": "Facadely - No-Code Website Builder",
+  "short_name": "Facadely",
+  "description": "Create professional websites without coding. 100+ templates, multi-language support, and modern design tools.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "productivity",
+    "business"
+  ],
+  "screenshots": [
+    {
+      "src": "/image/hero.avif",
+      "sizes": "1280x720",
+      "type": "image/avif",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/image/login.avif",
+      "sizes": "540x720",
+      "type": "image/avif",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Templates",
+      "short_name": "Templates",
+      "description": "Browse 100+ website templates",
+      "url": "/templates",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Generate",
+      "short_name": "Generate",
+      "description": "Generate website with AI",
+      "url": "/generate",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
