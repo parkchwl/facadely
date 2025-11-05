@@ -96,16 +96,16 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
           {/* Contact Info & Form - White Card */}
           <motion.div
             {...fadeInUp}
-            className="bg-white rounded-xl p-12 shadow-lg"
+            className="bg-white rounded-xl p-6 sm:p-8 lg:p-12 shadow-lg"
           >
             {/* Card Header */}
-            <div className="mb-8 pb-6 border-b border-gray-200">
-              <h2 className="text-2xl font-bold text-black">✦ facadely</h2>
+            <div className="mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-gray-200">
+              <h2 className="text-xl sm:text-2xl font-bold text-black">✦ facadely</h2>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-16">
               {/* Contact Info */}
-              <div className="lg:col-span-1 space-y-8">
+              <div className="lg:col-span-1 space-y-6 sm:space-y-8">
                 {/* Email */}
                 <div>
                   <div className="flex items-center mb-3">
@@ -134,7 +134,7 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
               {/* Contact Form */}
               <div className="lg:col-span-2">
                 {!isSubmitted ? (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                     {/* Name */}
                     <div>
                       <label htmlFor="name" className="block text-sm font-semibold text-black mb-2">
@@ -200,9 +200,9 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
                         value={formData.message}
                         onChange={handleChange}
                         required
-                        rows={6}
+                        rows={4}
                         placeholder={dictionary.messagePlaceholder}
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400 resize-none"
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white text-black placeholder-gray-400 resize-none sm:min-h-32"
                       />
                     </div>
 
