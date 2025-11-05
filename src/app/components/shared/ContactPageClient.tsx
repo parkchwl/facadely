@@ -84,21 +84,8 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
   return (
     <div className="w-full bg-white">
       {/* Hero Section with Contact Form */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden pt-20 pb-20">
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-          <div className="absolute bottom-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-        </div>
-
+      <section className="relative min-h-screen flex items-center justify-center bg-white text-white overflow-hidden pt-20 pb-20">
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
-          {/* Title */}
-          <motion.div {...fadeInUp} className="text-center mb-20">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-              Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Touch</span>
-            </h1>
-          </motion.div>
-
           {/* Contact Info & Form - White Card */}
           <motion.div
             {...fadeInUp}
@@ -249,32 +236,6 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
               </div>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* FAQ Preview Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-gray-900 to-black">
-        <div className="max-w-5xl mx-auto">
-          <motion.h2
-            {...fadeInUp}
-            className="text-5xl font-bold text-white text-center mb-16"
-          >
-            {dictionary.faqTitle}
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {dictionary.faqItems.map((item, index) => (
-              <motion.div
-                key={index}
-                {...fadeInUp}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="p-6 bg-white/10 backdrop-blur-md rounded-lg border-2 border-white/20"
-              >
-                <h3 className="font-bold text-white text-lg mb-3">{item.question}</h3>
-                <p className="text-gray-300 leading-relaxed">{item.answer}</p>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
     </div>
