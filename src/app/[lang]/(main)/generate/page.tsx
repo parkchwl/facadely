@@ -12,7 +12,13 @@ export default async function GeneratePage({
   return (
     <div className="min-h-screen bg-black flex items-center justify-center py-20 px-6">
       <div className="text-center">
-        <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Facadely Generate: launching soon.</p>
+        {/* Logo */}
+        <div className="mb-12">
+          <p className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white">✦</p>
+        </div>
+
+        {/* Text */}
+        <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Facadely Generate: Coming soon.</p>
       </div>
     </div>
   );
