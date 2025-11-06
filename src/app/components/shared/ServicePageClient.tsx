@@ -340,13 +340,13 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="flex flex-col sm:flex-row items-start gap-4 mb-10"
+                className="flex flex-row items-start gap-3 sm:gap-4 mb-10"
               >
                 <Link href={`/${lang}/generate`}>
                   <motion.button
                     {...BUTTON_ANIMATIONS.primary}
                     aria-label="Start building your website for free"
-                    className="bg-white text-black px-8 py-4 lg:px-10 lg:py-5 rounded-full font-bold text-lg shadow-2xl hover:bg-gray-100 transition-all duration-200 w-full sm:w-auto"
+                    className="bg-white text-black px-5 sm:px-8 py-3 sm:py-4 lg:px-10 lg:py-5 rounded-full font-bold text-sm sm:text-lg shadow-2xl hover:bg-gray-100 transition-all duration-200 whitespace-nowrap"
                   >
                     {dictionary.hero.startBuildingFree}
                   </motion.button>
@@ -355,7 +355,7 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
                   <motion.button
                     {...BUTTON_ANIMATIONS.secondary}
                     aria-label="Browse website templates"
-                    className="border-2 border-white/30 text-white px-8 py-4 lg:px-10 lg:py-5 rounded-full font-bold text-lg hover:bg-white/10 hover:border-white/50 transition-all duration-200 backdrop-blur-sm w-full sm:w-auto"
+                    className="border-2 border-white/30 text-white px-5 sm:px-8 py-3 sm:py-4 lg:px-10 lg:py-5 rounded-full font-bold text-sm sm:text-lg hover:bg-white/10 hover:border-white/50 transition-all duration-200 backdrop-blur-sm whitespace-nowrap"
                   >
                     {dictionary.hero.browseTemplates}
                   </motion.button>
