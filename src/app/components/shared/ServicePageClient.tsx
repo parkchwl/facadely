@@ -315,7 +315,7 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
             {/* Left Side - Content */}
             <motion.div
               {...HERO_ANIMATIONS.leftContent}
-              className="flex-1 text-left pt-20 sm:pt-16 lg:pt-20"
+              className="flex-1 text-left pt-30 sm:pt-16 lg:pt-20"
             >
               {/* Main Headline */}
               <h1
