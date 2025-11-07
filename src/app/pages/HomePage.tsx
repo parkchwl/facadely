@@ -456,10 +456,12 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                   <motion.div
                     {...ANIMATIONS.headingFadeInUp}
                     className="w-full mb-2"
+                    suppressHydrationWarning
                   >
                     <h2
                       className={`text-7xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[110px] 2xl:text-[130px] font-extrabold tracking-tight leading-[0.9] text-white ${dmSerif.className}`}
                       dangerouslySetInnerHTML={{ __html: whyMatters.title }}
+                      suppressHydrationWarning
                     />
                   </motion.div>
                   <motion.div
