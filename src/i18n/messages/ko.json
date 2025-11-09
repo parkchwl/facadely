@@ -59,7 +59,7 @@
     },
     "whyMatters": {
       "title": "웹사이트가<br />중요한 이유",
-      "description": "오늘날의 디지털 세계에서 웹사이트는 <strong>첫 인상</strong>, <strong>신뢰성</strong>, 그리고 종종 <strong>주요 판매 수단</strong>입니다.",
+      "description": "오늘날의 디지털 세계에서 웹사이트는<br /><strong>첫 인상</strong>, <strong>신뢰성</strong>, 그리고 종종 <strong>주요 판매 수단</strong>입니다.",
       "ctaButton": "오늘 사이트 구축하기",
       "stats": [
         { "stat": "94%", "highlight": "첫 인상 중", "text": "디자인 관련입니다.", "source": "Northumbria University UX Lab" },
