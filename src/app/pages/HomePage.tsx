@@ -459,7 +459,11 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     suppressHydrationWarning
                   >
                     <h2
-                      className={`text-6xl sm:text-7xl md:text-8xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-extrabold tracking-tight leading-[0.9] text-white ${dmSerif.className}`}
+                      className={`text-6xl sm:text-7xl md:text-8xl lg:text-7xl font-extrabold tracking-tight leading-[0.9] text-white ${
+                        lang === 'ko'
+                          ? 'xl:text-7xl 2xl:text-8xl'
+                          : 'xl:text-8xl 2xl:text-9xl'
+                      } ${dmSerif.className}`}
                       dangerouslySetInnerHTML={{ __html: whyMatters.title }}
                       suppressHydrationWarning
                     />
