@@ -377,17 +377,17 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const STATS_DATA = whyMatters.stats;
   const SOLUTION_DATA = solution.items;
 
-  // Scroll Parallax Logic
+  // Scroll Parallax Logic with GPU acceleration
   const galleryRef = React.useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: galleryRef,
     offset: ["start end", "end start"]
   });
 
-  const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-2%"]);
-  const xRight = useTransform(scrollYProgress, [0, 1], ["-2%", "0%"]);
+  const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
+  const xRight = useTransform(scrollYProgress, [0, 1], ["-5%", "0%"]);
 
-  // Memoize duplicated template rows for parallax effect (need enough width)
+  // Memoize duplicated template rows for infinite scroll effect
   const duplicatedRow1 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
   const duplicatedRow2 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
 
@@ -404,7 +404,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               className="relative z-10 flex flex-col items-center justify-center gap-6 px-4 sm:px-6 lg:px-8 pt-24 pb-0"
             >
               <h1
-                className={`${inter.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold text-white tracking-tight leading-none`}
+                className={`${inter.className} text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold text-white tracking-tight leading-none`}
                 dangerouslySetInnerHTML={{ __html: hero.title }}
               />
               <p className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl font-light text-center"
@@ -422,10 +422,13 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
 
           <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-8 py-16">
             <div className="overflow-hidden">
-              <motion.div style={{ x: xLeft }} className="flex w-max">
+              <motion.div
+                style={{ x: xLeft, willChange: 'transform' }}
+                className="flex w-max"
+              >
                 {duplicatedRow1.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-60 sm:w-72 lg:w-80 mx-2">
+                    <div className="flex-shrink-0 w-48 sm:w-60 lg:w-72 mx-1.5 sm:mx-2">
                       <TemplateCard template={template} index={index} />
                     </div>
                   </Link>
@@ -433,10 +436,13 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               </motion.div>
             </div>
             <div className="overflow-hidden">
-              <motion.div style={{ x: xRight }} className="flex w-max">
+              <motion.div
+                style={{ x: xRight, willChange: 'transform' }}
+                className="flex w-max"
+              >
                 {duplicatedRow2.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-60 sm:w-72 lg:w-80 mx-2">
+                    <div className="flex-shrink-0 w-48 sm:w-60 lg:w-72 mx-1.5 sm:mx-2">
                       <TemplateCard template={template} index={index + 13} />
                     </div>
                   </Link>

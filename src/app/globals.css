@@ -195,6 +195,52 @@ body {
   animation: subtle-flash 5s ease-in-out infinite;
 }
 
+/* Infinite Scroll Gallery Animations - GPU Accelerated */
+@keyframes scroll-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.gallery-scroll-left {
+  animation: scroll-left 30s linear infinite;
+  will-change: transform;
+}
+
+.gallery-scroll-right {
+  animation: scroll-right 30s linear infinite;
+  will-change: transform;
+}
+
+/* Pause animation on hover for better UX */
+.gallery-scroll-left:hover,
+.gallery-scroll-right:hover {
+  animation-play-state: paused;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  .gallery-scroll-left,
+  .gallery-scroll-right {
+    animation: none;
+  }
+}
+
 /* Shine Scan Animation for Loading Screen */
 @keyframes shine {
   0% {
