@@ -21,7 +21,8 @@
 }
 
 html {
-  font-size: 80%; /* 전체 크기를 80%로 조정 */
+  font-size: 80%;
+  /* 전체 크기를 80%로 조정 */
 }
 
 body {
@@ -49,13 +50,15 @@ body {
   font-weight: 900;
   color: white;
   margin: 0 2rem;
-  white-space: pre; /* Preserve multiple spaces */
+  white-space: pre;
+  /* Preserve multiple spaces */
 }
 
 @keyframes moveLeft {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
@@ -63,12 +66,15 @@ body {
 
 /* Hide Scrollbar */
 .hide-scrollbar {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 
 /* Smooth Image Loading Animation */
@@ -77,6 +83,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -87,6 +94,7 @@ body {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -94,57 +102,24 @@ body {
 
 .skeleton-shimmer {
   animation: shimmer 2s infinite linear;
-  background: linear-gradient(
-    to right,
-    #1f2937 0%,
-    #374151 20%,
-    #1f2937 40%,
-    #1f2937 100%
-  );
+  background: linear-gradient(to right,
+      #1f2937 0%,
+      #374151 20%,
+      #1f2937 40%,
+      #1f2937 100%);
   background-size: 1000px 100%;
 }
 
-/* Infinite Scroll Animations */
-.scroll-container {
-  display: flex;
-  width: fit-content;
-}
-
-.scroll-container:hover {
-  animation-play-state: paused;
-}
-
-.scroll-left {
-  animation: scroll-left 210s linear infinite;
-}
-
-.scroll-right {
-  animation: scroll-right 210s linear infinite;
-}
-
-@keyframes scroll-left {
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes scroll-right {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0%);
-  }
-}
+/* Infinite Scroll Animations removed as we switched to Framer Motion Parallax */
 
 /* Gradient X Animation for Loading Screen */
 @keyframes gradient-x {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -157,16 +132,19 @@ body {
 
 /* Pulse Glow Animation for Loading Screen */
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
-                 0 0 20px rgba(255, 255, 255, 0.3),
-                 0 0 30px rgba(255, 255, 255, 0.2);
+      0 0 20px rgba(255, 255, 255, 0.3),
+      0 0 30px rgba(255, 255, 255, 0.2);
   }
+
   50% {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
-                 0 0 30px rgba(255, 255, 255, 0.6),
-                 0 0 40px rgba(255, 255, 255, 0.4),
-                 0 0 50px rgba(255, 255, 255, 0.2);
+      0 0 30px rgba(255, 255, 255, 0.6),
+      0 0 40px rgba(255, 255, 255, 0.4),
+      0 0 50px rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -176,16 +154,19 @@ body {
 
 /* Pulse Glow Animation for Login Logo */
 @keyframes pulse-glow-dark {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.3),
-                 0 0 20px rgba(0, 0, 0, 0.15),
-                 0 0 30px rgba(0, 0, 0, 0.1);
+      0 0 20px rgba(0, 0, 0, 0.15),
+      0 0 30px rgba(0, 0, 0, 0.1);
   }
+
   50% {
     text-shadow: 0 0 20px rgba(0, 0, 0, 0.5),
-                 0 0 30px rgba(0, 0, 0, 0.3),
-                 0 0 40px rgba(0, 0, 0, 0.2),
-                 0 0 50px rgba(0, 0, 0, 0.1);
+      0 0 30px rgba(0, 0, 0, 0.3),
+      0 0 40px rgba(0, 0, 0, 0.2),
+      0 0 50px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -193,11 +174,33 @@ body {
   animation: pulse-glow-dark 2s ease-in-out infinite;
 }
 
+/* Subtle Flash Animation for Hero Section */
+@keyframes subtle-flash {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.1;
+  }
+
+  12% {
+    opacity: 0;
+  }
+}
+
+.animate-subtle-flash {
+  animation: subtle-flash 5s ease-in-out infinite;
+}
+
 /* Shine Scan Animation for Loading Screen */
 @keyframes shine {
   0% {
     background-position: -200% center;
   }
+
   100% {
     background-position: 200% center;
   }
@@ -216,6 +219,7 @@ body {
   from {
     transform: scaleX(0);
   }
+
   to {
     transform: scaleX(1);
   }
@@ -227,13 +231,11 @@ body {
 }
 
 .stat-card-dashed-border {
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.3) 0px,
-    rgba(255, 255, 255, 0.3) 4px,
-    transparent 4px,
-    transparent 8px
-  );
+  background-image: repeating-linear-gradient(0deg,
+      rgba(255, 255, 255, 0.3) 0px,
+      rgba(255, 255, 255, 0.3) 4px,
+      transparent 4px,
+      transparent 8px);
   background-size: 2px 100%;
   background-position: 0 0, 100% 0;
   background-repeat: no-repeat;

@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
-import { DM_Serif_Display } from 'next/font/google';
+import { DM_Serif_Display, Inter } from 'next/font/google';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
@@ -14,6 +14,11 @@ const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
   weight: '400',
   display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['700', '800', '900'],
 });
 
 // ================================================================================
@@ -372,71 +377,71 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const STATS_DATA = whyMatters.stats;
   const SOLUTION_DATA = solution.items;
 
-  // Memoize duplicated template rows for carousel
-  const duplicatedRow1 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
-  const duplicatedRow2 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
+  // Scroll Parallax Logic
+  const galleryRef = React.useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: galleryRef,
+    offset: ["start end", "end start"]
+  });
+
+  const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-2%"]);
+  const xRight = useTransform(scrollYProgress, [0, 1], ["-2%", "0%"]);
+
+  // Memoize duplicated template rows for parallax effect (need enough width)
+  const duplicatedRow1 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
+  const duplicatedRow2 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
+
 
   return (
     <>
       <main className="bg-black min-h-screen">
         <section className="relative z-10 flex flex-col bg-black">
-          <div className="relative text-left text-white h-[55vh] sm:h-[60vh] lg:h-[65vh] flex items-center justify-center overflow-hidden">
-            <OptimizedImage
-              src="/image/Title.avif"
-              alt="Hero background"
-              type={ImageType.STATIC_BACKGROUND}
-              fill
-              priority
-              className="object-cover brightness-150"
-              onLoad={handleImageLoad}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+          <div className="relative text-center text-white min-h-[50vh] flex items-center justify-center overflow-hidden">
+            {/* Plain Black Background */}
+            <div className="absolute inset-0 bg-black" />
             <motion.div
               {...ANIMATIONS.heroFadeInUp}
-              className={`${STYLES.heroContainerClasses} py-12 sm:py-16 lg:py-20 xl:py-24 relative z-10 w-full`}
+              className="relative z-10 flex flex-col items-center justify-center gap-6 px-4 sm:px-6 lg:px-8 pt-24 pb-0"
             >
               <h1
-                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-extrabold text-white tracking-tight leading-[0.9] mb-8 lg:mb-20 xl:mb-20"
-                style={{ textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)' }}
+                className={`${inter.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold text-white tracking-tight leading-none`}
                 dangerouslySetInnerHTML={{ __html: hero.title }}
               />
-              <div className="w-full flex flex-col lg:flex-row lg:items-center items-start lg:justify-between gap-8 lg:gap-12">
-                <p className="text-xl sm:text-2xl lg:text-3xl text-gray-200 leading-relaxed max-w-2xl font-light"
-                   dangerouslySetInnerHTML={{ __html: hero.subtitle }} />
-                <div className="flex items-center gap-4 lg:gap-6 flex-shrink-0">
-                  <Link href={`${langPrefix}/templates`} className="font-semibold text-white hover:text-blue-400 transition-colors border-b-2 border-transparent hover:border-blue-400 pb-1 text-lg">
-                    {hero.templatesLink}
-                  </Link>
-                  <Link href={`${langPrefix}/login`} className="bg-white text-black hover:bg-gray-100 py-4 px-8 lg:py-5 lg:px-10 rounded-xl transition-all shadow-lg font-bold text-lg hover:shadow-2xl hover:scale-105">
-                    {hero.signupButton} <span className="hidden sm:inline font-normal">{hero.signupFreeText}</span>
-                  </Link>
-                </div>
+              <p className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl font-light text-center"
+                dangerouslySetInnerHTML={{ __html: hero.subtitle }} />
+              <div className="flex items-center gap-2 lg:gap-3">
+                <Link href={`${langPrefix}/login`} className="bg-white text-black py-3 px-6 lg:py-4 lg:px-8 rounded-xl font-bold text-base transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] hover:scale-105">
+                  {hero.signupButton} <span className="hidden sm:inline font-normal">{hero.signupFreeText}</span>
+                </Link>
+                <Link href={`${langPrefix}/templates`} className="bg-white/10 backdrop-blur-md border border-white/20 text-white py-3 px-6 lg:py-4 lg:px-8 rounded-xl transition-all font-semibold text-base hover:bg-white/20 hover:border-white/40">
+                  {hero.templatesLink}
+                </Link>
               </div>
             </motion.div>
           </div>
 
-          <section className="relative bg-black overflow-hidden space-y-8 py-16">
+          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-8 py-16">
             <div className="overflow-hidden">
-              <div className="scroll-container scroll-left">
+              <motion.div style={{ x: xLeft }} className="flex w-max">
                 {duplicatedRow1.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-72 sm:w-80 lg:w-96 mx-4">
+                    <div className="flex-shrink-0 w-60 sm:w-72 lg:w-80 mx-2">
                       <TemplateCard template={template} index={index} />
                     </div>
                   </Link>
                 ))}
-              </div>
+              </motion.div>
             </div>
             <div className="overflow-hidden">
-              <div className="scroll-container scroll-right">
+              <motion.div style={{ x: xRight }} className="flex w-max">
                 {duplicatedRow2.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-72 sm:w-80 lg:w-96 mx-4">
+                    <div className="flex-shrink-0 w-60 sm:w-72 lg:w-80 mx-2">
                       <TemplateCard template={template} index={index + 13} />
                     </div>
                   </Link>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </section>
 
@@ -459,11 +464,10 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     suppressHydrationWarning
                   >
                     <h2
-                      className={`text-6xl sm:text-7xl md:text-8xl lg:text-7xl font-extrabold tracking-tight leading-[0.9] text-white ${
-                        lang === 'ko'
-                          ? 'xl:text-7xl 2xl:text-8xl'
-                          : 'xl:text-8xl 2xl:text-9xl'
-                      } ${dmSerif.className}`}
+                      className={`text-6xl sm:text-7xl md:text-8xl lg:text-7xl font-extrabold tracking-tight leading-[0.9] text-white ${lang === 'ko'
+                        ? 'xl:text-7xl 2xl:text-8xl'
+                        : 'xl:text-8xl 2xl:text-9xl'
+                        } ${dmSerif.className}`}
                       dangerouslySetInnerHTML={{ __html: whyMatters.title }}
                       suppressHydrationWarning
                     />
@@ -473,7 +477,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     className="w-full"
                   >
                     <p className="text-xl lg:text-2xl xl:text-3xl text-gray-200 leading-relaxed font-light max-w-xl"
-                       dangerouslySetInnerHTML={{ __html: whyMatters.description }} />
+                      dangerouslySetInnerHTML={{ __html: whyMatters.description }} />
                   </motion.div>
                   <motion.div
                     {...ANIMATIONS.ctaButtonFadeInUp}
