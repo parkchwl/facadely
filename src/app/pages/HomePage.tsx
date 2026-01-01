@@ -384,12 +384,33 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     offset: ["start end", "end start"]
   });
 
-  const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
-  const xRight = useTransform(scrollYProgress, [0, 1], ["-5%", "0%"]);
+  // Detect if mobile for performance optimizations
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-  // Memoize duplicated template rows for infinite scroll effect
-  const duplicatedRow1 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
-  const duplicatedRow2 = useMemo(() => [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES], []);
+  // Reduced parallax on mobile (2%) vs desktop (5%)
+  const parallaxAmount = isMobile ? "-2%" : "-5%";
+  const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", parallaxAmount]);
+  const xRight = useTransform(scrollYProgress, [0, 1], [parallaxAmount, "0%"]);
+
+  // Fewer cards on mobile (2x) vs desktop (3x) for performance
+  const duplicatedRow1 = useMemo(() =>
+    isMobile
+      ? [...BASE_TEMPLATES, ...BASE_TEMPLATES]
+      : [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
+    [isMobile]
+  );
+  const duplicatedRow2 = useMemo(() =>
+    isMobile
+      ? [...BASE_TEMPLATES, ...BASE_TEMPLATES]
+      : [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
+    [isMobile]
+  );
 
 
   return (
@@ -423,7 +444,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
           <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-8 py-16">
             <div className="overflow-hidden">
               <motion.div
-                style={{ x: xLeft, willChange: 'transform' }}
+                style={{ x: xLeft, willChange: 'transform', transform: 'translateZ(0)' }}
                 className="flex w-max"
               >
                 {duplicatedRow1.map((template, index) => (
@@ -437,7 +458,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </div>
             <div className="overflow-hidden">
               <motion.div
-                style={{ x: xRight, willChange: 'transform' }}
+                style={{ x: xRight, willChange: 'transform', transform: 'translateZ(0)' }}
                 className="flex w-max"
               >
                 {duplicatedRow2.map((template, index) => (
