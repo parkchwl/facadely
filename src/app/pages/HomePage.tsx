@@ -384,32 +384,25 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     offset: ["start end", "end start"]
   });
 
-  // Detect if mobile for performance optimizations
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  // Fixed parallax values - NO dynamic changes to prevent re-renders
+  const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-3%"]);
+  const xRight = useTransform(scrollYProgress, [0, 1], ["-3%", "0%"]);
 
-  // Reduced parallax on mobile (2%) vs desktop (5%)
-  const parallaxAmount = isMobile ? "-2%" : "-5%";
-  const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", parallaxAmount]);
-  const xRight = useTransform(scrollYProgress, [0, 1], [parallaxAmount, "0%"]);
+  // Check mobile ONCE on mount (useRef to avoid re-renders)
+  const isMobileRef = React.useRef(typeof window !== 'undefined' && window.innerWidth < 768);
 
-  // Fewer cards on mobile (2x) vs desktop (3x) for performance
+  // Stable duplicated rows - only computed once based on initial screen size
   const duplicatedRow1 = useMemo(() =>
-    isMobile
+    isMobileRef.current
       ? [...BASE_TEMPLATES, ...BASE_TEMPLATES]
       : [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
-    [isMobile]
+    []
   );
   const duplicatedRow2 = useMemo(() =>
-    isMobile
+    isMobileRef.current
       ? [...BASE_TEMPLATES, ...BASE_TEMPLATES]
       : [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
-    [isMobile]
+    []
   );
 
 
