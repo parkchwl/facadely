@@ -294,19 +294,45 @@ function useFaqRotation(faqCount: number) {
  * Handles image loading state and minimum loading screen duration
  * Returns loading state and image load handler
  */
+// Custom hook for image loading with session check
 function useImageLoading(criticalImageCount: number = CONFIG.CRITICAL_IMAGES) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const loadStartTime = React.useRef(Date.now());
+  const hasVisitedRef = React.useRef(false);
+
+  // Check session storage on mount
+  useEffect(() => {
+    // If already visited in this session, skip loading screen immediately
+    if (typeof window !== 'undefined' && sessionStorage.getItem('hasVisited')) {
+      hasVisitedRef.current = true;
+      setIsLoaded(true);
+    }
+  }, []);
 
   // Manage loading screen timing
   useEffect(() => {
+    // If we've already visited, don't run the timing logic
+    if (hasVisitedRef.current) return;
+
     if (imagesLoaded >= criticalImageCount) {
       const elapsed = Date.now() - loadStartTime.current;
       const remainingDelay = Math.max(0, CONFIG.MIN_LOADING_TIME - elapsed);
-      setTimeout(() => setIsLoaded(true), remainingDelay);
+
+      setTimeout(() => {
+        setIsLoaded(true);
+        // Mark as visited after showing loading screen
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('hasVisited', 'true');
+        }
+      }, remainingDelay);
     } else {
-      const maxTimer = setTimeout(() => setIsLoaded(true), CONFIG.MAX_LOADING_TIME);
+      const maxTimer = setTimeout(() => {
+        setIsLoaded(true);
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('hasVisited', 'true');
+        }
+      }, CONFIG.MAX_LOADING_TIME);
       return () => clearTimeout(maxTimer);
     }
   }, [imagesLoaded, criticalImageCount]);
@@ -410,9 +436,20 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     <>
       <main className="bg-black min-h-screen">
         <section className="relative z-10 flex flex-col bg-black">
-          <div className="relative text-center text-white min-h-[50vh] flex items-center justify-center overflow-hidden">
+          <div className="relative text-center text-white min-h-[45vh] flex items-center justify-center overflow-hidden">
             {/* Plain Black Background */}
-            <div className="absolute inset-0 bg-black" />
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0">
+              <OptimizedImage
+                src="/image/Herosection.avif"
+                alt="Hero background"
+                type={ImageType.STATIC_BACKGROUND}
+                fill
+                priority
+                className="object-cover opacity-40"
+              />
+              <div className="absolute inset-0 bg-black/50" />
+            </div>
             <motion.div
               {...ANIMATIONS.heroFadeInUp}
               className="relative z-10 flex flex-col items-center justify-center gap-6 px-4 sm:px-6 lg:px-8 pt-24 pb-0"
@@ -434,7 +471,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
           </div>
 
-          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-8 py-16">
+          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-8 py-4">
             <div className="overflow-hidden">
               <motion.div
                 style={{ x: xLeft, willChange: 'transform', transform: 'translateZ(0)' }}
@@ -684,28 +721,33 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
           </div>
         </section>
 
-        <section className="relative bg-gradient-to-t from-gray-900 to-black py-20 lg:py-32 border-t border-gray-800">
+        {/* Final CTA Section - Minimal & Bold (Apple Style) */}
+        <section className="relative bg-black py-24 lg:py-40 border-t border-white/5 overflow-hidden">
           <div className={STYLES.containerClasses}>
             <motion.div
               {...ANIMATIONS.faqFadeInUp}
-              className="text-center max-w-4xl mx-auto"
+              className="text-center max-w-5xl mx-auto relative z-10"
             >
-              <h2 className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-8 ${dmSerif.className}`}
-              >
-                {finalCta.title}
-              </h2>
-              <p className="text-xl lg:text-2xl text-gray-400 mb-12 leading-relaxed">
-                {finalCta.subtitle}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <Link href={`${langPrefix}/templates`} className="inline-block bg-white text-black px-10 py-5 lg:px-12 lg:py-6 rounded-full hover:bg-gray-100 transition-all duration-200 text-lg lg:text-xl font-bold shadow-2xl hover:scale-105">
+              <h2
+                className={`${inter.className} text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white mb-8 tracking-tight leading-none`}
+                dangerouslySetInnerHTML={{ __html: finalCta.title }}
+              />
+              <p
+                className="text-xl sm:text-2xl text-gray-400 mb-12 leading-relaxed max-w-3xl mx-auto font-light"
+                dangerouslySetInnerHTML={{ __html: finalCta.subtitle }}
+              />
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+                <Link href={`${langPrefix}/templates`} className="group relative px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:scale-105 min-w-[200px] flex justify-center items-center">
                   {finalCta.browseButton}
                 </Link>
-                <Link href={`${langPrefix}/login`} className="inline-block bg-transparent border-2 border-white text-white px-10 py-5 lg:px-12 lg:py-6 rounded-full hover:bg-white hover:text-black transition-all duration-200 text-lg lg:text-xl font-bold hover:scale-105">
+                <Link href={`${langPrefix}/login`} className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)] hover:scale-105 min-w-[200px] flex justify-center items-center">
                   {finalCta.startButton}
                 </Link>
               </div>
             </motion.div>
+
+            {/* Subtle background glow effect using CSS animation */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none animate-pulse duration-[5000ms]" />
           </div>
         </section>
       </main>
