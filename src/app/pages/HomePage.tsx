@@ -414,20 +414,15 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-3%"]);
   const xRight = useTransform(scrollYProgress, [0, 1], ["-3%", "0%"]);
 
-  // Check mobile ONCE on mount (useRef to avoid re-renders)
-  const isMobileRef = React.useRef(typeof window !== 'undefined' && window.innerWidth < 768);
 
-  // Stable duplicated rows - only computed once based on initial screen size
+
+  // Stable duplicated rows - always render enough items for the largest screen to prevent hydration mismatch
   const duplicatedRow1 = useMemo(() =>
-    isMobileRef.current
-      ? [...BASE_TEMPLATES, ...BASE_TEMPLATES]
-      : [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
     []
   );
   const duplicatedRow2 = useMemo(() =>
-    isMobileRef.current
-      ? [...BASE_TEMPLATES, ...BASE_TEMPLATES]
-      : [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
     []
   );
 
@@ -436,7 +431,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     <>
       <main className="bg-black min-h-screen">
         <section className="relative z-10 flex flex-col bg-black">
-          <div className="relative text-center text-white min-h-[45vh] flex items-center justify-center overflow-hidden">
+          <div className="relative text-center text-white min-h-[35vh] sm:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center overflow-hidden">
             {/* Plain Black Background */}
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
@@ -471,7 +466,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
           </div>
 
-          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-8 py-4">
+          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-4 py-4">
             <div className="overflow-hidden">
               <motion.div
                 style={{ x: xLeft, willChange: 'transform', transform: 'translateZ(0)' }}
@@ -479,7 +474,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               >
                 {duplicatedRow1.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-48 sm:w-60 lg:w-72 mx-1.5 sm:mx-2">
+                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
                       <TemplateCard template={template} index={index} />
                     </div>
                   </Link>
@@ -493,7 +488,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               >
                 {duplicatedRow2.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-48 sm:w-60 lg:w-72 mx-1.5 sm:mx-2">
+                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
                       <TemplateCard template={template} index={index + 13} />
                     </div>
                   </Link>
@@ -737,11 +732,11 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                 dangerouslySetInnerHTML={{ __html: finalCta.subtitle }}
               />
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-                <Link href={`${langPrefix}/templates`} className="group relative px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:scale-105 min-w-[200px] flex justify-center items-center">
-                  {finalCta.browseButton}
-                </Link>
                 <Link href={`${langPrefix}/login`} className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)] hover:scale-105 min-w-[200px] flex justify-center items-center">
                   {finalCta.startButton}
+                </Link>
+                <Link href={`${langPrefix}/templates`} className="group relative px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:scale-105 min-w-[200px] flex justify-center items-center">
+                  {finalCta.browseButton}
                 </Link>
               </div>
             </motion.div>

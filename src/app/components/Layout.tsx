@@ -99,7 +99,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
       }
     >
       <header className="w-full top-0 z-50 fixed flex justify-center">
-        <div className="py-3 sm:py-4 flex justify-between items-center max-w-7xl w-full mx-4 px-6 sm:px-8 rounded-full mt-4 bg-black/60 backdrop-blur-md text-white shadow-lg">
+        <div className="py-3 sm:py-4 flex justify-between items-center max-w-7xl w-full mx-4 px-6 sm:px-8 rounded-2xl mt-4 bg-black/60 backdrop-blur-md text-white shadow-lg">
           {/* Left Side: Logo */}
           <div className="flex items-center">
             <Link
