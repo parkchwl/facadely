@@ -54,7 +54,7 @@
   "homePage": {
     "hero": {
       "title": "Customers are<br />Searching for you",
-      "subtitle": "Build a professional website in minutes —<br />No code, No hassle",
+      "subtitle": "Build a professional website in minutes<br />No code, No hassle",
       "templatesLink": "Templates",
       "signupButton": "Sign up",
       "signupFreeText": "It's free!"
@@ -64,23 +64,77 @@
       "description": "In today's digital world, your website is your <strong>first impression</strong>, your <strong>credibility</strong>, and often your <strong>main sales tool</strong>.",
       "ctaButton": "Build Your Site Today",
       "stats": [
-        { "stat": "94%", "highlight": "of first impressions", "text": "are design-related.", "source": "Northumbria University UX Lab" },
-        { "stat": "88%", "highlight": "of online consumers", "text": "are less likely to return to a site after a bad experience.", "source": "Econsultancy / Adobe" },
-        { "stat": "81%", "highlight": "of consumers", "text": "visit a website before making a purchase decision.", "source": "GE Capital Retail Bank / Google Think Insights" },
-        { "stat": "75%", "highlight": "of users", "text": "judge a company's credibility based on its website.", "source": "Stanford Web Credibility Research" },
-        { "stat": "~70%", "highlight": "lose trust", "text": "if a website doesn't look professional.", "source": "Adobe & Sweor" },
-        { "stat": "69%", "highlight": "of mobile users", "text": "interact with the website as their first brand experience.", "source": "Think with Google" }
+        {
+          "stat": "94%",
+          "highlight": "of first impressions",
+          "text": "are design-related.",
+          "source": "Northumbria University UX Lab"
+        },
+        {
+          "stat": "88%",
+          "highlight": "of online consumers",
+          "text": "are less likely to return to a site after a bad experience.",
+          "source": "Econsultancy / Adobe"
+        },
+        {
+          "stat": "81%",
+          "highlight": "of consumers",
+          "text": "visit a website before making a purchase decision.",
+          "source": "GE Capital Retail Bank / Google Think Insights"
+        },
+        {
+          "stat": "75%",
+          "highlight": "of users",
+          "text": "judge a company's credibility based on its website.",
+          "source": "Stanford Web Credibility Research"
+        },
+        {
+          "stat": "~70%",
+          "highlight": "lose trust",
+          "text": "if a website doesn't look professional.",
+          "source": "Adobe & Sweor"
+        },
+        {
+          "stat": "69%",
+          "highlight": "of mobile users",
+          "text": "interact with the website as their first brand experience.",
+          "source": "Think with Google"
+        }
       ]
     },
     "solution": {
       "title": "facadely solves the problems",
       "items": [
-        { "icon": "Zap", "title": "Launch in 5 minutes, no setup", "desc": "Start instantly with ready-made templates.\nNo coding or installation required." },
-        { "icon": "Smartphone", "title": "Mobile-ready by default", "desc": "All templates are fully responsive.\nYour site looks great on any device—automatically." },
-        { "icon": "Palette", "title": "Professional design, made easy", "desc": "Built by designers to earn trust and credibility.\nCreate a polished site without design skills." },
-        { "icon": "Settings", "title": "Tools for bookings and customer management", "desc": "Everything you need—forms, scheduling, CRM—built in.\nNo plugins or third-party tools required." },
-        { "icon": "BarChart3", "title": "Real-time analytics included", "desc": "Track visits, traffic, and user behavior.\nMake smarter decisions with live data." },
-        { "icon": "Shield", "title": "Security built-in", "desc": "SSL and encryption applied automatically.\nStay protected with continuous updates." }
+        {
+          "icon": "Zap",
+          "title": "Launch in 5 minutes, no setup",
+          "desc": "Start instantly with ready-made templates.\nNo coding or installation required."
+        },
+        {
+          "icon": "Smartphone",
+          "title": "Mobile-ready by default",
+          "desc": "All templates are fully responsive.\nYour site looks great on any device—automatically."
+        },
+        {
+          "icon": "Palette",
+          "title": "Professional design, made easy",
+          "desc": "Built by designers to earn trust and credibility.\nCreate a polished site without design skills."
+        },
+        {
+          "icon": "Settings",
+          "title": "Tools for bookings and customer management",
+          "desc": "Everything you need—forms, scheduling, CRM—built in.\nNo plugins or third-party tools required."
+        },
+        {
+          "icon": "BarChart3",
+          "title": "Real-time analytics included",
+          "desc": "Track visits, traffic, and user behavior.\nMake smarter decisions with live data."
+        },
+        {
+          "icon": "Shield",
+          "title": "Security built-in",
+          "desc": "SSL and encryption applied automatically.\nStay protected with continuous updates."
+        }
       ],
       "cta_text": "Create a lasting first impression and build a trusted brand that customers remember.",
       "cta_button": "Start Building Your Business"
@@ -194,48 +248,158 @@
         "basic": {
           "name": "Basic Features",
           "features": {
-            "pages": { "name": "Pages", "free": "5 pages", "pro": "Unlimited pages", "business": "Unlimited pages" },
-            "customDomain": { "name": "Custom Domain", "free": false, "pro": true, "business": true },
-            "storage": { "name": "Storage", "free": "500 MB", "pro": "10 GB", "business": "50 GB" },
-            "bandwidth": { "name": "Bandwidth", "free": "1 GB", "pro": "10 GB", "business": "100 GB" },
-            "monthlyVisits": { "name": "Monthly Visits", "free": "1K visits", "pro": "25K visits", "business": "100K visits" }
+            "pages": {
+              "name": "Pages",
+              "free": "5 pages",
+              "pro": "Unlimited pages",
+              "business": "Unlimited pages"
+            },
+            "customDomain": {
+              "name": "Custom Domain",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "storage": {
+              "name": "Storage",
+              "free": "500 MB",
+              "pro": "10 GB",
+              "business": "50 GB"
+            },
+            "bandwidth": {
+              "name": "Bandwidth",
+              "free": "1 GB",
+              "pro": "10 GB",
+              "business": "100 GB"
+            },
+            "monthlyVisits": {
+              "name": "Monthly Visits",
+              "free": "1K visits",
+              "pro": "25K visits",
+              "business": "100K visits"
+            }
           }
         },
         "design": {
           "name": "Design & Content",
           "features": {
-            "templates": { "name": "Templates", "free": "Basic templates", "pro": "Premium templates", "business": "All templates + Custom" },
-            "customCode": { "name": "Custom Code", "free": false, "pro": true, "business": true },
-            "fontUpload": { "name": "Font Upload", "free": false, "pro": true, "business": true },
-            "designMode": { "name": "Design Mode", "free": false, "pro": true, "business": true }
+            "templates": {
+              "name": "Templates",
+              "free": "Basic templates",
+              "pro": "Premium templates",
+              "business": "All templates + Custom"
+            },
+            "customCode": {
+              "name": "Custom Code",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "fontUpload": {
+              "name": "Font Upload",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "designMode": {
+              "name": "Design Mode",
+              "free": false,
+              "pro": true,
+              "business": true
+            }
           }
         },
         "ecommerce": {
           "name": "E-commerce",
           "features": {
-            "products": { "name": "Products", "free": false, "pro": "10 products", "business": "Unlimited products" },
-            "paymentGateway": { "name": "Payment Gateway", "free": false, "pro": true, "business": true },
-            "inventory": { "name": "Inventory Management", "free": false, "pro": true, "business": true },
-            "coupons": { "name": "Coupons & Discounts", "free": false, "pro": "3 coupons", "business": "Unlimited coupons" },
-            "orderManagement": { "name": "Order Management", "free": false, "pro": true, "business": true }
+            "products": {
+              "name": "Products",
+              "free": false,
+              "pro": "10 products",
+              "business": "Unlimited products"
+            },
+            "paymentGateway": {
+              "name": "Payment Gateway",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "inventory": {
+              "name": "Inventory Management",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "coupons": {
+              "name": "Coupons & Discounts",
+              "free": false,
+              "pro": "3 coupons",
+              "business": "Unlimited coupons"
+            },
+            "orderManagement": {
+              "name": "Order Management",
+              "free": false,
+              "pro": true,
+              "business": true
+            }
           }
         },
         "marketing": {
           "name": "Marketing & SEO",
           "features": {
-            "seoTools": { "name": "SEO Tools", "free": "Basic SEO", "pro": "Advanced SEO", "business": "Premium SEO + Analytics" },
-            "googleAnalytics": { "name": "Google Analytics", "free": false, "pro": true, "business": true },
-            "socialMedia": { "name": "Social Media Integration", "free": false, "pro": true, "business": true },
-            "emailMarketing": { "name": "Email Marketing", "free": false, "pro": "100 emails/month", "business": "Unlimited emails" }
+            "seoTools": {
+              "name": "SEO Tools",
+              "free": "Basic SEO",
+              "pro": "Advanced SEO",
+              "business": "Premium SEO + Analytics"
+            },
+            "googleAnalytics": {
+              "name": "Google Analytics",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "socialMedia": {
+              "name": "Social Media Integration",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "emailMarketing": {
+              "name": "Email Marketing",
+              "free": false,
+              "pro": "100 emails/month",
+              "business": "Unlimited emails"
+            }
           }
         },
         "support": {
           "name": "Support & Security",
           "features": {
-            "support": { "name": "Support", "free": "Community support", "pro": "Priority support", "business": "Dedicated support" },
-            "ssl": { "name": "SSL Certificate", "free": true, "pro": true, "business": true },
-            "passwordProtection": { "name": "Password Protection", "free": false, "pro": true, "business": true },
-            "backup": { "name": "Backup & Recovery", "free": false, "pro": "Weekly backups", "business": "Daily backups" }
+            "support": {
+              "name": "Support",
+              "free": "Community support",
+              "pro": "Priority support",
+              "business": "Dedicated support"
+            },
+            "ssl": {
+              "name": "SSL Certificate",
+              "free": true,
+              "pro": true,
+              "business": true
+            },
+            "passwordProtection": {
+              "name": "Password Protection",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "backup": {
+              "name": "Backup & Recovery",
+              "free": false,
+              "pro": "Weekly backups",
+              "business": "Daily backups"
+            }
           }
         }
       }
@@ -295,7 +459,7 @@
   "servicePage": {
     "hero": {
       "title": "We Service<br />for your Dream",
-      "subtitle": "Build a professional website in minutes — No code, No hassle",
+      "subtitle": "Build a professional website in minutes<br />No code, No hassle",
       "startBuildingFree": "Start Building Free",
       "browseTemplates": "Browse Templates",
       "noCreditCard": "No credit card required",
@@ -303,12 +467,30 @@
       "launchTime": "Launch in 5 minutes"
     },
     "heroFeatures": [
-      { "title": "Professional Design", "description": "Designer-made templates optimized for conversion" },
-      { "title": "Built-in SEO", "description": "Rank higher on Google with advanced SEO tools" },
-      { "title": "Enterprise Security", "description": "SSL certificates, auto-backups, 99.9% uptime" },
-      { "title": "Custom Domain", "description": "Connect your domain or get a free one" },
-      { "title": "Mobile Responsive", "description": "Perfect on all devices automatically" },
-      { "title": "Real-time Analytics", "description": "Track visitors and make data-driven decisions" }
+      {
+        "title": "Professional Design",
+        "description": "Designer-made templates optimized for conversion"
+      },
+      {
+        "title": "Built-in SEO",
+        "description": "Rank higher on Google with advanced SEO tools"
+      },
+      {
+        "title": "Enterprise Security",
+        "description": "SSL certificates, auto-backups, 99.9% uptime"
+      },
+      {
+        "title": "Custom Domain",
+        "description": "Connect your domain or get a free one"
+      },
+      {
+        "title": "Mobile Responsive",
+        "description": "Perfect on all devices automatically"
+      },
+      {
+        "title": "Real-time Analytics",
+        "description": "Track visitors and make data-driven decisions"
+      }
     ],
     "features": {
       "title": "Powerful Features, Simple Interface",
@@ -317,31 +499,59 @@
         {
           "title": "Lightning Fast Setup",
           "description": "Launch your website in just 5 minutes. No installation, no setup headaches. Choose a template and start editing immediately.",
-          "highlights": ["5-minute launch", "Instant start", "Zero setup required"]
+          "highlights": [
+            "5-minute launch",
+            "Instant start",
+            "Zero setup required"
+          ]
         },
         {
           "title": "Professional Design",
           "description": "Every template is crafted by professional designers. Modern, trendy, and conversion-optimized designs that make your brand shine.",
-          "highlights": ["Designer-made templates", "Trendy & modern", "Brand customization"]
+          "highlights": [
+            "Designer-made templates",
+            "Trendy & modern",
+            "Brand customization"
+          ]
         },
         {
           "title": "Mobile-First Responsive",
           "description": "All websites are fully responsive by default. Your site looks perfect on every device - desktop, tablet, and mobile.",
-          "highlights": ["100% responsive", "Perfect on all devices", "Mobile optimized"]
+          "highlights": [
+            "100% responsive",
+            "Perfect on all devices",
+            "Mobile optimized"
+          ]
         },
         {
           "title": "24/7 Security & Support",
           "description": "SSL certificates, automatic backups, and 99.9% uptime guaranteed. Our support team is here to help anytime.",
-          "highlights": ["SSL included", "Auto backups", "24/7 support"]
+          "highlights": [
+            "SSL included",
+            "Auto backups",
+            "24/7 support"
+          ]
         }
       ]
     },
     "howItWorks": {
       "title": "How It Works",
       "steps": [
-        { "number": "01", "title": "Choose Template", "description": "Browse 500+ professional templates and pick the one that fits your vision." },
-        { "number": "02", "title": "Customize Your Site", "description": "Use our drag & drop editor to personalize every element. No coding needed." },
-        { "number": "03", "title": "Launch & Grow", "description": "Hit publish and your website goes live instantly. Start growing your business today." }
+        {
+          "number": "01",
+          "title": "Choose Template",
+          "description": "Browse 500+ professional templates and pick the one that fits your vision."
+        },
+        {
+          "number": "02",
+          "title": "Customize Your Site",
+          "description": "Use our drag & drop editor to personalize every element. No coding needed."
+        },
+        {
+          "number": "03",
+          "title": "Launch & Grow",
+          "description": "Hit publish and your website goes live instantly. Start growing your business today."
+        }
       ]
     },
     "faq": {
@@ -516,19 +726,40 @@
         "heading": "1.1 Information You Provide",
         "intro": "We collect information that you voluntarily provide when using our Service:",
         "items": [
-          { "label": "Account Information", "description": "Name, email address, and profile information" },
-          { "label": "Payment Information", "description": "Billing details (processed securely through third-party providers)" },
-          { "label": "Website Content", "description": "Text, images, videos, and other content you upload" },
-          { "label": "Communications", "description": "Messages you send us through support channels" }
+          {
+            "label": "Account Information",
+            "description": "Name, email address, and profile information"
+          },
+          {
+            "label": "Payment Information",
+            "description": "Billing details (processed securely through third-party providers)"
+          },
+          {
+            "label": "Website Content",
+            "description": "Text, images, videos, and other content you upload"
+          },
+          {
+            "label": "Communications",
+            "description": "Messages you send us through support channels"
+          }
         ]
       },
       "automatic": {
         "heading": "1.2 Information Automatically Collected",
         "intro": "When you use facadely, we automatically collect certain information:",
         "items": [
-          { "label": "Usage Data", "description": "Pages visited, features used, time spent on platform" },
-          { "label": "Device Information", "description": "IP address, browser type, operating system" },
-          { "label": "Cookies", "description": "Session cookies, preference cookies, analytics cookies" }
+          {
+            "label": "Usage Data",
+            "description": "Pages visited, features used, time spent on platform"
+          },
+          {
+            "label": "Device Information",
+            "description": "IP address, browser type, operating system"
+          },
+          {
+            "label": "Cookies",
+            "description": "Session cookies, preference cookies, analytics cookies"
+          }
         ]
       },
       "socialLogin": {
@@ -554,10 +785,22 @@
       "heading": "3. How We Share Your Information",
       "intro": "We do not sell your personal information. We may share your information in the following circumstances:",
       "items": [
-        { "label": "Service Providers", "description": "Third-party vendors who perform services on our behalf (hosting, payment processing, email delivery, analytics)" },
-        { "label": "Business Transfers", "description": "In connection with a merger, acquisition, or sale of assets" },
-        { "label": "Legal Requirements", "description": "When required by law, subpoena, or government request" },
-        { "label": "With Your Consent", "description": "When you explicitly authorize us to share your information" }
+        {
+          "label": "Service Providers",
+          "description": "Third-party vendors who perform services on our behalf (hosting, payment processing, email delivery, analytics)"
+        },
+        {
+          "label": "Business Transfers",
+          "description": "In connection with a merger, acquisition, or sale of assets"
+        },
+        {
+          "label": "Legal Requirements",
+          "description": "When required by law, subpoena, or government request"
+        },
+        {
+          "label": "With Your Consent",
+          "description": "When you explicitly authorize us to share your information"
+        }
       ]
     },
     "dataSecurity": {
@@ -580,11 +823,26 @@
       "heading": "6. Your Privacy Rights",
       "intro": "Depending on your location, you may have the following rights:",
       "items": [
-        { "label": "Access and Portability", "description": "Request a copy of your personal data" },
-        { "label": "Correction", "description": "Update or correct inaccurate personal information" },
-        { "label": "Deletion", "description": "Request deletion of your personal data" },
-        { "label": "Objection", "description": "Object to or restrict certain processing activities" },
-        { "label": "Withdraw Consent", "description": "Withdraw consent for marketing communications" }
+        {
+          "label": "Access and Portability",
+          "description": "Request a copy of your personal data"
+        },
+        {
+          "label": "Correction",
+          "description": "Update or correct inaccurate personal information"
+        },
+        {
+          "label": "Deletion",
+          "description": "Request deletion of your personal data"
+        },
+        {
+          "label": "Objection",
+          "description": "Object to or restrict certain processing activities"
+        },
+        {
+          "label": "Withdraw Consent",
+          "description": "Withdraw consent for marketing communications"
+        }
       ],
       "note": "To exercise your rights, contact us at privacy@facadely.com. We will respond within 30 days."
     },
@@ -691,12 +949,30 @@
     "paymentBilling": {
       "heading": "4. Payment and Billing",
       "items": [
-        { "label": "Subscription Plans", "content": "Paid plans (Pro and Business) are billed on a monthly or annual basis as selected by you." },
-        { "label": "Auto-Renewal", "content": "Subscriptions automatically renew unless cancelled before the renewal date." },
-        { "label": "Cancellation", "content": "You may cancel your subscription at any time. Cancellation takes effect at the end of the current billing period." },
-        { "label": "Refunds", "content": "We offer a 14-day money-back guarantee for first-time annual subscriptions. Monthly subscriptions are non-refundable." },
-        { "label": "Price Changes", "content": "We reserve the right to modify pricing with 30 days notice to existing subscribers." },
-        { "label": "Taxes", "content": "Prices do not include applicable taxes, which will be added as required by local law." }
+        {
+          "label": "Subscription Plans",
+          "content": "Paid plans (Pro and Business) are billed on a monthly or annual basis as selected by you."
+        },
+        {
+          "label": "Auto-Renewal",
+          "content": "Subscriptions automatically renew unless cancelled before the renewal date."
+        },
+        {
+          "label": "Cancellation",
+          "content": "You may cancel your subscription at any time. Cancellation takes effect at the end of the current billing period."
+        },
+        {
+          "label": "Refunds",
+          "content": "We offer a 14-day money-back guarantee for first-time annual subscriptions. Monthly subscriptions are non-refundable."
+        },
+        {
+          "label": "Price Changes",
+          "content": "We reserve the right to modify pricing with 30 days notice to existing subscribers."
+        },
+        {
+          "label": "Taxes",
+          "content": "Prices do not include applicable taxes, which will be added as required by local law."
+        }
       ]
     },
     "intellectualProperty": {
@@ -809,9 +1085,18 @@
       "heading": "4. Third-Party Services",
       "intro": "We use third-party services that may set their own cookies:",
       "services": [
-        { "name": "Google Analytics", "purpose": "Website usage analytics" },
-        { "name": "Stripe", "purpose": "Payment processing" },
-        { "name": "Supabase", "purpose": "Authentication and database" }
+        {
+          "name": "Google Analytics",
+          "purpose": "Website usage analytics"
+        },
+        {
+          "name": "Stripe",
+          "purpose": "Payment processing"
+        },
+        {
+          "name": "Supabase",
+          "purpose": "Authentication and database"
+        }
       ]
     },
     "yourChoices": {

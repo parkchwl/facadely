@@ -37,10 +37,10 @@ export const IMAGE_STRATEGY: Record<ImageTypeKey, ImageStrategy> = {
   },
 
   [ImageType.TEMPLATE_THUMBNAIL]: {
-    component: 'img',
+    component: 'Image',
     loading: 'lazy',
-    optimization: false,
-    reason: 'Static AVIF thumbnails, browser-native lazy loading is sufficient'
+    optimization: true,
+    reason: 'Next.js Image optimization for responsive resizing (mobile/desktop)'
   },
 
   [ImageType.USER_CONTENT]: {

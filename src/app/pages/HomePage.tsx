@@ -4,7 +4,7 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { DM_Serif_Display, Inter } from 'next/font/google';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
@@ -453,7 +453,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                 className={`${inter.className} text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold text-white tracking-tight leading-none`}
                 dangerouslySetInnerHTML={{ __html: hero.title }}
               />
-              <p className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl font-light text-center"
+              <p className="text-base sm:text-lg lg:text-xl text-[rgb(150,150,150)] leading-relaxed max-w-xl font-normal text-center"
                 dangerouslySetInnerHTML={{ __html: hero.subtitle }} />
               <div className="flex items-center gap-2 lg:gap-3">
                 <Link href={`${langPrefix}/login`} className="bg-white text-black py-3 px-6 lg:py-4 lg:px-8 rounded-xl font-bold text-base transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] hover:scale-105">
@@ -725,6 +725,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             >
               <h2
                 className={`${inter.className} text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white mb-8 tracking-tight leading-none`}
+                style={{ textShadow: '0 0 30px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.15)' }}
                 dangerouslySetInnerHTML={{ __html: finalCta.title }}
               />
               <p
@@ -743,6 +744,20 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
 
             {/* Subtle background glow effect using CSS animation */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none animate-pulse duration-[5000ms]" />
+
+            {/* Large dot-pattern ✦ logo background */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] sm:text-[30rem] lg:text-[40rem] pointer-events-none select-none font-bold"
+              style={{
+                backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.10) 1px, transparent 1px)',
+                backgroundSize: '8px 8px',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              ✦
+            </div>
           </div>
         </section>
       </main>

@@ -5,14 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Globe, Check, Menu, X, Instagram, Facebook } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cardo } from 'next/font/google';
+import { Inter, DM_Serif_Display } from 'next/font/google';
 import { i18n, type Locale } from '@/i18n/config';
 import { languageNames } from '@/i18n/utils';
 import type { Dictionary } from '@/types/dictionary';
 
-const cardo = Cardo({
+const inter = Inter({ subsets: ['latin'] });
+const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
-  weight: ['700'],
+  weight: ['400'],
   display: 'swap',
 });
 
@@ -403,7 +404,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
           {/* BLOOM YOUR DREAM */}
           <div className="mt-16 text-center overflow-hidden">
             <h1
-              className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap ${cardo.className}`}
+              className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold whitespace-nowrap ${dmSerif.className}`}
             >
               {footer.headline}
             </h1>

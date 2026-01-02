@@ -24,6 +24,7 @@ const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index 
         alt={template.title}
         type={ImageType.TEMPLATE_THUMBNAIL}
         fill
+        sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 384px"
         className="object-cover opacity-100"
         priority={index < 13}
       />
