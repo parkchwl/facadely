@@ -217,14 +217,14 @@ body {
 }
 
 .gallery-scroll-left {
-  animation: scroll-left 60s linear infinite;
+  animation: scroll-left 240s linear infinite;
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
 .gallery-scroll-right {
-  animation: scroll-right 60s linear infinite;
+  animation: scroll-right 240s linear infinite;
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -233,11 +233,11 @@ body {
 /* Slower on mobile for smoother experience */
 @media (max-width: 640px) {
   .gallery-scroll-left {
-    animation-duration: 40s;
+    animation-duration: 160s;
   }
 
   .gallery-scroll-right {
-    animation-duration: 40s;
+    animation-duration: 160s;
   }
 }
 

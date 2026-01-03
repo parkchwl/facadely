@@ -4,7 +4,7 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { DM_Serif_Display, Inter } from 'next/font/google';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
@@ -360,9 +360,6 @@ const BASE_TEMPLATES = [
   { id: 8, title: 'Fitness App', category: 'Health', image: '/image/8.webp' },
   { id: 9, title: 'Real Estate', category: 'Business', image: '/image/9.webp' },
   { id: 10, title: 'Online Course', category: 'Education', image: '/image/10.webp' },
-  { id: 11, title: 'Template 11', category: 'Category', image: '/image/11.webp' },
-  { id: 12, title: 'Template 12', category: 'Category', image: '/image/12.webp' },
-  { id: 13, title: 'Template 13', category: 'Category', image: '/image/13.webp' }
 ] as const;
 
 const iconMap: { [key: string]: React.ElementType } = {
@@ -403,24 +400,13 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const STATS_DATA = whyMatters.stats;
   const SOLUTION_DATA = solution.items;
 
-  // Scroll Parallax Logic with GPU acceleration
-  const galleryRef = React.useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: galleryRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Fixed parallax values with non-linear easing (ease-in-out effect)
-  const xLeft = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["0%", "-0.5%", "-1.5%", "-2.5%", "-3%"]);
-  const xRight = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["-3%", "-2.5%", "-1.5%", "-0.5%", "0%"]);
-
-  // Reduced duplication (2x → 1.5x) - 39 cards total instead of 52
+  // Duplicated rows for CSS infinite scroll animation
   const duplicatedRow1 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES.slice(0, 7)], // 13 + 7 = 20 cards
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES], // 26 cards for seamless loop
     []
   );
   const duplicatedRow2 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES.slice(0, 6)], // 13 + 6 = 19 cards
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES], // 26 cards for seamless loop
     []
   );
 
@@ -429,7 +415,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     <>
       <main className="bg-black min-h-screen">
         <section className="relative z-10 flex flex-col bg-black">
-          <div className="relative text-center text-white min-h-[40vh] sm:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center overflow-hidden">
+          <div className="relative text-center text-white min-h-[45vh] sm:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center overflow-hidden">
             {/* Plain Black Background */}
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
@@ -464,12 +450,9 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
           </div>
 
-          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-4 py-4">
+          <section className="relative bg-black overflow-hidden space-y-4 py-4">
             <div className="overflow-hidden">
-              <motion.div
-                style={{ x: xLeft }}
-                className="flex w-max"
-              >
+              <div className="flex w-max gallery-scroll-left">
                 {duplicatedRow1.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
                     <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
@@ -477,21 +460,18 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     </div>
                   </Link>
                 ))}
-              </motion.div>
+              </div>
             </div>
             <div className="overflow-hidden">
-              <motion.div
-                style={{ x: xRight }}
-                className="flex w-max"
-              >
+              <div className="flex w-max gallery-scroll-right">
                 {duplicatedRow2.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
                     <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
-                      <TemplateCard template={template} index={index + 20} />
+                      <TemplateCard template={template} index={index + 10} />
                     </div>
                   </Link>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </section>
 
