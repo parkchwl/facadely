@@ -241,11 +241,7 @@ body {
   }
 }
 
-/* Pause animation on hover for better UX */
-.gallery-scroll-left:hover,
-.gallery-scroll-right:hover {
-  animation-play-state: paused;
-}
+/* Hover pause removed for continuous animation */
 
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
