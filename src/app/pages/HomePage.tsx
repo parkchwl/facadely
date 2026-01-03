@@ -410,17 +410,17 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     offset: ["start end", "end start"]
   });
 
-  // Fixed parallax values - NO dynamic changes to prevent re-renders
-  const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-3%"]);
-  const xRight = useTransform(scrollYProgress, [0, 1], ["-3%", "0%"]);
+  // Fixed parallax values with non-linear easing (ease-in-out effect)
+  const xLeft = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["0%", "-0.5%", "-1.5%", "-2.5%", "-3%"]);
+  const xRight = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["-3%", "-2.5%", "-1.5%", "-0.5%", "0%"]);
 
-  // Reduced duplication (3 → 2) for better mobile performance
+  // Reduced duplication (2x → 1.5x) - 39 cards total instead of 52
   const duplicatedRow1 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES],
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES.slice(0, 7)], // 13 + 7 = 20 cards
     []
   );
   const duplicatedRow2 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES],
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES.slice(0, 6)], // 13 + 6 = 19 cards
     []
   );
 
@@ -487,7 +487,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                 {duplicatedRow2.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
                     <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
-                      <TemplateCard template={template} index={index + 13} />
+                      <TemplateCard template={template} index={index + 20} />
                     </div>
                   </Link>
                 ))}

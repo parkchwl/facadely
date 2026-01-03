@@ -18,7 +18,6 @@ interface TemplateCardProps {
 const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index }) => {
   return (
     <div className="w-full h-full aspect-[3/4] relative overflow-hidden rounded-2xl shadow-xl cursor-default bg-gray-900 block">
-      {/* 이미지 - 항상 렌더링 (IntersectionObserver 제거) */}
       <OptimizedImage
         src={template.image}
         alt={template.title}
@@ -31,7 +30,6 @@ const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index 
     </div>
   );
 }, (prevProps, nextProps) => {
-  // Re-render if template ID OR index changes (for infinite scroll)
   return prevProps.template.id === nextProps.template.id &&
     prevProps.index === nextProps.index;
 });
