@@ -4,7 +4,7 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { DM_Serif_Display, Inter } from 'next/font/google';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
@@ -414,15 +414,13 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-3%"]);
   const xRight = useTransform(scrollYProgress, [0, 1], ["-3%", "0%"]);
 
-
-
-  // Stable duplicated rows - always render enough items for the largest screen to prevent hydration mismatch
+  // Reduced duplication (3 → 2) for better mobile performance
   const duplicatedRow1 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES],
     []
   );
   const duplicatedRow2 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES, ...BASE_TEMPLATES],
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES],
     []
   );
 
@@ -431,7 +429,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     <>
       <main className="bg-black min-h-screen">
         <section className="relative z-10 flex flex-col bg-black">
-          <div className="relative text-center text-white min-h-[35vh] sm:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center overflow-hidden">
+          <div className="relative text-center text-white min-h-[40vh] sm:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center overflow-hidden">
             {/* Plain Black Background */}
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">

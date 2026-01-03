@@ -202,13 +202,13 @@ body {
   }
 
   100% {
-    transform: translate3d(-33.333%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes scroll-right {
   0% {
-    transform: translate3d(-33.333%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
   }
 
   100% {
@@ -217,13 +217,28 @@ body {
 }
 
 .gallery-scroll-left {
-  animation: scroll-left 30s linear infinite;
+  animation: scroll-left 60s linear infinite;
   will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .gallery-scroll-right {
-  animation: scroll-right 30s linear infinite;
+  animation: scroll-right 60s linear infinite;
   will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Slower on mobile for smoother experience */
+@media (max-width: 640px) {
+  .gallery-scroll-left {
+    animation-duration: 40s;
+  }
+
+  .gallery-scroll-right {
+    animation-duration: 40s;
+  }
 }
 
 /* Pause animation on hover for better UX */
