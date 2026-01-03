@@ -17,7 +17,7 @@ interface TemplateCardProps {
 
 const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index }) => {
   return (
-    <div className="w-full h-full aspect-[3/4] relative overflow-hidden rounded-2xl shadow-xl cursor-default bg-gray-900 block">
+    <div className="w-full h-full aspect-[3/4] relative overflow-hidden rounded-2xl cursor-default bg-gray-900 block">
       <OptimizedImage
         src={template.image}
         alt={template.title}
@@ -25,7 +25,7 @@ const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index 
         fill
         sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 384px"
         className="object-cover opacity-100"
-        priority={index < 13}
+        priority={index < 6}
       />
     </div>
   );

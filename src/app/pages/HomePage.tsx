@@ -467,7 +467,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
           <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-4 py-4">
             <div className="overflow-hidden">
               <motion.div
-                style={{ x: xLeft, willChange: 'transform', transform: 'translateZ(0)' }}
+                style={{ x: xLeft }}
                 className="flex w-max"
               >
                 {duplicatedRow1.map((template, index) => (
@@ -481,7 +481,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </div>
             <div className="overflow-hidden">
               <motion.div
-                style={{ x: xRight, willChange: 'transform', transform: 'translateZ(0)' }}
+                style={{ x: xRight }}
                 className="flex w-max"
               >
                 {duplicatedRow2.map((template, index) => (
