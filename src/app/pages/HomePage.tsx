@@ -456,11 +456,11 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
           </div>
 
-          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-4 py-8">
+          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-2 py-8">
             <div className="overflow-hidden gallery-mask">
               <motion.div
                 style={{ x: xLeft }}
-                className="flex w-max py-4"
+                className="flex w-max py-2"
               >
                 {infiniteTemplates.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
@@ -478,7 +478,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             <div className="overflow-hidden gallery-mask">
               <motion.div
                 style={{ x: xRight }}
-                className="flex w-max py-4"
+                className="flex w-max py-2"
               >
                 {infiniteTemplates.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
