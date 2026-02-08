@@ -195,39 +195,20 @@ body {
   animation: subtle-flash 5s ease-in-out infinite;
 }
 
-/* Infinite Scroll Gallery Animations - GPU Accelerated */
-@keyframes scroll-left {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
+/* Infinite Scroll Gallery Animations - Removed in favor of Framer Motion Scroll */
 
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes scroll-right {
-  0% {
-    transform: translate3d(-50%, 0, 0);
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.gallery-scroll-left {
-  animation: scroll-left 240s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.gallery-scroll-right {
-  animation: scroll-right 240s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+/* Fading Edge Mask for Gallery - Refined for Parallax (5%) */
+.gallery-mask {
+  mask-image: linear-gradient(to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent);
+  -webkit-mask-image: linear-gradient(to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent);
 }
 
 /* Fading Edge Mask for Gallery - Minimal intensity (3%) */
@@ -244,16 +225,6 @@ body {
       transparent);
 }
 
-/* Slower on mobile for smoother experience */
-@media (max-width: 640px) {
-  .gallery-scroll-left {
-    animation-duration: 160s;
-  }
-
-  .gallery-scroll-right {
-    animation-duration: 160s;
-  }
-}
 
 /* Hover pause removed for continuous animation */
 

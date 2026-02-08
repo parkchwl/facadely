@@ -4,7 +4,7 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { DM_Serif_Display, Inter } from 'next/font/google';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
@@ -393,6 +393,16 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     handleFaqMouseLeave,
   } = useFaqRotation(dictionary.faq.questions.length);
 
+  // Scroll-linked gallery logic
+  const galleryRef = React.useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: galleryRef,
+    offset: ["start end", "end start"]
+  });
+
+  const xLeft = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const xRight = useTransform(scrollYProgress, [0, 1], [-400, 0]);
+
   // Extract dictionary data
   const { hero, whyMatters, solution, faq, finalCta, loadingScreen } = dictionary;
   const FAQS = faq.questions;
@@ -446,9 +456,12 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
           </div>
 
-          <section className="relative bg-black overflow-hidden space-y-4 py-8">
+          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-4 py-8">
             <div className="overflow-hidden gallery-mask">
-              <div className="flex w-max gallery-scroll-left py-4 hover:cursor-pointer">
+              <motion.div
+                style={{ x: xLeft }}
+                className="flex w-max py-4"
+              >
                 {infiniteTemplates.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
                     <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-2 sm:mx-3">
@@ -460,10 +473,13 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     </div>
                   </Link>
                 ))}
-              </div>
+              </motion.div>
             </div>
             <div className="overflow-hidden gallery-mask">
-              <div className="flex w-max gallery-scroll-right py-4 hover:cursor-pointer">
+              <motion.div
+                style={{ x: xRight }}
+                className="flex w-max py-4"
+              >
                 {infiniteTemplates.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
                     <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-2 sm:mx-3">
@@ -471,7 +487,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     </div>
                   </Link>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </section>
 
