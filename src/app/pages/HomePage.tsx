@@ -103,7 +103,7 @@ const ANIMATIONS = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     transition: { duration: CONFIG.ANIMATION_DURATION_NORMAL },
-    viewport: { once: true }
+    viewport: { once: true, margin: "-100px" }
   },
 
   // FAQ Section
@@ -111,7 +111,7 @@ const ANIMATIONS = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     transition: { duration: CONFIG.ANIMATION_DURATION_NORMAL },
-    viewport: { once: true }
+    viewport: { once: true, margin: "-100px" }
   },
 
   // Button Hover Effects
@@ -131,13 +131,13 @@ const ANIMATIONS = {
 // ================================================================================
 const STYLES = {
   // Container & Layout
-  containerClasses: "w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
+  containerClasses: "w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
   heroContainerClasses: "w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
   sectionSpacing: "py-16 sm:py-20 lg:py-24 xl:py-28 2xl:py-32",
 
   // Hero Section
   heroSection: "relative z-10 flex flex-col bg-black",
-  heroImageContainer: "relative text-left text-white h-[55vh] sm:h-[60vh] lg:h-[65vh] flex items-center justify-center overflow-hidden",
+  heroImageContainer: "relative text-left text-white flex items-center justify-center overflow-hidden py-24 sm:py-32 lg:py-40",
   heroGradient: "absolute inset-0 bg-gradient-to-r from-black/60 to-transparent",
   heroTitle: "text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-extrabold text-white tracking-tight leading-[0.9] mb-8 lg:mb-20 xl:mb-20",
   heroSubtitle: "text-xl sm:text-2xl lg:text-3xl text-gray-200 leading-relaxed max-w-2xl font-light",
@@ -153,21 +153,21 @@ const STYLES = {
   templateCardWrapper: "flex-shrink-0 w-72 sm:w-80 lg:w-96 mx-4",
 
   // Why Matters Section
-  whyMattersContainer: "relative flex items-center justify-center min-h-screen py-16 sm:py-20 lg:py-24 overflow-hidden",
+  whyMattersContainer: "relative flex items-center justify-center min-h-[700px] py-16 sm:py-20 lg:py-24 overflow-hidden",
   whyMattersGradient: "absolute inset-0 bg-black/40",
-  whyMattersGrid: "grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-start",
+  whyMattersGrid: "grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start",
   whyMattersLeftColumn: "flex flex-col gap-4 lg:gap-6 justify-start lg:col-span-1",
-  whyMattersTitle: "text-7xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[110px] 2xl:text-[130px] font-extrabold tracking-tight leading-[0.9] text-white",
-  whyMattersDescription: "text-xl lg:text-2xl xl:text-3xl text-gray-200 leading-relaxed font-light max-w-xl",
-  whyMattersButton: "bg-white text-black px-12 py-6 lg:px-14 lg:py-7 rounded-full hover:bg-gray-100 transition-all duration-200 text-xl lg:text-2xl font-bold shadow-2xl hover:scale-105 hover:-translate-y-0.5 active:scale-95",
-  statsGrid: "grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8",
+  whyMattersTitle: "text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/70",
+  whyMattersDescription: "text-lg lg:text-xl xl:text-2xl text-gray-200 leading-relaxed font-light max-w-2xl",
+  whyMattersButton: "bg-white text-black px-10 py-5 lg:px-12 lg:py-6 rounded-full hover:bg-gray-100 transition-all duration-200 text-lg lg:text-xl font-bold shadow-2xl hover:scale-105 hover:-translate-y-0.5 active:scale-95",
+  statsGrid: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8",
   statCard: "relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-6 lg:p-8 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02]",
   statCardGlow: "absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none stat-card-inner-glow",
   statCardContent: "relative z-10 flex flex-col gap-4",
-  statNumber: "text-5xl lg:text-6xl xl:text-7xl font-bold text-white",
+  statNumber: "text-4xl lg:text-5xl xl:text-6xl font-bold text-white",
   statHighlight: "font-medium",
-  statText: "text-base lg:text-lg xl:text-xl text-white leading-relaxed mb-3 font-light",
-  statSource: "text-sm lg:text-base text-gray-400",
+  statText: "text-sm lg:text-base xl:text-lg text-white leading-relaxed mb-3 font-light",
+  statSource: "text-xs lg:text-sm text-gray-400",
 
   // Solution Section
   solutionSection: "relative border-t border-gray-800 overflow-hidden",
@@ -400,13 +400,9 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const STATS_DATA = whyMatters.stats;
   const SOLUTION_DATA = solution.items;
 
-  // Duplicated rows for CSS infinite scroll animation
-  const duplicatedRow1 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES], // 26 cards for seamless loop
-    []
-  );
-  const duplicatedRow2 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES], // 26 cards for seamless loop
+  // Duplicated row for CSS infinite scroll animation
+  const infiniteTemplates = useMemo(() =>
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES], // 20 cards for seamless loop
     []
   );
 
@@ -415,7 +411,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     <>
       <main className="bg-black min-h-screen">
         <section className="relative z-10 flex flex-col bg-black">
-          <div className="relative text-center text-white min-h-[45vh] sm:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center overflow-hidden">
+          <div className="relative text-center text-white flex items-center justify-center overflow-hidden py-24 sm:py-32 lg:py-40">
             {/* Plain Black Background */}
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
@@ -431,7 +427,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </div>
             <motion.div
               {...ANIMATIONS.heroFadeInUp}
-              className="relative z-10 flex flex-col items-center justify-center gap-6 px-4 sm:px-6 lg:px-8 pt-24 pb-0"
+              className="relative z-10 flex flex-col items-center justify-center gap-6 px-4 sm:px-6 lg:px-8"
             >
               <h1
                 className={`${inter.className} text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold text-white tracking-tight leading-none`}
@@ -450,23 +446,27 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
           </div>
 
-          <section className="relative bg-black overflow-hidden space-y-4 py-4">
-            <div className="overflow-hidden">
-              <div className="flex w-max gallery-scroll-left">
-                {duplicatedRow1.map((template, index) => (
+          <section className="relative bg-black overflow-hidden space-y-4 py-8">
+            <div className="overflow-hidden gallery-mask">
+              <div className="flex w-max gallery-scroll-left py-4 hover:cursor-pointer">
+                {infiniteTemplates.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
-                      <TemplateCard template={template} index={index} />
+                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-2 sm:mx-3">
+                      <TemplateCard
+                        template={template}
+                        index={index}
+                        handleImageLoad={index < 4 ? handleImageLoad : undefined}
+                      />
                     </div>
                   </Link>
                 ))}
               </div>
             </div>
-            <div className="overflow-hidden">
-              <div className="flex w-max gallery-scroll-right">
-                {duplicatedRow2.map((template, index) => (
+            <div className="overflow-hidden gallery-mask">
+              <div className="flex w-max gallery-scroll-right py-4 hover:cursor-pointer">
+                {infiniteTemplates.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
+                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-2 sm:mx-3">
                       <TemplateCard template={template} index={index + 10} />
                     </div>
                   </Link>
@@ -475,7 +475,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </div>
           </section>
 
-          <div className="relative flex items-center justify-center min-h-screen py-16 sm:py-20 lg:py-24 overflow-hidden">
+          <div className="relative flex items-center justify-center min-h-[700px] py-16 sm:py-20 lg:py-24 overflow-hidden">
             <OptimizedImage
               src="/image/Matters.avif"
               alt="Why your website matters background"
@@ -485,19 +485,20 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               onLoad={handleImageLoad}
             />
             <div className="absolute inset-0 bg-black/40"></div>
-            <div className={`${STYLES.containerClasses} py-12 sm:py-16 lg:py-20 xl:py-24 relative z-10`}>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-start">
-                <div className="flex flex-col gap-4 lg:gap-6 justify-start lg:col-span-1">
+            <div className={`${STYLES.containerClasses} py-16 sm:py-24 lg:py-32 relative z-10`}>
+              <div className="flex flex-col items-center gap-12 sm:gap-14">
+                {/* Subtle Decorative Glow */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none" />
+
+                {/* Header Section */}
+                <div className="flex flex-col items-center text-center gap-4 sm:gap-5 max-w-4xl">
                   <motion.div
                     {...ANIMATIONS.headingFadeInUp}
-                    className="w-full mb-2"
+                    className="w-full"
                     suppressHydrationWarning
                   >
                     <h2
-                      className={`text-6xl sm:text-7xl md:text-8xl lg:text-7xl font-extrabold tracking-tight leading-[0.9] text-white ${lang === 'ko'
-                        ? 'xl:text-7xl 2xl:text-8xl'
-                        : 'xl:text-8xl 2xl:text-9xl'
-                        } ${dmSerif.className}`}
+                      className={`${STYLES.whyMattersTitle} ${dmSerif.className}`}
                       dangerouslySetInnerHTML={{ __html: whyMatters.title }}
                       suppressHydrationWarning
                     />
@@ -506,41 +507,33 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     {...ANIMATIONS.descriptionFadeInUp}
                     className="w-full"
                   >
-                    <p className="text-xl lg:text-2xl xl:text-3xl text-gray-200 leading-relaxed font-light max-w-xl"
+                    <p className={STYLES.whyMattersDescription}
                       dangerouslySetInnerHTML={{ __html: whyMatters.description }} />
                   </motion.div>
-                  <motion.div
-                    {...ANIMATIONS.ctaButtonFadeInUp}
-                    className="w-fit"
-                  >
-                    <Link href={`${langPrefix}/generate`}>
-                      <button className="bg-white text-black px-12 py-6 lg:px-14 lg:py-7 rounded-full hover:bg-gray-100 transition-all duration-200 text-xl lg:text-2xl font-bold shadow-2xl hover:scale-105 hover:-translate-y-0.5 active:scale-95">
-                        {whyMatters.ctaButton}
-                      </button>
-                    </Link>
-                  </motion.div>
                 </div>
+
+                {/* Statistics Grid */}
                 <motion.div
                   {...ANIMATIONS.statsContainerFadeInUp}
-                  className="w-full lg:col-span-2"
+                  className="w-full"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                  <div className={STYLES.statsGrid}>
                     {STATS_DATA.map((item, index: number) => (
                       <div
                         key={index}
-                        className={`relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-6 lg:p-8 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02] ${index >= CONFIG.STATS_DISPLAY_THRESHOLD ? 'hidden md:block' : ''}`}
+                        className={`${STYLES.statCard} ${index >= CONFIG.STATS_DISPLAY_THRESHOLD ? 'hidden md:block' : ''}`}
                         style={{ boxShadow: `inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)`, transform: 'translateZ(0)' }}
                       >
-                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none stat-card-inner-glow"></div>
-                        <div className="relative z-10 flex flex-col gap-4">
-                          <h3 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white">
+                        <div className={STYLES.statCardGlow}></div>
+                        <div className={STYLES.statCardContent}>
+                          <h3 className={STYLES.statNumber}>
                             {item.stat}
                           </h3>
                           <div>
-                            <p className="text-base lg:text-lg xl:text-xl text-white leading-relaxed mb-3 font-light">
-                              <span className="font-medium">{item.highlight}</span> {item.text}
+                            <p className={STYLES.statText}>
+                              <span className={STYLES.statHighlight}>{item.highlight}</span> {item.text}
                             </p>
-                            <p className="text-sm lg:text-base text-gray-400">
+                            <p className={STYLES.statSource}>
                               {item.source}
                             </p>
                           </div>

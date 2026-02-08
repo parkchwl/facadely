@@ -230,6 +230,20 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
+/* Fading Edge Mask for Gallery - Minimal intensity (3%) */
+.gallery-mask {
+  mask-image: linear-gradient(to right,
+      transparent,
+      black 3%,
+      black 97%,
+      transparent);
+  -webkit-mask-image: linear-gradient(to right,
+      transparent,
+      black 3%,
+      black 97%,
+      transparent);
+}
+
 /* Slower on mobile for smoother experience */
 @media (max-width: 640px) {
   .gallery-scroll-left {

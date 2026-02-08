@@ -58,27 +58,75 @@
       "signupFreeText": "무료입니다!"
     },
     "whyMatters": {
-      "title": "웹사이트가<br />중요한 이유",
+      "title": "웹사이트는<br />필수입니다",
       "description": "오늘날의 디지털 세계에서 웹사이트는<br /><strong>첫 인상</strong>, <strong>신뢰성</strong>, 그리고 <strong>주요 판매 수단</strong>입니다.",
       "ctaButton": "오늘 사이트 구축하기",
       "stats": [
-        { "stat": "94%", "highlight": "첫 인상 중", "text": "디자인 관련입니다.", "source": "Northumbria University UX Lab" },
-        { "stat": "88%", "highlight": "온라인 소비자 중", "text": "나쁜 경험 후 사이트로 돌아올 가능성이 낮습니다.", "source": "Econsultancy / Adobe" },
-        { "stat": "81%", "highlight": "소비자 중", "text": "구매 결정 전에 웹사이트를 방문합니다.", "source": "GE Capital Retail Bank / Google Think Insights" },
-        { "stat": "75%", "highlight": "사용자 중", "text": "웹사이트를 기반으로 회사의 신뢰성을 판단합니다.", "source": "Stanford Web Credibility Research" },
-        { "stat": "약 70%", "highlight": "신뢰 상실", "text": "웹사이트가 전문적으로 보이지 않으면.", "source": "Adobe & Sweor" },
-        { "stat": "69%", "highlight": "모바일 사용자 중", "text": "웹사이트를 첫 브랜드 경험으로 상호작용합니다.", "source": "Think with Google" }
+        {
+          "stat": "94%",
+          "highlight": "첫 인상 중",
+          "text": "디자인 관련입니다.",
+          "source": "Northumbria University UX Lab"
+        },
+        {
+          "stat": "88%",
+          "highlight": "온라인 소비자 중",
+          "text": "나쁜 경험 후 사이트로 돌아올 가능성이 낮습니다.",
+          "source": "Econsultancy / Adobe"
+        },
+        {
+          "stat": "81%",
+          "highlight": "소비자 중",
+          "text": "구매 결정 전에 웹사이트를 방문합니다.",
+          "source": "GE Capital Retail Bank / Google Think Insights"
+        },
+        {
+          "stat": "75%",
+          "highlight": "사용자 중",
+          "text": "웹사이트를 기반으로 회사의 신뢰성을 판단합니다.",
+          "source": "Stanford Web Credibility Research"
+        },
+        {
+          "stat": "약 70%",
+          "highlight": "신뢰 상실",
+          "text": "웹사이트가 전문적으로 보이지 않으면.",
+          "source": "Adobe & Sweor"
+        },
+        {
+          "stat": "69%",
+          "highlight": "모바일 사용자 중",
+          "text": "웹사이트를 첫 브랜드 경험으로 상호작용합니다.",
+          "source": "Think with Google"
+        }
       ]
     },
     "solution": {
       "title": "facadely가 해결합니다",
       "items": [
-        { "title": "5분 내 런칭, 설정 불필요", "desc": "준비된 템플릿으로 즉시 시작하세요.\n코딩이나 설치가 필요하지 않습니다." },
-        { "title": "기본적으로 모바일 준비됨", "desc": "모든 템플릿이 완전히 반응형입니다.\n모든 기기에서 완벽하게 보입니다 - 자동으로." },
-        { "title": "전문가 디자인, 간단하게", "desc": "신뢰와 신뢰성을 얻기 위해 디자이너가 만들었습니다.\n디자인 기술 없이도 세련된 사이트를 만들 수 있습니다." },
-        { "title": "예약 및 고객 관리 도구", "desc": "필요한 모든 것 - 폼, 일정 예약, CRM - 내장되어 있습니다.\n플러그인이나 써드파티 도구가 필요하지 않습니다." },
-        { "title": "실시간 분석 포함", "desc": "방문, 트래픽, 사용자 행동을 추적하세요.\n라이브 데이터로 더 나은 결정을 내리세요." },
-        { "title": "보안이 기본으로 내장됨", "desc": "SSL과 암호화가 자동으로 적용됩니다.\n지속적인 업데이트로 보호를 유지하세요." }
+        {
+          "title": "5분 내 런칭, 설정 불필요",
+          "desc": "준비된 템플릿으로 즉시 시작하세요.\n코딩이나 설치가 필요하지 않습니다."
+        },
+        {
+          "title": "기본적으로 모바일 준비됨",
+          "desc": "모든 템플릿이 완전히 반응형입니다.\n모든 기기에서 완벽하게 보입니다 - 자동으로."
+        },
+        {
+          "title": "전문가 디자인, 간단하게",
+          "desc": "신뢰와 신뢰성을 얻기 위해 디자이너가 만들었습니다.\n디자인 기술 없이도 세련된 사이트를 만들 수 있습니다."
+        },
+        {
+          "title": "예약 및 고객 관리 도구",
+          "desc": "필요한 모든 것 - 폼, 일정 예약, CRM - 내장되어 있습니다.\n플러그인이나 써드파티 도구가 필요하지 않습니다."
+        },
+        {
+          "title": "실시간 분석 포함",
+          "desc": "방문, 트래픽, 사용자 행동을 추적하세요.\n라이브 데이터로 더 나은 결정을 내리세요."
+        },
+        {
+          "title": "보안이 기본으로 내장됨",
+          "desc": "SSL과 암호화가 자동으로 적용됩니다.\n지속적인 업데이트로 보호를 유지하세요."
+        }
       ],
       "cta_text": "지속적인 첫 인상을 만들고 고객이 기억할 신뢰할 수 있는 브랜드를 구축하세요.",
       "cta_button": "비즈니스 구축 시작"
@@ -192,48 +240,158 @@
         "basic": {
           "name": "기본 기능",
           "features": {
-            "pages": { "name": "페이지", "free": "5개 페이지", "pro": "무제한 페이지", "business": "무제한 페이지" },
-            "customDomain": { "name": "사용자 정의 도메인", "free": false, "pro": true, "business": true },
-            "storage": { "name": "저장소", "free": "500 MB", "pro": "10 GB", "business": "50 GB" },
-            "bandwidth": { "name": "대역폭", "free": "1 GB", "pro": "10 GB", "business": "100 GB" },
-            "monthlyVisits": { "name": "월간 방문", "free": "1,000 방문", "pro": "25,000 방문", "business": "100,000 방문" }
+            "pages": {
+              "name": "페이지",
+              "free": "5개 페이지",
+              "pro": "무제한 페이지",
+              "business": "무제한 페이지"
+            },
+            "customDomain": {
+              "name": "사용자 정의 도메인",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "storage": {
+              "name": "저장소",
+              "free": "500 MB",
+              "pro": "10 GB",
+              "business": "50 GB"
+            },
+            "bandwidth": {
+              "name": "대역폭",
+              "free": "1 GB",
+              "pro": "10 GB",
+              "business": "100 GB"
+            },
+            "monthlyVisits": {
+              "name": "월간 방문",
+              "free": "1,000 방문",
+              "pro": "25,000 방문",
+              "business": "100,000 방문"
+            }
           }
         },
         "design": {
           "name": "디자인 & 콘텐츠",
           "features": {
-            "templates": { "name": "템플릿", "free": "기본 템플릿", "pro": "프리미엄 템플릿", "business": "모든 템플릿 + 사용자 정의" },
-            "customCode": { "name": "사용자 정의 코드", "free": false, "pro": true, "business": true },
-            "fontUpload": { "name": "글꼴 업로드", "free": false, "pro": true, "business": true },
-            "designMode": { "name": "디자인 모드", "free": false, "pro": true, "business": true }
+            "templates": {
+              "name": "템플릿",
+              "free": "기본 템플릿",
+              "pro": "프리미엄 템플릿",
+              "business": "모든 템플릿 + 사용자 정의"
+            },
+            "customCode": {
+              "name": "사용자 정의 코드",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "fontUpload": {
+              "name": "글꼴 업로드",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "designMode": {
+              "name": "디자인 모드",
+              "free": false,
+              "pro": true,
+              "business": true
+            }
           }
         },
         "ecommerce": {
           "name": "전자상거래",
           "features": {
-            "products": { "name": "상품", "free": false, "pro": "10개 상품", "business": "무제한 상품" },
-            "paymentGateway": { "name": "결제 게이트웨이", "free": false, "pro": true, "business": true },
-            "inventory": { "name": "재고 관리", "free": false, "pro": true, "business": true },
-            "coupons": { "name": "쿠폰 & 할인", "free": false, "pro": "3개 쿠폰", "business": "무제한 쿠폰" },
-            "orderManagement": { "name": "주문 관리", "free": false, "pro": true, "business": true }
+            "products": {
+              "name": "상품",
+              "free": false,
+              "pro": "10개 상품",
+              "business": "무제한 상품"
+            },
+            "paymentGateway": {
+              "name": "결제 게이트웨이",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "inventory": {
+              "name": "재고 관리",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "coupons": {
+              "name": "쿠폰 & 할인",
+              "free": false,
+              "pro": "3개 쿠폰",
+              "business": "무제한 쿠폰"
+            },
+            "orderManagement": {
+              "name": "주문 관리",
+              "free": false,
+              "pro": true,
+              "business": true
+            }
           }
         },
         "marketing": {
           "name": "마케팅 & SEO",
           "features": {
-            "seoTools": { "name": "SEO 도구", "free": "기본 SEO", "pro": "고급 SEO", "business": "프리미엄 SEO + 분석" },
-            "googleAnalytics": { "name": "Google Analytics", "free": false, "pro": true, "business": true },
-            "socialMedia": { "name": "소셜 미디어 통합", "free": false, "pro": true, "business": true },
-            "emailMarketing": { "name": "이메일 마케팅", "free": false, "pro": "월 100개 이메일", "business": "무제한 이메일" }
+            "seoTools": {
+              "name": "SEO 도구",
+              "free": "기본 SEO",
+              "pro": "고급 SEO",
+              "business": "프리미엄 SEO + 분석"
+            },
+            "googleAnalytics": {
+              "name": "Google Analytics",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "socialMedia": {
+              "name": "소셜 미디어 통합",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "emailMarketing": {
+              "name": "이메일 마케팅",
+              "free": false,
+              "pro": "월 100개 이메일",
+              "business": "무제한 이메일"
+            }
           }
         },
         "support": {
           "name": "지원 & 보안",
           "features": {
-            "support": { "name": "지원", "free": "커뮤니티 지원", "pro": "우선 지원", "business": "전담 지원" },
-            "ssl": { "name": "SSL 인증서", "free": true, "pro": true, "business": true },
-            "passwordProtection": { "name": "비밀번호 보호", "free": false, "pro": true, "business": true },
-            "backup": { "name": "백업 & 복구", "free": false, "pro": "주간 백업", "business": "일일 백업" }
+            "support": {
+              "name": "지원",
+              "free": "커뮤니티 지원",
+              "pro": "우선 지원",
+              "business": "전담 지원"
+            },
+            "ssl": {
+              "name": "SSL 인증서",
+              "free": true,
+              "pro": true,
+              "business": true
+            },
+            "passwordProtection": {
+              "name": "비밀번호 보호",
+              "free": false,
+              "pro": true,
+              "business": true
+            },
+            "backup": {
+              "name": "백업 & 복구",
+              "free": false,
+              "pro": "주간 백업",
+              "business": "일일 백업"
+            }
           }
         }
       }
@@ -301,12 +459,30 @@
       "launchTime": "5분 내 런칭"
     },
     "heroFeatures": [
-      { "title": "전문가 디자인", "description": "전환 최적화된 디자이너 템플릿" },
-      { "title": "내장 SEO", "description": "고급 SEO 도구로 Google에서 높은 순위" },
-      { "title": "엔터프라이즈 보안", "description": "SSL 인증서, 자동 백업, 99.9% 가동시간" },
-      { "title": "사용자 정의 도메인", "description": "도메인 연결 또는 무료 도메인 획득" },
-      { "title": "모바일 반응형", "description": "모든 기기에서 자동으로 완벽함" },
-      { "title": "실시간 분석", "description": "방문자 추적 및 데이터 기반 의사결정" }
+      {
+        "title": "전문가 디자인",
+        "description": "전환 최적화된 디자이너 템플릿"
+      },
+      {
+        "title": "내장 SEO",
+        "description": "고급 SEO 도구로 Google에서 높은 순위"
+      },
+      {
+        "title": "엔터프라이즈 보안",
+        "description": "SSL 인증서, 자동 백업, 99.9% 가동시간"
+      },
+      {
+        "title": "사용자 정의 도메인",
+        "description": "도메인 연결 또는 무료 도메인 획득"
+      },
+      {
+        "title": "모바일 반응형",
+        "description": "모든 기기에서 자동으로 완벽함"
+      },
+      {
+        "title": "실시간 분석",
+        "description": "방문자 추적 및 데이터 기반 의사결정"
+      }
     ],
     "features": {
       "title": "강력한 기능, 간단한 인터페이스",
@@ -315,31 +491,59 @@
         {
           "title": "빠른 설정",
           "description": "5분 내에 웹사이트를 런칭하세요. 설치 없음, 설정 번거로움 없음. 템플릿을 선택하고 즉시 편집을 시작하세요.",
-          "highlights": ["5분 런칭", "즉시 시작", "설정 없음"]
+          "highlights": [
+            "5분 런칭",
+            "즉시 시작",
+            "설정 없음"
+          ]
         },
         {
           "title": "전문가 디자인",
           "description": "모든 템플릿은 전문 디자이너가 만들었습니다. 현대적이고 유행의 선두에 있는 변환 최적화 디자인이 브랜드를 빛나게 합니다.",
-          "highlights": ["디자이너 템플릿", "유행의 최신", "브랜드 사용자 정의"]
+          "highlights": [
+            "디자이너 템플릿",
+            "유행의 최신",
+            "브랜드 사용자 정의"
+          ]
         },
         {
           "title": "모바일 우선 반응형",
           "description": "모든 웹사이트는 기본적으로 완전히 반응형입니다. 데스크톱, 태블릿, 모바일 등 모든 기기에서 완벽하게 보입니다.",
-          "highlights": ["100% 반응형", "모든 기기에서 완벽", "모바일 최적화"]
+          "highlights": [
+            "100% 반응형",
+            "모든 기기에서 완벽",
+            "모바일 최적화"
+          ]
         },
         {
           "title": "24/7 보안 & 지원",
           "description": "SSL 인증서, 자동 백업, 99.9% 가동시간 보장. 지원팀이 언제든지 도움을 드립니다.",
-          "highlights": ["SSL 포함", "자동 백업", "24/7 지원"]
+          "highlights": [
+            "SSL 포함",
+            "자동 백업",
+            "24/7 지원"
+          ]
         }
       ]
     },
     "howItWorks": {
       "title": "작동 방식",
       "steps": [
-        { "number": "01", "title": "템플릿 선택", "description": "500+ 프로페셜 템플릿을 둘러보고 비전에 맞는 것을 선택하세요." },
-        { "number": "02", "title": "사이트 사용자 정의", "description": "드래그 & 드롭 에디터를 사용하여 모든 요소를 사용자 정의하세요. 코딩이 필요하지 않습니다." },
-        { "number": "03", "title": "런칭 & 성장", "description": "게시를 누르면 웹사이트가 즉시 라이브됩니다. 지금 비즈니스를 성장시키세요." }
+        {
+          "number": "01",
+          "title": "템플릿 선택",
+          "description": "500+ 프로페셜 템플릿을 둘러보고 비전에 맞는 것을 선택하세요."
+        },
+        {
+          "number": "02",
+          "title": "사이트 사용자 정의",
+          "description": "드래그 & 드롭 에디터를 사용하여 모든 요소를 사용자 정의하세요. 코딩이 필요하지 않습니다."
+        },
+        {
+          "number": "03",
+          "title": "런칭 & 성장",
+          "description": "게시를 누르면 웹사이트가 즉시 라이브됩니다. 지금 비즈니스를 성장시키세요."
+        }
       ]
     },
     "faq": {
@@ -514,19 +718,40 @@
         "heading": "1.1 사용자가 제공한 정보",
         "intro": "당사 서비스를 사용할 때 자발적으로 제공하는 정보를 수집합니다:",
         "items": [
-          { "label": "계정 정보", "description": "이름, 이메일 주소, 프로필 정보" },
-          { "label": "결제 정보", "description": "청구 세부 정보(제삼자 공급자를 통해 안전하게 처리됨)" },
-          { "label": "웹사이트 콘텐츠", "description": "업로드한 텍스트, 이미지, 비디오 및 기타 콘텐츠" },
-          { "label": "커뮤니케이션", "description": "지원 채널을 통해 보내신 메시지" }
+          {
+            "label": "계정 정보",
+            "description": "이름, 이메일 주소, 프로필 정보"
+          },
+          {
+            "label": "결제 정보",
+            "description": "청구 세부 정보(제삼자 공급자를 통해 안전하게 처리됨)"
+          },
+          {
+            "label": "웹사이트 콘텐츠",
+            "description": "업로드한 텍스트, 이미지, 비디오 및 기타 콘텐츠"
+          },
+          {
+            "label": "커뮤니케이션",
+            "description": "지원 채널을 통해 보내신 메시지"
+          }
         ]
       },
       "automatic": {
         "heading": "1.2 자동으로 수집된 정보",
         "intro": "facadely를 사용할 때 자동으로 특정 정보를 수집합니다:",
         "items": [
-          { "label": "사용 데이터", "description": "방문한 페이지, 사용한 기능, 플랫폼에서 보낸 시간" },
-          { "label": "기기 정보", "description": "IP 주소, 브라우저 유형, 운영 체제" },
-          { "label": "쿠키", "description": "세션 쿠키, 환경설정 쿠키, 분석 쿠키" }
+          {
+            "label": "사용 데이터",
+            "description": "방문한 페이지, 사용한 기능, 플랫폼에서 보낸 시간"
+          },
+          {
+            "label": "기기 정보",
+            "description": "IP 주소, 브라우저 유형, 운영 체제"
+          },
+          {
+            "label": "쿠키",
+            "description": "세션 쿠키, 환경설정 쿠키, 분석 쿠키"
+          }
         ]
       },
       "socialLogin": {
@@ -552,10 +777,22 @@
       "heading": "3. 정보 공유 방법",
       "intro": "당사는 개인정보를 판매하지 않습니다. 다음 상황에서는 정보를 공유할 수 있습니다:",
       "items": [
-        { "label": "서비스 제공자", "description": "당사를 대신하여 서비스를 수행하는 제삼자 공급자(호스팅, 결제 처리, 이메일 전달, 분석)" },
-        { "label": "사업 이전", "description": "인수, 인수합병 또는 자산 판매와 관련하여" },
-        { "label": "법적 요구사항", "description": "법으로 필요하거나 소환장, 정부 요청이 있을 때" },
-        { "label": "귀하의 동의", "description": "정보 공유를 명시적으로 승인할 때" }
+        {
+          "label": "서비스 제공자",
+          "description": "당사를 대신하여 서비스를 수행하는 제삼자 공급자(호스팅, 결제 처리, 이메일 전달, 분석)"
+        },
+        {
+          "label": "사업 이전",
+          "description": "인수, 인수합병 또는 자산 판매와 관련하여"
+        },
+        {
+          "label": "법적 요구사항",
+          "description": "법으로 필요하거나 소환장, 정부 요청이 있을 때"
+        },
+        {
+          "label": "귀하의 동의",
+          "description": "정보 공유를 명시적으로 승인할 때"
+        }
       ]
     },
     "dataSecurity": {
@@ -578,11 +815,26 @@
       "heading": "6. 개인정보 보호 권리",
       "intro": "위치에 따라 다음 권리가 있을 수 있습니다:",
       "items": [
-        { "label": "접근 및 이동성", "description": "개인정보 사본 요청" },
-        { "label": "수정", "description": "부정확한 개인정보 업데이트 또는 수정" },
-        { "label": "삭제", "description": "개인정보 삭제 요청" },
-        { "label": "이의 제기", "description": "특정 처리 활동에 이의 제기 또는 제한" },
-        { "label": "동의 철회", "description": "마케팅 커뮤니케이션에 대한 동의 철회" }
+        {
+          "label": "접근 및 이동성",
+          "description": "개인정보 사본 요청"
+        },
+        {
+          "label": "수정",
+          "description": "부정확한 개인정보 업데이트 또는 수정"
+        },
+        {
+          "label": "삭제",
+          "description": "개인정보 삭제 요청"
+        },
+        {
+          "label": "이의 제기",
+          "description": "특정 처리 활동에 이의 제기 또는 제한"
+        },
+        {
+          "label": "동의 철회",
+          "description": "마케팅 커뮤니케이션에 대한 동의 철회"
+        }
       ],
       "note": "권리를 행사하려면 privacy@facadely.com으로 문의하세요. 30일 내에 응답하겠습니다."
     },
@@ -689,12 +941,30 @@
     "paymentBilling": {
       "heading": "4. 결제 및 청구",
       "items": [
-        { "label": "구독 계획", "content": "유료 계획(Pro 및 Business)은 사용자가 선택한 대로 월간 또는 연간 기준으로 청구됩니다." },
-        { "label": "자동 갱신", "content": "갱신 날짜 전에 취소하지 않으면 구독이 자동으로 갱신됩니다." },
-        { "label": "취소", "content": "언제든지 구독을 취소할 수 있습니다. 취소는 현재 청구 기간이 끝날 때 적용됩니다." },
-        { "label": "환불", "content": "첫 연간 구독에 대해 14일 환불 보장을 제공합니다. 월간 구독은 환불 불가입니다." },
-        { "label": "가격 변경", "content": "기존 구독자에게 30일 공지하고 가격을 수정할 권리가 있습니다." },
-        { "label": "세금", "content": "가격에는 현지법으로 필요한 해당 세금이 포함되지 않습니다." }
+        {
+          "label": "구독 계획",
+          "content": "유료 계획(Pro 및 Business)은 사용자가 선택한 대로 월간 또는 연간 기준으로 청구됩니다."
+        },
+        {
+          "label": "자동 갱신",
+          "content": "갱신 날짜 전에 취소하지 않으면 구독이 자동으로 갱신됩니다."
+        },
+        {
+          "label": "취소",
+          "content": "언제든지 구독을 취소할 수 있습니다. 취소는 현재 청구 기간이 끝날 때 적용됩니다."
+        },
+        {
+          "label": "환불",
+          "content": "첫 연간 구독에 대해 14일 환불 보장을 제공합니다. 월간 구독은 환불 불가입니다."
+        },
+        {
+          "label": "가격 변경",
+          "content": "기존 구독자에게 30일 공지하고 가격을 수정할 권리가 있습니다."
+        },
+        {
+          "label": "세금",
+          "content": "가격에는 현지법으로 필요한 해당 세금이 포함되지 않습니다."
+        }
       ]
     },
     "intellectualProperty": {
@@ -807,9 +1077,18 @@
       "heading": "4. 제삼자 서비스",
       "intro": "자신의 쿠키를 설정할 수 있는 제삼자 서비스를 사용합니다:",
       "services": [
-        { "name": "Google Analytics", "purpose": "웹사이트 사용 분석" },
-        { "name": "Stripe", "purpose": "결제 처리" },
-        { "name": "Supabase", "purpose": "인증 및 데이터베이스" }
+        {
+          "name": "Google Analytics",
+          "purpose": "웹사이트 사용 분석"
+        },
+        {
+          "name": "Stripe",
+          "purpose": "결제 처리"
+        },
+        {
+          "name": "Supabase",
+          "purpose": "인증 및 데이터베이스"
+        }
       ]
     },
     "yourChoices": {
