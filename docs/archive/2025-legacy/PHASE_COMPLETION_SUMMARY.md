@@ -1,3 +1,6 @@
+> Note: This document is a legacy summary for the 2025 homepage optimization effort.
+> For current app-wide updates, see `/Users/parkchwl/front/CHANGELOG.md`.
+
 # HomePage.tsx 5-Phase 최적화 완료 요약
 
 **완료 날짜**: 2025-11-04
