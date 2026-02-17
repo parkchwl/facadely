@@ -9,6 +9,5 @@ export default async function ServicePage({
 }) {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <ServicePageClient dictionary={dictionary.servicePage as any} />;
+  return <ServicePageClient dictionary={dictionary.servicePage} />;
 }

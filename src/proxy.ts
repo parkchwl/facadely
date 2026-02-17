@@ -3,8 +3,14 @@ import { i18n } from '@/i18n/config';
 import { updateSession } from '@/lib/supabase/middleware';
 
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const localeFromPath = i18n.locales.find(
+    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
+  );
+  const pathnameWithoutLocale = localeFromPath
+    ? pathname.replace(new RegExp(`^/${localeFromPath}(?=/|$)`), '') || '/'
+    : pathname;
 
   // Rewrite root paths to /en internally (no redirect - invisible to user)
   // This allows "/" to work while serving from "/en" route
@@ -30,7 +36,7 @@ export async function middleware(request: NextRequest) {
   const protectedRoutes = ['/dashboard'];
 
   const isProtectedRoute = protectedRoutes.some(route =>
-    pathname.startsWith(route)
+    pathnameWithoutLocale === route || pathnameWithoutLocale.startsWith(`${route}/`)
   );
 
   // If it's a protected route, check authentication

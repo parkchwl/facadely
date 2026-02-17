@@ -1,5 +1,25 @@
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const projectRoot = dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: projectRoot,
+  turbopack: {
+    root: projectRoot,
+  },
+  webpack: (config, { dir }) => {
+    const projectNodeModules = join(dir, "node_modules");
+    const currentModules = config.resolve?.modules ?? [];
+
+    if (!currentModules.includes(projectNodeModules)) {
+      config.resolve = config.resolve ?? {};
+      config.resolve.modules = [projectNodeModules, ...currentModules];
+    }
+
+    return config;
+  },
   images: {
     // Custom loader for flexible image handling (CDN-ready)
     loader: 'custom',

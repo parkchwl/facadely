@@ -15,9 +15,7 @@ interface ImageLoaderProps {
 }
 
 export default function imageLoader({
-  src,
-  width,
-  quality = 75
+  src
 }: ImageLoaderProps): string {
   // Future: CDN integration
   // if (process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_CDN_URL) {

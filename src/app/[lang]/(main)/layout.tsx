@@ -3,11 +3,11 @@ import "../../globals.css";
 import Layout from "../../components/Layout";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import { getDictionary } from "@/lib/get-dictionary";
+import { i18n, type Locale } from "@/i18n/config";
 
 type LayoutProps = Readonly<{
   children: React.ReactNode;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params: Promise<any>;
+  params: Promise<{ lang: string }>;
 }>;
 
 export const metadata: Metadata = {
@@ -20,7 +20,10 @@ export default async function MainLayout({
   params,
 }: LayoutProps) {
   const { lang } = await params;
-  const dictionary = await getDictionary(lang);
+  const resolvedLang = i18n.locales.includes(lang as Locale)
+    ? (lang as Locale)
+    : i18n.defaultLocale;
+  const dictionary = await getDictionary(resolvedLang);
   return (
     <ErrorBoundary>
       <Layout dictionary={dictionary}>{children}</Layout>

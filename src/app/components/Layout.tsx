@@ -1,21 +1,15 @@
 'use client';
 
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Globe, Check, Menu, X, Instagram, Facebook } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Inter, DM_Serif_Display } from 'next/font/google';
 import { i18n, type Locale } from '@/i18n/config';
 import { languageNames } from '@/i18n/utils';
 import type { Dictionary } from '@/types/dictionary';
 
-const inter = Inter({ subsets: ['latin'] });
-const dmSerif = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: ['400'],
-  display: 'swap',
-});
+const dmSerif = { className: 'font-serif' } as const;
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,7 +18,6 @@ interface LayoutProps {
 
 export default function Layout({ children, dictionary }: LayoutProps) {
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -63,32 +56,11 @@ export default function Layout({ children, dictionary }: LayoutProps) {
     return createLocalizedPath(locale, cleanPath || '/');
   };
 
-  useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 0);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
-
   const { navigation, mobileNav, languageSelector, footer } = dictionary;
 
   return (
     <div
-      className="min-h-screen text-gray-900 font-sans flex flex-col"
+      className="min-h-app-vh text-gray-900 font-sans flex flex-col"
       style={
         pathname.endsWith('/templates')
           ? {
@@ -196,8 +168,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden overflow-hidden"
-                style={{ height: '100dvh' }}
+                className="fixed inset-0 h-app-vh bg-black/60 backdrop-blur-sm z-40 lg:hidden overflow-hidden"
                 onClick={() => setIsMobileMenuOpen(false)}
               />
 
@@ -207,8 +178,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: "-100%", opacity: 0 }}
                 transition={{ type: "spring", damping: 25, stiffness: 200, mass: 1.2 }}
-                className="fixed top-0 left-0 right-0 bg-black z-50 lg:hidden overflow-y-auto"
-                style={{ height: '100dvh' }}
+                className="fixed top-0 left-0 right-0 h-app-vh bg-black z-50 lg:hidden overflow-y-auto"
               >
                 <div className="p-6 pb-8">
                   {/* Header with Close Button */}
@@ -384,9 +354,9 @@ export default function Layout({ children, dictionary }: LayoutProps) {
             <div>
               <h4 className="font-semibold mb-3 text-white">{footer.support.title}</h4>
               <ul className="space-y-2 text-neutral-400 text-sm">
-                <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/customer-service')} className="hover:text-white transition-colors">{footer.support.customerService}</Link></li>
-                <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/qa')} className="hover:text-white transition-colors">{footer.support.qa}</Link></li>
-                <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/status')} className="hover:text-white transition-colors">{footer.support.serverStatus}</Link></li>
+                <li><Link href={createLocalizedPath(currentLocale, '/customer-service')} className="hover:text-white transition-colors">{footer.support.customerService}</Link></li>
+                <li><Link href={createLocalizedPath(currentLocale, '/qa')} className="hover:text-white transition-colors">{footer.support.qa}</Link></li>
+                <li><Link href={createLocalizedPath(currentLocale, '/status')} className="hover:text-white transition-colors">{footer.support.serverStatus}</Link></li>
               </ul>
             </div>
 
@@ -394,8 +364,8 @@ export default function Layout({ children, dictionary }: LayoutProps) {
             <div>
               <h4 className="font-semibold mb-3 text-white">{footer.company.title}</h4>
               <ul className="space-y-2 text-neutral-400 text-sm">
-                <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/about')} className="hover:text-white transition-colors">{footer.company.about}</Link></li>
-                <li><Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/contact')} className="hover:text-white transition-colors">{footer.company.contact}</Link></li>
+                <li><Link href={createLocalizedPath(currentLocale, '/about')} className="hover:text-white transition-colors">{footer.company.about}</Link></li>
+                <li><Link href={createLocalizedPath(currentLocale, '/contact')} className="hover:text-white transition-colors">{footer.company.contact}</Link></li>
                 <li><Link href={createLocalizedPath(currentLocale, '/blog')} className="hover:text-white transition-colors">{footer.company.blog}</Link></li>
               </ul>
             </div>
@@ -415,9 +385,9 @@ export default function Layout({ children, dictionary }: LayoutProps) {
             <div className="flex flex-col sm:flex-row items-center gap-x-6 gap-y-3 text-xs order-2 sm:order-1 mt-4 sm:mt-0">
               <p className="text-neutral-500">{footer.legal.poweredBy}</p>
               <div className="flex items-center gap-x-6">
-                <Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/terms')} className="hover:text-white transition-colors">{footer.legal.terms}</Link>
-                <Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/privacy')} className="hover:text-white transition-colors">{footer.legal.privacy}</Link>
-                <Link href={redirectedPathName(currentLocale).replace(/\/[^/]*$/, '/cookie')} className="hover:text-white transition-colors">{footer.legal.cookie}</Link>
+                <Link href={createLocalizedPath(currentLocale, '/terms')} className="hover:text-white transition-colors">{footer.legal.terms}</Link>
+                <Link href={createLocalizedPath(currentLocale, '/privacy')} className="hover:text-white transition-colors">{footer.legal.privacy}</Link>
+                <Link href={createLocalizedPath(currentLocale, '/cookie')} className="hover:text-white transition-colors">{footer.legal.cookie}</Link>
               </div>
             </div>
             <div className="flex items-center gap-x-5 order-1 sm:order-2">

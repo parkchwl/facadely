@@ -107,17 +107,16 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
   }, []);
 
   return (
-    <main className="relative bg-black min-h-screen text-white">
+    <main className="relative bg-black min-h-app-vh text-white">
       <div
-        className="fixed inset-0 overflow-hidden"
+        className="fixed inset-0 h-app-vh overflow-hidden"
         style={{
           backgroundImage: `url(${CONFIG.BACKGROUND_IMAGE})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           opacity: CONFIG.BACKGROUND_OPACITY,
-          zIndex: 0,
-          height: '100dvh'
+          zIndex: 0
         }}
       ></div>
       <div

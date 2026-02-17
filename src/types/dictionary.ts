@@ -89,6 +89,7 @@ export interface WhyMattersDictionary {
 }
 
 export interface SolutionItemDictionary {
+  icon?: string;
   title: string;
   desc: string;
 }
@@ -260,12 +261,21 @@ export interface ServiceHeroDictionary {
   title: string;
   subtitle: string;
   startBuildingFree: string;
-  watchVideo: string;
+  browseTemplates: string;
+  noCreditCard: string;
+  templates: string;
+  launchTime: string;
+}
+
+export interface ServiceHeroFeatureDictionary {
+  title: string;
+  description: string;
 }
 
 export interface ServiceFeatureItemDictionary {
   title: string;
   description: string;
+  highlights: string[];
 }
 
 export interface ServiceFeaturesDictionary {
@@ -275,14 +285,13 @@ export interface ServiceFeaturesDictionary {
 }
 
 export interface HowItWorksStepDictionary {
-  step: string;
+  number: string;
   title: string;
   description: string;
 }
 
 export interface HowItWorksDictionary {
   title: string;
-  subtitle: string;
   steps: HowItWorksStepDictionary[];
 }
 
@@ -294,18 +303,23 @@ export interface ServiceFAQQuestionDictionary {
 export interface ServiceFAQDictionary {
   title: string;
   subtitle: string;
-  questions: ServiceFAQQuestionDictionary[];
+  items: ServiceFAQQuestionDictionary[];
 }
 
 export interface ServiceCTADictionary {
   title: string;
   subtitle: string;
-  primaryButton: string;
-  secondaryButton: string;
+  startBuilding: string;
+  browseTemplates: string;
+  sslSecured: string;
+  noCreditCardRequired: string;
+  users: string;
+  awardWinning: string;
 }
 
 export interface ServicePageDictionary {
   hero: ServiceHeroDictionary;
+  heroFeatures: ServiceHeroFeatureDictionary[];
   features: ServiceFeaturesDictionary;
   howItWorks: HowItWorksDictionary;
   faq: ServiceFAQDictionary;
@@ -314,127 +328,69 @@ export interface ServicePageDictionary {
 
 // ==================== Q&A Page ====================
 
-export interface QASearchDictionary {
-  placeholder: string;
-  button: string;
-}
-
-export interface QACategoryDictionary {
-  title: string;
-  icon: string;
-}
-
-export interface QAItemDictionary {
+export interface QAQuestionDictionary {
+  id: number;
+  category: string;
   question: string;
   answer: string;
 }
 
-export interface QASectionDictionary {
+export interface QAHeroDictionary {
   title: string;
-  items: QAItemDictionary[];
+  subtitle: string;
+  searchPlaceholder: string;
+}
+
+export interface QAStillHaveQuestionsDictionary {
+  title: string;
+  subtitle: string;
+  emailSupport: string;
+  contactUs: string;
 }
 
 export interface QAPageDictionary {
-  title: string;
-  subtitle: string;
-  search: QASearchDictionary;
-  categories: {
-    [key: string]: QACategoryDictionary;
-  };
-  sections: {
-    [key: string]: QASectionDictionary;
-  };
+  hero: QAHeroDictionary;
+  filterLabel: string;
+  allCategories: string;
+  results: string;
+  noResults: string;
+  clearFilters: string;
+  categories: Record<string, string>;
+  questions: QAQuestionDictionary[];
+  stillHaveQuestions: QAStillHaveQuestionsDictionary;
 }
 
 // ==================== Policy Pages ====================
 
-export interface PolicySectionDictionary {
+export interface PolicyPageDictionary {
   title: string;
-  content: string;
-  subsections?: PolicySubsectionDictionary[];
-  items?: string[];
-}
-
-export interface PolicySubsectionDictionary {
-  title: string;
-  content: string;
-  items?: string[];
-}
-
-export interface PrivacyPageDictionary {
-  title: string;
-  subtitle: string;
   lastUpdated: string;
-  sections: PolicySectionDictionary[];
+  [key: string]: unknown;
 }
 
-export interface TermsPageDictionary {
-  title: string;
-  subtitle: string;
-  lastUpdated: string;
-  sections: PolicySectionDictionary[];
-}
-
-export interface CookiePageDictionary {
-  title: string;
-  subtitle: string;
-  lastUpdated: string;
-  sections: PolicySectionDictionary[];
-}
+export type PrivacyPageDictionary = PolicyPageDictionary;
+export type TermsPageDictionary = PolicyPageDictionary;
+export type CookiePageDictionary = PolicyPageDictionary;
 
 // ==================== Other Pages ====================
 
 export interface GeneratePageDictionary {
   title: string;
   subtitle: string;
-  placeholder: string;
-  generateButton: string;
-  examplesTitle: string;
-  examples: string[];
+  placeholder?: string;
+  generateButton?: string;
+  examplesTitle?: string;
+  examples?: string[];
 }
 
 export interface StatusPageDictionary {
   title: string;
   subtitle: string;
-  operational: string;
-  degraded: string;
-  down: string;
-  services: {
-    [key: string]: {
-      name: string;
-      status: string;
-    };
-  };
 }
 
 export interface CustomerServicePageDictionary {
   title: string;
   subtitle: string;
-  channels: {
-    email: {
-      title: string;
-      description: string;
-      link: string;
-    };
-    chat: {
-      title: string;
-      description: string;
-      link: string;
-    };
-    help: {
-      title: string;
-      description: string;
-      link: string;
-    };
-  };
-  contactForm: {
-    title: string;
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-    submit: string;
-  };
 }
 
 export interface AboutMissionDictionary {
@@ -544,21 +500,22 @@ export interface BlogPostDictionary {
 }
 
 export interface BlogPageDictionary {
-  title: string;
-  subtitle: string;
-  categories: {
-    all: string;
-    tutorials: string;
-    news: string;
-    guides: string;
-    updates: string;
+  hero: {
+    title: string;
+    subtitle: string;
   };
-  searchPlaceholder: string;
+  categories: Record<string, string> & { all: string };
+  posts: BlogPostDictionary[];
+  filters: {
+    searchPlaceholder: string;
+    noResults: string;
+  };
   readMore: string;
   backToArticles: string;
-  relatedArticles: string;
+  relatedPosts: string;
   shareArticle: string;
-  posts: BlogPostDictionary[];
+  author: string;
+  published: string;
 }
 
 // ==================== Root Dictionary ====================

@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, User, Calendar, Share2, ChevronRight} from 'lucide-react';
 import type { BlogPageDictionary } from '@/types/dictionary';
+import OptimizedImage, { ImageType } from '@/app/components/OptimizedImage';
 
 export default function BlogPostDetailClient({
   dictionary,
@@ -34,7 +35,7 @@ export default function BlogPostDetailClient({
 
   if (!currentPost) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-app-vh bg-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">
             Article Not Found
@@ -69,9 +70,9 @@ export default function BlogPostDetailClient({
     .filter((section: string) => section.trim());
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-app-vh bg-white">
       {/* Back Button */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 pt-28 pb-4" style={{ marginTop: '-80px' }}>
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 pt-site-header pt-6 sm:pt-8 pb-4">
         <div className="max-w-4xl mx-auto">
           <Link href={`/${currentLang}/blog`}>
             <button className="inline-flex items-center text-gray-600 hover:text-black transition-colors font-medium">
@@ -89,16 +90,15 @@ export default function BlogPostDetailClient({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16"
-          style={{
-            marginTop: '-80px',
-            paddingTop: '80px'
-          }}
         >
           <div className="max-w-4xl mx-auto">
-            <div className="overflow-hidden rounded-2xl mb-8 h-96 sm:h-[500px]">
-              <img
+            <div className="overflow-hidden rounded-2xl mb-8 relative aspect-[16/9] max-h-[65svh]">
+              <OptimizedImage
                 src={currentPost.image}
                 alt={currentPost.title}
+                type={ImageType.TEMPLATE_THUMBNAIL}
+                fill
+                sizes="(max-width: 1024px) 100vw, 80vw"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -111,13 +111,9 @@ export default function BlogPostDetailClient({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16"
-          style={{
-            marginTop: '-80px',
-            paddingTop: '80px'
-          }}
         >
           <div className="max-w-4xl mx-auto">
-            <div className="overflow-hidden rounded-2xl mb-8 h-96 sm:h-[500px] bg-gray-200 flex items-center justify-center">
+            <div className="overflow-hidden rounded-2xl mb-8 relative aspect-[16/9] max-h-[65svh] bg-gray-200 flex items-center justify-center">
               <div className="text-gray-400 text-center">
                 <svg className="w-16 h-16 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -271,7 +267,7 @@ export default function BlogPostDetailClient({
         >
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-black mb-12">
-              {dictionary.relatedArticles}
+              {dictionary.relatedPosts}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {relatedPosts.map((post, index) => (
@@ -285,10 +281,13 @@ export default function BlogPostDetailClient({
                 >
                   <Link href={`/${currentLang}/blog/${post.id}`}>
                     {post.image && (
-                      <div className="overflow-hidden rounded-lg mb-4 h-48 sm:h-56">
-                        <img
+                      <div className="overflow-hidden rounded-lg mb-4 h-48 sm:h-56 relative">
+                        <OptimizedImage
                           src={post.image}
                           alt={post.title}
+                          type={ImageType.TEMPLATE_THUMBNAIL}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 33vw"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>

@@ -1,8 +1,17 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 import { Database } from '@/types/supabase';
+import { i18n } from '@/i18n/config';
 
 export async function updateSession(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const localeFromPath = i18n.locales.find(
+    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
+  );
+  const pathnameWithoutLocale = localeFromPath
+    ? pathname.replace(new RegExp(`^/${localeFromPath}(?=/|$)`), '') || '/'
+    : pathname;
+
   let supabaseResponse = NextResponse.next({
     request,
   });
@@ -41,12 +50,15 @@ export async function updateSession(request: NextRequest) {
 
   if (
     !user &&
-    !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/auth')
+    !pathnameWithoutLocale.startsWith('/login') &&
+    !pathnameWithoutLocale.startsWith('/auth')
   ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
-    url.pathname = '/login';
+    url.pathname =
+      localeFromPath && localeFromPath !== i18n.defaultLocale
+        ? `/${localeFromPath}/login`
+        : '/login';
     return NextResponse.redirect(url);
   }
 

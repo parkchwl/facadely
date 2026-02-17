@@ -27,11 +27,12 @@ export const FacebookIcon = ({ className }: { className?: string }) => (
 interface SocialLoginButtonProps {
   provider: 'Google' | 'Apple' | 'Facebook';
   onClick: () => void;
+  label?: string;
   disabled?: boolean;
   fullWidth?: boolean;
 }
 
-export default function SocialLoginButton({ provider, onClick, disabled = false, fullWidth = true }: SocialLoginButtonProps) {
+export default function SocialLoginButton({ provider, onClick, label, disabled = false, fullWidth = true }: SocialLoginButtonProps) {
   const IconComponent = provider === 'Google' ? GoogleIcon : provider === 'Apple' ? AppleIcon : FacebookIcon;
 
   return (
@@ -52,7 +53,7 @@ export default function SocialLoginButton({ provider, onClick, disabled = false,
       <div className="w-5 h-5 flex-shrink-0">
         <IconComponent className="w-full h-full" />
       </div>
-      <span className="flex-1 text-center">Continue with {provider}</span>
+      <span className="flex-1 text-center">{label ?? `Continue with ${provider}`}</span>
     </button>
   );
 }

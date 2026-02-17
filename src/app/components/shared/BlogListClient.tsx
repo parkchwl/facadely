@@ -5,41 +5,16 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Search, ChevronRight } from 'lucide-react';
+import type { BlogPageDictionary } from '@/types/dictionary';
+import OptimizedImage, { ImageType } from '@/app/components/OptimizedImage';
 
-interface BlogPost {
-  id: number;
-  title: string;
-  excerpt: string;
-  content: string;
-  category: string;
-  author: string;
-  date: string;
-  readTime: string;
-  featured: boolean;
-  image: string;
-}
-
-interface BlogDictionary {
-  hero: {
-    title: string;
-    subtitle: string;
-  };
-  categories: Record<string, string>;
-  posts: BlogPost[];
-  filters: {
-    searchPlaceholder: string;
-    noResults: string;
-  };
-  readMore: string;
-}
-
-export default function BlogListClient({ dictionary }: { dictionary: BlogDictionary }) {
+export default function BlogListClient({ dictionary }: { dictionary: BlogPageDictionary }) {
   const { lang: currentLang } = useParams() as { lang: string };
-  const [selectedCategory, setSelectedCategory] = useState(dictionary?.categories?.all || 'All Articles');
+  const [selectedCategory, setSelectedCategory] = useState(dictionary.categories.all);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const posts = dictionary?.posts || [];
-  const categories = dictionary?.categories ? Object.entries(dictionary.categories).map(([, value]) => value) : [];
+  const posts = dictionary.posts;
+  const categories = Object.values(dictionary.categories);
 
   // Filter posts based on category and search
   const filteredPosts = useMemo(() => {
@@ -57,21 +32,14 @@ export default function BlogListClient({ dictionary }: { dictionary: BlogDiction
   const featuredPosts = posts.filter((post) => post.featured).slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-app-vh bg-white">
       {/* Hero Section */}
       <section
-        className="w-full text-white relative overflow-hidden"
+        className="w-full text-white relative overflow-hidden blog-hero-bg min-h-[clamp(22rem,60svh,34rem)] flex items-center justify-center pt-site-header"
         style={{
           backgroundImage: 'url(/image/Blog.avif)',
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          height: '500px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: '-80px',
-          paddingTop: '80px'
+          backgroundPosition: 'center'
         }}
       >
         {/* Dark overlay for text readability */}
@@ -111,10 +79,13 @@ export default function BlogListClient({ dictionary }: { dictionary: BlogDiction
                 >
                   <Link href={`/${currentLang}/blog/${post.id}`}>
                     {post.image && (
-                      <div className="overflow-hidden rounded-xl mb-4 h-64 sm:h-72 lg:h-80">
-                        <img
+                      <div className="overflow-hidden rounded-xl mb-4 h-64 sm:h-72 lg:h-80 relative">
+                        <OptimizedImage
                           src={post.image}
                           alt={post.title}
+                          type={ImageType.TEMPLATE_THUMBNAIL}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
@@ -205,10 +176,13 @@ export default function BlogListClient({ dictionary }: { dictionary: BlogDiction
                 >
                   <Link href={`/${currentLang}/blog/${post.id}`}>
                     {post.image && (
-                      <div className="overflow-hidden rounded-lg mb-4 h-48 sm:h-56">
-                        <img
+                      <div className="overflow-hidden rounded-lg mb-4 h-48 sm:h-56 relative">
+                        <OptimizedImage
                           src={post.image}
                           alt={post.title}
+                          type={ImageType.TEMPLATE_THUMBNAIL}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 33vw"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>

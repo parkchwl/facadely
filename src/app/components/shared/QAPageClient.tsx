@@ -3,15 +3,11 @@ import { useParams } from 'next/navigation';
 
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { DM_Serif_Display } from 'next/font/google';
 import Link from 'next/link';
 import { Search, ChevronDown, Tag } from 'lucide-react';
+import type { QAPageDictionary } from '@/types/dictionary';
 
-const dmSerif = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
+const dmSerif = { className: 'font-serif' } as const;
 
 // Accordion Item Component
 const AccordionItem = ({
@@ -66,31 +62,7 @@ const AccordionItem = ({
 };
 
 interface QAPageClientProps {
-  dictionary: {
-    hero: {
-      title: string;
-      subtitle: string;
-      searchPlaceholder: string;
-    };
-    filterLabel: string;
-    allCategories: string;
-    results: string;
-    noResults: string;
-    clearFilters: string;
-    categories: Record<string, string>;
-    questions: Array<{
-      id: number;
-      category: string;
-      question: string;
-      answer: string;
-    }>;
-    stillHaveQuestions: {
-      title: string;
-      subtitle: string;
-      emailSupport: string;
-      contactUs: string;
-    };
-  };
+  dictionary: QAPageDictionary;
 }
 
 export default function QAPageClient({ dictionary }: QAPageClientProps) {
@@ -134,7 +106,7 @@ export default function QAPageClient({ dictionary }: QAPageClientProps) {
   };
 
   return (
-    <div className="w-full bg-black min-h-screen">
+    <div className="w-full bg-black min-h-app-vh">
       {/* Hero Section */}
       <section className="relative pt-20 sm:pt-24 pb-20 px-6 sm:px-8 lg:px-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 to-transparent pointer-events-none"></div>

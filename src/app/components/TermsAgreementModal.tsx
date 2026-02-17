@@ -10,40 +10,50 @@ interface TermsAgreementModalProps {
   onClose: () => void;
   onAgree: () => void;
   provider: string;
+  lang: string;
   dictionary: TermsModalDictionary;
 }
 
-export default function TermsAgreementModal({ isOpen, onClose, onAgree, provider, dictionary }: TermsAgreementModalProps) {
+export default function TermsAgreementModal({ isOpen, onClose, onAgree, provider, lang, dictionary }: TermsAgreementModalProps) {
   if (!isOpen) return null;
 
-  // A simple helper to parse the string with placeholders
-  const parseText = (text: string, replacements: { [key: string]: React.ReactNode }) => {
-    let result: (string | React.ReactNode)[] = [text];
-    for (const key in replacements) {
-      const newResult: (string | React.ReactNode)[] = [];
-      result.forEach((part, i) => {
-        if (typeof part === 'string') {
-          const split = part.split(`{${key}}`);
-          split.forEach((textPart, j) => {
-            if (textPart) newResult.push(textPart);
-            if (j < split.length - 1) {
-              // @ts-expect-error - cloneElement type issue
-              newResult.push(React.cloneElement(replacements[key], { key: `${key}-${i}-${j}` }));
-            }
-          });
-        } else {
-          newResult.push(part);
-        }
-      });
-      result = newResult;
-    }
-    return result;
+  const renderAgreementText = (text: string) => {
+    return text.split(/(\{terms\}|\{privacy\})/g).map((part, idx) => {
+      if (part === '{terms}') {
+        return (
+          <Link
+            key={`terms-${idx}`}
+            href={`/${lang}/terms`}
+            target="_blank"
+            rel="noreferrer"
+            className="text-black font-medium underline hover:text-gray-700"
+          >
+            {dictionary.termsLinkText}
+          </Link>
+        );
+      }
+
+      if (part === '{privacy}') {
+        return (
+          <Link
+            key={`privacy-${idx}`}
+            href={`/${lang}/privacy`}
+            target="_blank"
+            rel="noreferrer"
+            className="text-black font-medium underline hover:text-gray-700"
+          >
+            {dictionary.privacyLinkText}
+          </Link>
+        );
+      }
+
+      return <React.Fragment key={`text-${idx}`}>{part}</React.Fragment>;
+    });
   };
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-hidden"
-      style={{ height: '100dvh' }}
+      className="fixed inset-0 z-50 h-app-vh flex items-start sm:items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-sm overflow-y-auto"
     >
       <div className="bg-white rounded-none max-w-md w-full p-8 relative">
         <button
@@ -60,10 +70,7 @@ export default function TermsAgreementModal({ isOpen, onClose, onAgree, provider
 
         <div className="mb-8 p-6 bg-gray-50 rounded-none border-l-2 border-black">
           <p className="text-sm text-gray-600 leading-relaxed font-light">
-            {parseText(dictionary.agreement, {
-              terms: <Link href="/terms" target="_blank" className="text-black font-medium underline hover:text-gray-700" />,
-              privacy: <Link href="/privacy" target="_blank" className="text-black font-medium underline hover:text-gray-700" />
-            })}
+            {renderAgreementText(dictionary.agreement)}
           </p>
         </div>
 

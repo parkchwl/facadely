@@ -4,7 +4,7 @@ import React, { useState, useMemo, useCallback, memo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import OptimizedImage, { ImageType } from '@/app/components/OptimizedImage';
-import { DM_Serif_Display } from 'next/font/google';
+import type { ServicePageDictionary } from '@/types/dictionary';
 import {
   Zap,
   Palette,
@@ -20,11 +20,7 @@ import {
   Award
 } from 'lucide-react';
 
-const dmSerif = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
+const dmSerif = { className: 'font-serif' } as const;
 
 // Pre-compile regex patterns for SafeHtmlRenderer
 const BR_REGEX = /<br\s*\/?>/gi;
@@ -62,64 +58,8 @@ const HERO_FEATURE_ICONS = [Palette, Search, Lock, Globe, Smartphone, TrendingUp
 const FEATURE_ICONS = [Zap, Palette, Smartphone, Lock];
 const FEATURE_IMAGES = ['/image/Generate.avif', '/image/Matters.avif', '/image/Generate.avif', '/image/Matters.avif'];
 
-// Type definitions
-interface HeroSection {
-  title: string;
-  subtitle: string;
-  startBuildingFree: string;
-  browseTemplates: string;
-  noCreditCard: string;
-  templates: string;
-  launchTime: string;
-}
-
-interface HeroFeature {
-  title: string;
-  description: string;
-}
-
-interface Feature {
-  title: string;
-  description: string;
-  highlights: string[];
-}
-
-interface FeaturesSection {
-  title: string;
-  subtitle: string;
-  items: Feature[];
-}
-
-interface FaqItem {
-  question: string;
-  answer: string;
-}
-
-interface FaqSection {
-  title: string;
-  subtitle: string;
-  items: FaqItem[];
-}
-
-interface CtaSection {
-  title: string;
-  subtitle: string;
-  startBuilding: string;
-  browseTemplates: string;
-  sslSecured: string;
-  noCreditCardRequired: string;
-  users: string;
-  awardWinning: string;
-}
-
 interface ServicePageClientProps {
-  dictionary: {
-    hero: HeroSection;
-    heroFeatures: HeroFeature[];
-    features: FeaturesSection;
-    faq: FaqSection;
-    cta: CtaSection;
-  };
+  dictionary: ServicePageDictionary;
 }
 
 /**
@@ -294,9 +234,9 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
   }, []);
 
   return (
-    <div className="min-h-screen bg-white -mt-16 sm:-mt-20 lg:-mt-24">
+    <div className="min-h-app-vh bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] max-h-[1000px] flex items-center justify-center overflow-hidden bg-black py-12 sm:py-16 lg:py-20 xl:py-24">
+      <section className="relative min-h-[80svh] flex items-center justify-center overflow-hidden bg-black pt-site-header py-12 sm:py-16 lg:py-20 xl:py-24">
         <div className="absolute inset-0">
           <OptimizedImage
             src="/image/Service.avif"

@@ -1,16 +1,11 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { DM_Serif_Display } from 'next/font/google';
 import { CheckCircle, AlertCircle, Clock, TrendingUp } from 'lucide-react';
 import type { StatusPageDictionary } from '@/types/dictionary';
 
-const dmSerif = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
+const dmSerif = { className: 'font-serif' } as const;
 
 // ==================== Configuration Constants ====================
 
@@ -236,12 +231,7 @@ interface StatusPageClientProps {
 }
 
 export default function StatusPageClient({ dictionary }: StatusPageClientProps) {
-  const [lastChecked, setLastChecked] = useState<string>('');
-
-  // Initialize last checked time
-  useEffect(() => {
-    setLastChecked(new Date().toLocaleString());
-  }, []);
+  const [lastChecked] = useState<string>(() => new Date().toLocaleString());
 
   // Calculate status statistics
   const operationalCount = SERVICES.filter(s => s.status === 'operational').length;
@@ -254,7 +244,7 @@ export default function StatusPageClient({ dictionary }: StatusPageClientProps) 
   }, []);
 
   return (
-    <div className="w-full bg-black min-h-screen">
+    <div className="w-full bg-black min-h-app-vh">
       {/* Hero Section */}
       <section className={STYLES.heroSection}>
         <div className={STYLES.heroBackground}></div>

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import SocialLoginButton from './SocialLoginButton';
 import TermsAgreementModal from './TermsAgreementModal';
+import type { LoginPageDictionary, TermsModalDictionary } from '@/types/dictionary';
 
 // Helper to render text with links
 const TextWithLinks = ({ text, links }: { text: string, links: { [key: string]: { href: string, text: string } } }) => {
@@ -31,8 +32,11 @@ const TextWithLinks = ({ text, links }: { text: string, links: { [key: string]: 
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function LoginPageClient({ dictionary }: { dictionary: any }) {
+interface LoginPageClientDictionary extends LoginPageDictionary {
+  termsModal: TermsModalDictionary;
+}
+
+export default function LoginPageClient({ dictionary }: { dictionary: LoginPageClientDictionary }) {
   const router = useRouter();
   const params = useParams() as { lang: string };
   const { lang } = params;
@@ -63,7 +67,7 @@ export default function LoginPageClient({ dictionary }: { dictionary: any }) {
 
   return (
     <div
-      className="min-h-screen flex flex-col"
+      className="min-h-app-vh flex flex-col"
       style={{
         backgroundImage: 'url("/image/login.avif")',
         backgroundSize: 'cover',
@@ -101,14 +105,17 @@ export default function LoginPageClient({ dictionary }: { dictionary: any }) {
           <div className="space-y-3 mb-8">
             <SocialLoginButton
               provider="Google"
+              label={dictionary.google}
               onClick={() => handleSocialLogin('Google')}
             />
             <SocialLoginButton
               provider="Apple"
+              label={dictionary.apple}
               onClick={() => handleSocialLogin('Apple')}
             />
             <SocialLoginButton
               provider="Facebook"
+              label={dictionary.facebook}
               onClick={() => handleSocialLogin('Facebook')}
             />
           </div>
@@ -129,6 +136,7 @@ export default function LoginPageClient({ dictionary }: { dictionary: any }) {
         onClose={() => setShowTermsModal(false)}
         onAgree={handleTermsAgree}
         provider={selectedProvider}
+        lang={lang}
         dictionary={dictionary.termsModal}
       />
     </div>

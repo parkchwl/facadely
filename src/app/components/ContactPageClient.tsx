@@ -2,15 +2,10 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { DM_Serif_Display } from 'next/font/google';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import OptimizedImage, { ImageType } from '@/app/components/OptimizedImage';
 
-const dmSerif = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
+const dmSerif = { className: 'font-serif' } as const;
 
 interface ContactPageClientProps {
   dictionary: {

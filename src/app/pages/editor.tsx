@@ -10,7 +10,9 @@ interface Website {
 
 // 임시로 비워둔 컴포넌트들 (실제 구현 필요)
 const useWebsiteBuilderStore = () => ({
-  setWebsite: () => {},
+  setWebsite: (website?: Website) => {
+    if (website) return;
+  },
   isPreviewMode: false,
   isLayoutsPanelOpen: false,
   editorViewMode: 'single-edit'
@@ -68,7 +70,7 @@ const EditorPage = () => {
           }
           
           const templateData: Website = templateModule.default;
-          setWebsite();
+          setWebsite(templateData);
         } catch (error) {
           console.error("Error loading template:", error);
           console.error("Attempted to load template with ID:", templateId);

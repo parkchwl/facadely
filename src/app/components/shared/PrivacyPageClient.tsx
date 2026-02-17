@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation';
 export default function PrivacyPageClient() {
   const { lang } = useParams() as { lang: string };
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-app-vh bg-white">
       {/* Content */}
       <div className="max-w-4xl mx-auto px-6 py-16">
         <h1 className="text-5xl font-light text-black mb-3 tracking-tight">Privacy Policy</h1>
@@ -229,7 +229,7 @@ export default function PrivacyPageClient() {
           </p>
           <div className="flex justify-center gap-4">
             <Link
-              href={`/${lang}/signup`}
+              href={`/${lang}/login`}
               className="px-8 py-3 bg-black text-white font-light rounded-none hover:bg-gray-900 transition-colors duration-300"
             >
               Get Started

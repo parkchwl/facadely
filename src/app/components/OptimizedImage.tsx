@@ -67,6 +67,8 @@ export default function OptimizedImage({
       : style || {};
 
     return (
+      // Intentional native img usage for pre-optimized static assets.
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={src}
         alt={alt}

@@ -3,6 +3,20 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --app-vh: 100vh;
+  --site-header-offset: clamp(72px, 8.5vw, 104px);
+}
+
+@supports (height: 100svh) {
+  :root {
+    --app-vh: 100svh;
+  }
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --app-vh: 100dvh;
+  }
 }
 
 @theme inline {
@@ -10,7 +24,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-montserrat: var(--font-montserrat);
+  --font-montserrat: var(--font-geist-sans);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,14 +35,36 @@
 }
 
 html {
-  font-size: 80%;
-  /* 전체 크기를 80%로 조정 */
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+.min-h-app-vh {
+  min-height: var(--app-vh);
+}
+
+.h-app-vh {
+  height: var(--app-vh);
+}
+
+.pt-site-header {
+  padding-top: var(--site-header-offset);
+}
+
+.blog-hero-bg {
+  background-attachment: scroll;
+}
+
+@media (min-width: 1024px) {
+  .blog-hero-bg {
+    background-attachment: fixed;
+  }
 }
 
 /* Scrolling Banner Styles */

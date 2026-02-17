@@ -1,14 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { DM_Serif_Display } from 'next/font/google';
 import type { CustomerServicePageDictionary } from '@/types/dictionary';
 
-const dmSerif = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
+const dmSerif = { className: 'font-serif' } as const;
 
 interface CustomerServicePageClientProps {
   dictionary: CustomerServicePageDictionary;
@@ -18,7 +13,7 @@ export default function CustomerServicePageClient({
   dictionary
 }: CustomerServicePageClientProps) {
   return (
-    <div className="w-full bg-black min-h-screen">
+    <div className="w-full bg-black min-h-app-vh">
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-6 sm:px-8 lg:px-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-transparent pointer-events-none"></div>

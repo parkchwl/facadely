@@ -32,7 +32,7 @@ export default function CookiePageClient() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-app-vh bg-white">
       {/* Content */}
       <div className="max-w-4xl mx-auto px-6 py-16">
         <h1 className="text-5xl font-light text-black mb-3 tracking-tight">Cookie Policy</h1>

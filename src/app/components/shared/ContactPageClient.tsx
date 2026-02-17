@@ -3,35 +3,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Send, CheckCircle } from 'lucide-react';
+import type { ContactPageDictionary } from '@/types/dictionary';
 
 interface ContactPageClientProps {
-  dictionary: {
-    title: string;
-    subtitle: string;
-    description: string;
-    emailLabel: string;
-    emailAddress: string;
-    emailHint: string;
-    inquiryLabel: string;
-    inquiryOptions: {
-      general: string;
-      support: string;
-      partnership: string;
-      feedback: string;
-      other: string;
-    };
-    messageLabel: string;
-    messagePlaceholder: string;
-    sendButton: string;
-    successTitle: string;
-    successMessage: string;
-    sendAnother: string;
-    faqTitle: string;
-    faqItems: Array<{
-      question: string;
-      answer: string;
-    }>;
-  };
+  dictionary: ContactPageDictionary;
 }
 
 export default function ContactPageClient({ dictionary }: ContactPageClientProps) {
@@ -85,7 +60,7 @@ export default function ContactPageClient({ dictionary }: ContactPageClientProps
     <div className="w-full bg-white">
       {/* Hero Section with Contact Form */}
       <section
-        className="relative h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center bg-no-repeat"
+        className="relative min-h-app-vh flex items-center justify-center text-white overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: 'url(/image/Contact.avif)'
         }}
