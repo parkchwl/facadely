@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
-import { DM_Serif_Display, Inter } from 'next/font/google';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
@@ -10,16 +9,8 @@ import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
 import type { HomePageDictionary } from '@/types/dictionary';
 
-const dmSerif = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['700', '800', '900'],
-});
+const dmSerif = { className: 'font-serif' } as const;
+const inter = { className: 'font-sans' } as const;
 
 // ================================================================================
 // CONFIGURATION CONSTANTS
@@ -137,7 +128,7 @@ const STYLES = {
 
   // Hero Section
   heroSection: "relative z-10 flex flex-col bg-black",
-  heroImageContainer: "relative text-left text-white h-[55vh] sm:h-[60vh] lg:h-[65vh] flex items-center justify-center overflow-hidden",
+  heroImageContainer: "relative text-left text-white flex items-center justify-center overflow-hidden py-24 sm:py-32 lg:py-40",
   heroGradient: "absolute inset-0 bg-gradient-to-r from-black/60 to-transparent",
   heroTitle: "text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-extrabold text-white tracking-tight leading-[0.9] mb-8 lg:mb-20 xl:mb-20",
   heroSubtitle: "text-xl sm:text-2xl lg:text-3xl text-gray-200 leading-relaxed max-w-2xl font-light",
@@ -153,7 +144,7 @@ const STYLES = {
   templateCardWrapper: "flex-shrink-0 w-72 sm:w-80 lg:w-96 mx-4",
 
   // Why Matters Section
-  whyMattersContainer: "relative flex items-center justify-center min-h-screen py-16 sm:py-20 lg:py-24 overflow-hidden",
+  whyMattersContainer: "relative flex items-center justify-center min-h-app-vh py-16 sm:py-20 lg:py-24 overflow-hidden",
   whyMattersGradient: "absolute inset-0 bg-black/40",
   whyMattersGrid: "grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-start",
   whyMattersLeftColumn: "flex flex-col gap-4 lg:gap-6 justify-start lg:col-span-1",
@@ -298,44 +289,44 @@ function useFaqRotation(faqCount: number) {
 function useImageLoading(criticalImageCount: number = CONFIG.CRITICAL_IMAGES) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(0);
-  const loadStartTime = React.useRef(Date.now());
+  const loadStartTime = React.useRef<number | null>(null);
   const hasVisitedRef = React.useRef(false);
 
-  // Check session storage on mount
   useEffect(() => {
-    // If already visited in this session, skip loading screen immediately
-    if (typeof window !== 'undefined' && sessionStorage.getItem('hasVisited')) {
-      hasVisitedRef.current = true;
-      setIsLoaded(true);
+    hasVisitedRef.current = sessionStorage.getItem('hasVisited') === 'true';
+
+    // Returning visitors skip loading screen after hydration.
+    if (hasVisitedRef.current) {
+      const visitedTimer = setTimeout(() => {
+        setIsLoaded(true);
+      }, 0);
+      return () => clearTimeout(visitedTimer);
     }
+
+    loadStartTime.current = Date.now();
   }, []);
 
   // Manage loading screen timing
   useEffect(() => {
-    // If we've already visited, don't run the timing logic
-    if (hasVisitedRef.current) return;
+    if (hasVisitedRef.current || isLoaded || loadStartTime.current === null) return;
 
     if (imagesLoaded >= criticalImageCount) {
       const elapsed = Date.now() - loadStartTime.current;
       const remainingDelay = Math.max(0, CONFIG.MIN_LOADING_TIME - elapsed);
 
-      setTimeout(() => {
+      const minTimer = setTimeout(() => {
         setIsLoaded(true);
-        // Mark as visited after showing loading screen
-        if (typeof window !== 'undefined') {
-          sessionStorage.setItem('hasVisited', 'true');
-        }
+        sessionStorage.setItem('hasVisited', 'true');
       }, remainingDelay);
+      return () => clearTimeout(minTimer);
     } else {
       const maxTimer = setTimeout(() => {
         setIsLoaded(true);
-        if (typeof window !== 'undefined') {
-          sessionStorage.setItem('hasVisited', 'true');
-        }
+        sessionStorage.setItem('hasVisited', 'true');
       }, CONFIG.MAX_LOADING_TIME);
       return () => clearTimeout(maxTimer);
     }
-  }, [imagesLoaded, criticalImageCount]);
+  }, [imagesLoaded, criticalImageCount, isLoaded]);
 
   const handleImageLoad = useCallback(() => {
     setImagesLoaded(prev => prev + 1);
@@ -394,10 +385,9 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   } = useFaqRotation(dictionary.faq.questions.length);
 
   // Extract dictionary data
-  const { hero, whyMatters, solution, faq, finalCta, loadingScreen } = dictionary;
+  const { hero, solution, faq, finalCta, loadingScreen } = dictionary;
   const FAQS = faq.questions;
   const langPrefix = lang ? `/${lang}` : '';
-  const STATS_DATA = whyMatters.stats;
   const SOLUTION_DATA = solution.items;
 
   // Duplicated rows for CSS infinite scroll animation
@@ -413,9 +403,9 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
 
   return (
     <>
-      <main className="bg-black min-h-screen">
+      <main className="bg-black min-h-app-vh">
         <section className="relative z-10 flex flex-col bg-black">
-          <div className="relative text-center text-white min-h-[45vh] sm:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center overflow-hidden">
+          <div className="relative text-center text-white flex items-center justify-center overflow-hidden py-24 sm:py-32 lg:py-40">
             {/* Plain Black Background */}
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
@@ -431,7 +421,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </div>
             <motion.div
               {...ANIMATIONS.heroFadeInUp}
-              className="relative z-10 flex flex-col items-center justify-center gap-6 px-4 sm:px-6 lg:px-8 pt-24 pb-0"
+              className="relative z-10 flex flex-col items-center justify-center gap-6 px-4 sm:px-6 lg:px-8"
             >
               <h1
                 className={`${inter.className} text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold text-white tracking-tight leading-none`}
@@ -475,83 +465,6 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </div>
           </section>
 
-          <div className="relative flex items-center justify-center min-h-screen py-16 sm:py-20 lg:py-24 overflow-hidden">
-            <OptimizedImage
-              src="/image/Matters.avif"
-              alt="Why your website matters background"
-              type={ImageType.STATIC_BACKGROUND}
-              fill
-              className="object-cover"
-              onLoad={handleImageLoad}
-            />
-            <div className="absolute inset-0 bg-black/40"></div>
-            <div className={`${STYLES.containerClasses} py-12 sm:py-16 lg:py-20 xl:py-24 relative z-10`}>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-start">
-                <div className="flex flex-col gap-4 lg:gap-6 justify-start lg:col-span-1">
-                  <motion.div
-                    {...ANIMATIONS.headingFadeInUp}
-                    className="w-full mb-2"
-                    suppressHydrationWarning
-                  >
-                    <h2
-                      className={`text-6xl sm:text-7xl md:text-8xl lg:text-7xl font-extrabold tracking-tight leading-[0.9] text-white ${lang === 'ko'
-                        ? 'xl:text-7xl 2xl:text-8xl'
-                        : 'xl:text-8xl 2xl:text-9xl'
-                        } ${dmSerif.className}`}
-                      dangerouslySetInnerHTML={{ __html: whyMatters.title }}
-                      suppressHydrationWarning
-                    />
-                  </motion.div>
-                  <motion.div
-                    {...ANIMATIONS.descriptionFadeInUp}
-                    className="w-full"
-                  >
-                    <p className="text-xl lg:text-2xl xl:text-3xl text-gray-200 leading-relaxed font-light max-w-xl"
-                      dangerouslySetInnerHTML={{ __html: whyMatters.description }} />
-                  </motion.div>
-                  <motion.div
-                    {...ANIMATIONS.ctaButtonFadeInUp}
-                    className="w-fit"
-                  >
-                    <Link href={`${langPrefix}/generate`}>
-                      <button className="bg-white text-black px-12 py-6 lg:px-14 lg:py-7 rounded-full hover:bg-gray-100 transition-all duration-200 text-xl lg:text-2xl font-bold shadow-2xl hover:scale-105 hover:-translate-y-0.5 active:scale-95">
-                        {whyMatters.ctaButton}
-                      </button>
-                    </Link>
-                  </motion.div>
-                </div>
-                <motion.div
-                  {...ANIMATIONS.statsContainerFadeInUp}
-                  className="w-full lg:col-span-2"
-                >
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-                    {STATS_DATA.map((item, index: number) => (
-                      <div
-                        key={index}
-                        className={`relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-6 lg:p-8 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02] ${index >= CONFIG.STATS_DISPLAY_THRESHOLD ? 'hidden md:block' : ''}`}
-                        style={{ boxShadow: `inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)`, transform: 'translateZ(0)' }}
-                      >
-                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none stat-card-inner-glow"></div>
-                        <div className="relative z-10 flex flex-col gap-4">
-                          <h3 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white">
-                            {item.stat}
-                          </h3>
-                          <div>
-                            <p className="text-base lg:text-lg xl:text-xl text-white leading-relaxed mb-3 font-light">
-                              <span className="font-medium">{item.highlight}</span> {item.text}
-                            </p>
-                            <p className="text-sm lg:text-base text-gray-400">
-                              {item.source}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
         </section>
 
         <ScrollingBanner />
