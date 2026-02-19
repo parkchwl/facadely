@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
@@ -94,7 +94,7 @@ const ANIMATIONS = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     transition: { duration: CONFIG.ANIMATION_DURATION_NORMAL },
-    viewport: { once: true }
+    viewport: { once: true, margin: "-100px" }
   },
 
   // FAQ Section
@@ -102,7 +102,7 @@ const ANIMATIONS = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     transition: { duration: CONFIG.ANIMATION_DURATION_NORMAL },
-    viewport: { once: true }
+    viewport: { once: true, margin: "-100px" }
   },
 
   // Button Hover Effects
@@ -122,7 +122,7 @@ const ANIMATIONS = {
 // ================================================================================
 const STYLES = {
   // Container & Layout
-  containerClasses: "w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
+  containerClasses: "w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
   heroContainerClasses: "w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
   sectionSpacing: "py-16 sm:py-20 lg:py-24 xl:py-28 2xl:py-32",
 
@@ -146,19 +146,19 @@ const STYLES = {
   // Why Matters Section
   whyMattersContainer: "relative flex items-center justify-center min-h-app-vh py-16 sm:py-20 lg:py-24 overflow-hidden",
   whyMattersGradient: "absolute inset-0 bg-black/40",
-  whyMattersGrid: "grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-start",
+  whyMattersGrid: "grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start",
   whyMattersLeftColumn: "flex flex-col gap-4 lg:gap-6 justify-start lg:col-span-1",
-  whyMattersTitle: "text-7xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[110px] 2xl:text-[130px] font-extrabold tracking-tight leading-[0.9] text-white",
-  whyMattersDescription: "text-xl lg:text-2xl xl:text-3xl text-gray-200 leading-relaxed font-light max-w-xl",
-  whyMattersButton: "bg-white text-black px-12 py-6 lg:px-14 lg:py-7 rounded-full hover:bg-gray-100 transition-all duration-200 text-xl lg:text-2xl font-bold shadow-2xl hover:scale-105 hover:-translate-y-0.5 active:scale-95",
-  statsGrid: "grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8",
+  whyMattersTitle: "text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/70",
+  whyMattersDescription: "text-lg lg:text-xl xl:text-2xl text-gray-200 leading-relaxed font-light max-w-2xl",
+  whyMattersButton: "bg-white text-black px-10 py-5 lg:px-12 lg:py-6 rounded-full hover:bg-gray-100 transition-all duration-200 text-lg lg:text-xl font-bold shadow-2xl hover:scale-105 hover:-translate-y-0.5 active:scale-95",
+  statsGrid: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8",
   statCard: "relative group bg-gradient-to-br from-white/5 via-white/3 to-transparent backdrop-blur-lg rounded-xl p-6 lg:p-8 cursor-pointer transition-all duration-300 overflow-hidden border-2 border-white/20 hover:border-white/40 hover:-translate-y-1 hover:scale-[1.02]",
   statCardGlow: "absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none stat-card-inner-glow",
   statCardContent: "relative z-10 flex flex-col gap-4",
-  statNumber: "text-5xl lg:text-6xl xl:text-7xl font-bold text-white",
+  statNumber: "text-4xl lg:text-5xl xl:text-6xl font-bold text-white",
   statHighlight: "font-medium",
-  statText: "text-base lg:text-lg xl:text-xl text-white leading-relaxed mb-3 font-light",
-  statSource: "text-sm lg:text-base text-gray-400",
+  statText: "text-sm lg:text-base xl:text-lg text-white leading-relaxed mb-3 font-light",
+  statSource: "text-xs lg:text-sm text-gray-400",
 
   // Solution Section
   solutionSection: "relative border-t border-gray-800 overflow-hidden",
@@ -384,19 +384,25 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     handleFaqMouseLeave,
   } = useFaqRotation(dictionary.faq.questions.length);
 
+  // Scroll-linked gallery logic
+  const galleryRef = React.useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: galleryRef,
+    offset: ["start end", "end start"]
+  });
+
+  const xLeft = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const xRight = useTransform(scrollYProgress, [0, 1], [-400, 0]);
+
   // Extract dictionary data
   const { hero, solution, faq, finalCta, loadingScreen } = dictionary;
   const FAQS = faq.questions;
   const langPrefix = lang ? `/${lang}` : '';
   const SOLUTION_DATA = solution.items;
 
-  // Duplicated rows for CSS infinite scroll animation
-  const duplicatedRow1 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES], // 26 cards for seamless loop
-    []
-  );
-  const duplicatedRow2 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES], // 26 cards for seamless loop
+  // Duplicated row for CSS infinite scroll animation
+  const infiniteTemplates = useMemo(() =>
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES], // 20 cards for seamless loop
     []
   );
 
@@ -440,28 +446,38 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
           </div>
 
-          <section className="relative bg-black overflow-hidden space-y-4 py-4">
-            <div className="overflow-hidden">
-              <div className="flex w-max gallery-scroll-left">
-                {duplicatedRow1.map((template, index) => (
+          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-2 py-8">
+            <div className="overflow-hidden gallery-mask">
+              <motion.div
+                style={{ x: xLeft }}
+                className="flex w-max py-2"
+              >
+                {infiniteTemplates.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
-                      <TemplateCard template={template} index={index} />
+                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-2 sm:mx-3">
+                      <TemplateCard
+                        template={template}
+                        index={index}
+                        handleImageLoad={index < 4 ? handleImageLoad : undefined}
+                      />
                     </div>
                   </Link>
                 ))}
-              </div>
+              </motion.div>
             </div>
-            <div className="overflow-hidden">
-              <div className="flex w-max gallery-scroll-right">
-                {duplicatedRow2.map((template, index) => (
+            <div className="overflow-hidden gallery-mask">
+              <motion.div
+                style={{ x: xRight }}
+                className="flex w-max py-2"
+              >
+                {infiniteTemplates.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
+                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-2 sm:mx-3">
                       <TemplateCard template={template} index={index + 10} />
                     </div>
                   </Link>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </section>
 
