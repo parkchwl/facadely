@@ -231,38 +231,36 @@ body {
   animation: subtle-flash 5s ease-in-out infinite;
 }
 
-/* Infinite Scroll Gallery Animations - Removed in favor of Framer Motion Scroll */
+/* Infinite Scroll Gallery Animations */
+@keyframes gallery-scroll-left {
+  from {
+    transform: translateX(0);
+  }
 
-/* Fading Edge Mask for Gallery - Refined for Parallax (5%) */
-.gallery-mask {
-  mask-image: linear-gradient(to right,
-      transparent,
-      black 5%,
-      black 95%,
-      transparent);
-  -webkit-mask-image: linear-gradient(to right,
-      transparent,
-      black 5%,
-      black 95%,
-      transparent);
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-/* Fading Edge Mask for Gallery - Minimal intensity (3%) */
-.gallery-mask {
-  mask-image: linear-gradient(to right,
-      transparent,
-      black 3%,
-      black 97%,
-      transparent);
-  -webkit-mask-image: linear-gradient(to right,
-      transparent,
-      black 3%,
-      black 97%,
-      transparent);
+@keyframes gallery-scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
+.gallery-scroll-left {
+  animation: gallery-scroll-left 140s linear infinite;
+  will-change: transform;
+}
 
-/* Hover pause removed for continuous animation */
+.gallery-scroll-right {
+  animation: gallery-scroll-right 140s linear infinite;
+  will-change: transform;
+}
 
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {

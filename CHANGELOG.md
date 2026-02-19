@@ -2,6 +2,23 @@
 
 All notable changes to this project are documented in this file.
 
+## 2026-02-19
+
+- Migrated root typography from package-based Geist imports to project-local fonts via `next/font/local`.
+  - Added local font assets under `src/app/fonts/`.
+  - Added font loader module: `src/app/fonts.ts`.
+  - Updated root layout to use local font variables: `src/app/layout.tsx`.
+  - Removed `geist` dependency from `package.json` and `package-lock.json`.
+- Restored homepage infinite gallery to CSS-driven continuous left/right marquee behavior.
+  - Removed side fade masking and scroll-linked Framer Motion transforms.
+  - Added gallery keyframes/utilities in `src/app/globals.css`.
+  - Tuned gallery speed to slower loop timing for readability.
+- Repositioned homepage marquee banner (`ScrollingBanner`) directly below the "facadely solves the problems" section.
+- Fixed homepage FAQ progress bar desynchronization.
+  - Progress now resets and starts from zero consistently on section entry, manual question changes, and resume from pause.
+  - Prevented pre-filled/instantly-full progress behavior when FAQ section was not in view.
+- Removed unused `motion` import from `src/app/components/TemplateCard.tsx`.
+
 ## 2026-02-17 (Documentation Overhaul)
 
 - Reorganized documentation into active docs and archived legacy docs.

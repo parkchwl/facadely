@@ -26,4 +26,4 @@ This directory contains the active project documentation for `front`.
 - Archive outdated docs instead of deleting when they may still be useful for history.
 - When code behavior changes, update:
   1. `CHANGELOG.md`
-  2. `docs/PROJECT_OVERVIEW.md` (if architecture/route/runtime behavior changed)
+  2. `docs/PROJECT_OVERVIEW.md` (if architecture/route/runtime behavior changed, including layout/font/runtime policy)

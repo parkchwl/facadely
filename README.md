@@ -26,6 +26,8 @@ Open `http://localhost:3000`.
 ## Core Structure
 
 - `src/app` - App Router routes and layouts
+- `src/app/fonts.ts` - local font loader (`next/font/local`)
+- `src/app/fonts/` - bundled variable font assets (sans/mono)
 - `src/app/components` - page-level and shared UI components
 - `src/app/components/shared` - shared route clients used by real pages
 - `src/i18n/messages` - locale dictionaries (with English fallback merge)

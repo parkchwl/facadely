@@ -1,6 +1,6 @@
 # Project Overview
 
-Last updated: 2026-02-17
+Last updated: 2026-02-19
 
 ## Stack
 
@@ -17,6 +17,8 @@ Last updated: 2026-02-17
 - Main localized layout: `/Users/parkchwl/front/src/app/[lang]/(main)/layout.tsx`
 - Proxy entry (Next 16): `/Users/parkchwl/front/src/proxy.ts`
 - Shared route clients: `/Users/parkchwl/front/src/app/components/shared/`
+- Local font loader: `/Users/parkchwl/front/src/app/fonts.ts`
+- Local font assets: `/Users/parkchwl/front/src/app/fonts/`
 
 ## Locales and Dictionary Behavior
 
@@ -55,12 +57,20 @@ All routes are under `src/app/[lang]/(main)` unless noted.
 - App-wide responsive/viewport stabilization:
   - utility classes and viewport variables added in `src/app/globals.css`
   - route roots aligned to `min-h-app-vh`
+- Root font strategy migrated to local assets:
+  - removed package-based `geist/font/*` imports from root layout
+  - loaded variable sans/mono fonts via `next/font/local` (`src/app/fonts.ts`)
+  - font files committed under `src/app/fonts/` for deterministic offline/restricted builds
 - Dev/build module resolution hardening:
   - pinned `outputFileTracingRoot` and `turbopack.root` in `next.config.mjs`
   - local `node_modules` resolution precedence for webpack
 - Home/blog content restructuring:
   - home "It is Essential" section removed
   - moved into blog article (`blogPage.posts` id `6`) in `src/i18n/messages/en.json`
+- Homepage interaction refinements:
+  - infinite gallery restored to CSS loop animation (`gallery-scroll-left/right`) without edge fade mask
+  - marquee banner moved below the solution section
+  - FAQ progress bar reset/play logic synchronized with viewport visibility and manual selection
 
 ## Validation Baseline
 

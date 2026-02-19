@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
@@ -214,12 +214,13 @@ const STYLES = {
 /**
  * useFaqRotation Hook
  * Handles automatic FAQ rotation logic with pause on interaction
- * Uses CSS animation-play-state to pause progress bar without re-rendering
+ * Keeps progress bar reset in sync with FAQ rotation state changes
  */
 function useFaqRotation(faqCount: number) {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isFaqInView, setIsFaqInView] = useState(false);
+  const [faqProgressCycle, setFaqProgressCycle] = useState(0);
   const faqSectionRef = React.useRef<HTMLDivElement>(null);
   const pauseTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -227,6 +228,9 @@ function useFaqRotation(faqCount: number) {
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       setIsFaqInView(entry.isIntersecting);
+      if (entry.isIntersecting) {
+        setFaqProgressCycle((prev) => prev + 1);
+      }
     }, { threshold: CONFIG.INTERSECTION_THRESHOLD });
 
     const currentRef = faqSectionRef.current;
@@ -244,15 +248,25 @@ function useFaqRotation(faqCount: number) {
   // Auto-cycle FAQ items when in view and not paused
   useEffect(() => {
     if (isPaused || !isFaqInView) return;
+
     const timer = setTimeout(() => {
       setActiveFaqIndex((current) => (current + 1) % faqCount);
     }, CONFIG.FAQ_ROTATION_INTERVAL);
     return () => clearTimeout(timer);
   }, [isPaused, activeFaqIndex, isFaqInView, faqCount]);
 
+  useEffect(() => {
+    return () => {
+      if (pauseTimeoutRef.current) {
+        clearTimeout(pauseTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleFaqIndexChange = useCallback((index: number) => {
     setActiveFaqIndex(index);
     setIsPaused(false);
+    setFaqProgressCycle((prev) => prev + 1);
   }, []);
 
   const handleFaqMouseEnter = useCallback(() => {
@@ -266,6 +280,7 @@ function useFaqRotation(faqCount: number) {
   const handleFaqMouseLeave = useCallback(() => {
     // Delay unpause slightly to allow CSS animation to resume smoothly
     pauseTimeoutRef.current = setTimeout(() => {
+      setFaqProgressCycle((prev) => prev + 1);
       setIsPaused(false);
     }, 100);
   }, []);
@@ -273,6 +288,8 @@ function useFaqRotation(faqCount: number) {
   return {
     activeFaqIndex,
     isPaused,
+    isFaqInView,
+    faqProgressCycle,
     faqSectionRef,
     handleFaqIndexChange,
     handleFaqMouseEnter,
@@ -378,21 +395,13 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const {
     activeFaqIndex,
     isPaused,
+    isFaqInView,
+    faqProgressCycle,
     faqSectionRef,
     handleFaqIndexChange,
     handleFaqMouseEnter,
     handleFaqMouseLeave,
   } = useFaqRotation(dictionary.faq.questions.length);
-
-  // Scroll-linked gallery logic
-  const galleryRef = React.useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: galleryRef,
-    offset: ["start end", "end start"]
-  });
-
-  const xLeft = useTransform(scrollYProgress, [0, 1], [0, -400]);
-  const xRight = useTransform(scrollYProgress, [0, 1], [-400, 0]);
 
   // Extract dictionary data
   const { hero, solution, faq, finalCta, loadingScreen } = dictionary;
@@ -400,9 +409,13 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const langPrefix = lang ? `/${lang}` : '';
   const SOLUTION_DATA = solution.items;
 
-  // Duplicated row for CSS infinite scroll animation
-  const infiniteTemplates = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES], // 20 cards for seamless loop
+  // Duplicated rows for CSS infinite scroll animation
+  const duplicatedRow1 = useMemo(() =>
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES],
+    []
+  );
+  const duplicatedRow2 = useMemo(() =>
+    [...BASE_TEMPLATES, ...BASE_TEMPLATES],
     []
   );
 
@@ -446,15 +459,12 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
           </div>
 
-          <section ref={galleryRef} className="relative bg-black overflow-hidden space-y-2 py-8">
-            <div className="overflow-hidden gallery-mask">
-              <motion.div
-                style={{ x: xLeft }}
-                className="flex w-max py-2"
-              >
-                {infiniteTemplates.map((template, index) => (
+          <section className="relative bg-black overflow-hidden space-y-4 py-4">
+            <div className="overflow-hidden">
+              <div className="flex w-max gallery-scroll-left">
+                {duplicatedRow1.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-2 sm:mx-3">
+                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
                       <TemplateCard
                         template={template}
                         index={index}
@@ -463,27 +473,22 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     </div>
                   </Link>
                 ))}
-              </motion.div>
+              </div>
             </div>
-            <div className="overflow-hidden gallery-mask">
-              <motion.div
-                style={{ x: xRight }}
-                className="flex w-max py-2"
-              >
-                {infiniteTemplates.map((template, index) => (
+            <div className="overflow-hidden">
+              <div className="flex w-max gallery-scroll-right">
+                {duplicatedRow2.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-2 sm:mx-3">
+                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
                       <TemplateCard template={template} index={index + 10} />
                     </div>
                   </Link>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </section>
 
         </section>
-
-        <ScrollingBanner />
 
         <section className="relative border-t border-gray-800 overflow-hidden">
           <OptimizedImage
@@ -533,6 +538,8 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
           </div>
         </section>
 
+        <ScrollingBanner />
+
         <section ref={faqSectionRef} className="relative bg-black py-20 lg:py-28 border-t border-gray-800">
           <div className={STYLES.containerClasses}>
             <motion.div
@@ -569,12 +576,13 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                       />
                     </div>
                     {activeFaqIndex === index && (
-                      <div key={`progress-${activeFaqIndex}`} className="mt-4 h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="mt-4 h-1 bg-gray-200 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-black animate-progress"
+                          key={`progress-${activeFaqIndex}-${faqProgressCycle}`}
+                          className="h-full w-full bg-black animate-progress"
                           style={{
                             animation: `progressBar ${CONFIG.FAQ_ROTATION_INTERVAL}ms linear forwards`,
-                            animationPlayState: isPaused ? 'paused' : 'running'
+                            animationPlayState: isPaused || !isFaqInView ? 'paused' : 'running'
                           }}
                         />
                       </div>

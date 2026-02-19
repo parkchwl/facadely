@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import OptimizedImage, { ImageType } from './OptimizedImage';
 
 interface Template {
