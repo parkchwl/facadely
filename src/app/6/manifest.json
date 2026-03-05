@@ -1,0 +1,1042 @@
+{
+  "schemaVersion": 1,
+  "templateId": "main-page",
+  "sitePath": "/6",
+  "name": "Velocity SaaS Landing",
+  "description": "Dark SaaS landing template with hero, feature grid, and social proof",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/6/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    {
+      "editId": "t6-main",
+      "label": "Main",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-nav",
+      "label": "Navbar",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-brand",
+      "label": "Brand",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-brand-text",
+      "label": "Brand Text",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-nav-menu",
+      "label": "Nav Menu",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-nav-link-features",
+      "label": "Nav Link Features",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-nav-link-developers",
+      "label": "Nav Link Developers",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-nav-link-pricing",
+      "label": "Nav Link Pricing",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-nav-link-company",
+      "label": "Nav Link Company",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-nav-actions",
+      "label": "Nav Actions",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-nav-login",
+      "label": "Nav Login",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-nav-start",
+      "label": "Nav Start",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-hero",
+      "label": "Hero",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-hero-badge",
+      "label": "Hero Badge",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-hero-badge-text",
+      "label": "Hero Badge Text",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-hero-title",
+      "label": "Hero Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-hero-title-emphasis",
+      "label": "Hero Title Emphasis",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-hero-copy",
+      "label": "Hero Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-hero-cta-group",
+      "label": "Hero CTA Group",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-hero-cta-primary",
+      "label": "Hero CTA Primary",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-hero-cta-secondary",
+      "label": "Hero CTA Secondary",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-dashboard",
+      "label": "Dashboard",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-dashboard-shell",
+      "label": "Dashboard Shell",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-dashboard-header",
+      "label": "Dashboard Header",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-dashboard-status",
+      "label": "Dashboard Status",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-dashboard-status-text",
+      "label": "Dashboard Status Text",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-dashboard-preview",
+      "label": "Dashboard Preview",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-dashboard-toast",
+      "label": "Dashboard Toast",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-dashboard-toast-title",
+      "label": "Dashboard Toast Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-dashboard-toast-copy",
+      "label": "Dashboard Toast Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-trusted",
+      "label": "Trusted Section",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-trusted-heading",
+      "label": "Trusted Heading",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-trusted-track",
+      "label": "Trusted Logo Track",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-trusted-logo-vercel",
+      "label": "Logo Vercel",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-trusted-logo-linear",
+      "label": "Logo LINEAR",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-trusted-logo-notion",
+      "label": "Logo Notion",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-trusted-logo-raycast",
+      "label": "Logo Raycast",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-trusted-logo-framer",
+      "label": "Logo Framer",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-features",
+      "label": "Features",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-features-header",
+      "label": "Features Header",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-features-title",
+      "label": "Features Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-features-copy",
+      "label": "Features Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-features-grid",
+      "label": "Features Grid",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-render",
+      "label": "Feature Card Render",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-render-title",
+      "label": "Feature Render Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-render-copy",
+      "label": "Feature Render Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-security",
+      "label": "Feature Card Security",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-security-title",
+      "label": "Feature Security Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-security-copy",
+      "label": "Feature Security Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-database",
+      "label": "Feature Card Database",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-database-title",
+      "label": "Feature Database Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-database-copy",
+      "label": "Feature Database Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-frameworks",
+      "label": "Feature Card Frameworks",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-frameworks-title",
+      "label": "Feature Frameworks Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-frameworks-copy",
+      "label": "Feature Frameworks Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-frameworks-snippet",
+      "label": "Feature Frameworks Snippet",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-feature-card-frameworks-snippet-content",
+      "label": "Feature Frameworks Snippet Content",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonials",
+      "label": "Testimonials",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-testimonials-title",
+      "label": "Testimonials Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonials-grid",
+      "label": "Testimonials Grid",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-card-sarah",
+      "label": "Testimonial Sarah Card",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-quote-sarah",
+      "label": "Testimonial Sarah Quote",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-name-sarah",
+      "label": "Testimonial Sarah Name",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-role-sarah",
+      "label": "Testimonial Sarah Role",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-card-david",
+      "label": "Testimonial David Card",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-quote-david",
+      "label": "Testimonial David Quote",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-name-david",
+      "label": "Testimonial David Name",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-role-david",
+      "label": "Testimonial David Role",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-card-elena",
+      "label": "Testimonial Elena Card",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-quote-elena",
+      "label": "Testimonial Elena Quote",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-name-elena",
+      "label": "Testimonial Elena Name",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-testimonial-role-elena",
+      "label": "Testimonial Elena Role",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-cta",
+      "label": "CTA",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-cta-content",
+      "label": "CTA Content",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-cta-title",
+      "label": "CTA Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-cta-copy",
+      "label": "CTA Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-cta-actions",
+      "label": "CTA Actions",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-cta-primary",
+      "label": "CTA Primary",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-cta-secondary",
+      "label": "CTA Secondary",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer",
+      "label": "Footer",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-footer-top",
+      "label": "Footer Top",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-footer-brand",
+      "label": "Footer Brand",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-footer-brand-text",
+      "label": "Footer Brand Text",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-brand-copy",
+      "label": "Footer Brand Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-links",
+      "label": "Footer Links",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-footer-col-product",
+      "label": "Footer Product Column",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-footer-col-product-title",
+      "label": "Footer Product Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-product-features",
+      "label": "Footer Product Features",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-product-integrations",
+      "label": "Footer Product Integrations",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-product-pricing",
+      "label": "Footer Product Pricing",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-product-changelog",
+      "label": "Footer Product Changelog",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-col-resources",
+      "label": "Footer Resources Column",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-footer-col-resources-title",
+      "label": "Footer Resources Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-resources-docs",
+      "label": "Footer Docs",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-resources-blog",
+      "label": "Footer Blog",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-resources-community",
+      "label": "Footer Community",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-resources-guides",
+      "label": "Footer Guides",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-col-company",
+      "label": "Footer Company Column",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-footer-col-company-title",
+      "label": "Footer Company Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-company-about",
+      "label": "Footer About",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-company-careers",
+      "label": "Footer Careers",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-company-legal",
+      "label": "Footer Legal",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-company-contact",
+      "label": "Footer Contact",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-bottom",
+      "label": "Footer Bottom",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-footer-copyright",
+      "label": "Footer Copyright",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-legal-links",
+      "label": "Footer Legal Links",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-privacy",
+      "label": "Footer Privacy",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t6-footer-link-terms",
+      "label": "Footer Terms",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    }
+  ],
+  "themeTokens": [
+    "primary",
+    "secondary",
+    "radius",
+    "spacingBase"
+  ]
+}

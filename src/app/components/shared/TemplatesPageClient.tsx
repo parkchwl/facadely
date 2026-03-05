@@ -1,42 +1,56 @@
 'use client';
-import { useParams } from 'next/navigation';
 import type { TemplatesPageDictionary } from '@/types/dictionary';
 
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Search, ChevronDown, Grid3x3, Grid2x2 } from 'lucide-react';
+import Link from 'next/link';
 
-// This is mock data. In a real app, this would be fetched from the server.
-const templates = [
-  { id: 1, name: 'Modern Business', category: 'Business' },
-  { id: 2, name: 'Creative Portfolio', category: 'Portfolio' },
-  { id: 3, name: 'Shop Template', category: 'E-commerce' },
-  { id: 4, name: 'Minimal Blog', category: 'Blog' },
-  { id: 5, name: 'Product Launch', category: 'Landing Page' },
-  { id: 6, name: 'Corporate', category: 'Business' },
-  { id: 7, name: 'Designer Showcase', category: 'Portfolio' },
-  { id: 8, name: 'Online Store', category: 'E-commerce' },
-  { id: 9, name: 'Tech Blog', category: 'Blog' },
-  { id: 10, name: 'App Landing', category: 'Landing Page' },
-  { id: 11, name: 'Startup', category: 'Business' },
-  { id: 12, name: 'Photography', category: 'Portfolio' },
-];
+type CategoryKey = 'business' | 'portfolio' | 'ecommerce' | 'blog' | 'landingPage';
 
-export default function TemplatesPageClient({ dictionary }: { dictionary: TemplatesPageDictionary }) {
-  useParams() as { lang: string };
-  const [selectedCategory, setSelectedCategory] = useState(dictionary.categories.all);
+export type TemplateListItem = {
+  id: string;
+  name: string;
+  categoryKey: CategoryKey;
+  path: string;
+  description: string;
+};
+
+export default function TemplatesPageClient({
+  dictionary,
+  templates,
+}: {
+  dictionary: TemplatesPageDictionary;
+  templates: TemplateListItem[];
+}) {
+  const [selectedCategoryKey, setSelectedCategoryKey] = useState<'all' | CategoryKey>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState(dictionary.sortOptions.latest);
   const [gridCols, setGridCols] = useState(3);
 
-  const categories = useMemo(() => Object.values(dictionary.categories), [dictionary]);
+  const categories = useMemo(() => Object.entries(dictionary.categories), [dictionary]);
   const sortOptions = useMemo(() => Object.values(dictionary.sortOptions), [dictionary]);
 
-  const filteredTemplates = useMemo(() => templates.filter((template) => {
-    const matchesCategory = selectedCategory === dictionary.categories.all || template.category === selectedCategory;
-    const matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  }), [selectedCategory, searchQuery, dictionary.categories.all]);
+  const filteredTemplates = useMemo(() => {
+    const searchedTemplates = templates.filter((template) => {
+      const matchesCategory =
+        selectedCategoryKey === 'all' || template.categoryKey === selectedCategoryKey;
+      const searchText = `${template.name} ${template.description}`.toLowerCase();
+      const matchesSearch = searchText.includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+
+    if (sortBy === dictionary.sortOptions.nameAZ) {
+      return [...searchedTemplates].sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    if (sortBy === dictionary.sortOptions.popular) {
+      // Popularity is not tracked yet; keep deterministic fallback order.
+      return [...searchedTemplates].sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    return searchedTemplates;
+  }, [selectedCategoryKey, searchQuery, sortBy, dictionary.sortOptions.nameAZ, dictionary.sortOptions.popular, templates]);
 
   const container = {
     hidden: { opacity: 0 },
@@ -136,20 +150,20 @@ export default function TemplatesPageClient({ dictionary }: { dictionary: Templa
 
           <div className="flex items-center gap-4">
             <div className="flex flex-wrap gap-2 sm:gap-3 flex-1">
-              {categories.map((category, idx) => (
+              {categories.map(([categoryKey, categoryLabel], idx) => (
                 <button
                   key={idx}
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => setSelectedCategoryKey(categoryKey as 'all' | CategoryKey)}
                   className={`px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
-                    selectedCategory === category
+                    selectedCategoryKey === categoryKey
                       ? 'bg-black text-white shadow-lg shadow-black/20'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  {String(category)}
-                  {category !== dictionary.categories.all && (
+                  {String(categoryLabel)}
+                  {categoryKey !== 'all' && (
                     <span className="ml-1 sm:ml-2 text-xs opacity-70">
-                      ({templates.filter((t) => t.category === String(category)).length})
+                      ({templates.filter((template) => template.categoryKey === categoryKey).length})
                     </span>
                   )}
                 </button>
@@ -182,9 +196,12 @@ export default function TemplatesPageClient({ dictionary }: { dictionary: Templa
                   </div>
 
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <button className="bg-white text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-100 transition-colors transform scale-90 group-hover:scale-100 duration-300">
+                    <Link
+                      href={template.path}
+                      className="bg-white text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-100 transition-colors transform scale-90 group-hover:scale-100 duration-300"
+                    >
                       {dictionary.useTemplate}
-                    </button>
+                    </Link>
                   </div>
                 </div>
 
@@ -192,7 +209,9 @@ export default function TemplatesPageClient({ dictionary }: { dictionary: Templa
                   <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-1 sm:mb-2">
                     {template.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-500 font-medium">{template.category}</p>
+                  <p className="text-xs sm:text-sm text-gray-500 font-medium">
+                    {dictionary.categories[template.categoryKey] ?? template.categoryKey}
+                  </p>
                 </div>
               </div>
             </motion.div>

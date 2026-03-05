@@ -18,10 +18,10 @@ export default function TermsPageClient() {
           <section className="mb-16">
             <h2 className="text-2xl font-light text-black mb-6 tracking-tight">1. Agreement to Terms</h2>
             <p className="text-gray-600 leading-relaxed mb-4 font-light">
-              Welcome to facadely. By accessing or using our website builder platform (&quot;Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you disagree with any part of these terms, you may not access the Service.
+              Welcome to facadely. By accessing or using our website editing platform (&quot;Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you disagree with any part of these terms, you may not access the Service.
             </p>
             <p className="text-gray-600 leading-relaxed font-light">
-              facadely provides a no-code website building platform that allows users to create, customize, and publish professional websites without technical knowledge. These Terms apply to all users of the Service, including without limitation users who are browsers, builders, and contributors of content.
+              facadely provides a website editing platform that allows users to create, customize, and publish professional websites through an intuitive interface. These Terms apply to all users of the Service, including without limitation users who are browsers, editors, and contributors of content.
             </p>
           </section>
 

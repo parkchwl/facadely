@@ -1,7 +1,7 @@
 {
   "navigation": {
     "templates": "Templates",
-    "generate": "Generate",
+    "generate": "Editor",
     "service": "Service",
     "pricing": "Pricing",
     "signup": "Sign up",
@@ -9,7 +9,7 @@
   },
   "mobileNav": {
     "templates": "Templates",
-    "generate": "Generate",
+    "generate": "Editor",
     "service": "Service",
     "pricing": "Pricing",
     "signup": "SIGN UP",
@@ -26,7 +26,7 @@
     },
     "platform": {
       "title": "Platform",
-      "generator": "Website Generator",
+      "generator": "Editor Platform",
       "template": "Template",
       "domain": "Domain"
     },
@@ -54,7 +54,7 @@
   "homePage": {
     "hero": {
       "title": "Customers are<br />Searching for you",
-      "subtitle": "Build a professional website in minutes<br />No code, No hassle",
+      "subtitle": "Build a professional website in minutes<br />Simple setup, No hassle",
       "templatesLink": "Templates",
       "signupButton": "Sign up",
       "signupFreeText": "It's free!"
@@ -439,9 +439,21 @@
     "back": "Back",
     "title": "facadely",
     "subtitle": "Sign in or create an account",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm password",
+    "signInButton": "Sign in",
+    "signUpButton": "Create account",
+    "switchToSignUp": "Need an account? Create one",
+    "switchToSignIn": "Already have an account? Sign in",
+    "orDivider": "or",
+    "loading": "Processing...",
+    "passwordMismatch": "Password confirmation does not match.",
+    "unknownError": "Something went wrong. Please try again.",
+    "googleSuccess": "Google login completed. You can continue now.",
+    "googleError": "Google login failed",
     "google": "Continue with Google",
-    "apple": "Continue with Apple",
-    "facebook": "Continue with Facebook",
     "terms": "By continuing, you agree to our {terms} and have read and understood the {privacy}.",
     "termsLinkText": "Terms of Service",
     "privacyLinkText": "Privacy Policy",
@@ -459,7 +471,7 @@
   "servicePage": {
     "hero": {
       "title": "We Service<br />for your Dream",
-      "subtitle": "Build a professional website in minutes<br />No code, No hassle",
+      "subtitle": "Build a professional website in minutes<br />Simple setup, No hassle",
       "startBuildingFree": "Start Building Free",
       "browseTemplates": "Browse Templates",
       "noCreditCard": "No credit card required",
@@ -913,8 +925,8 @@
     "lastUpdated": "Last Updated: December 2024",
     "agreement": {
       "heading": "1. Agreement to Terms",
-      "intro": "Welcome to facadely. By accessing or using our website builder platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
-      "description": "facadely provides a no-code website building platform that allows users to create, customize, and publish professional websites without technical knowledge. These Terms apply to all users of the Service, including without limitation users who are browsers, builders, and contributors of content."
+      "intro": "Welcome to facadely. By accessing or using our website editing platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you disagree with any part of these terms, you may not access the Service.",
+      "description": "facadely provides a website editing platform that allows users to create, customize, and publish professional websites through an intuitive interface. These Terms apply to all users of the Service, including without limitation users who are browsers, editors, and contributors of content."
     },
     "accountTerms": {
       "heading": "2. Account Terms",
@@ -1094,8 +1106,8 @@
           "purpose": "Payment processing"
         },
         {
-          "name": "Supabase",
-          "purpose": "Authentication and database"
+          "name": "Google OAuth",
+          "purpose": "Social login"
         }
       ]
     },
@@ -1115,8 +1127,8 @@
     }
   },
   "generatePage": {
-    "title": "Generate Your Website",
-    "subtitle": "Choose a template and customize it to create your perfect website"
+    "title": "Open Editor",
+    "subtitle": "Choose a template and customize it in the editor"
   },
   "statusPage": {
     "title": "Service Status",
@@ -1132,7 +1144,7 @@
     "brandStory": {
       "heading": "Our Brand Story",
       "intro": "facadely",
-      "description": "\"Facade\" means the exterior or front of a building, and in programming, the Facade Pattern refers to a design pattern that simplifies complex systems by providing a unified interface.\n\nInspired by both meanings, Facadely aims to make complex digital creation as simple and elegant as a beautiful facade — providing a no-code platform that lets anyone build sophisticated websites effortlessly."
+      "description": "\"Facade\" means the exterior or front of a building, and in programming, the Facade Pattern refers to a design pattern that simplifies complex systems by providing a unified interface.\n\nInspired by both meanings, Facadely aims to make complex digital creation as simple and elegant as a beautiful facade — providing an intuitive website builder platform that lets anyone build sophisticated websites efficiently."
     },
     "mission": {
       "heading": "Our Mission",
@@ -1140,7 +1152,7 @@
     },
     "vision": {
       "heading": "Our Vision",
-      "content": "To be the world's most user-friendly website builder, empowering millions of people and businesses to succeed online. We envision a world where web presence is no longer a technical barrier, but a creative opportunity available to all."
+      "content": "To be the world's most user-friendly website builder platform, empowering millions of people and businesses to succeed online. We envision a world where web presence is no longer a technical barrier, but a creative opportunity available to all."
     },
     "values": {
       "heading": "Our Core Values",

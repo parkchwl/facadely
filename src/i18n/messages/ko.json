@@ -1,7 +1,7 @@
 {
   "navigation": {
     "templates": "템플릿",
-    "generate": "생성",
+    "generate": "에디터",
     "service": "서비스",
     "pricing": "가격",
     "signup": "가입하기",
@@ -9,7 +9,7 @@
   },
   "mobileNav": {
     "templates": "템플릿",
-    "generate": "생성",
+    "generate": "에디터",
     "service": "서비스",
     "pricing": "가격",
     "signup": "가입하기",
@@ -26,7 +26,7 @@
     },
     "platform": {
       "title": "플랫폼",
-      "generator": "웹사이트 생성기",
+      "generator": "에디터 플랫폼",
       "template": "템플릿",
       "domain": "도메인"
     },
@@ -430,10 +430,22 @@
   "loginPage": {
     "back": "뒤로",
     "title": "facadely",
-    "subtitle": "로그인하거나 계정 만들기",
+    "subtitle": "로그인하거나 계정을 만드세요",
+    "nameLabel": "이름",
+    "emailLabel": "이메일",
+    "passwordLabel": "비밀번호",
+    "confirmPasswordLabel": "비밀번호 확인",
+    "signInButton": "로그인",
+    "signUpButton": "회원가입",
+    "switchToSignUp": "계정이 없으신가요? 가입하기",
+    "switchToSignIn": "이미 계정이 있나요? 로그인",
+    "orDivider": "또는",
+    "loading": "처리 중...",
+    "passwordMismatch": "비밀번호와 확인 값이 일치하지 않습니다.",
+    "unknownError": "요청 처리 중 오류가 발생했습니다. 다시 시도해주세요.",
+    "googleSuccess": "Google 로그인이 완료되었습니다.",
+    "googleError": "Google 로그인에 실패했습니다",
     "google": "Google로 계속",
-    "apple": "Apple로 계속",
-    "facebook": "Facebook으로 계속",
     "terms": "계속함으로써 {terms}에 동의하며 {privacy}를 읽고 이해했습니다.",
     "termsLinkText": "서비스 약관",
     "privacyLinkText": "개인정보 보호정책",
@@ -1086,8 +1098,8 @@
           "purpose": "결제 처리"
         },
         {
-          "name": "Supabase",
-          "purpose": "인증 및 데이터베이스"
+          "name": "Google OAuth",
+          "purpose": "소셜 로그인"
         }
       ]
     },
@@ -1107,8 +1119,8 @@
     }
   },
   "generatePage": {
-    "title": "웹사이트 생성",
-    "subtitle": "템플릿을 선택하고 사용자 정의하여 완벽한 웹사이트를 만드세요"
+    "title": "에디터 열기",
+    "subtitle": "템플릿을 선택하고 에디터에서 사용자 정의하세요"
   },
   "statusPage": {
     "title": "서비스 상태",
@@ -1124,7 +1136,7 @@
     "brandStory": {
       "heading": "우리의 브랜드 스토리",
       "intro": "facadely",
-      "description": "\"Facade\"는 건물의 외관을 의미하며, 프로그래밍에서 Facade 패턴은 복잡한 시스템을 통합된 인터페이스로 단순화하는 디자인 패턴을 뜻합니다.\n\n두 의미에서 영감을 얻은 Facadely는 복잡한 디지털 창작을 아름다운 건축물의 외관처럼 간단하고 우아하게 만드는 것을 목표로 합니다. — 누구나 정교한 웹사이트를 쉽게 만들 수 있는 노코드 플랫폼을 제공합니다."
+      "description": "\"Facade\"는 건물의 외관을 의미하며, 프로그래밍에서 Facade 패턴은 복잡한 시스템을 통합된 인터페이스로 단순화하는 디자인 패턴을 뜻합니다.\n\n두 의미에서 영감을 얻은 Facadely는 복잡한 디지털 창작을 아름다운 건축물의 외관처럼 간단하고 우아하게 만드는 것을 목표로 합니다. — 누구나 정교한 웹사이트를 쉽게 만들 수 있는 직관적인 웹사이트 빌더 플랫폼을 제공합니다."
     },
     "mission": {
       "heading": "우리의 사명",

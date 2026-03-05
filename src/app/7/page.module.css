@@ -1,0 +1,487 @@
+/* --- Variables --- */
+.container {
+    /* High-end design tokens */
+    --text-main: #111822;
+    /* very dark blue/black */
+    --text-muted: #576574;
+
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.8);
+
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: var(--text-main);
+
+    min-height: 100vh;
+    /* Default background image (can be overridden from editor via inline style) */
+    background-image: url('/webP/Cloud1.webp');
+    /* Overlay alpha can be tuned from editor via backgroundColor (rgba alpha) */
+    background-color: rgba(15, 23, 42, 0.22);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Add a subtle cloud overlay effect with multiple radial gradients */
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.5) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.45;
+}
+
+/* --- Navigation --- */
+.nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.navLeft {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+}
+
+.logoIcon {
+    width: 24px;
+    height: 24px;
+    background-color: var(--text-main);
+    border-radius: 6px;
+    /* A small distinctive rounding on top-left to match image */
+    border-top-left-radius: 2px;
+}
+
+.navCenter {
+    display: flex;
+    gap: 32px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navLink {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.navLink:hover {
+    color: var(--text-main);
+}
+
+.ctaButtonDark {
+    background-color: var(--text-main);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ctaButtonDark:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Hero Content --- */
+.main {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.hero {
+    text-align: center;
+    max-width: 800px;
+    margin-bottom: 80px;
+}
+
+.title {
+    font-size: 5rem;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+    color: #1a1a1a;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.primaryButton {
+    background-color: var(--text-main);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primaryButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.secondaryButton {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    color: var(--text-main);
+    border: 1px solid var(--glass-border);
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.secondaryButton:hover {
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+/* --- Dashboard Mockup --- */
+.dashboardContainer {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 24px;
+    /* Hide the Overflowing bottom if we want it to look like it's resting on the bottom of the screen */
+}
+
+.dashboard {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08);
+    /* Soft, extremely large shadow */
+    display: flex;
+    overflow: hidden;
+    height: 600px;
+    /* fixed height layout like an app */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    border-right: 1px solid #f0f0f0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.sidebarNav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebarLink {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebarLink:hover {
+    background-color: #f7f7f7;
+    color: var(--text-main);
+}
+
+.activeLink {
+    background-color: #f2efe9;
+    /* Beige background from template */
+    color: var(--text-main);
+}
+
+/* Dashboard Main Area */
+.dashboardMain {
+    flex: 1;
+    padding: 32px 40px;
+    background-color: #fafbfc;
+    /* very subtle off-white for main area */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Topbar */
+.dashboardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+}
+
+.greeting h2 {
+    font-size: 1.5rem;
+    margin: 0 0 4px 0;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.greeting p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.headerControls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: white;
+    border: 1px solid #eaeaea;
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: border-color 0.2s ease;
+}
+
+.searchBar:focus-within {
+    border-color: #ccc;
+}
+
+.searchBar input {
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    background: transparent;
+    width: 120px;
+}
+
+.searchBar input::placeholder {
+    color: #adb5bd;
+}
+
+.headerIcons {
+    display: flex;
+    gap: 8px;
+}
+
+.iconButton {
+    background: white;
+    border: 1px solid #eaeaea;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.iconButton:hover {
+    background-color: #f5f5f5;
+    color: var(--text-main);
+}
+
+.timerWidget {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 16px;
+}
+
+.playButton {
+    background-color: var(--text-main);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.playButton:hover {
+    transform: scale(1.05);
+}
+
+/* Stats Grid */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.statCard {
+    background: white;
+    border: 1px solid #f0f0f0;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.statCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.statHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.statIconWrapper {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+.statTitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.statBody {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.statValue {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.statBadge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+}
+
+.badgePositive {
+    background-color: #e6f7ef;
+    color: #12b76a;
+}
+
+.badgeNegative {
+    background-color: #ffeef0;
+    color: #f04438;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 3.5rem;
+    }
+
+    .navCenter {
+        display: none;
+        /* Hide on mobile for now */
+    }
+
+    .dashboard {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+}

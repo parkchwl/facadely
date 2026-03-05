@@ -1,7 +1,7 @@
 {
-  "name": "Facadely - No-Code Website Builder",
+  "name": "Facadely - Website Builder",
   "short_name": "Facadely",
-  "description": "Create professional websites without coding. 100+ templates, multi-language support, and modern design tools.",
+  "description": "Build and operate professional websites with a modern website builder and templates.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -69,9 +69,9 @@
       ]
     },
     {
-      "name": "Generate",
-      "short_name": "Generate",
-      "description": "Generate website with AI",
+      "name": "Editor",
+      "short_name": "Editor",
+      "description": "Open the website builder editor",
       "url": "/generate",
       "icons": [
         {

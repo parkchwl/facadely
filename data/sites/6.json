@@ -1,0 +1,36 @@
+{
+  "sitePath": "/6",
+  "themeTokens": {
+    "primary": "#6366f1",
+    "secondary": "#d946ef",
+    "radius": "0.5rem",
+    "spacingBase": "1rem"
+  },
+  "typographyTokens": {
+    "heading": {
+      "fontFamily": "\"Playfair Display\", serif",
+      "fontWeight": "700",
+      "fontSize": "48px",
+      "lineHeight": "1.08",
+      "letterSpacing": "-0.01em"
+    },
+    "body": {
+      "fontFamily": "\"Inter\", sans-serif",
+      "fontWeight": "400",
+      "fontSize": "16px",
+      "lineHeight": "1.65",
+      "letterSpacing": "0px"
+    },
+    "button": {
+      "fontFamily": "\"Inter\", sans-serif",
+      "fontWeight": "600",
+      "fontSize": "14px",
+      "lineHeight": "1.2",
+      "letterSpacing": "0px"
+    }
+  },
+  "typographyPresetEnabled": false,
+  "customFonts": [],
+  "elements": [],
+  "updatedAt": "2026-03-02T08:55:15.041Z"
+}

@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import React, { useMemo, useState } from 'react';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import SocialLoginButton from './SocialLoginButton';
-import TermsAgreementModal from './TermsAgreementModal';
-import type { LoginPageDictionary, TermsModalDictionary } from '@/types/dictionary';
+import { getGoogleAuthUrl, login, signup } from '@/lib/api/auth';
+import type { LoginPageDictionary } from '@/types/dictionary';
 
 // Helper to render text with links
 const TextWithLinks = ({ text, links }: { text: string, links: { [key: string]: { href: string, text: string } } }) => {
@@ -32,37 +32,74 @@ const TextWithLinks = ({ text, links }: { text: string, links: { [key: string]: 
   );
 };
 
-interface LoginPageClientDictionary extends LoginPageDictionary {
-  termsModal: TermsModalDictionary;
-}
+type Mode = 'signin' | 'signup';
 
-export default function LoginPageClient({ dictionary }: { dictionary: LoginPageClientDictionary }) {
+export default function LoginPageClient({ dictionary }: { dictionary: LoginPageDictionary }) {
   const router = useRouter();
   const params = useParams() as { lang: string };
+  const searchParams = useSearchParams();
   const { lang } = params;
-  const [showTermsModal, setShowTermsModal] = useState(false);
-  const [selectedProvider, setSelectedProvider] = useState('');
 
-  const handleSocialLogin = async (provider: string) => {
-    const isNewUser = Math.random() > 0.5;
-    if (isNewUser) {
-      setSelectedProvider(provider);
-      setShowTermsModal(true);
-    } else {
-      alert(`${provider} login successful! (Existing user)`);
-      // router.push('/dashboard');
+  const [mode, setMode] = useState<Mode>('signin');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const oauthState = searchParams.get('oauth');
+  const oauthError = searchParams.get('error');
+
+  const bannerMessage = useMemo(() => {
+    if (oauthState === 'success') {
+      return dictionary.googleSuccess;
     }
-  };
-
-  const handleTermsAgree = () => {
-    setShowTermsModal(false);
-    alert(`${selectedProvider} signup complete! (New user)`);
-    // router.push('/dashboard');
-  };
+    if (oauthState === 'error') {
+      return oauthError ? `${dictionary.googleError}: ${oauthError}` : dictionary.googleError;
+    }
+    return '';
+  }, [oauthError, oauthState, dictionary.googleError, dictionary.googleSuccess]);
 
   const termLinks = {
     terms: { href: `/${lang}/terms`, text: dictionary.termsLinkText },
     privacy: { href: `/${lang}/privacy`, text: dictionary.privacyLinkText },
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    if (mode === 'signup' && password !== confirmPassword) {
+      setError(dictionary.passwordMismatch);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      if (mode === 'signup') {
+        await signup({
+          email,
+          password,
+          name,
+          locale: lang,
+          agreeTerms: true,
+        });
+      } else {
+        await login({ email, password });
+      }
+
+      router.push(`/${lang}`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : dictionary.unknownError);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    document.cookie = `facadely_lang=${lang}; Path=/; Max-Age=600; SameSite=Lax`;
+    window.location.href = getGoogleAuthUrl();
   };
 
   return (
@@ -86,8 +123,8 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageC
       </div>
 
       <div className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-md bg-white p-12 rounded-3xl shadow-2xl">
-          <div className="text-center mb-12">
+        <div className="w-full max-w-md bg-white p-10 rounded-3xl shadow-2xl">
+          <div className="text-center mb-8">
             <Link
               href={`/${lang}`}
               className="inline-block text-6xl font-montserrat font-bold text-gray-900 animate-pulse-glow-dark hover:animate-none transition-all mb-6"
@@ -102,21 +139,101 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageC
             </p>
           </div>
 
+          {bannerMessage && (
+            <div className="mb-4 rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-sm text-gray-700">
+              {bannerMessage}
+            </div>
+          )}
+
+          {error && (
+            <div className="mb-4 rounded-lg border border-red-300 bg-red-50 px-4 py-2 text-sm text-red-700">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-3 mb-6">
+            {mode === 'signup' && (
+              <div>
+                <label className="mb-1 block text-sm text-gray-700">{dictionary.nameLabel}</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-gray-500"
+                />
+              </div>
+            )}
+
+            <div>
+              <label className="mb-1 block text-sm text-gray-700">{dictionary.emailLabel}</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-gray-500"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-gray-700">{dictionary.passwordLabel}</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={8}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-gray-500"
+              />
+            </div>
+
+            {mode === 'signup' && (
+              <div>
+                <label className="mb-1 block text-sm text-gray-700">{dictionary.confirmPasswordLabel}</label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  minLength={8}
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-gray-500"
+                />
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full rounded-lg bg-black py-3 text-sm font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isSubmitting
+                ? dictionary.loading
+                : mode === 'signup'
+                  ? dictionary.signUpButton
+                  : dictionary.signInButton}
+            </button>
+          </form>
+
+          <div className="mb-6 text-center">
+            <button
+              type="button"
+              onClick={() => setMode((prev) => (prev === 'signin' ? 'signup' : 'signin'))}
+              className="text-sm text-gray-600 underline underline-offset-2"
+            >
+              {mode === 'signin' ? dictionary.switchToSignUp : dictionary.switchToSignIn}
+            </button>
+          </div>
+
+          <div className="relative mb-6 text-center">
+            <span className="bg-white px-3 text-xs text-gray-500">{dictionary.orDivider}</span>
+            <div className="-mt-2 h-px w-full bg-gray-200" />
+          </div>
+
           <div className="space-y-3 mb-8">
             <SocialLoginButton
-              provider="Google"
               label={dictionary.google}
-              onClick={() => handleSocialLogin('Google')}
-            />
-            <SocialLoginButton
-              provider="Apple"
-              label={dictionary.apple}
-              onClick={() => handleSocialLogin('Apple')}
-            />
-            <SocialLoginButton
-              provider="Facebook"
-              label={dictionary.facebook}
-              onClick={() => handleSocialLogin('Facebook')}
+              onClick={handleGoogleLogin}
             />
           </div>
 
@@ -130,15 +247,6 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageC
           </div>
         </div>
       </div>
-
-      <TermsAgreementModal
-        isOpen={showTermsModal}
-        onClose={() => setShowTermsModal(false)}
-        onAgree={handleTermsAgree}
-        provider={selectedProvider}
-        lang={lang}
-        dictionary={dictionary.termsModal}
-      />
     </div>
   );
 }

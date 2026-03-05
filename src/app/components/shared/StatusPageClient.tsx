@@ -23,7 +23,7 @@ const CONFIG = {
 const SERVICES = [
   {
     id: 1,
-    name: 'Website Builder',
+    name: 'Website Editing',
     description: 'Drag-and-drop editor and template system',
     status: 'operational',
     uptime: 99.98,
@@ -76,8 +76,8 @@ const SERVICES = [
 const INCIDENTS = [
   {
     id: 1,
-    title: 'Scheduled Maintenance - Website Builder',
-    description: 'We performed scheduled maintenance on the website builder infrastructure.',
+    title: 'Scheduled Maintenance - Website Editing',
+    description: 'We performed scheduled maintenance on the website editing infrastructure.',
     date: 'October 22, 2024',
     time: '02:00 - 02:30 UTC',
     severity: 'info',

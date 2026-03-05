@@ -1,0 +1,1071 @@
+{
+  "schemaVersion": 1,
+  "templateId": "onepro-dashboard-white",
+  "sitePath": "/7",
+  "name": "OnePro Dashboard",
+  "description": "SaaS dashboard hero template",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/7/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    {
+      "editId": "t7-main",
+      "label": "Main",
+      "kind": "container",
+      "fields": [
+        "color",
+        "image"
+      ]
+    },
+    {
+      "editId": "t7-nav",
+      "label": "Nav",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-brand",
+      "label": "Brand",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-brand-text",
+      "label": "Brand Text",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-nav-menu",
+      "label": "Nav Menu",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-nav-link-features",
+      "label": "Nav Link Features",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-nav-link-pricing",
+      "label": "Nav Link Pricing",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-nav-link-blog",
+      "label": "Nav Link Blog",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-nav-link-contact",
+      "label": "Nav Link Contact",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-nav-actions",
+      "label": "Nav Actions",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-nav-cta",
+      "label": "Nav Cta",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-hero",
+      "label": "Hero",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-hero-copy-group",
+      "label": "Hero Copy Group",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-title",
+      "label": "Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-subtitle",
+      "label": "Subtitle",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-cta-group",
+      "label": "Cta Group",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-cta-primary",
+      "label": "Cta Primary",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-cta-secondary",
+      "label": "Cta Secondary",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-dashboard-container",
+      "label": "Dashboard Container",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-dashboard",
+      "label": "Dashboard",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-sidebar",
+      "label": "Sidebar",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-sidebar-header",
+      "label": "Sidebar Header",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-sidebar-brand",
+      "label": "Sidebar Brand",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-sidebar-brand-text",
+      "label": "Sidebar Brand Text",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-sidebar-collapse",
+      "label": "Sidebar Collapse",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-sidebar-nav",
+      "label": "Sidebar Nav",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-sidebar-link-home",
+      "label": "Sidebar Link Home",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-sidebar-link-clients",
+      "label": "Sidebar Link Clients",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-sidebar-link-projects",
+      "label": "Sidebar Link Projects",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-sidebar-link-time",
+      "label": "Sidebar Link Time",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-dashboard-main",
+      "label": "Dashboard Main",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-dashboard-header",
+      "label": "Dashboard Header",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-greeting",
+      "label": "Greeting",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-greeting-title",
+      "label": "Greeting Title",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-greeting-copy",
+      "label": "Greeting Copy",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-header-controls",
+      "label": "Header Controls",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-search-bar",
+      "label": "Search Bar",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-header-icons",
+      "label": "Header Icons",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-control-target",
+      "label": "Control Target",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-control-folder",
+      "label": "Control Folder",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-control-billing",
+      "label": "Control Billing",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-timer",
+      "label": "Timer",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-time-value",
+      "label": "Time Value",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-time-play",
+      "label": "Time Play",
+      "kind": "button",
+      "fields": [
+        "text",
+        "button",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stats-grid",
+      "label": "Stats Grid",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-stat-card-1",
+      "label": "Stat Card 1",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-stat-title-1",
+      "label": "Stat Title 1",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-value-1",
+      "label": "Stat Value 1",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-badge-1",
+      "label": "Stat Badge 1",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-card-2",
+      "label": "Stat Card 2",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-stat-title-2",
+      "label": "Stat Title 2",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-value-2",
+      "label": "Stat Value 2",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-badge-2",
+      "label": "Stat Badge 2",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-card-3",
+      "label": "Stat Card 3",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-stat-title-3",
+      "label": "Stat Title 3",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-value-3",
+      "label": "Stat Value 3",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-badge-3",
+      "label": "Stat Badge 3",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-card-4",
+      "label": "Stat Card 4",
+      "kind": "container",
+      "fields": [
+        "color"
+      ]
+    },
+    {
+      "editId": "t7-stat-title-4",
+      "label": "Stat Title 4",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-value-4",
+      "label": "Stat Value 4",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    },
+    {
+      "editId": "t7-stat-badge-4",
+      "label": "Stat Badge 4",
+      "kind": "text",
+      "fields": [
+        "text",
+        "color",
+        "font"
+      ]
+    }
+  ],
+  "themeTokens": [
+    "primary",
+    "secondary",
+    "radius",
+    "spacingBase"
+  ],
+  "presetUi": {
+    "imageInitialVisible": 4,
+    "sceneInitialVisible": 4
+  },
+  "imagePresets": [
+    {
+      "id": "cloud-1",
+      "label": "Cloud 1",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud1.jpg",
+      "imageUrl": "/webP/Cloud1.webp"
+    },
+    {
+      "id": "cloud-2",
+      "label": "Cloud 2",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud2.jpg",
+      "imageUrl": "/webP/Cloud2.webp"
+    },
+    {
+      "id": "cloud-3",
+      "label": "Cloud 3",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud3.jpg",
+      "imageUrl": "/webP/Cloud3.webp"
+    },
+    {
+      "id": "cloud-4",
+      "label": "Cloud 4",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud4.jpg",
+      "imageUrl": "/webP/Cloud4.webp"
+    },
+    {
+      "id": "cloud-5",
+      "label": "Cloud 5",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud5.jpg",
+      "imageUrl": "/webP/Cloud5.webp"
+    },
+    {
+      "id": "cloud-6",
+      "label": "Cloud 6",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud6.jpg",
+      "imageUrl": "/webP/Cloud6.webp"
+    },
+    {
+      "id": "cloud-7",
+      "label": "Cloud 7",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud7.jpg",
+      "imageUrl": "/webP/Cloud7.webp"
+    },
+    {
+      "id": "cloud-8",
+      "label": "Cloud 8",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud8.jpg",
+      "imageUrl": "/webP/Cloud8.webp"
+    },
+    {
+      "id": "cloud-9",
+      "label": "Cloud 9",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud9.jpg",
+      "imageUrl": "/webP/Cloud9.webp"
+    }
+  ],
+  "scenePresets": [
+    {
+      "id": "scene-clear-morning",
+      "label": "Clear Morning",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud1.jpg",
+      "description": "Bright, crisp cloud layer with strong dark typography.",
+      "patches": [
+        {
+          "editId": "t7-main",
+          "styles": {
+            "backgroundImage": "url(\"/webP/Cloud1.webp\")",
+            "backgroundColor": "rgba(245, 249, 255, 0.28)"
+          }
+        },
+        {
+          "editId": "t7-brand-text",
+          "styles": {
+            "color": "#0f172a"
+          }
+        },
+        {
+          "editId": "t7-title",
+          "styles": {
+            "color": "#0f172a"
+          }
+        },
+        {
+          "editId": "t7-subtitle",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-nav-link-features",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-nav-link-pricing",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-nav-link-blog",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-nav-link-contact",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-cta-primary",
+          "styles": {
+            "backgroundColor": "#0f172a",
+            "color": "#ffffff"
+          }
+        },
+        {
+          "editId": "t7-cta-secondary",
+          "styles": {
+            "backgroundColor": "rgba(255, 255, 255, 0.74)",
+            "color": "#0f172a"
+          }
+        },
+        {
+          "editId": "t7-nav-cta",
+          "styles": {
+            "backgroundColor": "#0f172a",
+            "color": "#ffffff"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-silver-mist",
+      "label": "Silver Mist",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud3.jpg",
+      "description": "Soft neutral balance for elegant corporate landing pages.",
+      "patches": [
+        {
+          "editId": "t7-main",
+          "styles": {
+            "backgroundImage": "url(\"/webP/Cloud3.webp\")",
+            "backgroundColor": "rgba(236, 242, 248, 0.34)"
+          }
+        },
+        {
+          "editId": "t7-brand-text",
+          "styles": {
+            "color": "#111827"
+          }
+        },
+        {
+          "editId": "t7-title",
+          "styles": {
+            "color": "#111827"
+          }
+        },
+        {
+          "editId": "t7-subtitle",
+          "styles": {
+            "color": "#475569"
+          }
+        },
+        {
+          "editId": "t7-nav-link-features",
+          "styles": {
+            "color": "#475569"
+          }
+        },
+        {
+          "editId": "t7-nav-link-pricing",
+          "styles": {
+            "color": "#475569"
+          }
+        },
+        {
+          "editId": "t7-nav-link-blog",
+          "styles": {
+            "color": "#475569"
+          }
+        },
+        {
+          "editId": "t7-nav-link-contact",
+          "styles": {
+            "color": "#475569"
+          }
+        },
+        {
+          "editId": "t7-cta-primary",
+          "styles": {
+            "backgroundColor": "#1f2937",
+            "color": "#f8fafc"
+          }
+        },
+        {
+          "editId": "t7-cta-secondary",
+          "styles": {
+            "backgroundColor": "rgba(248, 250, 252, 0.72)",
+            "color": "#1f2937"
+          }
+        },
+        {
+          "editId": "t7-nav-cta",
+          "styles": {
+            "backgroundColor": "#1f2937",
+            "color": "#f8fafc"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-azure-focus",
+      "label": "Azure Focus",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud6.jpg",
+      "description": "Colder contrast profile with confident action accents.",
+      "patches": [
+        {
+          "editId": "t7-main",
+          "styles": {
+            "backgroundImage": "url(\"/webP/Cloud6.webp\")",
+            "backgroundColor": "rgba(233, 244, 255, 0.30)"
+          }
+        },
+        {
+          "editId": "t7-brand-text",
+          "styles": {
+            "color": "#0b1220"
+          }
+        },
+        {
+          "editId": "t7-title",
+          "styles": {
+            "color": "#0b1220"
+          }
+        },
+        {
+          "editId": "t7-subtitle",
+          "styles": {
+            "color": "#1e3a5f"
+          }
+        },
+        {
+          "editId": "t7-nav-link-features",
+          "styles": {
+            "color": "#1e3a5f"
+          }
+        },
+        {
+          "editId": "t7-nav-link-pricing",
+          "styles": {
+            "color": "#1e3a5f"
+          }
+        },
+        {
+          "editId": "t7-nav-link-blog",
+          "styles": {
+            "color": "#1e3a5f"
+          }
+        },
+        {
+          "editId": "t7-nav-link-contact",
+          "styles": {
+            "color": "#1e3a5f"
+          }
+        },
+        {
+          "editId": "t7-cta-primary",
+          "styles": {
+            "backgroundColor": "#0b1220",
+            "color": "#ffffff"
+          }
+        },
+        {
+          "editId": "t7-cta-secondary",
+          "styles": {
+            "backgroundColor": "rgba(224, 242, 254, 0.72)",
+            "color": "#0b1220"
+          }
+        },
+        {
+          "editId": "t7-nav-cta",
+          "styles": {
+            "backgroundColor": "#0b1220",
+            "color": "#ffffff"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-pearl-evening",
+      "label": "Pearl Evening",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud8.jpg",
+      "description": "Balanced evening palette for premium SaaS positioning.",
+      "patches": [
+        {
+          "editId": "t7-main",
+          "styles": {
+            "backgroundImage": "url(\"/webP/Cloud8.webp\")",
+            "backgroundColor": "rgba(237, 244, 251, 0.30)"
+          }
+        },
+        {
+          "editId": "t7-brand-text",
+          "styles": {
+            "color": "#111827"
+          }
+        },
+        {
+          "editId": "t7-title",
+          "styles": {
+            "color": "#111827"
+          }
+        },
+        {
+          "editId": "t7-subtitle",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-nav-link-features",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-nav-link-pricing",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-nav-link-blog",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-nav-link-contact",
+          "styles": {
+            "color": "#334155"
+          }
+        },
+        {
+          "editId": "t7-cta-primary",
+          "styles": {
+            "backgroundColor": "#1e293b",
+            "color": "#f8fafc"
+          }
+        },
+        {
+          "editId": "t7-cta-secondary",
+          "styles": {
+            "backgroundColor": "rgba(241, 245, 249, 0.75)",
+            "color": "#1e293b"
+          }
+        },
+        {
+          "editId": "t7-nav-cta",
+          "styles": {
+            "backgroundColor": "#1e293b",
+            "color": "#f8fafc"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-midnight-luxe",
+      "label": "Midnight Luxe",
+      "targetEditId": "t7-main",
+      "thumbnailUrl": "/webP/thumbs/Cloud9.jpg",
+      "description": "Deep contrast mode for dramatic hero messaging.",
+      "patches": [
+        {
+          "editId": "t7-main",
+          "styles": {
+            "backgroundImage": "url(\"/webP/Cloud9.webp\")",
+            "backgroundColor": "rgba(15, 23, 42, 0.28)"
+          }
+        },
+        {
+          "editId": "t7-brand-text",
+          "styles": {
+            "color": "#f8fafc"
+          }
+        },
+        {
+          "editId": "t7-title",
+          "styles": {
+            "color": "#f8fafc"
+          }
+        },
+        {
+          "editId": "t7-subtitle",
+          "styles": {
+            "color": "#e2e8f0"
+          }
+        },
+        {
+          "editId": "t7-nav-link-features",
+          "styles": {
+            "color": "#e2e8f0"
+          }
+        },
+        {
+          "editId": "t7-nav-link-pricing",
+          "styles": {
+            "color": "#e2e8f0"
+          }
+        },
+        {
+          "editId": "t7-nav-link-blog",
+          "styles": {
+            "color": "#e2e8f0"
+          }
+        },
+        {
+          "editId": "t7-nav-link-contact",
+          "styles": {
+            "color": "#e2e8f0"
+          }
+        },
+        {
+          "editId": "t7-cta-primary",
+          "styles": {
+            "backgroundColor": "#f8fafc",
+            "color": "#0f172a"
+          }
+        },
+        {
+          "editId": "t7-cta-secondary",
+          "styles": {
+            "backgroundColor": "rgba(15, 23, 42, 0.62)",
+            "color": "#f8fafc"
+          }
+        },
+        {
+          "editId": "t7-nav-cta",
+          "styles": {
+            "backgroundColor": "#f8fafc",
+            "color": "#0f172a"
+          }
+        }
+      ]
+    }
+  ]
+}

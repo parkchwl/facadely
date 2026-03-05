@@ -1,0 +1,42 @@
+package com.facadely.backend.auth.config;
+
+import org.springframework.http.ResponseCookie;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CookieFactory {
+
+    private final AuthProperties authProperties;
+
+    public CookieFactory(AuthProperties authProperties) {
+        this.authProperties = authProperties;
+    }
+
+    public ResponseCookie accessCookie(String value, long maxAgeSeconds) {
+        return ResponseCookie.from(authProperties.getCookie().getAccessName(), value)
+            .httpOnly(true)
+            .secure(authProperties.getCookie().isSecure())
+            .sameSite(authProperties.getCookie().getSameSite())
+            .path("/")
+            .maxAge(maxAgeSeconds)
+            .build();
+    }
+
+    public ResponseCookie refreshCookie(String value, long maxAgeSeconds) {
+        return ResponseCookie.from(authProperties.getCookie().getRefreshName(), value)
+            .httpOnly(true)
+            .secure(authProperties.getCookie().isSecure())
+            .sameSite(authProperties.getCookie().getSameSite())
+            .path("/api/v1/auth")
+            .maxAge(maxAgeSeconds)
+            .build();
+    }
+
+    public ResponseCookie clearAccessCookie() {
+        return accessCookie("", 0);
+    }
+
+    public ResponseCookie clearRefreshCookie() {
+        return refreshCookie("", 0);
+    }
+}

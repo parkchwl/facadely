@@ -30,15 +30,21 @@ Open `http://localhost:3000`.
 - `src/app/fonts/` - bundled variable font assets (sans/mono)
 - `src/app/components` - page-level and shared UI components
 - `src/app/components/shared` - shared route clients used by real pages
+- `src/app/editor/page.tsx` - visual editor entry
+- `src/app/s/[slug]/page.tsx` - canonical template rendering route
+- `src/lib/template-registry.ts` - canonical/legacy template path mapping
+- `src/lib/api/auth.ts` - frontend auth API client for Spring backend
 - `src/i18n/messages` - locale dictionaries (with English fallback merge)
 - `src/lib/get-dictionary.ts` - dictionary loading and fallback merge
 - `src/proxy.ts` - Next 16 proxy entry (replaces legacy `middleware.ts`)
+- `backend/` - Spring Boot backend (auth, Google OAuth, Flyway)
 
 ## Validation
 
 ```bash
 npm run lint
-npx next build --webpack
+npm run build
+cd backend && ./gradlew test
 ```
 
 If Turbopack networking/ports are restricted in your local environment, use webpack build validation as above.

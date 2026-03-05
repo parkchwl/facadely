@@ -1,7 +1,7 @@
 {
   "navigation": {
     "templates": "模板",
-    "generate": "生成",
+    "generate": "編輯器",
     "service": "服務",
     "pricing": "價格",
     "signup": "註冊",
@@ -9,7 +9,7 @@
   },
   "mobileNav": {
     "templates": "模板",
-    "generate": "生成",
+    "generate": "編輯器",
     "service": "服務",
     "pricing": "價格",
     "signup": "註冊",
@@ -26,7 +26,7 @@
     },
     "platform": {
       "title": "平台",
-      "generator": "網站生成器",
+      "generator": "編輯器平台",
       "template": "模板",
       "domain": "域名"
     },
@@ -828,8 +828,8 @@
     }
   },
   "generatePage": {
-    "title": "生成您的網站",
-    "subtitle": "選擇一個模板並自定義它以創建您完美的網站"
+    "title": "開啟編輯器",
+    "subtitle": "選擇範本並在編輯器中自訂"
   },
   "statusPage": {
     "title": "服務狀態",

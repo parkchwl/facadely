@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "templateId": "nexus-ai-enterprise",
+  "sitePath": "/5",
+  "name": "Nexus AI Enterprise",
+  "description": "Dark enterprise AI consulting landing template",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/5/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    {
+      "editId": "t5-main",
+      "label": "Main",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-background",
+      "label": "Background",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-nav",
+      "label": "Nav",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-brand",
+      "label": "Brand",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-brand-text",
+      "label": "Brand Text",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-nav-menu",
+      "label": "Nav Menu",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-nav-link-services",
+      "label": "Nav Services",
+      "kind": "button",
+      "fields": ["text", "button", "color", "font"]
+    },
+    {
+      "editId": "t5-nav-link-cases",
+      "label": "Nav Cases",
+      "kind": "button",
+      "fields": ["text", "button", "color", "font"]
+    },
+    {
+      "editId": "t5-nav-link-careers",
+      "label": "Nav Careers",
+      "kind": "button",
+      "fields": ["text", "button", "color", "font"]
+    },
+    {
+      "editId": "t5-nav-actions",
+      "label": "Nav Actions",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-nav-login",
+      "label": "Nav Login",
+      "kind": "button",
+      "fields": ["text", "button", "color", "font"]
+    },
+    {
+      "editId": "t5-nav-audit",
+      "label": "Nav Audit",
+      "kind": "button",
+      "fields": ["text", "button", "color", "font"]
+    },
+    {
+      "editId": "t5-hero",
+      "label": "Hero",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-content-left",
+      "label": "Hero Left",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-tag",
+      "label": "Tag",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-title",
+      "label": "Title",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-title-emphasis",
+      "label": "Title Emphasis",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-description",
+      "label": "Description",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-cta-group",
+      "label": "CTA Group",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-cta-primary",
+      "label": "CTA Primary",
+      "kind": "button",
+      "fields": ["text", "button", "color", "font"]
+    },
+    {
+      "editId": "t5-cta-secondary",
+      "label": "CTA Secondary",
+      "kind": "button",
+      "fields": ["text", "button", "color", "font"]
+    },
+    {
+      "editId": "t5-content-right",
+      "label": "Hero Right",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-stat-card-1",
+      "label": "Stat Card 1",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-stat-label-1",
+      "label": "Stat Label 1",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-stat-value-1",
+      "label": "Stat Value 1",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-stat-unit-1",
+      "label": "Stat Unit 1",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-stat-card-2",
+      "label": "Stat Card 2",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-stat-label-2",
+      "label": "Stat Label 2",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-stat-value-2",
+      "label": "Stat Value 2",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-stat-unit-2",
+      "label": "Stat Unit 2",
+      "kind": "text",
+      "fields": ["text", "color", "font"]
+    },
+    {
+      "editId": "t5-ticker",
+      "label": "Ticker",
+      "kind": "container",
+      "fields": ["color"]
+    },
+    {
+      "editId": "t5-ticker-track",
+      "label": "Ticker Track",
+      "kind": "container",
+      "fields": ["color"]
+    }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"]
+}

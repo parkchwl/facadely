@@ -1,0 +1,118 @@
+{
+  "sitePath": "/7",
+  "themeTokens": {
+    "primary": "#6366f1",
+    "secondary": "#d946ef",
+    "radius": "0.5rem",
+    "spacingBase": "1rem"
+  },
+  "typographyTokens": {
+    "heading": {
+      "fontFamily": "\"Playfair Display\", serif",
+      "fontWeight": "700",
+      "fontSize": "48px",
+      "lineHeight": "1.08",
+      "letterSpacing": "-0.01em"
+    },
+    "body": {
+      "fontFamily": "\"Inter\", sans-serif",
+      "fontWeight": "400",
+      "fontSize": "16px",
+      "lineHeight": "1.65",
+      "letterSpacing": "0px"
+    },
+    "button": {
+      "fontFamily": "\"Inter\", sans-serif",
+      "fontWeight": "600",
+      "fontSize": "14px",
+      "lineHeight": "1.2",
+      "letterSpacing": "0px"
+    }
+  },
+  "typographyPresetEnabled": false,
+  "customFonts": [],
+  "elements": [
+    {
+      "editId": "t7-nav-link-blog",
+      "styles": {
+        "color": "#e2e8f0"
+      },
+      "updatedAt": "2026-03-05T09:22:46.286Z"
+    },
+    {
+      "editId": "t7-nav-link-contact",
+      "styles": {
+        "color": "#e2e8f0"
+      },
+      "updatedAt": "2026-03-05T09:22:46.305Z"
+    },
+    {
+      "editId": "t7-cta-primary",
+      "styles": {
+        "backgroundColor": "#f8fafc",
+        "color": "#0f172a"
+      },
+      "updatedAt": "2026-03-05T09:22:46.314Z"
+    },
+    {
+      "editId": "t7-cta-secondary",
+      "styles": {
+        "backgroundColor": "rgba(15, 23, 42, 0.62)",
+        "color": "#f8fafc"
+      },
+      "updatedAt": "2026-03-05T09:22:46.323Z"
+    },
+    {
+      "editId": "t7-nav-cta",
+      "styles": {
+        "backgroundColor": "#f8fafc",
+        "color": "#0f172a"
+      },
+      "updatedAt": "2026-03-05T09:22:46.332Z"
+    },
+    {
+      "editId": "t7-main",
+      "styles": {
+        "backgroundImage": "url(\"/webP/Cloud9.webp\")",
+        "backgroundColor": "rgba(15, 23, 42, 0.28)"
+      },
+      "updatedAt": "2026-03-05T09:22:46.206Z"
+    },
+    {
+      "editId": "t7-brand-text",
+      "styles": {
+        "color": "#f8fafc"
+      },
+      "updatedAt": "2026-03-05T09:22:46.245Z"
+    },
+    {
+      "editId": "t7-title",
+      "styles": {
+        "color": "#f8fafc"
+      },
+      "updatedAt": "2026-03-05T09:22:46.253Z"
+    },
+    {
+      "editId": "t7-subtitle",
+      "styles": {
+        "color": "#e2e8f0"
+      },
+      "updatedAt": "2026-03-05T09:22:46.261Z"
+    },
+    {
+      "editId": "t7-nav-link-features",
+      "styles": {
+        "color": "#e2e8f0"
+      },
+      "updatedAt": "2026-03-05T09:22:46.268Z"
+    },
+    {
+      "editId": "t7-nav-link-pricing",
+      "styles": {
+        "color": "#e2e8f0"
+      },
+      "updatedAt": "2026-03-05T09:22:46.278Z"
+    }
+  ],
+  "updatedAt": "2026-03-05T09:22:46.332Z"
+}

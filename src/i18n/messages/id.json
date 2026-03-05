@@ -1,7 +1,7 @@
 {
   "navigation": {
     "templates": "Template",
-    "generate": "Buat",
+    "generate": "Editor",
     "service": "Layanan",
     "pricing": "Harga",
     "signup": "Daftar",
@@ -9,7 +9,7 @@
   },
   "mobileNav": {
     "templates": "Template",
-    "generate": "Buat",
+    "generate": "Editor",
     "service": "Layanan",
     "pricing": "Harga",
     "signup": "DAFTAR",
@@ -26,7 +26,7 @@
     },
     "platform": {
       "title": "Platform",
-      "generator": "Pembuat Situs Web",
+      "generator": "Platform Editor",
       "template": "Template",
       "domain": "Domain"
     },
@@ -828,8 +828,8 @@
     }
   },
   "generatePage": {
-    "title": "Buat Situs Web Anda",
-    "subtitle": "Pilih template dan sesuaikan untuk membuat situs web sempurna Anda"
+    "title": "Buka Editor",
+    "subtitle": "Pilih template dan sesuaikan di editor"
   },
   "statusPage": {
     "title": "Status Layanan",

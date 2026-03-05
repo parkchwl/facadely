@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "templateId": "onepro-dashboard-white",
+  "sitePath": "/t/onepro-dashboard-white",
+  "name": "OnePro Dashboard",
+  "description": "SaaS dashboard hero template",
+  "runtime": {
+    "format": "html",
+    "entry": "templates/onepro-dashboard-white/index.html",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t7-main", "label": "Main", "kind": "container", "fields": ["color", "image"] },
+    { "editId": "t7-brand-text", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t7-title", "label": "Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t7-subtitle", "label": "Subtitle", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t7-cta-primary", "label": "Primary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t7-cta-secondary", "label": "Secondary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t7-nav-cta", "label": "Nav CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t7-stat-value-1", "label": "Stat 1", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t7-stat-value-2", "label": "Stat 2", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t7-stat-value-3", "label": "Stat 3", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t7-stat-value-4", "label": "Stat 4", "kind": "text", "fields": ["text", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"]
+}

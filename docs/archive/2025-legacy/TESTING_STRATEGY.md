@@ -208,7 +208,7 @@ describe('OptimizedImage', () => {
 **이유:**
 1. **속도**: CI/CD에서 중요
 2. **크로스 브라우저**: Safari 테스트 가능 (i18n 버그 발견 가능)
-3. **API 모킹**: Supabase API 테스트
+3. **API 모킹**: 레거시 인증 API 테스트
 4. **병렬 실행**: 무료로 빠른 테스트
 
 **설치:**
@@ -282,7 +282,7 @@ test('search templates and filter', async ({ page }) => {
 │   ├── setup.ts                         ← Vitest global setup
 │   ├── mocks/
 │   │   ├── dictionary.ts                ← Mock translations
-│   │   └── supabase.ts                  ← Mock Supabase client
+│   │   └── legacy-auth.ts               ← Mock legacy auth client
 │   ├── integration/                     ← Integration tests
 │   │   ├── i18n-routing.test.tsx
 │   │   ├── image-optimization.test.tsx
@@ -793,7 +793,7 @@ screen.getByTestId('language-dropdown')  // ⚠️ Last resort
 
 ```typescript
 // ✅ Good - Mock external API
-vi.mock('@supabase/supabase-js', () => ({
+vi.mock('legacy-auth-client', () => ({
   createClient: vi.fn(),
 }));
 

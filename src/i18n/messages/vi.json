@@ -1,7 +1,7 @@
 {
   "navigation": {
     "templates": "Mẫu",
-    "generate": "Tạo",
+    "generate": "Editor",
     "service": "Dịch vụ",
     "pricing": "Giá cả",
     "signup": "Đăng ký",
@@ -9,7 +9,7 @@
   },
   "mobileNav": {
     "templates": "Mẫu",
-    "generate": "Tạo",
+    "generate": "Editor",
     "service": "Dịch vụ",
     "pricing": "Giá cả",
     "signup": "ĐĂNG KÝ",
@@ -26,7 +26,7 @@
     },
     "platform": {
       "title": "Nền tảng",
-      "generator": "Trình tạo trang web",
+      "generator": "Nền tảng Editor",
       "template": "Mẫu",
       "domain": "Miền"
     },
@@ -828,8 +828,8 @@
     }
   },
   "generatePage": {
-    "title": "Tạo trang web của bạn",
-    "subtitle": "Chọn một mẫu và tùy chỉnh nó để tạo trang web hoàn hảo của bạn"
+    "title": "Mở Editor",
+    "subtitle": "Chọn mẫu và tùy chỉnh trong editor"
   },
   "statusPage": {
     "title": "Trạng thái dịch vụ",

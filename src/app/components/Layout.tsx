@@ -20,6 +20,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
   const pathname = usePathname();
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const editorHref = process.env.NEXT_PUBLIC_BETA_EDITOR_URL?.trim() || '/editor';
 
   const getLocaleFromPath = (path: string): Locale => {
     const segments = path.split('/');
@@ -86,7 +87,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
           {/* Center: Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6">
             <Link href={createLocalizedPath(currentLocale, '/templates')} className="font-semibold hover:text-blue-400 transition-colors text-sm">{navigation.templates}</Link>
-            <Link href={createLocalizedPath(currentLocale, '/generate')} className="font-semibold hover:text-blue-400 transition-colors text-sm">{navigation.generate}</Link>
+            <Link href={editorHref} className="font-semibold hover:text-blue-400 transition-colors text-sm">{navigation.generate}</Link>
             <Link href={createLocalizedPath(currentLocale, '/service')} className="font-semibold hover:text-blue-400 transition-colors text-sm">{navigation.service}</Link>
             <Link href={createLocalizedPath(currentLocale, '/pricing')} className="font-semibold hover:text-blue-400 transition-colors text-sm">{navigation.pricing}</Link>
           </nav>
@@ -224,7 +225,7 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                       transition={{ delay: 0.45, duration: 0.5 }}
                     >
                       <Link
-                        href={createLocalizedPath(currentLocale, '/generate')}
+                        href={editorHref}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="block text-3xl sm:text-4xl font-light tracking-tight text-white/80 hover:text-white hover:pl-4 transition-all duration-300 py-3"
                       >

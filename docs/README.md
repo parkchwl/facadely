@@ -9,7 +9,9 @@ This directory contains the active project documentation for `front`.
 - `/Users/parkchwl/front/CHANGELOG.md`
   - Chronological change history.
 - `/Users/parkchwl/front/docs/PROJECT_OVERVIEW.md`
-  - Current architecture, route map, i18n behavior, and runtime notes.
+  - Current architecture, route map, template routing model, i18n behavior, and runtime notes.
+- `/Users/parkchwl/front/docs/backend/README.md`
+  - Spring backend migration learning track, `backend_starter.md` 입문서, and phase-by-phase guides.
 
 ## Archived Docs
 
@@ -27,3 +29,4 @@ This directory contains the active project documentation for `front`.
 - When code behavior changes, update:
   1. `CHANGELOG.md`
   2. `docs/PROJECT_OVERVIEW.md` (if architecture/route/runtime behavior changed, including layout/font/runtime policy)
+  3. `README.md` (if quick start, script, or top-level structure changed)

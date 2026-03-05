@@ -1,4 +1,4 @@
-import { getDictionary } from '@/lib/get-dictionary';
+import { redirect } from 'next/navigation';
 import { Locale } from '@/i18n/config';
 
 export default async function GeneratePage({
@@ -6,25 +6,6 @@ export default async function GeneratePage({
 }: {
   params: Promise<{ lang: Locale }>
 }) {
-  const { lang } = await params;
-  const dictionary = await getDictionary(lang);
-
-  return (
-    <div className="min-h-app-vh bg-black flex items-center justify-center py-20 px-6">
-      <div className="text-center">
-        {/* Logo */}
-        <div className="mb-12">
-          <p className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white">✦</p>
-        </div>
-
-        {/* Text */}
-        <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
-          {dictionary.generatePage.title}
-        </p>
-        <p className="mt-4 text-base sm:text-lg text-gray-300">
-          {dictionary.generatePage.subtitle}
-        </p>
-      </div>
-    </div>
-  );
+  await params;
+  redirect(process.env.NEXT_PUBLIC_BETA_EDITOR_URL?.trim() || '/editor');
 }

@@ -12,7 +12,7 @@ type LayoutProps = Readonly<{
 
 export const metadata: Metadata = {
   title: "facadely",
-  description: "Build a professional website in minutes — No code, no hassle",
+  description: "Build and operate professional websites with a modern website builder and template workflow",
 };
 
 export default async function MainLayout({

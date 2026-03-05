@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import { appMono, appSans } from "./fonts";
 import "./globals.css";
+import type { CSSProperties } from "react";
 
 export const metadata: Metadata = {
   title: {
-    default: "facadely - No Code Website Builder",
+    default: "facadely - Website Builder",
     template: "%s | facadely"
   },
-  description: "Build a professional website in minutes — No code, no hassle. Choose from 100+ templates and launch your site today.",
-  keywords: ["website builder", "no-code", "templates", "web design", "landing page", "website maker"],
+  description: "Build and operate professional websites with a modern website builder and template system.",
+  keywords: ["website builder", "templates", "web design", "landing page", "website platform"],
   authors: [{ name: "facadely Team" }],
   creator: "facadely Corp.",
   publisher: "facadely Corp.",
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: '/',
-    title: 'facadely - No Code Website Builder',
-    description: 'Build a professional website in minutes — No code, no hassle',
+    title: 'facadely - Website Builder',
+    description: 'Build and operate professional websites with a modern website builder',
     siteName: 'facadely',
     images: [{
       url: '/image/og-image.jpg',
@@ -33,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'facadely - No Code Website Builder',
-    description: 'Build a professional website in minutes — No code, no hassle',
+    title: 'facadely - Website Builder',
+    description: 'Build and operate professional websites with a modern website builder',
     images: ['/image/og-image.jpg'],
   },
   robots: {
@@ -55,13 +56,20 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const ROOT_THEME_STYLE: CSSProperties = {
+  "--primary": "#6366f1",
+  "--secondary": "#d946ef",
+  "--radius": "0.5rem",
+  "--spacing-base": "1rem",
+} as CSSProperties;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={ROOT_THEME_STYLE} suppressHydrationWarning>
       <body
         className={`${appSans.variable} ${appMono.variable} antialiased`}
       >

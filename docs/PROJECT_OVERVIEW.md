@@ -1,6 +1,6 @@
 # Project Overview
 
-Last updated: 2026-02-19
+Last updated: 2026-03-06
 
 ## Stack
 
@@ -9,7 +9,7 @@ Last updated: 2026-02-19
 - TypeScript `5`
 - Tailwind CSS `4`
 - Framer Motion `12.23.22`
-- Supabase (`@supabase/supabase-js`, `@supabase/ssr`)
+- Spring Boot backend (`/backend`, Java 21, Security, JPA, Flyway, OAuth2)
 
 ## App Shape
 
@@ -18,7 +18,22 @@ Last updated: 2026-02-19
 - Proxy entry (Next 16): `/Users/parkchwl/front/src/proxy.ts`
 - Shared route clients: `/Users/parkchwl/front/src/app/components/shared/`
 - Local font loader: `/Users/parkchwl/front/src/app/fonts.ts`
-- Local font assets: `/Users/parkchwl/front/src/app/fonts/`
+- Backend app root: `/Users/parkchwl/front/backend`
+
+## Template Routing Model
+
+- Canonical template route:
+  - `/Users/parkchwl/front/src/app/s/[slug]/page.tsx`
+- Template registry and path conversion:
+  - `/Users/parkchwl/front/src/lib/template-registry.ts`
+- Compatibility redirect routes:
+  - `/Users/parkchwl/front/src/app/5/page.tsx`
+  - `/Users/parkchwl/front/src/app/6/page.tsx`
+  - `/Users/parkchwl/front/src/app/7/page.tsx`
+- Runtime template views:
+  - `/Users/parkchwl/front/src/app/5/TemplateView.tsx`
+  - `/Users/parkchwl/front/src/app/6/TemplateView.tsx`
+  - `/Users/parkchwl/front/src/app/7/TemplateView.tsx`
 
 ## Locales and Dictionary Behavior
 
@@ -30,7 +45,7 @@ Last updated: 2026-02-19
 
 ## Main Runtime Routes
 
-All routes are under `src/app/[lang]/(main)` unless noted.
+Localized routes (`src/app/[lang]/(main)`):
 
 - `/{lang}` (home)
 - `/{lang}/about`
@@ -39,7 +54,7 @@ All routes are under `src/app/[lang]/(main)` unless noted.
 - `/{lang}/contact`
 - `/{lang}/cookie`
 - `/{lang}/customer-service`
-- `/{lang}/generate`
+- `/{lang}/generate` (redirects to editor entry)
 - `/{lang}/login`
 - `/{lang}/pricing`
 - `/{lang}/privacy`
@@ -48,33 +63,43 @@ All routes are under `src/app/[lang]/(main)` unless noted.
 - `/{lang}/status`
 - `/{lang}/templates`
 - `/{lang}/terms`
-- `/_not-found` (framework route)
 
-## Recent Architecture-Significant Changes
+Non-localized routes:
 
-- Replaced legacy middleware entry with proxy:
-  - `src/middleware.ts` -> `src/proxy.ts`
+- `/editor` (beta editor app)
+- `/s/{slug}` (canonical template preview)
+- `/5`, `/6`, `/7` (legacy compatibility redirects)
+- `/p/{slug}`, `/t/{slug}`, `/t/{slug}/{...asset}` (publish/runtime paths)
+- `/api/*` (template/editor/publish/font APIs)
+
+## Architecture-Significant Changes
+
+- Replaced legacy middleware entry with proxy (`src/proxy.ts`).
 - App-wide responsive/viewport stabilization:
-  - utility classes and viewport variables added in `src/app/globals.css`
-  - route roots aligned to `min-h-app-vh`
-- Root font strategy migrated to local assets:
-  - removed package-based `geist/font/*` imports from root layout
-  - loaded variable sans/mono fonts via `next/font/local` (`src/app/fonts.ts`)
-  - font files committed under `src/app/fonts/` for deterministic offline/restricted builds
-- Dev/build module resolution hardening:
-  - pinned `outputFileTracingRoot` and `turbopack.root` in `next.config.mjs`
-  - local `node_modules` resolution precedence for webpack
-- Home/blog content restructuring:
-  - home "It is Essential" section removed
-  - moved into blog article (`blogPage.posts` id `6`) in `src/i18n/messages/en.json`
+  - viewport utility classes and variables in `src/app/globals.css`
+  - route roots aligned to app viewport utility classes
+  - zoom restriction removed from root viewport metadata
+- Root font strategy migrated to local assets via `next/font/local`.
 - Homepage interaction refinements:
-  - infinite gallery restored to CSS loop animation (`gallery-scroll-left/right`) without edge fade mask
-  - marquee banner moved below the solution section
-  - FAQ progress bar reset/play logic synchronized with viewport visibility and manual selection
+  - infinite gallery restored to CSS loop animation without side fade mask
+  - marquee location/speed tuned
+  - FAQ progress bar reset/play behavior synchronized
+- Editor/template integration:
+  - `/generate` changed to editor entry redirect (`NEXT_PUBLIC_BETA_EDITOR_URL` fallback to `/editor`)
+  - navigation label switched from Generate to Editor
+  - canonical template listing/paths unified through registry (`/s/{slug}`)
+- Backend auth cutover:
+  - frontend auth source unified to Spring `/api/v1/auth/*`
+  - Google OAuth only; Apple/Facebook removed from login flow
+  - legacy Supabase auth runtime code removed
+- Repository cleanup:
+  - removed unused legacy editor/client files
+  - removed macOS `.DS_Store` artifacts
 
 ## Validation Baseline
 
-- Lint:
+- Frontend:
   - `npm run lint`
-- Build (preferred for restricted local environments):
-  - `npx next build --webpack`
+  - `npm run build`
+- Backend:
+  - `cd backend && ./gradlew test`

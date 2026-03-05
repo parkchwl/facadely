@@ -10,10 +10,5 @@ export default async function LoginPage({
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
-  const pageDictionary = {
-    ...dictionary.loginPage,
-    termsModal: dictionary.termsModal
-  };
-
-  return <LoginPageClient dictionary={pageDictionary} />;
+  return <LoginPageClient dictionary={dictionary.loginPage} />;
 }

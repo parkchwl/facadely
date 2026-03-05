@@ -208,6 +208,7 @@ const FeatureCard = memo(function FeatureCard({ feature, index }: FeatureCardPro
 export default function ServicePageClient({ dictionary }: ServicePageClientProps) {
   const { lang } = useParams() as { lang: string };
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const editorHref = process.env.NEXT_PUBLIC_BETA_EDITOR_URL?.trim() || '/editor';
 
   // Memoize hero features - only recalculate when dictionary.heroFeatures changes
   const heroFeatures = useMemo(() =>
@@ -282,7 +283,7 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="flex flex-row items-start gap-3 sm:gap-4 mb-10"
               >
-                <Link href={`/${lang}/generate`}>
+                <Link href={editorHref}>
                   <motion.button
                     {...BUTTON_ANIMATIONS.primary}
                     aria-label="Start building your website for free"
@@ -469,7 +470,7 @@ export default function ServicePageClient({ dictionary }: ServicePageClientProps
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Link href={`/${lang}/generate`}>
+              <Link href={editorHref}>
                 <motion.button
                   {...BUTTON_ANIMATIONS.primary}
                   aria-label="Start building your website for free"
