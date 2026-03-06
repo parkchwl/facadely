@@ -34,6 +34,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# runtime editor/publish state
+.runtime/
+public/uploads/
+
 # vercel
 .vercel
 

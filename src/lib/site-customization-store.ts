@@ -16,9 +16,60 @@ import {
   toLegacyTemplatePath,
 } from "@/lib/template-registry";
 
-const DATA_DIR = path.join(process.cwd(), "data", "sites");
+const RUNTIME_DATA_DIR = path.join(process.cwd(), ".runtime", "sites");
+const LEGACY_DATA_DIR = path.join(process.cwd(), "data", "sites");
 const SAFE_SITE_PATH = /^\/[a-z0-9/-]*$/;
 const SAFE_EDIT_ID = /^[a-z0-9][a-z0-9_-]*$/i;
+const SAFE_FONT_FAMILY = /^[a-z0-9 _-]{2,64}$/i;
+const SAFE_FONT_URL = /^\/(?:uploads\/fonts|fonts)\/[a-z0-9/_-]+\.woff2$/i;
+
+function isSafeRelativePath(value: string): boolean {
+  return value.startsWith("/") && !value.startsWith("//") && !value.includes("..");
+}
+
+function isSafeHttpUrl(value: string): boolean {
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+function sanitizeStoredHref(input: string): string | null {
+  const trimmed = input.trim();
+  if (!trimmed) return null;
+  if (trimmed.startsWith("#")) return trimmed;
+  if (isSafeRelativePath(trimmed)) return trimmed;
+
+  try {
+    const parsed = new URL(trimmed);
+    if (["https:", "http:", "mailto:", "tel:"].includes(parsed.protocol)) {
+      return trimmed;
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
+function sanitizeStoredImageSrc(input: string): string | null {
+  const trimmed = input.trim();
+  if (!trimmed) return null;
+  if (isSafeRelativePath(trimmed) || isSafeHttpUrl(trimmed)) return trimmed;
+  return null;
+}
+
+function sanitizeStoredFont(input: { family: string; url: string }): { family: string; url: string } | null {
+  const family = input.family.trim().replace(/\s+/g, " ");
+  const url = input.url.trim();
+
+  if (!SAFE_FONT_FAMILY.test(family)) return null;
+  if (!SAFE_FONT_URL.test(url)) return null;
+
+  return { family, url };
+}
 
 function normalizeSitePath(sitePath: string): string {
   if (!sitePath) return getDefaultLegacyTemplatePath();
@@ -44,13 +95,18 @@ function sitePathToId(sitePath: string): string {
   return sitePath.slice(1).replace(/\//g, "__");
 }
 
-function siteFilePath(sitePath: string): string {
+function runtimeSiteFilePath(sitePath: string): string {
   const safePath = assertSafeSitePath(sitePath);
-  return path.join(DATA_DIR, `${sitePathToId(safePath)}.json`);
+  return path.join(RUNTIME_DATA_DIR, `${sitePathToId(safePath)}.json`);
+}
+
+function legacySiteFilePath(sitePath: string): string {
+  const safePath = assertSafeSitePath(sitePath);
+  return path.join(LEGACY_DATA_DIR, `${sitePathToId(safePath)}.json`);
 }
 
 async function ensureStoreDir(): Promise<void> {
-  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.mkdir(RUNTIME_DATA_DIR, { recursive: true });
 }
 
 function buildDefaultSiteCustomization(sitePath: string): SiteCustomization {
@@ -140,10 +196,11 @@ function normalizeStoredCustomFont(input: unknown): CustomFontAsset | null {
   if (!isObject(input)) return null;
   const family = typeof input.family === "string" ? input.family.trim() : "";
   const url = typeof input.url === "string" ? input.url.trim() : "";
-  if (!family || !url) return null;
+  const safeFont = sanitizeStoredFont({ family, url });
+  if (!safeFont) return null;
   return {
-    family,
-    url,
+    family: safeFont.family,
+    url: safeFont.url,
     uploadedAt: typeof input.uploadedAt === "string" ? input.uploadedAt : new Date().toISOString(),
   };
 }
@@ -174,48 +231,58 @@ function normalizeStoredElementPatch(value: unknown): ElementPatch | null {
   };
 
   if (typeof value.innerText === "string") patch.innerText = value.innerText;
-  if (typeof value.src === "string") patch.src = value.src.trim();
-  if (typeof value.href === "string") patch.href = value.href.trim();
+  if (typeof value.src === "string") {
+    const safeSrc = sanitizeStoredImageSrc(value.src);
+    if (safeSrc) patch.src = safeSrc;
+  }
+  if (typeof value.href === "string") {
+    const safeHref = sanitizeStoredHref(value.href);
+    if (safeHref) patch.href = safeHref;
+  }
 
   return patch;
 }
 
 export async function readSiteCustomization(sitePath: string): Promise<SiteCustomization> {
   await ensureStoreDir();
-  const filePath = siteFilePath(sitePath);
+  const fileCandidates = [runtimeSiteFilePath(sitePath), legacySiteFilePath(sitePath)];
 
-  try {
-    const raw = await fs.readFile(filePath, "utf8");
-    const parsed = JSON.parse(raw) as Partial<SiteCustomization>;
+  for (const filePath of fileCandidates) {
+    try {
+      const raw = await fs.readFile(filePath, "utf8");
+      const parsed = JSON.parse(raw) as Partial<SiteCustomization>;
 
-    return {
-      sitePath: assertSafeSitePath(parsed.sitePath ?? sitePath),
-      themeTokens: {
-        ...DEFAULT_THEME_TOKENS,
-        ...(parsed.themeTokens ?? {}),
-      },
-      typographyTokens: normalizeTypographyTokens(parsed.typographyTokens),
-      typographyPresetEnabled: parsed.typographyPresetEnabled === true,
-      customFonts: Array.isArray(parsed.customFonts)
-        ? parsed.customFonts
-          .map((value) => normalizeStoredCustomFont(value))
-          .filter((value): value is CustomFontAsset => value !== null)
-        : [],
-      elements: Array.isArray(parsed.elements)
-        ? parsed.elements
-          .map((value) => normalizeStoredElementPatch(value))
-          .filter((value): value is ElementPatch => value !== null)
-        : [],
-      updatedAt: typeof parsed.updatedAt === "string" ? parsed.updatedAt : new Date().toISOString(),
-    };
-  } catch {
-    return buildDefaultSiteCustomization(sitePath);
+      return {
+        sitePath: assertSafeSitePath(parsed.sitePath ?? sitePath),
+        themeTokens: {
+          ...DEFAULT_THEME_TOKENS,
+          ...(parsed.themeTokens ?? {}),
+        },
+        typographyTokens: normalizeTypographyTokens(parsed.typographyTokens),
+        typographyPresetEnabled: parsed.typographyPresetEnabled === true,
+        customFonts: Array.isArray(parsed.customFonts)
+          ? parsed.customFonts
+            .map((value) => normalizeStoredCustomFont(value))
+            .filter((value): value is CustomFontAsset => value !== null)
+          : [],
+        elements: Array.isArray(parsed.elements)
+          ? parsed.elements
+            .map((value) => normalizeStoredElementPatch(value))
+            .filter((value): value is ElementPatch => value !== null)
+          : [],
+        updatedAt: typeof parsed.updatedAt === "string" ? parsed.updatedAt : new Date().toISOString(),
+      };
+    } catch {
+      continue;
+    }
   }
+
+  return buildDefaultSiteCustomization(sitePath);
 }
 
 export async function writeSiteCustomization(customization: SiteCustomization): Promise<void> {
   await ensureStoreDir();
-  const filePath = siteFilePath(customization.sitePath);
+  const filePath = runtimeSiteFilePath(customization.sitePath);
   const payload: SiteCustomization = {
     ...customization,
     sitePath: assertSafeSitePath(customization.sitePath),
@@ -243,8 +310,16 @@ export async function upsertElementPatch(sitePath: string, patch: ElementPatchIn
     updatedAt: new Date().toISOString(),
   };
   if (typeof patch.innerText === "string") nextPatch.innerText = patch.innerText;
-  if (typeof patch.src === "string") nextPatch.src = patch.src.trim();
-  if (typeof patch.href === "string") nextPatch.href = patch.href.trim();
+  if (typeof patch.src === "string") {
+    const safeSrc = sanitizeStoredImageSrc(patch.src);
+    if (!safeSrc) throw new Error("src is invalid");
+    nextPatch.src = safeSrc;
+  }
+  if (typeof patch.href === "string") {
+    const safeHref = sanitizeStoredHref(patch.href);
+    if (!safeHref) throw new Error("href is invalid");
+    nextPatch.href = safeHref;
+  }
 
   const existingIndex = customization.elements.findIndex((item) => item.editId === editId);
   if (existingIndex >= 0) {
@@ -317,20 +392,17 @@ export async function upsertCustomFont(
   font: { family: string; url: string }
 ): Promise<SiteCustomization> {
   const customization = await readSiteCustomization(sitePath);
-  const family = font.family.trim();
-  const url = font.url.trim();
-  if (!family || !url) {
-    throw new Error("custom font family and url are required");
-  }
+  const safeFont = sanitizeStoredFont(font);
+  if (!safeFont) throw new Error("custom font family or url is invalid");
 
   const nextFont: CustomFontAsset = {
-    family,
-    url,
+    family: safeFont.family,
+    url: safeFont.url,
     uploadedAt: new Date().toISOString(),
   };
 
   const existingIndex = customization.customFonts.findIndex(
-    (item) => item.family.toLowerCase() === family.toLowerCase()
+    (item) => item.family.toLowerCase() === safeFont.family.toLowerCase()
   );
 
   if (existingIndex >= 0) {

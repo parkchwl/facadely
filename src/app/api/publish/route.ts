@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 import { getPublishRecord, publishSite } from "@/lib/publish-store";
+import {
+  requireAuthenticatedUser,
+  requireSameOrigin,
+} from "@/lib/server/api-security";
 
 function buildPublicUrl(origin: string, slug: string): string {
   return `${origin}/p/${slug}`;
@@ -7,6 +11,7 @@ function buildPublicUrl(origin: string, slug: string): string {
 
 export async function GET(req: Request) {
   try {
+    await requireAuthenticatedUser(req);
     const { searchParams, origin } = new URL(req.url);
     const sitePath = searchParams.get("sitePath");
 
@@ -28,6 +33,9 @@ export async function GET(req: Request) {
       },
     });
   } catch (error) {
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    }
     console.error("publish GET error:", error);
     return NextResponse.json({ error: "Failed to load publish state" }, { status: 500 });
   }
@@ -35,6 +43,8 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
+    requireSameOrigin(req);
+    await requireAuthenticatedUser(req);
     const { sitePath, customDomain } = (await req.json()) as {
       sitePath?: string;
       customDomain?: string;
@@ -63,6 +73,12 @@ export async function POST(req: Request) {
         : null,
     });
   } catch (error) {
+    if (error instanceof Error && (error.message === "FORBIDDEN_ORIGIN" || error.message === "MISSING_ORIGIN")) {
+      return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
+    }
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    }
     if (error instanceof Error && error.message === "Invalid custom domain format") {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }

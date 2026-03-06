@@ -21,6 +21,10 @@ import {
   EditableStyleProperty,
   TemplateManifest,
 } from "@/lib/template-manifest-types";
+import {
+  requireAuthenticatedUser,
+  requireSameOrigin,
+} from "@/lib/server/api-security";
 
 type SaveCodeRequest = {
   sitePath?: string;
@@ -40,6 +44,9 @@ type SaveCodeRequest = {
   };
 };
 
+const SAFE_FONT_FAMILY = /^[a-z0-9 _-]{2,64}$/i;
+const SAFE_FONT_URL = /^\/(?:uploads\/fonts|fonts)\/[a-z0-9/_-]+\.woff2$/i;
+
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
@@ -52,6 +59,55 @@ function sanitizeStyles(input: unknown): Record<string, string> {
         typeof entry[0] === "string" && typeof entry[1] === "string"
     )
   );
+}
+
+function isSafeRelativePath(value: string): boolean {
+  return value.startsWith("/") && !value.startsWith("//") && !value.includes("..");
+}
+
+function isSafeHttpUrl(value: string): boolean {
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+function sanitizeHref(input: string): string {
+  const trimmed = input.trim();
+  if (!trimmed) throw new Error("href is invalid");
+  if (trimmed.startsWith("#")) return trimmed;
+  if (isSafeRelativePath(trimmed)) return trimmed;
+
+  try {
+    const parsed = new URL(trimmed);
+    if (["https:", "http:", "mailto:", "tel:"].includes(parsed.protocol)) {
+      return trimmed;
+    }
+  } catch {
+    throw new Error("href is invalid");
+  }
+
+  throw new Error("href is invalid");
+}
+
+function sanitizeImageSrc(input: string): string {
+  const trimmed = input.trim();
+  if (!trimmed) throw new Error("src is invalid");
+  if (isSafeRelativePath(trimmed) || isSafeHttpUrl(trimmed)) return trimmed;
+  throw new Error("src is invalid");
+}
+
+function sanitizeCustomFont(input: { family: string; url: string }): { family: string; url: string } {
+  const family = input.family.trim().replace(/\s+/g, " ");
+  const url = input.url.trim();
+
+  if (!SAFE_FONT_FAMILY.test(family) || !SAFE_FONT_URL.test(url)) {
+    throw new Error("customFont is invalid");
+  }
+
+  return { family, url };
 }
 
 function sanitizeThemeTokens(
@@ -157,14 +213,14 @@ function validateElementPatch(
     if (!hasEditableField(editableNode, "image")) {
       throw new Error(`Edit target ${editableNode.editId} does not allow image updates`);
     }
-    nextPatch.src = patch.src;
+    nextPatch.src = sanitizeImageSrc(patch.src);
   }
 
   if (typeof patch?.href === "string") {
     if (!hasEditableField(editableNode, "button")) {
       throw new Error(`Edit target ${editableNode.editId} does not allow link updates`);
     }
-    nextPatch.href = patch.href;
+    nextPatch.href = sanitizeHref(patch.href);
   }
 
   return nextPatch;
@@ -185,6 +241,8 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
+    requireSameOrigin(req);
+    await requireAuthenticatedUser(req);
     const body = (await req.json()) as SaveCodeRequest;
     const incomingSitePath = body.sitePath ?? getDefaultCanonicalTemplatePath();
     const sitePath = toLegacyTemplatePath(incomingSitePath);
@@ -251,7 +309,7 @@ export async function POST(req: Request) {
           { status: 400 }
         );
       }
-      updatedCustomization = await upsertCustomFont(sitePath, { family, url });
+      updatedCustomization = await upsertCustomFont(sitePath, sanitizeCustomFont({ family, url }));
     }
 
     const hasPatch = typeof body.editId === "string" && isObject(body.patch);
@@ -281,10 +339,19 @@ export async function POST(req: Request) {
       customization: updatedCustomization,
     });
   } catch (error) {
+    if (error instanceof Error && (error.message === "FORBIDDEN_ORIGIN" || error.message === "MISSING_ORIGIN")) {
+      return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
+    }
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    }
     if (error instanceof Error && error.message.includes("does not allow")) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
     if (error instanceof Error && error.message.includes("Unsupported style keys")) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+    if (error instanceof Error && /is invalid/.test(error.message)) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
     console.error("save-code POST error:", error);

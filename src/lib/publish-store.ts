@@ -14,7 +14,7 @@ export type PublishRecord = {
   updatedAt: string;
 };
 
-const DATA_DIR = path.join(process.cwd(), "data", "publish");
+const DATA_DIR = path.join(process.cwd(), ".runtime", "publish");
 const DATA_FILE = path.join(DATA_DIR, "records.json");
 const SAFE_SITE_PATH = /^\/[a-z0-9/-]*$/;
 const DOMAIN_REGEX = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i;

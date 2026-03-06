@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { readTemplateManifest } from "@/lib/template-manifest-store";
+import { requireAuthenticatedUser } from "@/lib/server/api-security";
 
 export async function GET(req: Request) {
   try {
+    await requireAuthenticatedUser(req);
     const { searchParams } = new URL(req.url);
     const sitePath = searchParams.get("sitePath");
 
@@ -17,6 +19,9 @@ export async function GET(req: Request) {
 
     return NextResponse.json({ success: true, manifest });
   } catch (error) {
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    }
     console.error("template-manifest GET error:", error);
     return NextResponse.json({ error: "Failed to load template manifest" }, { status: 500 });
   }

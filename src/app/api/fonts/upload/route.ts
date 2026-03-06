@@ -1,8 +1,13 @@
 import fs from "fs/promises";
 import path from "path";
+import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { readTemplateManifest } from "@/lib/template-manifest-store";
 import { upsertCustomFont } from "@/lib/site-customization-store";
+import {
+  requireAuthenticatedUser,
+  requireSameOrigin,
+} from "@/lib/server/api-security";
 
 const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads", "fonts");
 const SAFE_SITE_PATH = /^\/[a-z0-9/-]*$/;
@@ -36,6 +41,8 @@ function safeFileName(baseName: string): string {
 
 export async function POST(req: Request) {
   try {
+    requireSameOrigin(req);
+    await requireAuthenticatedUser(req);
     const form = await req.formData();
     const sitePathRaw = form.get("sitePath");
     const familyRaw = form.get("family");
@@ -71,7 +78,7 @@ export async function POST(req: Request) {
     await fs.mkdir(UPLOAD_DIR, { recursive: true });
 
     const stamp = Date.now();
-    const suffix = Math.random().toString(36).slice(2, 8);
+    const suffix = randomUUID().slice(0, 8);
     const outputFileName = `${safeFileName(family)}-${stamp}-${suffix}.woff2`;
     const outputPath = path.join(UPLOAD_DIR, outputFileName);
 
@@ -89,6 +96,12 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
+    if (error instanceof Error && (error.message === "FORBIDDEN_ORIGIN" || error.message === "MISSING_ORIGIN")) {
+      return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
+    }
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    }
     if (error instanceof Error && /Invalid/.test(error.message)) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }

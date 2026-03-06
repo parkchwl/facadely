@@ -2,12 +2,44 @@
 
 All notable changes to this project are documented in this file.
 
+## 2026-03-07
+
+- Hardened Next editor/runtime APIs:
+  - Added shared server-side auth/origin guard in `src/lib/server/api-security.ts`.
+  - Protected `pages`, `save-code`, `fonts/upload`, `publish`, and `template-manifest` APIs with authentication checks.
+  - Added same-origin enforcement for mutation routes.
+  - Disabled runtime page TSX generation by default behind `FACADELY_ENABLE_TEMPLATE_CODEGEN`.
+  - Removed code injection risk in `src/app/api/pages/route.ts` by serializing user-provided page names instead of embedding them as executable source.
+- Tightened editor input validation:
+  - Restricted editable `href` to safe relative links, anchors, `http(s)`, `mailto`, and `tel`.
+  - Restricted editable `src` to safe relative paths or `http(s)`.
+  - Restricted custom font registration to local `.woff2` paths under `/uploads/fonts` or `/fonts`.
+  - Applied validation both at API boundary and persisted runtime store normalization.
+- Separated runtime-writable state from tracked project data:
+  - Moved site customization writes to `.runtime/sites`.
+  - Moved publish state writes to `.runtime/publish`.
+  - Ignored `.runtime/` and `public/uploads/` in Git while keeping legacy read compatibility for existing `data/sites/*.json`.
+- Hardened frontend route access:
+  - Protected `/editor`, `/generate`, and `/dashboard` in `src/proxy.ts` using backend `/auth/me`.
+- Hardened Spring auth configuration and request validation:
+  - Added automatic backend `.env` loading via `spring.config.import`.
+  - Added fail-fast validation for JWT secrets, Google OAuth credentials, and secure cookie requirements in non-local environments.
+  - Added auth POST origin/referer validation filter and wired it into Spring Security.
+- Documentation update:
+  - Refreshed `README.md` and `docs/PROJECT_OVERVIEW.md` with current security/runtime/env assumptions.
+
 ## 2026-03-06
 
 - Canonicalized template routing and listing:
   - Added canonical route `/s/{slug}` and unified template metadata through `src/lib/template-registry.ts`.
   - Kept legacy numeric routes `/5`, `/6`, `/7` as compatibility redirects.
   - Updated editor/template/API path handling to normalize canonical/legacy paths consistently.
+  - Completed phase-2 template folder refactor:
+    - Moved React template runtime assets from numeric folders to slug folders:
+      - `src/app/nexus-ai-enterprise/*`
+      - `src/app/velocity-saas-landing/*`
+      - `src/app/onepro-dashboard-white/*`
+    - Left `src/app/5`, `src/app/6`, `src/app/7` as redirect-only compatibility routes.
 - Refined editor integration:
   - `/[lang]/generate` now redirects to `NEXT_PUBLIC_BETA_EDITOR_URL` (fallback `/editor`).
   - Navigation terminology switched from Generate to Editor in i18n/UI paths.

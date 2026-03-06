@@ -25,6 +25,7 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final AuthOriginValidationFilter authOriginValidationFilter;
     private final JsonAuthenticationEntryPoint jsonAuthenticationEntryPoint;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
     private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
@@ -32,12 +33,14 @@ public class SecurityConfig {
 
     public SecurityConfig(
         JwtAuthenticationFilter jwtAuthenticationFilter,
+        AuthOriginValidationFilter authOriginValidationFilter,
         JsonAuthenticationEntryPoint jsonAuthenticationEntryPoint,
         OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler,
         OAuth2LoginFailureHandler oAuth2LoginFailureHandler,
         AuthProperties authProperties
     ) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.authOriginValidationFilter = authOriginValidationFilter;
         this.jsonAuthenticationEntryPoint = jsonAuthenticationEntryPoint;
         this.oAuth2LoginSuccessHandler = oAuth2LoginSuccessHandler;
         this.oAuth2LoginFailureHandler = oAuth2LoginFailureHandler;
@@ -66,6 +69,7 @@ public class SecurityConfig {
             )
             .formLogin(form -> form.disable())
             .httpBasic(basic -> basic.disable())
+            .addFilterBefore(authOriginValidationFilter, JwtAuthenticationFilter.class)
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

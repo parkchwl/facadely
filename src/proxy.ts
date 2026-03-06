@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { i18n } from '@/i18n/config';
 
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080/api/v1').replace(/\/$/, '');
+const API_BASE_URL = (
+  process.env.INTERNAL_API_BASE_URL ||
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  'http://localhost:8080/api/v1'
+).replace(/\/$/, '');
 
 async function isAuthenticated(request: NextRequest): Promise<boolean> {
   try {
@@ -73,7 +77,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
-  const protectedRoutes = ['/dashboard'];
+  const protectedRoutes = ['/dashboard', '/editor', '/generate'];
 
   const isProtectedRoute = protectedRoutes.some(route =>
     pathnameWithoutLocale === route || pathnameWithoutLocale.startsWith(`${route}/`)
