@@ -8,7 +8,7 @@ type ReactTemplateRegistryEntry = {
 
 const REACT_TEMPLATE_REGISTRY: ReactTemplateRegistryEntry[] = [
   {
-    templateId: "main-page",
+    templateId: "velocity-saas-landing",
     slug: "velocity-saas-landing",
     legacyPath: "/6",
     name: "Velocity SaaS Landing",
@@ -30,7 +30,7 @@ const REACT_TEMPLATE_REGISTRY: ReactTemplateRegistryEntry[] = [
   },
 ];
 
-const DEFAULT_TEMPLATE_ID = "main-page";
+const DEFAULT_TEMPLATE_ID = "velocity-saas-landing";
 
 const bySlug = new Map(REACT_TEMPLATE_REGISTRY.map((entry) => [entry.slug, entry]));
 const byLegacyPath = new Map(

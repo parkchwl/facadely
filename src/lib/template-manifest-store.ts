@@ -3,6 +3,7 @@ import path from "path";
 import { parseTemplateManifest, TemplateManifest } from "@/lib/template-manifest-types";
 import {
   getDefaultLegacyTemplatePath,
+  getTemplateByLegacyPath,
   toLegacyTemplatePath,
 } from "@/lib/template-registry";
 
@@ -41,7 +42,12 @@ function manifestCandidates(sitePath: string): string[] {
   const segments = sitePathToSegments(normalized);
   if (segments.length === 0) return [];
 
-  const candidates = [path.join(APP_DIR, ...segments, "manifest.json")];
+  const candidates: string[] = [];
+  const registryEntry = getTemplateByLegacyPath(normalized);
+  if (registryEntry) {
+    candidates.push(path.join(APP_DIR, registryEntry.slug, "manifest.json"));
+  }
+  candidates.push(path.join(APP_DIR, ...segments, "manifest.json"));
 
   if (segments[0] === "t" && segments.length >= 2) {
     candidates.push(path.join(STATIC_TEMPLATE_DIR, ...segments.slice(1), "manifest.json"));
@@ -49,7 +55,16 @@ function manifestCandidates(sitePath: string): string[] {
     candidates.push(path.join(STATIC_TEMPLATE_DIR, ...segments, "manifest.json"));
   }
 
-  return candidates;
+  return Array.from(new Set(candidates));
+}
+
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 async function readManifestFile(filePath: string, expectedSitePath: string): Promise<TemplateManifest | null> {
@@ -109,10 +124,11 @@ export async function listTemplateManifests(): Promise<TemplateManifest[]> {
 
       const routeDir = path.join(APP_DIR, entry.name);
       const pagePath = path.join(routeDir, "page.tsx");
+      const templateViewPath = path.join(routeDir, "TemplateView.tsx");
       const manifestPath = path.join(routeDir, "manifest.json");
-      try {
-        await fs.access(pagePath);
-      } catch {
+      const hasPageRuntime = await fileExists(pagePath);
+      const hasTemplateRuntime = await fileExists(templateViewPath);
+      if (!hasPageRuntime && !hasTemplateRuntime) {
         continue;
       }
 

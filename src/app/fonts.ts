@@ -14,3 +14,25 @@ export const appMono = localFont({
   weight: "100 900",
   display: "swap",
 });
+
+export const appMontserrat = localFont({
+  src: [
+    { path: "./fonts/Montserrat-400.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/Montserrat-700.ttf", weight: "700", style: "normal" },
+    { path: "./fonts/Montserrat-800.ttf", weight: "800", style: "normal" },
+  ],
+  variable: "--font-app-montserrat",
+  display: "swap",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+});
+
+export const appPlusJakarta = localFont({
+  src: [
+    { path: "./fonts/PlusJakartaSans-400.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/PlusJakartaSans-700.ttf", weight: "700", style: "normal" },
+    { path: "./fonts/PlusJakartaSans-800.ttf", weight: "800", style: "normal" },
+  ],
+  variable: "--font-app-plus-jakarta",
+  display: "swap",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+});

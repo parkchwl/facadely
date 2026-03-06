@@ -35,84 +35,84 @@
     {
       "editId": "t7-nav-link-blog",
       "styles": {
-        "color": "#e2e8f0"
+        "color": "#334155"
       },
-      "updatedAt": "2026-03-05T09:22:46.286Z"
+      "updatedAt": "2026-03-06T07:10:18.644Z"
     },
     {
       "editId": "t7-nav-link-contact",
       "styles": {
-        "color": "#e2e8f0"
+        "color": "#334155"
       },
-      "updatedAt": "2026-03-05T09:22:46.305Z"
+      "updatedAt": "2026-03-06T07:10:18.658Z"
     },
     {
       "editId": "t7-cta-primary",
       "styles": {
-        "backgroundColor": "#f8fafc",
-        "color": "#0f172a"
+        "backgroundColor": "#0f172a",
+        "color": "#ffffff"
       },
-      "updatedAt": "2026-03-05T09:22:46.314Z"
+      "updatedAt": "2026-03-06T07:10:18.678Z"
     },
     {
       "editId": "t7-cta-secondary",
       "styles": {
-        "backgroundColor": "rgba(15, 23, 42, 0.62)",
-        "color": "#f8fafc"
+        "backgroundColor": "rgba(255, 255, 255, 0.74)",
+        "color": "#0f172a"
       },
-      "updatedAt": "2026-03-05T09:22:46.323Z"
+      "updatedAt": "2026-03-06T07:10:18.695Z"
     },
     {
       "editId": "t7-nav-cta",
       "styles": {
-        "backgroundColor": "#f8fafc",
-        "color": "#0f172a"
+        "backgroundColor": "#0f172a",
+        "color": "#ffffff"
       },
-      "updatedAt": "2026-03-05T09:22:46.332Z"
+      "updatedAt": "2026-03-06T07:10:18.712Z"
     },
     {
       "editId": "t7-main",
       "styles": {
-        "backgroundImage": "url(\"/webP/Cloud9.webp\")",
-        "backgroundColor": "rgba(15, 23, 42, 0.28)"
+        "backgroundImage": "url(\"/webP/Cloud1.webp\")",
+        "backgroundColor": "rgba(245, 249, 255, 0.28)"
       },
-      "updatedAt": "2026-03-05T09:22:46.206Z"
+      "updatedAt": "2026-03-06T07:10:18.528Z"
     },
     {
       "editId": "t7-brand-text",
       "styles": {
-        "color": "#f8fafc"
+        "color": "#0f172a"
       },
-      "updatedAt": "2026-03-05T09:22:46.245Z"
+      "updatedAt": "2026-03-06T07:10:18.562Z"
     },
     {
       "editId": "t7-title",
       "styles": {
-        "color": "#f8fafc"
+        "color": "#0f172a"
       },
-      "updatedAt": "2026-03-05T09:22:46.253Z"
+      "updatedAt": "2026-03-06T07:10:18.579Z"
     },
     {
       "editId": "t7-subtitle",
       "styles": {
-        "color": "#e2e8f0"
+        "color": "#334155"
       },
-      "updatedAt": "2026-03-05T09:22:46.261Z"
+      "updatedAt": "2026-03-06T07:10:18.596Z"
     },
     {
       "editId": "t7-nav-link-features",
       "styles": {
-        "color": "#e2e8f0"
+        "color": "#334155"
       },
-      "updatedAt": "2026-03-05T09:22:46.268Z"
+      "updatedAt": "2026-03-06T07:10:18.613Z"
     },
     {
       "editId": "t7-nav-link-pricing",
       "styles": {
-        "color": "#e2e8f0"
+        "color": "#334155"
       },
-      "updatedAt": "2026-03-05T09:22:46.278Z"
+      "updatedAt": "2026-03-06T07:10:18.628Z"
     }
   ],
-  "updatedAt": "2026-03-05T09:22:46.332Z"
+  "updatedAt": "2026-03-06T07:10:18.712Z"
 }

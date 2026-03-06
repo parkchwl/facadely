@@ -103,41 +103,46 @@
       ]
     },
     "solution": {
-      "title": "facadely solves the problems",
+      "title": "Ready to build?",
+      "subtitle": "Turn your vision into a website that looks credible, feels seamless, and launches fast.",
+      "problem_label": "Challenge",
+      "problem_text": "Scattered tools, slow launch cycles, and inconsistent mobile quality.",
+      "answer_label": "facadely Answer",
+      "answer_text": "One streamlined workflow for design, publishing, and growth operations.",
       "items": [
         {
           "icon": "Zap",
-          "title": "Launch in 5 minutes, no setup",
-          "desc": "Start instantly with ready-made templates.\nNo coding or installation required."
+          "title": "Launch in minutes, not weeks",
+          "desc": "Start with production-ready templates and publish fast.\nNo setup overhead or technical bottlenecks."
         },
         {
           "icon": "Smartphone",
-          "title": "Mobile-ready by default",
-          "desc": "All templates are fully responsive.\nYour site looks great on any device—automatically."
+          "title": "Responsive consistency by default",
+          "desc": "Every layout is built for desktop, tablet, and mobile.\nYour brand stays consistent across every screen."
         },
         {
           "icon": "Palette",
-          "title": "Professional design, made easy",
-          "desc": "Built by designers to earn trust and credibility.\nCreate a polished site without design skills."
+          "title": "Trust-first visual system",
+          "desc": "Design patterns are optimized for credibility and clarity.\nShip a polished experience without heavy design work."
         },
         {
           "icon": "Settings",
-          "title": "Tools for bookings and customer management",
-          "desc": "Everything you need—forms, scheduling, CRM—built in.\nNo plugins or third-party tools required."
+          "title": "Business operations built in",
+          "desc": "Forms, booking flows, and customer workflows are ready.\nOperate without stitching multiple tools together."
         },
         {
           "icon": "BarChart3",
-          "title": "Real-time analytics included",
-          "desc": "Track visits, traffic, and user behavior.\nMake smarter decisions with live data."
+          "title": "Actionable analytics in real time",
+          "desc": "Track traffic and behavior signals as they happen.\nTurn insights into faster growth decisions."
         },
         {
           "icon": "Shield",
-          "title": "Security built-in",
-          "desc": "SSL and encryption applied automatically.\nStay protected with continuous updates."
+          "title": "Security without extra effort",
+          "desc": "Security defaults are already in place and maintained.\nProtect your site while staying focused on growth."
         }
       ],
-      "cta_text": "Create a lasting first impression and build a trusted brand that customers remember.",
-      "cta_button": "Start Building Your Business"
+      "cta_text": "",
+      "cta_button": ""
     },
     "faq": {
       "title": "Frequently Asked Questions",
@@ -171,8 +176,8 @@
       ]
     },
     "finalCta": {
-      "title": "Ready to build your dream website?",
-      "subtitle": "Join thousands of happy users who transformed their online presence with facadely",
+      "title": "Build Once ✦ Scale Faster",
+      "subtitle": "Launch a credible, consistent site that converts faster.",
       "browseButton": "Browse Templates",
       "startButton": "Start for Free"
     },

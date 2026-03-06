@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Montserrat } from "next/font/google";
 import { FaPlay, FaRedoAlt, FaUndoAlt } from "react-icons/fa";
 import {
   Monitor,
@@ -152,16 +151,11 @@ const sanitizeWebsites = (sites: Website[]) => {
 
 const DEFAULT_WEBSITES = sanitizeWebsites(WEBSITES);
 const DEFAULT_ACTIVE_SITE: Website = DEFAULT_WEBSITES[0] ?? {
-  id: "main-page",
+  id: "velocity-saas-landing",
   name: "Velocity SaaS Landing",
   desc: "Dark SaaS landing template with hero, feature grid, and social proof",
   path: getDefaultCanonicalTemplatePath(),
 };
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["700"],
-});
 
 const TOKEN_TO_CSS_VAR: Record<keyof ThemeTokens, string> = {
   primary: "--primary",
@@ -1944,7 +1938,7 @@ export default function Editor() {
             <div className="h-16 border-b border-gray-200 dark:border-[#242524] flex items-center px-4 shrink-0 bg-white dark:bg-[#111010]">
               <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <span className="text-2xl leading-none text-gray-900 dark:text-gray-100">✦</span>
-                <span className={`${montserrat.className} text-sm font-bold tracking-tight text-gray-900 dark:text-gray-100`}>
+                <span className="font-montserrat text-sm font-bold tracking-tight text-gray-900 dark:text-gray-100">
                   facadely
                 </span>
               </Link>

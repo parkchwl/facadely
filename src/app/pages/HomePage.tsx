@@ -408,6 +408,18 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const FAQS = faq.questions;
   const langPrefix = lang ? `/${lang}` : '';
   const SOLUTION_DATA = solution.items;
+  const solutionTitleSegments = solution.title.split('✦');
+  const hasInlineSolutionStar = solutionTitleSegments.length >= 2;
+  const solutionTitleBeforeStar = solutionTitleSegments[0]?.trim() ?? solution.title;
+  const solutionTitleAfterStar = solutionTitleSegments.slice(1).join('✦').trim();
+  const finalCtaTitleSegments = finalCta.title.split('✦');
+  const hasInlineFinalCtaStar = finalCtaTitleSegments.length >= 2;
+  const finalCtaTitleBeforeStar = finalCtaTitleSegments[0]?.trim() ?? finalCta.title;
+  const finalCtaTitleAfterStar = finalCtaTitleSegments.slice(1).join('✦').trim();
+  const hasSolutionCta = Boolean(solution.cta_text?.trim() || solution.cta_button?.trim());
+  const finalCtaTitleClassName = hasInlineFinalCtaStar
+    ? `${inter.className} text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-8 tracking-tight leading-none sm:whitespace-nowrap`
+    : `${inter.className} text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white mb-8 tracking-tight leading-none`;
 
   // Duplicated rows for CSS infinite scroll animation
   const duplicatedRow1 = useMemo(() =>
@@ -504,10 +516,23 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             <div className="bg-white rounded-3xl shadow-2xl px-8 sm:px-12 lg:px-16 py-20 lg:py-24">
               <motion.h2
                 {...ANIMATIONS.solutionFadeInUp}
-                className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-black mb-16 lg:mb-20 text-center ${dmSerif.className}`}
+                className="font-plus-jakarta text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-black mb-4 text-center tracking-[-0.02em] leading-[0.95]"
               >
-                {solution.title}
+                {hasInlineSolutionStar ? (
+                  <>
+                    {solutionTitleBeforeStar}
+                    <span className="inline-block text-[0.48em] font-medium mx-[0.24em] align-[0.18em]">✦</span>
+                    {solutionTitleAfterStar}
+                  </>
+                ) : (
+                  solution.title
+                )}
               </motion.h2>
+              {solution.subtitle && (
+                <p className="text-center text-lg sm:text-xl text-gray-700 mb-12">
+                  {solution.subtitle}
+                </p>
+              )}
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
                 {SOLUTION_DATA.map((item, index: number) => {
                   const iconKeys = Object.keys(iconMap) as Array<keyof typeof iconMap>;
@@ -526,14 +551,20 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                   );
                 })}
               </div>
-              <div className="mt-20 text-center">
-                <p className="text-xl lg:text-2xl xl:text-3xl text-gray-800 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
-                  {solution.cta_text}
-                </p>
-                <Link href={`${langPrefix}/templates`} className="inline-block px-10 py-5 lg:px-12 lg:py-6 bg-black text-white font-bold rounded-full hover:bg-gray-900 transition-all duration-200 text-lg lg:text-xl shadow-xl hover:scale-105">
-                  {solution.cta_button}
-                </Link>
-              </div>
+              {hasSolutionCta && (
+                <div className="mt-20 text-center">
+                  {solution.cta_text && (
+                    <p className="text-xl lg:text-2xl xl:text-3xl text-gray-800 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
+                      {solution.cta_text}
+                    </p>
+                  )}
+                  {solution.cta_button && (
+                    <Link href={`${langPrefix}/templates`} className="inline-block px-10 py-5 lg:px-12 lg:py-6 bg-black text-white font-bold rounded-full hover:bg-gray-900 transition-all duration-200 text-lg lg:text-xl shadow-xl hover:scale-105">
+                      {solution.cta_button}
+                    </Link>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -639,10 +670,26 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
               className="text-center max-w-5xl mx-auto relative z-10"
             >
               <h2
-                className={`${inter.className} text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white mb-8 tracking-tight leading-none`}
+                className={finalCtaTitleClassName}
                 style={{ textShadow: '0 0 30px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.15)' }}
-                dangerouslySetInnerHTML={{ __html: finalCta.title }}
-              />
+              >
+                {hasInlineFinalCtaStar ? (
+                  <>
+                    <span className="block sm:hidden">
+                      <span className="block">{finalCtaTitleBeforeStar}</span>
+                      <span className="block text-[0.48em] font-medium leading-none my-[0.2em]">✦</span>
+                      <span className="block">{finalCtaTitleAfterStar}</span>
+                    </span>
+                    <span className="hidden sm:inline">
+                      {finalCtaTitleBeforeStar}
+                      <span className="inline-block text-[0.48em] font-medium mx-[0.24em] align-[0.18em]">✦</span>
+                      {finalCtaTitleAfterStar}
+                    </span>
+                  </>
+                ) : (
+                  <span dangerouslySetInnerHTML={{ __html: finalCta.title }} />
+                )}
+              </h2>
               <p
                 className="text-xl sm:text-2xl text-gray-400 mb-12 leading-relaxed max-w-3xl mx-auto font-light"
                 dangerouslySetInnerHTML={{ __html: finalCta.subtitle }}

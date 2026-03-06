@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { appMono, appSans } from "./fonts";
+import { appMono, appSans, appMontserrat, appPlusJakarta } from "./fonts";
 import "./globals.css";
 import type { CSSProperties } from "react";
 
@@ -71,7 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en" style={ROOT_THEME_STYLE} suppressHydrationWarning>
       <body
-        className={`${appSans.variable} ${appMono.variable} antialiased`}
+        className={`${appSans.variable} ${appMono.variable} ${appMontserrat.variable} ${appPlusJakarta.variable} antialiased`}
       >
         {children}
       </body>

@@ -6,7 +6,7 @@
   "description": "SaaS dashboard hero template",
   "runtime": {
     "format": "react",
-    "entry": "src/app/7/TemplateView.tsx",
+    "entry": "src/app/onepro-dashboard-white/TemplateView.tsx",
     "deployment": "static"
   },
   "editable": [

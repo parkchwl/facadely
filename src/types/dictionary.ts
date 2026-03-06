@@ -96,6 +96,11 @@ export interface SolutionItemDictionary {
 
 export interface SolutionDictionary {
   title: string;
+  subtitle?: string;
+  problem_label?: string;
+  problem_text?: string;
+  answer_label?: string;
+  answer_text?: string;
   items: SolutionItemDictionary[];
   cta_text: string;
   cta_button: string;
