@@ -1,10 +1,4 @@
-type AuthenticatedUser = {
-  id: string;
-  email: string;
-  name: string;
-  role: "USER" | "ADMIN";
-  termsAgreed: boolean;
-};
+import type { AuthenticatedUser } from '@/lib/auth-types';
 
 const INTERNAL_API_BASE_URL = (
   process.env.INTERNAL_API_BASE_URL ||
@@ -55,21 +49,35 @@ export function requireSameOrigin(request: Request): void {
   throw new Error("MISSING_ORIGIN");
 }
 
+export async function getAuthenticatedUser(cookie: string): Promise<AuthenticatedUser | null> {
+  try {
+    const response = await fetch(`${INTERNAL_API_BASE_URL}/auth/me`, {
+      method: "GET",
+      headers: {
+        cookie,
+      },
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return response.json() as Promise<AuthenticatedUser>;
+  } catch {
+    return null;
+  }
+}
+
 export async function requireAuthenticatedUser(request: Request): Promise<AuthenticatedUser> {
   const cookie = request.headers.get("cookie") || "";
-  const response = await fetch(`${INTERNAL_API_BASE_URL}/auth/me`, {
-    method: "GET",
-    headers: {
-      cookie,
-    },
-    cache: "no-store",
-  });
+  const user = await getAuthenticatedUser(cookie);
 
-  if (!response.ok) {
+  if (!user) {
     throw new Error("UNAUTHORIZED");
   }
 
-  return response.json() as Promise<AuthenticatedUser>;
+  return user;
 }
 
 export function isTemplateCodegenEnabled(): boolean {

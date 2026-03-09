@@ -26,7 +26,6 @@ public class AuthConfigurationValidator {
         boolean localOrigin = isLocalOrigin(authProperties.getFrontendOrigin());
 
         validateJwtSecret("JWT_ACCESS_SECRET", authProperties.getJwt().getAccessSecret(), localOrigin);
-        validateJwtSecret("JWT_REFRESH_SECRET", authProperties.getJwt().getRefreshSecret(), localOrigin);
         validateOAuthSecret(
             "GOOGLE_CLIENT_ID",
             environment.getProperty("spring.security.oauth2.client.registration.google.client-id"),

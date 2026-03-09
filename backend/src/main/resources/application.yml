@@ -5,17 +5,18 @@ spring:
     name: backend
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/facadely}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:}
     username: ${SPRING_DATASOURCE_USERNAME:facadely}
     password: ${SPRING_DATASOURCE_PASSWORD:facadely}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:validate}
     properties:
       hibernate:
         format_sql: true
     open-in-view: false
   flyway:
-    enabled: true
+    enabled: ${SPRING_FLYWAY_ENABLED:true}
   security:
     oauth2:
       client:
@@ -39,7 +40,6 @@ app:
     privacy-version: ${PRIVACY_VERSION:2026-01}
     jwt:
       access-secret: ${JWT_ACCESS_SECRET:change-this-access-secret-change-this-access-secret}
-      refresh-secret: ${JWT_REFRESH_SECRET:change-this-refresh-secret-change-this-refresh-secret}
       access-ttl-seconds: ${JWT_ACCESS_TTL_SECONDS:900}
       refresh-ttl-seconds: ${JWT_REFRESH_TTL_SECONDS:1209600}
     cookie:

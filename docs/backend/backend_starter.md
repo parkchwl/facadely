@@ -413,20 +413,22 @@ DTO 검증:
 
 ---
 
-## 12. Refresh Secret이 있는데 왜 안 쓰는가?
+## 12. Refresh Token은 왜 별도 secret이 없는가?
 
 현재 구현은:
 - Access Token만 JWT
 - Refresh는 랜덤 문자열 + DB 해시 저장 방식
 
-그래서 `AuthProperties.jwt.refreshSecret`은 현재 코드에서 직접 사용되지 않습니다.
+즉, refresh는 서명 검증보다 **DB에 저장된 해시와 만료/폐기 상태**로 유효성을 판단합니다.
 
-이게 문제인가?
-- 당장 치명적 문제는 아님
-- 향후 Refresh도 JWT로 바꾸거나, 설정 정리를 위해 제거할지 결정하면 됨
+왜 이렇게 했나?
+- 리프레시 토큰 원문을 DB에 저장하지 않아도 됨
+- 서버가 토큰을 즉시 폐기(revoke)할 수 있음
+- Access JWT와 역할이 명확히 분리됨
 
 초보자 관점 체크:
-- "설정에 있는데 안 쓰는 값"은 기술부채 후보로 문서화해두는 것이 좋습니다.
+- 모든 토큰이 꼭 JWT일 필요는 없습니다.
+- "랜덤 토큰 + DB 해시 저장"도 운영에서 자주 쓰는 정석적인 방식입니다.
 
 ---
 
@@ -539,10 +541,9 @@ DTO 검증:
 - DB 스키마가 Flyway로 관리됨
 
 개선 포인트:
-- `BackendSanityTest`만 존재 -> 통합테스트 확장 필요
+- 인증 통합테스트는 추가됐지만, OAuth 성공/실패 흐름 테스트는 더 보강 가능
 - LoginAttemptService 메모리 제한 -> Redis 전환 검토
-- Refresh secret 미사용 정리
-- 감사 로그 조회/분석 API 아직 없음
+- 감사 로그 조회는 `GET /api/v1/auth/audit-summary`까지 제공, 상세 분석 API는 추후 확장 가능
 
 ---
 
@@ -587,4 +588,3 @@ npm run dev
 2. `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/service/AuthService.java`
 3. `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/config/SecurityConfig.java`
 4. `/Users/parkchwl/front/backend/src/main/resources/db/migration/V1__auth_init.sql`
-

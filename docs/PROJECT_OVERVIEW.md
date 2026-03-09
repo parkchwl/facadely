@@ -1,6 +1,6 @@
 # Project Overview
 
-Last updated: 2026-03-07
+Last updated: 2026-03-10
 
 ## Stack
 
@@ -99,6 +99,14 @@ Non-localized routes:
   - editor/publish runtime state moved from tracked `data/` paths to `.runtime/`
   - backend startup now fails fast on placeholder JWT/OAuth secrets outside local origins
   - backend auth POST flows add explicit origin/referer validation on top of CORS
+- Auth redirect/runtime hardening:
+  - centralized `next` redirect sanitization in `/Users/parkchwl/front/src/lib/auth-redirect.ts`
+  - protected route fallback policy standardized to `/login?next=...`
+  - logout UX now retries once and surfaces explicit failure copy in dashboard/header account actions
+- Browser regression automation:
+  - Playwright setup added (`/Users/parkchwl/front/playwright.config.ts`)
+  - auth flow regression scenarios added under `/Users/parkchwl/front/e2e/specs/`
+  - local mock auth backend for deterministic browser tests (`/Users/parkchwl/front/e2e/mock-auth-server.mjs`)
 - Repository cleanup:
   - removed unused legacy editor/client files
   - removed macOS `.DS_Store` artifacts
@@ -147,7 +155,7 @@ Backend:
 - fail-fast validation entry:
   - `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/config/AuthConfigurationValidator.java`
 - validation rules:
-  - non-local `FRONTEND_ORIGIN` cannot use placeholder JWT secrets
+  - non-local `FRONTEND_ORIGIN` cannot use a placeholder `JWT_ACCESS_SECRET`
   - non-local `FRONTEND_ORIGIN` cannot use placeholder Google OAuth credentials
   - `COOKIE_SECURE` must be `true` outside local development
   - `COOKIE_SAME_SITE=None` requires `COOKIE_SECURE=true`
@@ -166,5 +174,6 @@ Backend:
 - Frontend:
   - `npm run lint`
   - `npm run build`
+  - `npm run test:e2e`
 - Backend:
   - `cd backend && ./gradlew test`

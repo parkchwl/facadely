@@ -3,6 +3,7 @@ package com.facadely.backend.auth.service;
 import com.facadely.backend.auth.config.AuthProperties;
 import com.facadely.backend.auth.domain.*;
 import com.facadely.backend.auth.dto.LoginRequest;
+import com.facadely.backend.auth.dto.AuditSummaryResponse;
 import com.facadely.backend.auth.dto.MeResponse;
 import com.facadely.backend.auth.dto.SignupRequest;
 import com.facadely.backend.auth.dto.TermsAgreeRequest;
@@ -18,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.time.Instant;
+import java.util.List;
 import java.util.HexFormat;
 import java.util.Optional;
 import java.util.UUID;
@@ -173,6 +175,83 @@ public class AuthService {
         agreement.setLocale(request.locale());
         agreement.setAgreedAt(Instant.now());
         termsAgreementRepository.save(agreement);
+    }
+
+    @Transactional(readOnly = true)
+    public AuditSummaryResponse auditSummary(UUID userId) {
+        userAccountRepository.findById(userId)
+            .orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "USER_NOT_FOUND", "사용자를 찾을 수 없습니다."));
+
+        List<AuthAuditLog> logs = authAuditLogRepository.findByUserIdOrderByCreatedAtDesc(userId);
+
+        long signupCount = 0;
+        long passwordLoginCount = 0;
+        long googleLoginCount = 0;
+        long refreshCount = 0;
+        long logoutCount = 0;
+
+        Instant lastSignupAt = null;
+        Instant lastPasswordLoginAt = null;
+        Instant lastGoogleLoginAt = null;
+        Instant lastRefreshAt = null;
+        Instant lastLogoutAt = null;
+
+        for (AuthAuditLog log : logs) {
+            String eventType = log.getEventType();
+            if (eventType == null) {
+                continue;
+            }
+
+            switch (eventType) {
+                case "SIGNUP_SUCCESS" -> {
+                    signupCount += 1;
+                    if (lastSignupAt == null) {
+                        lastSignupAt = log.getCreatedAt();
+                    }
+                }
+                case "LOGIN_SUCCESS" -> {
+                    passwordLoginCount += 1;
+                    if (lastPasswordLoginAt == null) {
+                        lastPasswordLoginAt = log.getCreatedAt();
+                    }
+                }
+                case "GOOGLE_LOGIN_SUCCESS" -> {
+                    googleLoginCount += 1;
+                    if (lastGoogleLoginAt == null) {
+                        lastGoogleLoginAt = log.getCreatedAt();
+                    }
+                }
+                case "REFRESH_SUCCESS" -> {
+                    refreshCount += 1;
+                    if (lastRefreshAt == null) {
+                        lastRefreshAt = log.getCreatedAt();
+                    }
+                }
+                case "LOGOUT_SUCCESS" -> {
+                    logoutCount += 1;
+                    if (lastLogoutAt == null) {
+                        lastLogoutAt = log.getCreatedAt();
+                    }
+                }
+                default -> {
+                    // Keep the response stable even if new audit event types are added later.
+                }
+            }
+        }
+
+        return new AuditSummaryResponse(
+            logs.size(),
+            signupCount,
+            passwordLoginCount,
+            googleLoginCount,
+            refreshCount,
+            logoutCount,
+            lastSignupAt,
+            lastPasswordLoginAt,
+            lastGoogleLoginAt,
+            lastRefreshAt,
+            lastLogoutAt
+        );
     }
 
     @Transactional

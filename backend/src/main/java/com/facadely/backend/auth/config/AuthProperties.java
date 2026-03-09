@@ -54,7 +54,6 @@ public class AuthProperties {
 
     public static class Jwt {
         private String accessSecret = "change-this-access-secret-change-this-access-secret";
-        private String refreshSecret = "change-this-refresh-secret-change-this-refresh-secret";
         private long accessTtlSeconds = 900;
         private long refreshTtlSeconds = 1209600;
 
@@ -64,14 +63,6 @@ public class AuthProperties {
 
         public void setAccessSecret(String accessSecret) {
             this.accessSecret = accessSecret;
-        }
-
-        public String getRefreshSecret() {
-            return refreshSecret;
-        }
-
-        public void setRefreshSecret(String refreshSecret) {
-            this.refreshSecret = refreshSecret;
         }
 
         public long getAccessTtlSeconds() {

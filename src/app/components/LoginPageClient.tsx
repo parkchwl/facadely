@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import SocialLoginButton from './SocialLoginButton';
-import { getGoogleAuthUrl, login, signup } from '@/lib/api/auth';
+import { getGoogleAuthUrl, login, me, signup } from '@/lib/api/auth';
 import type { LoginPageDictionary } from '@/types/dictionary';
+import { resolvePostLoginPath, sanitizeNextPath } from '@/lib/auth-redirect';
 
 // Helper to render text with links
 const TextWithLinks = ({ text, links }: { text: string, links: { [key: string]: { href: string, text: string } } }) => {
@@ -39,6 +40,10 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageD
   const params = useParams() as { lang: string };
   const searchParams = useSearchParams();
   const { lang } = params;
+  const postLoginPath = useMemo(
+    () => resolvePostLoginPath(lang, searchParams.get('next')),
+    [lang, searchParams],
+  );
 
   const [mode, setMode] = useState<Mode>('signin');
   const [name, setName] = useState('');
@@ -66,6 +71,31 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageD
     privacy: { href: `/${lang}/privacy`, text: dictionary.privacyLinkText },
   };
 
+  useEffect(() => {
+    if (oauthState !== 'success') {
+      return;
+    }
+
+    let cancelled = false;
+
+    void (async () => {
+      try {
+        await me();
+        if (!cancelled) {
+          window.location.replace(postLoginPath);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : dictionary.googleError);
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [dictionary.googleError, oauthState, postLoginPath]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -89,7 +119,7 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageD
         await login({ email, password });
       }
 
-      router.push(`/${lang}`);
+      router.push(postLoginPath);
     } catch (err) {
       setError(err instanceof Error ? err.message : dictionary.unknownError);
     } finally {
@@ -99,6 +129,12 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageD
 
   const handleGoogleLogin = () => {
     document.cookie = `facadely_lang=${lang}; Path=/; Max-Age=600; SameSite=Lax`;
+    const safeNextPath = sanitizeNextPath(searchParams.get('next'));
+    if (safeNextPath) {
+      document.cookie = `facadely_next=${encodeURIComponent(safeNextPath)}; Path=/; Max-Age=600; SameSite=Lax`;
+    } else {
+      document.cookie = 'facadely_next=; Path=/; Max-Age=0; SameSite=Lax';
+    }
     window.location.href = getGoogleAuthUrl();
   };
 
@@ -127,13 +163,15 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageD
           <div className="text-center mb-8">
             <Link
               href={`/${lang}`}
-              className="inline-block text-6xl font-montserrat font-bold text-gray-900 animate-pulse-glow-dark hover:animate-none transition-all mb-6"
+              className="inline-flex flex-col items-center justify-center mb-6 text-gray-900 hover:text-black transition-colors"
             >
-              ✦
+              <span className="text-6xl font-montserrat font-bold animate-pulse-glow-dark hover:animate-none transition-all">
+                ✦
+              </span>
+              <span className="text-4xl font-montserrat font-bold tracking-tight">
+                {dictionary.title}
+              </span>
             </Link>
-            <h1 className="text-4xl font-montserrat font-bold text-gray-900 tracking-tight">
-              {dictionary.title}
-            </h1>
             <p className="text-sm text-gray-500 mt-2 font-light">
               {dictionary.subtitle}
             </p>

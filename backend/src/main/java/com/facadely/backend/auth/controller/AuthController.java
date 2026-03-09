@@ -7,11 +7,14 @@ import com.facadely.backend.auth.service.AuthService;
 import com.facadely.backend.common.exception.ApiException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -72,8 +75,10 @@ public class AuthController {
             servletRequest.getHeader("User-Agent"),
             servletRequest.getRemoteAddr()
         );
+        clearSession(servletRequest);
 
         return ResponseEntity.ok()
+            .header(HttpHeaders.SET_COOKIE, clearSessionCookie().toString())
             .header(HttpHeaders.SET_COOKIE, cookieFactory.clearAccessCookie().toString())
             .header(HttpHeaders.SET_COOKIE, cookieFactory.clearRefreshCookie().toString())
             .body(new MessageResponse("로그아웃 되었습니다."));
@@ -91,6 +96,11 @@ public class AuthController {
     ) {
         authService.upsertTermsAgreement(requireUserId(authentication), request);
         return ResponseEntity.ok(new MessageResponse("약관 동의가 완료되었습니다."));
+    }
+
+    @GetMapping("/audit-summary")
+    public ResponseEntity<AuditSummaryResponse> auditSummary(Authentication authentication) {
+        return ResponseEntity.ok(authService.auditSummary(requireUserId(authentication)));
     }
 
     private ResponseEntity.BodyBuilder withAuthCookies(AuthService.AuthBundle bundle) {
@@ -122,5 +132,23 @@ public class AuthController {
             }
         }
         return null;
+    }
+
+    private void clearSession(HttpServletRequest request) {
+        SecurityContextHolder.clearContext();
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+    }
+
+    private ResponseCookie clearSessionCookie() {
+        return ResponseCookie.from("JSESSIONID", "")
+            .httpOnly(true)
+            .secure(authProperties.getCookie().isSecure())
+            .sameSite(authProperties.getCookie().getSameSite())
+            .path("/")
+            .maxAge(0)
+            .build();
     }
 }

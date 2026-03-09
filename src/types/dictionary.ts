@@ -25,6 +25,14 @@ export interface MobileNavDictionary {
   signupFree: string;
 }
 
+export interface AccountMenuDictionary {
+  dashboard: string;
+  signedInAs: string;
+  logout: string;
+  loggingOut: string;
+  logoutFailed: string;
+}
+
 export interface LanguageSelectorDictionary {
   title: string;
 }
@@ -260,6 +268,40 @@ export interface LoginPageDictionary {
   termsLinkText: string;
   privacyLinkText: string;
   captcha: string;
+}
+
+export interface DashboardPageDictionary {
+  badge: string;
+  title: string;
+  subtitle: string;
+  profileTitle: string;
+  profileDescription: string;
+  emailLabel: string;
+  roleLabel: string;
+  roleUser: string;
+  roleAdmin: string;
+  termsLabel: string;
+  accountIdLabel: string;
+  termsAccepted: string;
+  termsPending: string;
+  activityTitle: string;
+  activityDescription: string;
+  totalEventsLabel: string;
+  passwordLoginsLabel: string;
+  googleLoginsLabel: string;
+  refreshesLabel: string;
+  logoutsLabel: string;
+  lastPasswordLoginLabel: string;
+  lastGoogleLoginLabel: string;
+  neverLabel: string;
+  quickActionsTitle: string;
+  quickActionsSubtitle: string;
+  reviewTerms: string;
+  statusTitle: string;
+  statusAuthenticated: string;
+  statusTermsReady: string;
+  statusTermsPending: string;
+  logout: string;
 }
 
 export interface TermsModalDictionary {
@@ -540,12 +582,14 @@ export interface BlogPageDictionary {
 export interface Dictionary {
   navigation: NavigationDictionary;
   mobileNav: MobileNavDictionary;
+  accountMenu: AccountMenuDictionary;
   languageSelector: LanguageSelectorDictionary;
   footer: FooterDictionary;
   homePage: HomePageDictionary;
   pricingPage: PricingPageDictionary;
   templatesPage: TemplatesPageDictionary;
   loginPage: LoginPageDictionary;
+  dashboardPage: DashboardPageDictionary;
   termsModal: TermsModalDictionary;
   servicePage: ServicePageDictionary;
   qaPage: QAPageDictionary;

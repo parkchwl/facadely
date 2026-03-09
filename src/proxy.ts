@@ -1,11 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { i18n } from '@/i18n/config';
+import { createLoginPathWithNext } from '@/lib/auth-redirect';
 
 const API_BASE_URL = (
   process.env.INTERNAL_API_BASE_URL ||
   process.env.NEXT_PUBLIC_API_BASE_URL ||
   'http://localhost:8080/api/v1'
 ).replace(/\/$/, '');
+
+const ACCESS_COOKIE_NAME = process.env.COOKIE_ACCESS_NAME || 'facadely_at';
+const REFRESH_COOKIE_NAME = process.env.COOKIE_REFRESH_NAME || 'facadely_rt';
+
+function hasCookie(request: NextRequest, cookieName: string): boolean {
+  return request.cookies.has(cookieName);
+}
+
+function hasAuthCookie(request: NextRequest): boolean {
+  return hasCookie(request, ACCESS_COOKIE_NAME) || hasCookie(request, REFRESH_COOKIE_NAME);
+}
 
 async function isAuthenticated(request: NextRequest): Promise<boolean> {
   try {
@@ -84,13 +96,19 @@ export async function proxy(request: NextRequest) {
   );
 
   if (isProtectedRoute) {
-    const authenticated = await isAuthenticated(request);
-    if (!authenticated) {
-      const url = request.nextUrl.clone();
-      url.pathname = localeFromPath && localeFromPath !== i18n.defaultLocale
-        ? `/${localeFromPath}/login`
-        : '/login';
-      return NextResponse.redirect(url);
+    const locale = localeFromPath && i18n.locales.includes(localeFromPath) ? localeFromPath : i18n.defaultLocale;
+    const loginRedirectPath = createLoginPathWithNext(locale, `${pathname}${request.nextUrl.search}`);
+
+    if (!hasAuthCookie(request)) {
+      return NextResponse.redirect(new URL(loginRedirectPath, request.url));
+    }
+
+    const isDashboardRoute = pathnameWithoutLocale === '/dashboard' || pathnameWithoutLocale.startsWith('/dashboard/');
+    if (!isDashboardRoute) {
+      const authenticated = await isAuthenticated(request);
+      if (!authenticated) {
+        return NextResponse.redirect(new URL(loginRedirectPath, request.url));
+      }
     }
   }
 

@@ -3,23 +3,30 @@
 import { useState, ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Globe, Check, Menu, X, Instagram, Facebook } from 'lucide-react';
+import { Globe, Check, Menu, X, Instagram, Facebook, ChevronDown, LayoutDashboard, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { i18n, type Locale } from '@/i18n/config';
 import { languageNames } from '@/i18n/utils';
 import type { Dictionary } from '@/types/dictionary';
+import type { AuthenticatedUser } from '@/lib/auth-types';
+import { getErrorMessage, logoutWithRetry } from '@/lib/logout';
 
 const dmSerif = { className: 'font-serif' } as const;
 
 interface LayoutProps {
   children: ReactNode;
   dictionary: Dictionary;
+  authenticatedUser: AuthenticatedUser | null;
 }
 
-export default function Layout({ children, dictionary }: LayoutProps) {
+export default function Layout({ children, dictionary, authenticatedUser }: LayoutProps) {
   const pathname = usePathname();
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const [isMobileAccountMenuOpen, setIsMobileAccountMenuOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [logoutError, setLogoutError] = useState<string | null>(null);
   const editorHref = process.env.NEXT_PUBLIC_BETA_EDITOR_URL?.trim() || '/editor';
 
   const getLocaleFromPath = (path: string): Locale => {
@@ -58,6 +65,27 @@ export default function Layout({ children, dictionary }: LayoutProps) {
   };
 
   const { navigation, mobileNav, languageSelector, footer } = dictionary;
+  const { accountMenu } = dictionary;
+  const homeHref = createLocalizedPath(currentLocale, '/');
+  const dashboardHref = createLocalizedPath(currentLocale, '/dashboard');
+  const loginHref = createLocalizedPath(currentLocale, '/login');
+
+  const handleLogout = async () => {
+    if (isLoggingOut) {
+      return;
+    }
+
+    setIsLoggingOut(true);
+    setLogoutError(null);
+
+    try {
+      await logoutWithRetry();
+      window.location.assign(homeHref);
+    } catch (error) {
+      setIsLoggingOut(false);
+      setLogoutError(getErrorMessage(error, accountMenu.logoutFailed));
+    }
+  };
 
   return (
     <div
@@ -142,13 +170,74 @@ export default function Layout({ children, dictionary }: LayoutProps) {
               </AnimatePresence>
             </div>
 
-            {/* Sign Up Button */}
-            <Link
-              href={createLocalizedPath(currentLocale, '/login')}
-              className="bg-white text-black hover:bg-gray-200 py-2 px-4 rounded-lg transition shadow font-bold"
-            >
-              {navigation.signup} <span className="font-normal">{navigation.signupFree}</span>
-            </Link>
+            {authenticatedUser ? (
+              <div
+                className="relative"
+                onMouseEnter={() => setIsAccountMenuOpen(true)}
+                onMouseLeave={() => setIsAccountMenuOpen(false)}
+              >
+                <motion.button
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setIsAccountMenuOpen((prev) => !prev)}
+                >
+                  <LayoutDashboard size={16} />
+                  {accountMenu.dashboard}
+                  <ChevronDown className={`h-4 w-4 transition-transform ${isAccountMenuOpen ? 'rotate-180' : ''}`} />
+                </motion.button>
+
+                <AnimatePresence>
+                  {isAccountMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.18 }}
+                      className="absolute right-0 mt-1.5 w-60 overflow-hidden rounded-2xl border border-gray-200/80 bg-white text-black shadow-xl"
+                    >
+                      <div className="border-b border-gray-200 bg-gray-50 px-3.5 py-2.5">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">
+                          {accountMenu.signedInAs}
+                        </p>
+                        <p className="mt-1.5 truncate text-xs font-medium text-gray-700">{authenticatedUser.email}</p>
+                      </div>
+                      <div className="p-1.5">
+                        <Link
+                          href={dashboardHref}
+                          className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-gray-700 transition hover:bg-gray-100 hover:text-gray-950"
+                          onClick={() => setIsAccountMenuOpen(false)}
+                        >
+                          <LayoutDashboard size={14} />
+                          {accountMenu.dashboard}
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={handleLogout}
+                          disabled={isLoggingOut}
+                          className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60"
+                        >
+                          <LogOut size={14} />
+                          {isLoggingOut ? accountMenu.loggingOut : accountMenu.logout}
+                        </button>
+                        {logoutError && (
+                          <p className="px-3 pb-2 pt-1 text-[11px] font-medium text-rose-600">
+                            {logoutError}
+                          </p>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <Link
+                href={loginHref}
+                className="bg-white text-black hover:bg-gray-200 py-2 px-4 rounded-lg transition shadow font-bold"
+              >
+                {navigation.signup} <span className="font-normal">{navigation.signupFree}</span>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -296,23 +385,76 @@ export default function Layout({ children, dictionary }: LayoutProps) {
                     </div>
                   </motion.div>
 
-                  {/* Sign Up Button */}
+                  {/* Account Actions */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.95, duration: 0.5 }}
                     className="space-y-2"
                   >
-                    <Link
-                      href={createLocalizedPath(currentLocale, '/login')}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block w-full px-6 py-4 border-2 border-white text-white font-medium text-base tracking-wide hover:bg-white hover:text-black transition-all duration-300 text-center"
-                    >
-                      {mobileNav.signup}
-                    </Link>
-                    <p className="text-white/40 text-xs font-light tracking-wide text-center">
-                      {mobileNav.signupFree}
-                    </p>
+                    {authenticatedUser ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => setIsMobileAccountMenuOpen((prev) => !prev)}
+                          className="flex w-full items-center justify-between border-2 border-white px-5 py-3 text-left text-white transition-all duration-300 hover:bg-white hover:text-black"
+                        >
+                          <span className="text-sm font-medium tracking-wide">{accountMenu.dashboard}</span>
+                          <ChevronDown className={`h-4 w-4 transition-transform ${isMobileAccountMenuOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        <AnimatePresence initial={false}>
+                          {isMobileAccountMenuOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45">
+                                  {accountMenu.signedInAs}
+                                </p>
+                                <p className="mt-1.5 break-all text-xs text-white/70">{authenticatedUser.email}</p>
+                                <Link
+                                  href={dashboardHref}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="mt-3 block w-full border border-white/25 px-5 py-2.5 text-center text-xs font-medium text-white/85 transition-all duration-300 hover:border-white/50 hover:text-white"
+                                >
+                                  {accountMenu.dashboard}
+                                </Link>
+                                <button
+                                  type="button"
+                                  onClick={handleLogout}
+                                  disabled={isLoggingOut}
+                                  className="mt-2.5 block w-full border border-white/25 px-5 py-2.5 text-center text-xs font-medium text-white/85 transition-all duration-300 hover:border-red-400 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-60"
+                                >
+                                  {isLoggingOut ? accountMenu.loggingOut : accountMenu.logout}
+                                </button>
+                                {logoutError && (
+                                  <p className="mt-2 text-center text-[11px] font-medium text-rose-300">
+                                    {logoutError}
+                                  </p>
+                                )}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          href={loginHref}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="block w-full px-6 py-4 border-2 border-white text-white font-medium text-base tracking-wide hover:bg-white hover:text-black transition-all duration-300 text-center"
+                        >
+                          {mobileNav.signup}
+                        </Link>
+                        <p className="text-white/40 text-xs font-light tracking-wide text-center">
+                          {mobileNav.signupFree}
+                        </p>
+                      </>
+                    )}
                   </motion.div>
                 </div>
               </motion.div>

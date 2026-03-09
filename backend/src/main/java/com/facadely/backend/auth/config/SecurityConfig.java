@@ -9,8 +9,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -69,8 +67,8 @@ public class SecurityConfig {
             )
             .formLogin(form -> form.disable())
             .httpBasic(basic -> basic.disable())
-            .addFilterBefore(authOriginValidationFilter, JwtAuthenticationFilter.class)
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(authOriginValidationFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterAfter(jwtAuthenticationFilter, AuthOriginValidationFilter.class);
 
         return http.build();
     }
@@ -87,10 +85,5 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new Argon2PasswordEncoder(16, 32, 1, 1 << 15, 3);
     }
 }

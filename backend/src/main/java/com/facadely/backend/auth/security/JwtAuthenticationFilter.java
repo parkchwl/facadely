@@ -32,21 +32,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws ServletException, IOException {
 
-        if (SecurityContextHolder.getContext().getAuthentication() == null) {
-            String token = resolveAccessToken(request);
-            if (token != null && jwtTokenProvider.isAccessTokenValid(token)) {
-                Claims claims = jwtTokenProvider.parseAccessToken(token);
-                String userId = claims.getSubject();
-                String role = claims.get("role", String.class);
+        String token = resolveAccessToken(request);
+        if (token != null && jwtTokenProvider.isAccessTokenValid(token)) {
+            Claims claims = jwtTokenProvider.parseAccessToken(token);
+            String userId = claims.getSubject();
+            String role = claims.get("role", String.class);
 
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    userId,
-                    null,
-                    List.of(new SimpleGrantedAuthority("ROLE_" + (role == null ? "USER" : role)))
-                );
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                userId,
+                null,
+                List.of(new SimpleGrantedAuthority("ROLE_" + (role == null ? "USER" : role)))
+            );
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
         filterChain.doFilter(request, response);

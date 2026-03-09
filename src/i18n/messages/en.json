@@ -15,6 +15,13 @@
     "signup": "SIGN UP",
     "signupFree": "It's free to get started"
   },
+  "accountMenu": {
+    "dashboard": "Dashboard",
+    "signedInAs": "Signed in as",
+    "logout": "Log out",
+    "loggingOut": "Signing out...",
+    "logoutFailed": "Sign-out failed. Please check your connection and try again."
+  },
   "languageSelector": {
     "title": "Choose your Country/Region"
   },
@@ -463,6 +470,39 @@
     "termsLinkText": "Terms of Service",
     "privacyLinkText": "Privacy Policy",
     "captcha": "Secure Login with reCAPTCHA subject to Google"
+  },
+  "dashboardPage": {
+    "badge": "Account workspace",
+    "title": "Welcome back, {name}",
+    "subtitle": "Your authentication is working. Review your account, check recent sign-in activity, and jump back into building.",
+    "profileTitle": "Profile",
+    "profileDescription": "Core account details synced from the auth service.",
+    "emailLabel": "Email",
+    "roleLabel": "Role",
+    "roleUser": "User",
+    "roleAdmin": "Admin",
+    "termsLabel": "Terms",
+    "accountIdLabel": "Account ID",
+    "termsAccepted": "Agreed",
+    "termsPending": "Needs review",
+    "activityTitle": "Auth activity",
+    "activityDescription": "A snapshot from your sign-in audit log.",
+    "totalEventsLabel": "Total events",
+    "passwordLoginsLabel": "Password logins",
+    "googleLoginsLabel": "Google logins",
+    "refreshesLabel": "Refreshes",
+    "logoutsLabel": "Logouts",
+    "lastPasswordLoginLabel": "Last password login",
+    "lastGoogleLoginLabel": "Last Google login",
+    "neverLabel": "Never",
+    "quickActionsTitle": "Quick actions",
+    "quickActionsSubtitle": "Move back into the product without digging through menus.",
+    "reviewTerms": "Review terms",
+    "statusTitle": "Account status",
+    "statusAuthenticated": "Authentication is active and this session is valid.",
+    "statusTermsReady": "Required policy agreement is already recorded.",
+    "statusTermsPending": "This account still needs a recorded policy agreement.",
+    "logout": "Log out"
   },
   "termsModal": {
     "title": "Welcome to facadely",

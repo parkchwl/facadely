@@ -2,6 +2,25 @@
 
 All notable changes to this project are documented in this file.
 
+## 2026-03-10
+
+- Hardened auth redirect behavior and logout UX:
+  - Added centralized `next` path sanitization with length limits, internal-path checks, and login-loop prevention.
+  - Unified protected-route redirect policy to `/login?next=...` and applied consistent post-login redirect handling for password login and Google OAuth callback flows.
+  - Updated logout UX to include retry logic and user-visible failure messaging instead of silent fallback.
+- Reduced auth middleware overhead:
+  - Optimized `src/proxy.ts` to avoid unnecessary backend auth roundtrips on dashboard paths while preserving protected-route gating.
+- Added browser regression coverage for auth flows:
+  - Added Playwright test setup (`playwright.config.ts`) with a local mock auth server (`e2e/mock-auth-server.mjs`).
+  - Added E2E specs for password login, Google login, `next` redirect validation, expired-session re-entry, logout re-access, and logout-network-failure feedback.
+
+## 2026-03-09
+
+- Completed the remaining Spring auth backend gaps:
+  - Added authenticated `GET /api/v1/auth/audit-summary` to expose per-user auth event counts and latest timestamps.
+  - Replaced the placeholder backend sanity test with H2-backed integration tests for signup, refresh rotation, audit summary, and auth origin validation.
+  - Removed the unused `JWT_REFRESH_SECRET` setting so runtime config now matches the opaque DB-backed refresh token design.
+
 ## 2026-03-07
 
 - Hardened Next editor/runtime APIs:
