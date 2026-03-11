@@ -1,9 +1,16 @@
 'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { Zap, Smartphone, Palette, Settings, BarChart3, Shield, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform
+} from 'framer-motion';
 import ScrollingBanner from '../components/ScrollingBanner';
 import TemplateCard from '../components/TemplateCard';
 import OptimizedImage, { ImageType } from '../components/OptimizedImage';
@@ -44,6 +51,11 @@ const CONFIG = {
 
   // Display Counts
   STATS_DISPLAY_THRESHOLD: 4,         // Hide stats after this index on mobile
+
+  // Scroll-linked gallery tuning
+  GALLERY_SCROLL_INTENSITY: 0.02,     // Lower = slower horizontal movement
+  GALLERY_CARD_BASE_WIDTH: 330,       // Keep card width visually consistent
+  GALLERY_ZOOM_COMPENSATION_MAX: 4,   // 100% -> 25% zoom range support
 } as const;
 
 // ================================================================================
@@ -421,15 +433,101 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     ? `${inter.className} text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-8 tracking-tight leading-none sm:whitespace-nowrap`
     : `${inter.className} text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white mb-8 tracking-tight leading-none`;
 
-  // Duplicated rows for CSS infinite scroll animation
+  // Keep gallery lightweight: 6 cards per row (duplicated once for seamless looping)
+  const topRowTemplates = useMemo(() => BASE_TEMPLATES.slice(0, 6), []);
+  const bottomRowTemplates = useMemo(() => BASE_TEMPLATES.slice(-6), []);
   const duplicatedRow1 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES],
-    []
+    [...topRowTemplates, ...topRowTemplates],
+    [topRowTemplates]
   );
   const duplicatedRow2 = useMemo(() =>
-    [...BASE_TEMPLATES, ...BASE_TEMPLATES],
-    []
+    [...bottomRowTemplates, ...bottomRowTemplates],
+    [bottomRowTemplates]
   );
+  const gallerySectionRef = useRef<HTMLElement | null>(null);
+  const galleryLeftTrackRef = useRef<HTMLDivElement | null>(null);
+  const galleryRightTrackRef = useRef<HTMLDivElement | null>(null);
+  const initialDevicePixelRatioRef = useRef(1);
+  const [galleryScrollDistance, setGalleryScrollDistance] = useState(0);
+  const [galleryZoomCompensation, setGalleryZoomCompensation] = useState(1);
+  const prefersReducedMotion = useReducedMotion();
+
+  const { scrollYProgress: galleryScrollProgress } = useScroll({
+    target: gallerySectionRef,
+    offset: ['start end', 'end start']
+  });
+
+  const galleryTravelDistance = galleryScrollDistance * CONFIG.GALLERY_SCROLL_INTENSITY;
+  const leftTrackX = useTransform(galleryScrollProgress, [0, 1], [0, -galleryTravelDistance]);
+  const rightTrackX = useTransform(galleryScrollProgress, [0, 1], [-galleryTravelDistance, 0]);
+
+  const smoothLeftTrackX = useSpring(leftTrackX, { stiffness: 120, damping: 24, mass: 0.35 });
+  const smoothRightTrackX = useSpring(rightTrackX, { stiffness: 120, damping: 24, mass: 0.35 });
+  const galleryCardWidth = Math.max(
+    1,
+    Math.round(CONFIG.GALLERY_CARD_BASE_WIDTH * galleryZoomCompensation)
+  );
+
+  useEffect(() => {
+    const updateZoomCompensation = () => {
+      const baseDpr = initialDevicePixelRatioRef.current || 1;
+      const currentDpr = window.devicePixelRatio || baseDpr;
+      const rawCompensation = baseDpr / currentDpr;
+      const nextCompensation = Math.min(
+        CONFIG.GALLERY_ZOOM_COMPENSATION_MAX,
+        Math.max(1, rawCompensation)
+      );
+
+      setGalleryZoomCompensation((prev) =>
+        Math.abs(prev - nextCompensation) > 0.01 ? nextCompensation : prev
+      );
+    };
+
+    initialDevicePixelRatioRef.current = window.devicePixelRatio || 1;
+    updateZoomCompensation();
+
+    window.addEventListener('resize', updateZoomCompensation);
+    window.visualViewport?.addEventListener('resize', updateZoomCompensation);
+
+    return () => {
+      window.removeEventListener('resize', updateZoomCompensation);
+      window.visualViewport?.removeEventListener('resize', updateZoomCompensation);
+    };
+  }, []);
+
+  useEffect(() => {
+    const calculateGalleryDistance = () => {
+      const leftDistance = galleryLeftTrackRef.current ? galleryLeftTrackRef.current.scrollWidth / 2 : 0;
+      const rightDistance = galleryRightTrackRef.current ? galleryRightTrackRef.current.scrollWidth / 2 : 0;
+      const nextDistance = Math.max(leftDistance, rightDistance);
+
+      setGalleryScrollDistance((prev) =>
+        Math.abs(prev - nextDistance) > 1 ? nextDistance : prev
+      );
+    };
+
+    calculateGalleryDistance();
+
+    const resizeObserver = typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(calculateGalleryDistance)
+      : null;
+
+    if (resizeObserver) {
+      if (galleryLeftTrackRef.current) {
+        resizeObserver.observe(galleryLeftTrackRef.current);
+      }
+      if (galleryRightTrackRef.current) {
+        resizeObserver.observe(galleryRightTrackRef.current);
+      }
+    }
+
+    window.addEventListener('resize', calculateGalleryDistance);
+
+    return () => {
+      window.removeEventListener('resize', calculateGalleryDistance);
+      resizeObserver?.disconnect();
+    };
+  }, [galleryCardWidth]);
 
 
   return (
@@ -471,32 +569,49 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </motion.div>
           </div>
 
-          <section className="relative bg-black overflow-hidden space-y-4 py-4">
-            <div className="overflow-hidden">
-              <div className="flex w-max gallery-scroll-left">
+          <section ref={gallerySectionRef} className="relative bg-black overflow-hidden space-y-4 py-4">
+            <div className="gallery-edge-blur">
+              <motion.div
+                ref={galleryLeftTrackRef}
+                data-gallery-track="left"
+                className="flex w-max gallery-scroll-track"
+                style={{ x: prefersReducedMotion ? 0 : smoothLeftTrackX }}
+              >
                 {duplicatedRow1.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row1-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
+                    <div
+                      className="flex-shrink-0 mx-1.5 sm:mx-2"
+                      style={{ width: `${galleryCardWidth}px`, minWidth: `${galleryCardWidth}px` }}
+                    >
                       <TemplateCard
                         template={template}
                         index={index}
+                        imageWidthPx={galleryCardWidth}
                         handleImageLoad={index < 4 ? handleImageLoad : undefined}
                       />
                     </div>
                   </Link>
                 ))}
-              </div>
+              </motion.div>
             </div>
-            <div className="overflow-hidden">
-              <div className="flex w-max gallery-scroll-right">
+            <div className="gallery-edge-blur">
+              <motion.div
+                ref={galleryRightTrackRef}
+                data-gallery-track="right"
+                className="flex w-max gallery-scroll-track"
+                style={{ x: prefersReducedMotion ? 0 : smoothRightTrackX }}
+              >
                 {duplicatedRow2.map((template, index) => (
                   <Link href={`${langPrefix}/templates`} key={`row2-${template.id}-${index}`}>
-                    <div className="flex-shrink-0 w-56 sm:w-72 lg:w-96 mx-1.5 sm:mx-2">
-                      <TemplateCard template={template} index={index + 10} />
+                    <div
+                      className="flex-shrink-0 mx-1.5 sm:mx-2"
+                      style={{ width: `${galleryCardWidth}px`, minWidth: `${galleryCardWidth}px` }}
+                    >
+                      <TemplateCard template={template} index={index + 10} imageWidthPx={galleryCardWidth} />
                     </div>
                   </Link>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </section>
 

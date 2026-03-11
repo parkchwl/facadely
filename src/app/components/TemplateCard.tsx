@@ -13,10 +13,13 @@ interface Template {
 interface TemplateCardProps {
   template: Template;
   index: number;
+  imageWidthPx?: number;
   handleImageLoad?: () => void;
 }
 
-const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index, handleImageLoad }) => {
+const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index, imageWidthPx, handleImageLoad }) => {
+  const imageSizes = imageWidthPx ? `${Math.round(imageWidthPx)}px` : '(max-width: 640px) 224px, (max-width: 1024px) 288px, 384px';
+
   return (
     <div className="w-full h-full aspect-[3/4] relative overflow-hidden rounded-2xl cursor-default bg-black block shadow-md border border-white/5 transition-all duration-300">
       <OptimizedImage
@@ -24,7 +27,7 @@ const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index,
         alt={template.title}
         type={ImageType.TEMPLATE_THUMBNAIL}
         fill
-        sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 384px"
+        sizes={imageSizes}
         className="object-cover opacity-100"
         priority={index < 6}
         onLoad={handleImageLoad}
@@ -34,6 +37,7 @@ const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index,
 }, (prevProps, nextProps) => {
   return prevProps.template.id === nextProps.template.id &&
     prevProps.index === nextProps.index &&
+    prevProps.imageWidthPx === nextProps.imageWidthPx &&
     prevProps.handleImageLoad === nextProps.handleImageLoad;
 });
 
