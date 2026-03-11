@@ -55,6 +55,8 @@ const CONFIG = {
   // Scroll-linked gallery tuning
   GALLERY_SCROLL_INTENSITY: 0.02,     // Lower = slower horizontal movement
   GALLERY_CARD_BASE_WIDTH: 330,       // Keep card width visually consistent
+  GALLERY_CARD_BASE_WIDTH_MOBILE: 280,// Slightly smaller cards on mobile viewports
+  GALLERY_MOBILE_BREAKPOINT: 640,     // Tailwind sm breakpoint
   GALLERY_ZOOM_COMPENSATION_MAX: 4,   // 100% -> 25% zoom range support
 } as const;
 
@@ -450,6 +452,9 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   const initialDevicePixelRatioRef = useRef(1);
   const [galleryScrollDistance, setGalleryScrollDistance] = useState(0);
   const [galleryZoomCompensation, setGalleryZoomCompensation] = useState(1);
+  const [isMobileGalleryViewport, setIsMobileGalleryViewport] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth < CONFIG.GALLERY_MOBILE_BREAKPOINT
+  );
   const prefersReducedMotion = useReducedMotion();
 
   const { scrollYProgress: galleryScrollProgress } = useScroll({
@@ -463,15 +468,19 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
 
   const smoothLeftTrackX = useSpring(leftTrackX, { stiffness: 120, damping: 24, mass: 0.35 });
   const smoothRightTrackX = useSpring(rightTrackX, { stiffness: 120, damping: 24, mass: 0.35 });
+  const galleryBaseCardWidth = isMobileGalleryViewport
+    ? CONFIG.GALLERY_CARD_BASE_WIDTH_MOBILE
+    : CONFIG.GALLERY_CARD_BASE_WIDTH;
   const galleryCardWidth = Math.max(
     1,
-    Math.round(CONFIG.GALLERY_CARD_BASE_WIDTH * galleryZoomCompensation)
+    Math.round(galleryBaseCardWidth * galleryZoomCompensation)
   );
 
   useEffect(() => {
     const updateZoomCompensation = () => {
       const baseDpr = initialDevicePixelRatioRef.current || 1;
       const currentDpr = window.devicePixelRatio || baseDpr;
+      const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
       const rawCompensation = baseDpr / currentDpr;
       const nextCompensation = Math.min(
         CONFIG.GALLERY_ZOOM_COMPENSATION_MAX,
@@ -481,6 +490,10 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
       setGalleryZoomCompensation((prev) =>
         Math.abs(prev - nextCompensation) > 0.01 ? nextCompensation : prev
       );
+      setIsMobileGalleryViewport((prev) => {
+        const nextIsMobile = viewportWidth < CONFIG.GALLERY_MOBILE_BREAKPOINT;
+        return prev === nextIsMobile ? prev : nextIsMobile;
+      });
     };
 
     initialDevicePixelRatioRef.current = window.devicePixelRatio || 1;
