@@ -55,7 +55,7 @@ const CONFIG = {
   // Scroll-linked gallery tuning
   GALLERY_SCROLL_INTENSITY: 0.02,     // Lower = slower horizontal movement
   GALLERY_CARD_BASE_WIDTH: 330,       // Keep card width visually consistent
-  GALLERY_CARD_BASE_WIDTH_MOBILE: 280,// Slightly smaller cards on mobile viewports
+  GALLERY_CARD_BASE_WIDTH_MOBILE: 200,// Smaller cards on mobile viewports
   GALLERY_MOBILE_BREAKPOINT: 640,     // Tailwind sm breakpoint
   GALLERY_ZOOM_COMPENSATION_MAX: 4,   // 100% -> 25% zoom range support
 } as const;
@@ -437,6 +437,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
 
   // Keep gallery lightweight: 6 cards per row (duplicated once for seamless looping)
   const topRowTemplates = useMemo(() => BASE_TEMPLATES.slice(0, 6), []);
+  const middleRowTemplates = useMemo(() => BASE_TEMPLATES.slice(2, 8), []);
   const bottomRowTemplates = useMemo(() => BASE_TEMPLATES.slice(-6), []);
   const duplicatedRow1 = useMemo(() =>
     [...topRowTemplates, ...topRowTemplates],
@@ -446,9 +447,14 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     [...bottomRowTemplates, ...bottomRowTemplates],
     [bottomRowTemplates]
   );
+  const duplicatedRow3 = useMemo(() =>
+    [...middleRowTemplates, ...middleRowTemplates],
+    [middleRowTemplates]
+  );
   const gallerySectionRef = useRef<HTMLElement | null>(null);
   const galleryLeftTrackRef = useRef<HTMLDivElement | null>(null);
   const galleryRightTrackRef = useRef<HTMLDivElement | null>(null);
+  const galleryMiddleTrackRef = useRef<HTMLDivElement | null>(null);
   const initialDevicePixelRatioRef = useRef(1);
   const [galleryScrollDistance, setGalleryScrollDistance] = useState(0);
   const [galleryZoomCompensation, setGalleryZoomCompensation] = useState(1);
@@ -464,9 +470,11 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
 
   const galleryTravelDistance = galleryScrollDistance * CONFIG.GALLERY_SCROLL_INTENSITY;
   const leftTrackX = useTransform(galleryScrollProgress, [0, 1], [0, -galleryTravelDistance]);
+  const middleTrackX = useTransform(galleryScrollProgress, [0, 1], [0, -galleryTravelDistance * 0.7]);
   const rightTrackX = useTransform(galleryScrollProgress, [0, 1], [-galleryTravelDistance, 0]);
 
   const smoothLeftTrackX = useSpring(leftTrackX, { stiffness: 120, damping: 24, mass: 0.35 });
+  const smoothMiddleTrackX = useSpring(middleTrackX, { stiffness: 120, damping: 24, mass: 0.35 });
   const smoothRightTrackX = useSpring(rightTrackX, { stiffness: 120, damping: 24, mass: 0.35 });
   const galleryBaseCardWidth = isMobileGalleryViewport
     ? CONFIG.GALLERY_CARD_BASE_WIDTH_MOBILE
@@ -511,8 +519,9 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   useEffect(() => {
     const calculateGalleryDistance = () => {
       const leftDistance = galleryLeftTrackRef.current ? galleryLeftTrackRef.current.scrollWidth / 2 : 0;
+      const middleDistance = galleryMiddleTrackRef.current ? galleryMiddleTrackRef.current.scrollWidth / 2 : 0;
       const rightDistance = galleryRightTrackRef.current ? galleryRightTrackRef.current.scrollWidth / 2 : 0;
-      const nextDistance = Math.max(leftDistance, rightDistance);
+      const nextDistance = Math.max(leftDistance, middleDistance, rightDistance);
 
       setGalleryScrollDistance((prev) =>
         Math.abs(prev - nextDistance) > 1 ? nextDistance : prev
@@ -531,6 +540,9 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
       }
       if (galleryRightTrackRef.current) {
         resizeObserver.observe(galleryRightTrackRef.current);
+      }
+      if (galleryMiddleTrackRef.current) {
+        resizeObserver.observe(galleryMiddleTrackRef.current);
       }
     }
 
@@ -626,6 +638,27 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                 ))}
               </motion.div>
             </div>
+            {isMobileGalleryViewport && (
+              <div className="gallery-edge-blur">
+                <motion.div
+                  ref={galleryMiddleTrackRef}
+                  data-gallery-track="middle"
+                  className="flex w-max gallery-scroll-track"
+                  style={{ x: prefersReducedMotion ? 0 : smoothMiddleTrackX }}
+                >
+                  {duplicatedRow3.map((template, index) => (
+                    <Link href={`${langPrefix}/templates`} key={`row3-${template.id}-${index}`}>
+                      <div
+                        className="flex-shrink-0 mx-1.5 sm:mx-2"
+                        style={{ width: `${galleryCardWidth}px`, minWidth: `${galleryCardWidth}px` }}
+                      >
+                        <TemplateCard template={template} index={index + 20} imageWidthPx={galleryCardWidth} />
+                      </div>
+                    </Link>
+                  ))}
+                </motion.div>
+              </div>
+            )}
           </section>
 
         </section>
