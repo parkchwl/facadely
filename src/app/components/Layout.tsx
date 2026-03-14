@@ -69,6 +69,8 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
   const homeHref = createLocalizedPath(currentLocale, '/');
   const dashboardHref = createLocalizedPath(currentLocale, '/dashboard');
   const loginHref = createLocalizedPath(currentLocale, '/login');
+  
+  const isOnDashboard = pathname.endsWith('/dashboard') || pathname.includes('/dashboard/');
 
   const handleLogout = async () => {
     if (isLoggingOut) {
@@ -100,6 +102,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
           : undefined
       }
     >
+      {!isOnDashboard && (
       <header className="w-full top-0 z-50 fixed flex justify-center">
         <div className="py-3 sm:py-4 flex justify-between items-center max-w-7xl w-full mx-4 px-6 sm:px-8 rounded-2xl mt-4 bg-black/60 backdrop-blur-md text-white shadow-lg">
           {/* Left Side: Logo */}
@@ -462,13 +465,15 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
           )}
         </AnimatePresence>
       </header>
+      )}
 
       {/* Main Content */}
-      <main className="flex-grow">
+      <main className={isOnDashboard ? "flex-1 w-full h-full" : "flex-grow"}>
         {children}
       </main>
 
       {/* Footer */}
+      {!isOnDashboard && (
       <footer className={`relative z-10 w-full text-white ${pathname.endsWith('/templates') ? '' : 'bg-black'}`}>
         <div className={`py-12 ${pathname.endsWith('/templates')
           ? 'max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 bg-black'
@@ -540,6 +545,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
           </div>
         </div>
       </footer>
+      )}
     </div>
   );
 }

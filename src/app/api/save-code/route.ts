@@ -1,18 +1,11 @@
 import { NextResponse } from "next/server";
 import {
-  readSiteCustomization,
-  setTypographyPresetEnabled,
-  updateTypographyTokens,
-  updateThemeTokens,
-  upsertCustomFont,
-  upsertElementPatch,
-} from "@/lib/site-customization-store";
-import { ThemeTokens, TypographyTokens } from "@/lib/site-customization-types";
+  buildDefaultSiteCustomization,
+  ThemeTokens,
+  TypographyTokens,
+} from "@/lib/site-customization-types";
 import { readTemplateManifest } from "@/lib/template-manifest-store";
-import {
-  getDefaultCanonicalTemplatePath,
-  toLegacyTemplatePath,
-} from "@/lib/template-registry";
+import { getDefaultCanonicalTemplatePath } from "@/lib/template-registry";
 import {
   getAllowedStyleProperties,
   hasEditableField,
@@ -25,6 +18,12 @@ import {
   requireAuthenticatedUser,
   requireSameOrigin,
 } from "@/lib/server/api-security";
+import {
+  BackendSiteApiError,
+  getSiteCustomizationFromBackend,
+  saveSiteCustomizationToBackend,
+} from "@/lib/server/site-backend";
+import { isCanonicalTemplatePath, resolveTemplateSourcePath } from "@/lib/user-site-store";
 
 type SaveCodeRequest = {
   sitePath?: string;
@@ -42,6 +41,15 @@ type SaveCodeRequest = {
     family?: string;
     url?: string;
   };
+  patches?: Array<{
+    editId?: string;
+    patch?: {
+      styles?: Record<string, string>;
+      innerText?: string;
+      src?: string;
+      href?: string;
+    };
+  }>;
 };
 
 const SAFE_FONT_FAMILY = /^[a-z0-9 _-]{2,64}$/i;
@@ -230,10 +238,19 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const incomingSitePath = searchParams.get("sitePath") ?? getDefaultCanonicalTemplatePath();
-    const sitePath = toLegacyTemplatePath(incomingSitePath);
-    const customization = await readSiteCustomization(sitePath);
+    if (isCanonicalTemplatePath(incomingSitePath)) {
+      return NextResponse.json({
+        success: true,
+        customization: buildDefaultSiteCustomization(incomingSitePath),
+      });
+    }
+
+    const customization = await getSiteCustomizationFromBackend(incomingSitePath);
     return NextResponse.json({ success: true, customization });
   } catch (error) {
+    if (error instanceof BackendSiteApiError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
     console.error("save-code GET error:", error);
     return NextResponse.json({ error: "Failed to load site customization" }, { status: 500 });
   }
@@ -245,13 +262,16 @@ export async function POST(req: Request) {
     await requireAuthenticatedUser(req);
     const body = (await req.json()) as SaveCodeRequest;
     const incomingSitePath = body.sitePath ?? getDefaultCanonicalTemplatePath();
-    const sitePath = toLegacyTemplatePath(incomingSitePath);
+    const requestedPatches = Array.isArray(body.patches) ? body.patches : [];
+    const singlePatchRequested = typeof body.editId === "string" && isObject(body.patch);
+    const hasPatchBatch = requestedPatches.length > 0;
     const requiresWritePayload =
       (body.themeTokens && isObject(body.themeTokens)) ||
       (body.typographyTokens && isObject(body.typographyTokens)) ||
       typeof body.typographyPresetEnabled === "boolean" ||
       (body.customFont && isObject(body.customFont)) ||
-      (typeof body.editId === "string" && isObject(body.patch));
+      singlePatchRequested ||
+      hasPatchBatch;
 
     if (!requiresWritePayload) {
       return NextResponse.json(
@@ -260,15 +280,21 @@ export async function POST(req: Request) {
       );
     }
 
-    const manifest = await readTemplateManifest(sitePath);
-    if (!manifest) {
+    if (isCanonicalTemplatePath(incomingSitePath)) {
       return NextResponse.json(
-        { error: `Template manifest not found for ${sitePath}.` },
-        { status: 404 }
+        { error: "Create a site from this template before saving customizations." },
+        { status: 400 }
       );
     }
 
-    let updatedCustomization = await readSiteCustomization(sitePath);
+    const templateSourcePath = resolveTemplateSourcePath(incomingSitePath);
+    const manifest = await readTemplateManifest(templateSourcePath);
+    if (!manifest) {
+      return NextResponse.json(
+        { error: `Template manifest not found for ${incomingSitePath}.` },
+        { status: 404 }
+      );
+    }
 
     if (body.themeTokens && isObject(body.themeTokens)) {
       const { value: tokens, invalidKeys } = sanitizeThemeTokens(body.themeTokens, manifest);
@@ -278,9 +304,7 @@ export async function POST(req: Request) {
           { status: 400 }
         );
       }
-      if (Object.keys(tokens).length > 0) {
-        updatedCustomization = await updateThemeTokens(sitePath, tokens);
-      }
+      body.themeTokens = tokens;
     }
 
     if (body.typographyTokens && isObject(body.typographyTokens)) {
@@ -291,13 +315,7 @@ export async function POST(req: Request) {
           { status: 400 }
         );
       }
-      if (Object.keys(tokens).length > 0) {
-        updatedCustomization = await updateTypographyTokens(sitePath, tokens);
-      }
-    }
-
-    if (typeof body.typographyPresetEnabled === "boolean") {
-      updatedCustomization = await setTypographyPresetEnabled(sitePath, body.typographyPresetEnabled);
+      body.typographyTokens = tokens;
     }
 
     if (body.customFont && isObject(body.customFont)) {
@@ -309,12 +327,23 @@ export async function POST(req: Request) {
           { status: 400 }
         );
       }
-      updatedCustomization = await upsertCustomFont(sitePath, sanitizeCustomFont({ family, url }));
+      body.customFont = sanitizeCustomFont({ family, url });
     }
 
-    const hasPatch = typeof body.editId === "string" && isObject(body.patch);
-    if (hasPatch) {
-      const editId = body.editId!.trim();
+    const patchRequests = [
+      ...(singlePatchRequested ? [{ editId: body.editId, patch: body.patch }] : []),
+      ...requestedPatches,
+    ];
+
+    for (const patchRequest of patchRequests) {
+      const editId = typeof patchRequest.editId === "string" ? patchRequest.editId.trim() : "";
+      if (!editId || !isObject(patchRequest.patch)) {
+        return NextResponse.json(
+          { error: "Each patch request requires editId and patch." },
+          { status: 400 }
+        );
+      }
+
       const editableNode = manifest.editable.find((node) => node.editId === editId);
       if (!editableNode) {
         return NextResponse.json(
@@ -323,15 +352,31 @@ export async function POST(req: Request) {
         );
       }
 
-      const validatedPatch = validateElementPatch(editableNode, body.patch);
-      updatedCustomization = await upsertElementPatch(sitePath, {
-        editId,
+      const validatedPatch = validateElementPatch(editableNode, patchRequest.patch);
+      patchRequest.patch = {
         styles: validatedPatch.styles,
         innerText: validatedPatch.innerText,
         src: validatedPatch.src,
         href: validatedPatch.href,
-      });
+      };
     }
+
+    const cookieHeader = req.headers.get("cookie") ?? "";
+    const normalizedBody: Record<string, unknown> = {
+      ...body,
+      sitePath: incomingSitePath,
+    };
+
+    if (patchRequests.length > 0) {
+      normalizedBody.patches = patchRequests.map((patchRequest) => ({
+        editId: patchRequest.editId,
+        patch: patchRequest.patch,
+      }));
+      delete normalizedBody.editId;
+      delete normalizedBody.patch;
+    }
+
+    const updatedCustomization = await saveSiteCustomizationToBackend(cookieHeader, normalizedBody);
 
     return NextResponse.json({
       success: true,
@@ -339,6 +384,9 @@ export async function POST(req: Request) {
       customization: updatedCustomization,
     });
   } catch (error) {
+    if (error instanceof BackendSiteApiError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
     if (error instanceof Error && (error.message === "FORBIDDEN_ORIGIN" || error.message === "MISSING_ORIGIN")) {
       return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
     }

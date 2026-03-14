@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { readTemplateManifest } from "@/lib/template-manifest-store";
 import { requireAuthenticatedUser } from "@/lib/server/api-security";
+import { resolveTemplateSourcePath } from "@/lib/user-site-store";
 
 export async function GET(req: Request) {
   try {
@@ -12,7 +13,8 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "sitePath is required" }, { status: 400 });
     }
 
-    const manifest = await readTemplateManifest(sitePath);
+    const templateSourcePath = await resolveTemplateSourcePath(sitePath);
+    const manifest = await readTemplateManifest(templateSourcePath);
     if (!manifest) {
       return NextResponse.json({ error: "Template manifest not found" }, { status: 404 });
     }

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { Suspense, useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { FaPlay, FaRedoAlt, FaUndoAlt } from "react-icons/fa";
 import {
   Monitor,
@@ -20,12 +21,10 @@ import {
   Box,
   Palette,
   Save,
-  Check,
   ShieldCheck,
   CheckCircle2,
   Rocket,
   FolderTree,
-  FilePlus2
 } from "lucide-react";
 import {
   CustomFontAsset,
@@ -51,10 +50,8 @@ import {
   TemplateManifest,
   TemplateScenePreset,
 } from "@/lib/template-manifest-types";
-import {
-  getDefaultCanonicalTemplatePath,
-  listCanonicalTemplateEntries,
-} from "@/lib/template-registry";
+import { i18n } from "@/i18n/config";
+import { isCanonicalTemplatePath } from "@/lib/user-site-store";
 
 type Viewport = "desktop" | "tablet" | "mobile" | "responsive";
 
@@ -76,12 +73,29 @@ type Website = {
   path: string;
 };
 
+type SaveableElementPatch = {
+  editId: string;
+  patch: {
+    styles?: Record<string, string>;
+    innerText?: string;
+    src?: string;
+    href?: string;
+  };
+};
+
 type CanvasStructureNode = {
   editId: string;
   label: string;
   kind: TemplateEditableKind;
   tagName: string;
   children: CanvasStructureNode[];
+};
+
+type PublishState = {
+  publicUrl: string;
+  publishedSlug?: string;
+  customDomain?: string | null;
+  publishedAt?: string | null;
 };
 
 interface ViewportConfig {
@@ -109,14 +123,7 @@ const CANVAS_HEADER_META: Record<Exclude<Viewport, "responsive">, {
   mobile: { title: "Mobile", sizeLabel: "<768px", icon: Smartphone },
 };
 
-const WEBSITES = [
-  ...listCanonicalTemplateEntries().map((entry) => ({
-    id: entry.templateId,
-    name: entry.name,
-    desc: entry.description,
-    path: entry.canonicalPath,
-  })),
-];
+const WEBSITES: Website[] = [];
 
 const EXCLUDED_SITE_PATH_PREFIXES = ["/t/"];
 
@@ -151,10 +158,10 @@ const sanitizeWebsites = (sites: Website[]) => {
 
 const DEFAULT_WEBSITES = sanitizeWebsites(WEBSITES);
 const DEFAULT_ACTIVE_SITE: Website = DEFAULT_WEBSITES[0] ?? {
-  id: "velocity-saas-landing",
-  name: "Velocity SaaS Landing",
-  desc: "Dark SaaS landing template with hero, feature grid, and social proof",
-  path: getDefaultCanonicalTemplatePath(),
+  id: "",
+  name: "",
+  desc: "",
+  path: "",
 };
 
 const TOKEN_TO_CSS_VAR: Record<keyof ThemeTokens, string> = {
@@ -175,7 +182,7 @@ const LINE_HEIGHT_MIN = 0.8;
 const LINE_HEIGHT_MAX = 2.2;
 const LETTER_SPACING_MIN = -2;
 const LETTER_SPACING_MAX = 10;
-const AUTO_SAVE_ENABLED = false;
+const AUTO_SAVE_ENABLED = true;
 const PREVIEW_SWITCH_DURATION_MS = 0;
 
 const clampNumber = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
@@ -294,7 +301,8 @@ const normalizePresetPath = (value: string) => {
   }
 };
 
-export default function Editor() {
+function EditorContent() {
+  const searchParams = useSearchParams();
   const [activeSite, setActiveSite] = useState<Website>(DEFAULT_ACTIVE_SITE);
   const [viewport, setViewport] = useState<ViewportConfig>(VIEWPORTS[0]);
   const [zoom, setZoom] = useState(100);
@@ -351,7 +359,8 @@ export default function Editor() {
   const [isUploadingFont, setIsUploadingFont] = useState(false);
 
   const [isSaving, setIsSaving] = useState(false);
-  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [publishState, setPublishState] = useState<PublishState | null>(null);
   const [isPreviewMode, setIsPreviewMode] = useState(false);
   const [isPreviewSwitching, setIsPreviewSwitching] = useState(false);
   const [isPreviewPostEffectsReady, setIsPreviewPostEffectsReady] = useState(true);
@@ -375,6 +384,7 @@ export default function Editor() {
   const [actionIndex, setActionIndex] = useState(-1);
   const pendingActionRef = useRef<HistoryAction | null>(null);
   const actionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hasActiveSite = activeSite.path.trim().length > 0;
 
   const commitAction = useCallback((action: HistoryAction) => {
     setActionStack(prev => [...prev.slice(0, actionIndex + 1), action]);
@@ -405,7 +415,6 @@ export default function Editor() {
 
   const markEditorDirty = useCallback(() => {
     setChangeVersion(prev => prev + 1);
-    setSaveSuccess(false);
     setAutoSaveStatus(prev => (prev === "saving" ? prev : "idle"));
     setAutoSaveError(prev => (prev ? null : prev));
   }, []);
@@ -494,6 +503,55 @@ export default function Editor() {
     }
     return patch;
   }, [getAllowedStyleSet]);
+
+  const collectAllEditablePatches = useCallback((): SaveableElementPatch[] => {
+    const iframeDoc = iframeRef.current?.contentWindow?.document;
+    const manifest = templateManifestRef.current;
+    if (!iframeDoc || !manifest) {
+      return [];
+    }
+
+    return manifest.editable.flatMap((node) => {
+      const escapedEditId =
+        typeof CSS !== "undefined" && typeof CSS.escape === "function"
+          ? CSS.escape(node.editId)
+          : node.editId;
+      const element = iframeDoc.querySelector<HTMLElement>(`[data-edit-id="${escapedEditId}"]`);
+      if (!element) {
+        return [];
+      }
+
+      const patch: SaveableElementPatch["patch"] = {};
+      const styles = collectEditableStyles(element, node);
+      if (Object.keys(styles).length > 0) {
+        patch.styles = styles;
+      }
+
+      if (hasEditableField(node, "text")) {
+        patch.innerText = element.innerText;
+      }
+
+      if (hasEditableField(node, "image") && element.tagName.toLowerCase() === "img") {
+        const imageSrc = (element as HTMLImageElement).src;
+        if (imageSrc) {
+          patch.src = imageSrc;
+        }
+      }
+
+      if (hasEditableField(node, "button") && element.tagName.toLowerCase() === "a") {
+        const href = element.getAttribute("href") ?? "";
+        if (href) {
+          patch.href = href;
+        }
+      }
+
+      if (!patch.styles && patch.innerText === undefined && !patch.src && !patch.href) {
+        return [];
+      }
+
+      return [{ editId: node.editId, patch }];
+    });
+  }, [collectEditableStyles]);
 
   const applyAction = useCallback((action: HistoryAction, isUndo: boolean) => {
     const val = isUndo ? action.oldValue : action.newValue;
@@ -612,16 +670,28 @@ export default function Editor() {
 
     setIsMounting(false);
 
-    // Fetch dynamic pages from API
-    fetch('/api/pages', { cache: 'no-store' })
-      .then(res => res.json())
+    const controller = new AbortController();
+
+    fetch("/api/pages", { cache: "no-store", signal: controller.signal })
+      .then((res) => res.json())
       .then((data: { pages?: Website[] }) => {
         const incomingPages = data.pages ?? [];
         if (incomingPages.length > 0) {
-          setWebsites((prev) => sanitizeWebsites([...prev, ...incomingPages]));
+          setWebsites(sanitizeWebsites(incomingPages));
+        } else {
+          setWebsites([]);
         }
       })
-      .catch(console.warn);
+      .catch((error) => {
+        if (error instanceof Error && error.name === "AbortError") {
+          return;
+        }
+        console.warn(error);
+      });
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   useEffect(() => {
@@ -629,7 +699,12 @@ export default function Editor() {
   }, []);
 
   useEffect(() => {
-    if (websites.length === 0) return;
+    if (websites.length === 0) {
+      if (activeSite.path) {
+        setActiveSite(DEFAULT_ACTIVE_SITE);
+      }
+      return;
+    }
     const matched = websites.find((site) => site.path === activeSite.path);
     if (!matched) {
       setActiveSite(websites[0]);
@@ -699,7 +774,6 @@ export default function Editor() {
   }, [resizingSide]);
 
   useEffect(() => {
-    setSaveSuccess(false);
     setAutoSaveStatus("idle");
     setAutoSaveError(null);
     setLastSavedAt(null);
@@ -724,9 +798,22 @@ export default function Editor() {
   }, [activeSite.path]);
 
   useEffect(() => {
-    fetch(`/api/template-manifest?sitePath=${encodeURIComponent(activeSite.path)}`)
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error("Template manifest not found"))))
+    if (!activeSite.path) {
+      setTemplateManifest(null);
+      setManifestError(null);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    fetch(`/api/template-manifest?sitePath=${encodeURIComponent(activeSite.path)}`, {
+      signal: controller.signal,
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(new Error("Template manifest not found"))
+      )
       .then((data: { manifest?: TemplateManifest }) => {
+        if (controller.signal.aborted) return;
         if (!data.manifest) {
           throw new Error("Template manifest not found");
         }
@@ -734,13 +821,35 @@ export default function Editor() {
         setManifestError(null);
       })
       .catch((error) => {
+        if (controller.signal.aborted) return;
         setTemplateManifest(null);
         setManifestError(error instanceof Error ? error.message : "Template manifest unavailable");
       });
+
+    return () => {
+      controller.abort();
+    };
   }, [activeSite.path]);
 
   useEffect(() => {
-    fetch(`/api/save-code?sitePath=${encodeURIComponent(activeSite.path)}`)
+    if (!activeSite.path) {
+      setThemeTokens({
+        primary: "#6366f1",
+        secondary: "#d946ef",
+        radius: "0.5rem",
+        spacingBase: "1rem",
+      });
+      setTypographyTokens(cloneDefaultTypographyTokens());
+      setTypographyPresetEnabled(false);
+      setCustomFonts([]);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    fetch(`/api/save-code?sitePath=${encodeURIComponent(activeSite.path)}`, {
+      signal: controller.signal,
+    })
       .then((res) => (res.ok ? res.json() : null))
       .then((data: {
         customization?: {
@@ -750,6 +859,7 @@ export default function Editor() {
           customFonts?: CustomFontAsset[];
         };
       } | null) => {
+        if (controller.signal.aborted) return;
         if (!data?.customization) return;
         if (data.customization.themeTokens) {
           setThemeTokens(data.customization.themeTokens);
@@ -766,10 +876,18 @@ export default function Editor() {
           setCustomFonts([]);
         }
       })
-      .catch(console.warn);
+      .catch((error) => {
+        if (controller.signal.aborted) return;
+        console.warn(error);
+      });
+
+    return () => {
+      controller.abort();
+    };
   }, [activeSite.path]);
 
   useEffect(() => {
+    if (!activeSite.path) return;
     const iframeDoc = iframeRef.current?.contentWindow?.document;
     const root = iframeDoc?.documentElement;
     if (!iframeDoc || !root) return;
@@ -778,9 +896,10 @@ export default function Editor() {
     root.style.setProperty(TOKEN_TO_CSS_VAR.radius, themeTokens.radius);
     root.style.setProperty(TOKEN_TO_CSS_VAR.spacingBase, themeTokens.spacingBase);
     applyGlobalPreviewCustomization(iframeDoc);
-  }, [applyGlobalPreviewCustomization, themeTokens]);
+  }, [activeSite.path, applyGlobalPreviewCustomization, themeTokens]);
 
   useEffect(() => {
+    if (!activeSite.path) return;
     ensureFontLoaded(typographyTokens.heading.fontFamily);
     ensureFontLoaded(typographyTokens.body.fontFamily);
     ensureFontLoaded(typographyTokens.button.fontFamily);
@@ -838,6 +957,19 @@ export default function Editor() {
     setElementType("unknown");
     setFontQuery("");
   }, []);
+
+  useEffect(() => {
+    const requestedSitePath = normalizeSitePath(searchParams.get("sitePath") ?? "");
+    if (!requestedSitePath) return;
+
+    const matched = websites.find((site) => site.path === requestedSitePath);
+    if (!matched || matched.path === activeSite.path) {
+      return;
+    }
+
+    clearSelection();
+    setActiveSite(matched);
+  }, [activeSite.path, clearSelection, searchParams, websites]);
 
   const selectEditableElement = useCallback((editableTarget: HTMLElement, editableNode: TemplateEditableNode) => {
     if (editableTarget.isContentEditable) return;
@@ -1061,8 +1193,14 @@ export default function Editor() {
           const originalText = editableTarget.innerText;
           editableTarget.contentEditable = "true";
           editableTarget.focus();
+          const handleInput = () => {
+            const nextValue = editableTarget.innerText;
+            setStyles((prev) => ({ ...prev, innerText: nextValue }));
+            markEditorDirty();
+          };
           const handleStopEdit = () => {
             editableTarget.contentEditable = "false";
+            editableTarget.removeEventListener("input", handleInput);
             editableTarget.removeEventListener("blur", handleStopEdit);
             const newValue = editableTarget.innerText;
             if (originalText !== newValue) {
@@ -1074,9 +1212,9 @@ export default function Editor() {
                 newValue: newValue
               });
               setStyles(prev => ({ ...prev, innerText: newValue }));
-              markEditorDirty();
             }
           };
+          editableTarget.addEventListener("input", handleInput);
           editableTarget.addEventListener("blur", handleStopEdit);
         }
       });
@@ -1337,6 +1475,10 @@ export default function Editor() {
   const handleZoomReset = () => setZoom(100);
 
   const handleTogglePreview = () => {
+    if (!hasActiveSite && !isPreviewModeRef.current) {
+      return;
+    }
+
     const enteringPreview = !isPreviewModeRef.current;
 
     if (previewSwitchTimeoutRef.current) {
@@ -1420,7 +1562,6 @@ export default function Editor() {
     if (!iframeDoc || !manifest) return;
 
     setIsSaving(true);
-    setSaveSuccess(false);
     setAutoSaveError(null);
 
     try {
@@ -1510,8 +1651,6 @@ export default function Editor() {
       markEditorDirty();
       setLastSavedAt(new Date());
       setAutoSaveStatus("saved");
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 1800);
     } catch (error) {
       console.error(error);
       const message = error instanceof Error ? error.message : "Failed to apply scene preset";
@@ -1528,18 +1667,23 @@ export default function Editor() {
       return false;
     }
 
-    const selectedElement = selectedElementRef.current;
-    const selectedEditId = selectedEditIdRef.current;
-    const selectedNode = selectedEditableNode;
-    const canSaveElementPatch = Boolean(selectedElement && selectedEditId && selectedNode);
-
-    if (!canSaveElementPatch && mode === "manual" && activePanelTab === "elements") {
-      alert("Unable to resolve this editable element. Please reselect and try again.");
+    if (!activeSite.path) {
+      if (mode === "manual") {
+        alert("Create or select a site before saving.");
+      }
       return false;
     }
 
+    if (!templateManifestRef.current) {
+      if (mode === "manual") {
+        alert("Template manifest is still loading. Please try again in a moment.");
+      }
+      return false;
+    }
+
+    const elementPatches = collectAllEditablePatches();
+
     setIsSaving(true);
-    setSaveSuccess(false);
     setAutoSaveError(null);
     if (mode === "auto") {
       setAutoSaveStatus("saving");
@@ -1552,18 +1696,9 @@ export default function Editor() {
         typographyTokens,
         typographyPresetEnabled,
       };
-      if (selectedElement && selectedEditId && selectedNode) {
-        requestBody.editId = selectedEditId;
-        requestBody.patch = {
-          styles: collectEditableStyles(selectedElement, selectedNode),
-          innerText: hasEditableField(selectedNode, "text") ? selectedElement.innerText : undefined,
-          src: hasEditableField(selectedNode, "image") && selectedElement.tagName.toLowerCase() === "img"
-            ? (selectedElement as HTMLImageElement).src
-            : undefined,
-          href: hasEditableField(selectedNode, "button") && selectedElement.tagName.toLowerCase() === "a"
-            ? (selectedElement.getAttribute("href") ?? "")
-            : undefined,
-        };
+
+      if (elementPatches.length > 0) {
+        requestBody.patches = elementPatches;
       }
 
       const res = await fetch('/api/save-code', {
@@ -1583,8 +1718,8 @@ export default function Editor() {
       }
 
       if (mode === "manual") {
-        setSaveSuccess(true);
-        setTimeout(() => setSaveSuccess(false), 2000);
+        setLastSavedAt(new Date());
+        setAutoSaveStatus("saved");
       }
 
       return true;
@@ -1603,10 +1738,8 @@ export default function Editor() {
       setIsSaving(false);
     }
   }, [
-    activePanelTab,
     activeSite.path,
-    collectEditableStyles,
-    selectedEditableNode,
+    collectAllEditablePatches,
     themeTokens,
     typographyPresetEnabled,
     typographyTokens,
@@ -1614,6 +1747,7 @@ export default function Editor() {
 
   useEffect(() => {
     if (!AUTO_SAVE_ENABLED) return;
+    if (!activeSite.path) return;
     if (changeVersion === 0) return;
 
     if (autoSaveTimeoutRef.current) {
@@ -1628,45 +1762,80 @@ export default function Editor() {
         clearTimeout(autoSaveTimeoutRef.current);
       }
     };
-  }, [changeVersion, saveToDataStore]);
+  }, [activeSite.path, changeVersion, saveToDataStore]);
 
-  const handlePublish = () => {
-    alert("Publishing to Vercel...");
-  };
-
-  const handleCreatePage = async () => {
-    const title = window.prompt("Enter new page title (e.g., 'About Us')");
-    if (!title) return;
-    const slug = window.prompt("Enter URL slug (e.g., 'about', lowercase, no spaces)");
-    if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
-      alert("Invalid slug. Must be lowercase alphanumeric and hyphens.");
+  useEffect(() => {
+    if (!activeSite.path || isCanonicalTemplatePath(activeSite.path)) {
+      setPublishState(null);
       return;
     }
 
-    try {
-      const res = await fetch('/api/pages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug, name: title })
+    const controller = new AbortController();
+
+    fetch(`/api/publish?sitePath=${encodeURIComponent(activeSite.path)}`, {
+      cache: "no-store",
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        const payload = await response.json().catch(() => null);
+        if (!response.ok) {
+          throw new Error(payload?.error ?? "Failed to load publish state");
+        }
+        if (controller.signal.aborted) return;
+        setPublishState(payload?.published ? (payload.publish as PublishState) : null);
+      })
+      .catch((error) => {
+        if (controller.signal.aborted) return;
+        setPublishState(null);
+        console.warn("Failed to load publish state:", error);
       });
-      if (!res.ok) {
-        const d = await res.json();
-        throw new Error(d.error || "Failed to create page");
+
+    return () => {
+      controller.abort();
+    };
+  }, [activeSite.path]);
+
+  const handlePublish = async () => {
+    if (!activeSite.path) {
+      alert("Create or select a site before publishing.");
+      return;
+    }
+
+    if (isCanonicalTemplatePath(activeSite.path)) {
+      alert("Create a site from this template before publishing it.");
+      return;
+    }
+
+    const saved = await saveToDataStore("manual");
+    if (!saved) {
+      return;
+    }
+
+    setIsPublishing(true);
+    try {
+      const res = await fetch("/api/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sitePath: activeSite.path }),
+      });
+      const payload = await res.json().catch(() => null);
+      if (!res.ok || !payload?.publish?.publicUrl) {
+        throw new Error(payload?.error ?? "Failed to publish site");
       }
-      const data = await res.json();
-      const nextPage = data.page as Website;
-      setWebsites((prev) => sanitizeWebsites([...prev, nextPage]));
-      if (!isExcludedWebsite(nextPage)) {
-        setActiveSite({ ...nextPage, path: normalizeSitePath(nextPage.path) });
-      }
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Unknown error";
-      alert("Error: " + message);
+
+      setPublishState(payload.publish as PublishState);
+      alert(`Site is live at ${payload.publish.publicUrl}`);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "Failed to publish site");
+    } finally {
+      setIsPublishing(false);
     }
   };
 
   const autoSaveTooltip = !AUTO_SAVE_ENABLED
-    ? "Auto-save is off. Use Save Draft."
+    ? "Auto-save is off."
+    : !activeSite.path
+      ? "No site selected"
     : autoSaveStatus === "saving"
       ? "Saving changes..."
       : autoSaveStatus === "saved"
@@ -1922,6 +2091,9 @@ export default function Editor() {
 
   if (isMounting) return null;
 
+  const dashboardHref = `/${i18n.defaultLocale}/dashboard`;
+  const templatesHref = `/${i18n.defaultLocale}/templates`;
+
   return (
     <div className="flex h-screen w-full bg-[#090b0f] text-zinc-300 font-sans overflow-hidden selection:bg-indigo-500/30">
       {/* Left Sidebar */}
@@ -1948,13 +2120,14 @@ export default function Editor() {
               <div className="text-[10px] flex items-center justify-between font-bold text-zinc-600 uppercase tracking-[0.2em] mb-4 mt-2 px-2">
                 <span className="inline-flex items-center gap-1.5">
                   <FolderTree className="w-3.5 h-3.5" />
-                  Pages
+                  Sites
                 </span>
-                <button onClick={handleCreatePage} className="hover:text-indigo-400 transition-colors" title="Create New Page">
-                  <FilePlus2 className="w-3.5 h-3.5" />
-                </button>
               </div>
-              {websites.map((site) => {
+              {websites.length === 0 ? (
+                <div className="rounded-lg border border-[#222] bg-[#101217] px-3 py-3 text-[11px] leading-relaxed text-zinc-500">
+                  No sites yet. Choose a template from your dashboard to start editing.
+                </div>
+              ) : websites.map((site) => {
                 const isActive = activeSite.path === site.path;
                 return (
                   <button
@@ -1993,7 +2166,7 @@ export default function Editor() {
                   </div>
                 ) : (
                   <div className="rounded-lg border border-[#222] bg-[#101217] px-3 py-2 text-[11px] text-zinc-500">
-                    No editable structure found.
+                    {hasActiveSite ? "No editable structure found." : "Select a site to inspect its editable structure."}
                   </div>
                 )}
               </div>
@@ -2128,6 +2301,7 @@ export default function Editor() {
 
               <button
                 onClick={handleTogglePreview}
+                disabled={!hasActiveSite}
                 className={`w-8 h-8 rounded-lg border border-gray-300 dark:border-[#4a4a4a] flex items-center justify-center transition-colors ${isPreviewMode
                   ? "bg-zinc-800 text-white"
                   : "bg-gray-200 dark:bg-[#3a3a3a] text-gray-700 dark:text-zinc-200 hover:bg-gray-300 dark:hover:bg-[#474747]"
@@ -2137,13 +2311,26 @@ export default function Editor() {
                 <FaPlay className="text-[12px]" />
               </button>
 
+              {publishState?.publicUrl && (
+                <a
+                  href={publishState.publicUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hidden h-9 items-center gap-1 rounded-lg border border-emerald-400/20 bg-emerald-500/10 px-3 text-xs font-semibold text-emerald-300 transition hover:bg-emerald-500/15 xl:flex"
+                >
+                  <Rocket className="w-3.5 h-3.5" />
+                  Live site
+                </a>
+              )}
+
               <button
-                onClick={handlePublish}
-                className="h-9 px-4 rounded-lg text-sm font-bold text-white bg-purple-700/90 hover:bg-purple-600 shadow-[0_8px_24px_rgba(126,34,206,0.45)] backdrop-blur-md border border-purple-400/40 transition-all flex items-center gap-2"
-                title="Publish"
+                onClick={() => void handlePublish()}
+                disabled={!hasActiveSite || isPublishing || isSaving}
+                className="h-9 px-4 rounded-lg text-sm font-bold text-white bg-purple-700/90 hover:bg-purple-600 shadow-[0_8px_24px_rgba(126,34,206,0.45)] backdrop-blur-md border border-purple-400/40 transition-all flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
+                title={publishState ? "Update live site" : "Publish"}
               >
                 <Rocket className="w-4 h-4" />
-                Publish
+                {isPublishing ? "Publishing..." : publishState ? "Update Live" : "Publish"}
               </button>
             </div>
           </header>
@@ -2190,41 +2377,67 @@ export default function Editor() {
               </div>
             )}
 
-            <motion.div
-              layout={false}
-              initial={false}
-              animate={{
-                width: isPreviewMode ? "100%" : (viewport.id === "responsive" ? "100%" : viewport.width),
-                height: isPreviewMode ? "100%" : (viewport.id === "responsive" ? "100%" : viewport.height),
-                scale: isPreviewMode ? 1 : (zoom / 100),
-              }}
-              transition={canvasFrameTransition}
-              className={`relative bg-transparent origin-center flex flex-col z-10 ${isPreviewMode || isPreviewSwitching ? "transition-none" : "transition-shadow duration-500"} ${isPreviewMode
-                ? "h-full w-full rounded-none shadow-none ring-0 overflow-hidden"
-                : viewport.id === "responsive"
-                  ? "h-full w-full rounded-2xl overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.12)] ring-1 ring-black/40"
-                  : "rounded-xl overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.12)] ring-1 ring-black/40"
-                }`}
-              style={{
-                maxHeight: isPreviewMode || viewport.id === "responsive" ? "100%" : undefined,
-                maxWidth: isPreviewMode || viewport.id === "responsive" ? "100%" : undefined,
-              }}
-            >
-            <div className="flex-1 w-full bg-transparent relative">
-              {!isPreviewMode && (
-                <div className="absolute inset-0 pointer-events-none z-10 ring-1 ring-black/45 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]" />
-              )}
-              <iframe
-                ref={iframeRef}
-                key={activeSite.id}
-                src={activeSite.path}
-                onLoad={handleIframeLoad}
-                className="absolute inset-0 w-full h-full bg-transparent border-none"
-                title={`Preview of ${activeSite.name}`}
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-              />
-            </div>
-            </motion.div>
+            {hasActiveSite ? (
+              <motion.div
+                layout={false}
+                initial={false}
+                animate={{
+                  width: isPreviewMode ? "100%" : (viewport.id === "responsive" ? "100%" : viewport.width),
+                  height: isPreviewMode ? "100%" : (viewport.id === "responsive" ? "100%" : viewport.height),
+                  scale: isPreviewMode ? 1 : (zoom / 100),
+                }}
+                transition={canvasFrameTransition}
+                className={`relative bg-transparent origin-center flex flex-col z-10 ${isPreviewMode || isPreviewSwitching ? "transition-none" : "transition-shadow duration-500"} ${isPreviewMode
+                  ? "h-full w-full rounded-none shadow-none ring-0 overflow-hidden"
+                  : viewport.id === "responsive"
+                    ? "h-full w-full rounded-2xl overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.12)] ring-1 ring-black/40"
+                    : "rounded-xl overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.12)] ring-1 ring-black/40"
+                  }`}
+                style={{
+                  maxHeight: isPreviewMode || viewport.id === "responsive" ? "100%" : undefined,
+                  maxWidth: isPreviewMode || viewport.id === "responsive" ? "100%" : undefined,
+                }}
+              >
+                <div className="flex-1 w-full bg-transparent relative">
+                  {!isPreviewMode && (
+                    <div className="absolute inset-0 pointer-events-none z-10 ring-1 ring-black/45 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]" />
+                  )}
+                  <iframe
+                    ref={iframeRef}
+                    key={activeSite.id}
+                    src={activeSite.path}
+                    onLoad={handleIframeLoad}
+                    className="absolute inset-0 w-full h-full bg-transparent border-none"
+                    title={`Preview of ${activeSite.name}`}
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  />
+                </div>
+              </motion.div>
+            ) : (
+              <div className="relative z-10 mx-auto w-full max-w-2xl rounded-[28px] border border-white/10 bg-[#0f1218]/95 p-10 text-center shadow-[0_32px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                  <LayoutTemplate className="h-6 w-6 text-zinc-200" />
+                </div>
+                <h2 className="text-2xl font-semibold tracking-tight text-white">No site selected</h2>
+                <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-zinc-400">
+                  Start from a template in your dashboard, then we&apos;ll open the site here with autosave and restore support.
+                </p>
+                <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+                  <Link
+                    href={dashboardHref}
+                    className="inline-flex h-11 items-center rounded-lg border border-white/10 bg-white/5 px-4 text-sm font-semibold text-white transition hover:bg-white/10"
+                  >
+                    Go to dashboard
+                  </Link>
+                  <Link
+                    href={templatesHref}
+                    className="inline-flex h-11 items-center rounded-lg bg-purple-700/90 px-4 text-sm font-bold text-white shadow-[0_8px_24px_rgba(126,34,206,0.45)] ring-1 ring-purple-400/40 transition hover:bg-purple-600"
+                  >
+                    Explore templates
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </main>
@@ -2480,16 +2693,17 @@ export default function Editor() {
                     )}
                   </div>
 
-                  <button
-                    onClick={() => void saveToDataStore("manual")}
-                    disabled={isSaving}
-                    className={`w-full h-9 rounded-md text-xs font-bold transition-all ${saveSuccess
-                      ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                      : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/20"
-                      }`}
-                  >
-                    {saveSuccess ? "Saved Global Tokens" : isSaving ? "Saving..." : "Save Global Tokens"}
-                  </button>
+                  <div className={`rounded-md border px-3 py-2 text-[11px] ${
+                    autoSaveStatus === "error"
+                      ? "border-rose-500/30 bg-rose-500/10 text-rose-300"
+                      : "border-emerald-500/20 bg-emerald-500/10 text-emerald-300"
+                  }`}>
+                    {autoSaveStatus === "error"
+                      ? autoSaveError ?? "Auto-save failed."
+                      : isSaving || autoSaveStatus === "saving"
+                        ? "Saving global token changes automatically..."
+                        : "Global token changes save automatically."}
+                  </div>
                 </div>
               )}
 
@@ -2524,22 +2738,6 @@ export default function Editor() {
                   </div>
 
                   {/* DOM to Tailwind Write-back Action */}
-                  <div className="border border-[#222] bg-[#141414] rounded-xl p-4 shadow-sm relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-2xl rounded-full" />
-                    <h3 className="text-[13px] font-bold text-white mb-1">Save Site Draft</h3>
-                    <p className="text-[11px] text-zinc-400 mb-4 leading-relaxed">Store element and token changes as JSON data for this template instance.</p>
-                    <button
-                      onClick={() => void saveToDataStore("manual")}
-                      disabled={isSaving}
-                      className={`w-full h-9 rounded-md flex items-center justify-center gap-2 text-xs font-bold transition-all ${saveSuccess
-                        ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                        : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/20"
-                        }`}
-                    >
-                      {saveSuccess ? <><Check className="w-4 h-4" /> Saved Draft</> : isSaving ? "Saving..." : <><Save className="w-4 h-4" /> Save Draft Data</>}
-                    </button>
-                  </div>
-
                   {/* TEXT CONTENT EDITOR */}
                   {supportsText && (
                     <div>
@@ -2981,5 +3179,13 @@ export default function Editor() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+export default function Editor() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#050505]" />}>
+      <EditorContent />
+    </Suspense>
   );
 }

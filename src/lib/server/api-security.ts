@@ -79,7 +79,3 @@ export async function requireAuthenticatedUser(request: Request): Promise<Authen
 
   return user;
 }
-
-export function isTemplateCodegenEnabled(): boolean {
-  return process.env.FACADELY_ENABLE_TEMPLATE_CODEGEN === "true";
-}

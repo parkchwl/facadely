@@ -5,6 +5,8 @@ import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Search, ChevronDown, Grid3x3, Grid2x2 } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { i18n } from '@/i18n/config';
 
 type CategoryKey = 'business' | 'portfolio' | 'ecommerce' | 'blog' | 'landingPage';
 
@@ -23,10 +25,13 @@ export default function TemplatesPageClient({
   dictionary: TemplatesPageDictionary;
   templates: TemplateListItem[];
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [selectedCategoryKey, setSelectedCategoryKey] = useState<'all' | CategoryKey>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState(dictionary.sortOptions.latest);
   const [gridCols, setGridCols] = useState(3);
+  const [creatingTemplateId, setCreatingTemplateId] = useState<string | null>(null);
 
   const categories = useMemo(() => Object.entries(dictionary.categories), [dictionary]);
   const sortOptions = useMemo(() => Object.values(dictionary.sortOptions), [dictionary]);
@@ -65,6 +70,44 @@ export default function TemplatesPageClient({
   const item = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0 }
+  };
+
+  const handleUseTemplate = async (templateId: string) => {
+    if (creatingTemplateId) return;
+
+    setCreatingTemplateId(templateId);
+
+    try {
+      const response = await fetch('/api/sites', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ templateId }),
+      });
+      const payload = await response.json().catch(() => null);
+
+      if (response.status === 401) {
+        const pathSegments = (pathname ?? '').split('/').filter(Boolean);
+        const localePrefix =
+          pathSegments.length > 0 && i18n.locales.includes(pathSegments[0] as (typeof i18n.locales)[number])
+            ? `/${pathSegments[0]}`
+            : '';
+        const nextTarget = pathname || `${localePrefix}/templates`;
+        window.location.href = `${localePrefix}/login?next=${encodeURIComponent(nextTarget)}`;
+        return;
+      }
+
+      if (!response.ok || !payload?.site?.sitePath) {
+        throw new Error(payload?.error ?? 'Failed to create site from template');
+      }
+
+      router.push(`/editor?sitePath=${encodeURIComponent(payload.site.sitePath)}`);
+      router.refresh();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to create site from template';
+      window.alert(message);
+    } finally {
+      setCreatingTemplateId(null);
+    }
   };
 
   return (
@@ -186,7 +229,7 @@ export default function TemplatesPageClient({
             <motion.div
               key={template.id}
               variants={item}
-              className="group cursor-pointer"
+              className="group"
             >
               <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                 <div className="aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center relative overflow-hidden">
@@ -196,12 +239,23 @@ export default function TemplatesPageClient({
                   </div>
 
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <Link
-                      href={template.path}
-                      className="bg-white text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-100 transition-colors transform scale-90 group-hover:scale-100 duration-300"
-                    >
-                      {dictionary.useTemplate}
-                    </Link>
+                    <div className="flex flex-col items-center gap-3 px-4">
+                      <button
+                        type="button"
+                        onClick={() => void handleUseTemplate(template.id)}
+                        disabled={creatingTemplateId !== null}
+                        className="bg-white text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-100 transition-colors transform scale-90 group-hover:scale-100 duration-300 disabled:cursor-not-allowed disabled:opacity-70"
+                      >
+                        {creatingTemplateId === template.id ? 'Creating site...' : dictionary.useTemplate}
+                      </button>
+
+                      <Link
+                        href={template.path}
+                        className="text-sm font-medium text-white/90 transition hover:text-white"
+                      >
+                        {dictionary.preview}
+                      </Link>
+                    </div>
                   </div>
                 </div>
 

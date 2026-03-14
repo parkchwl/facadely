@@ -2,6 +2,27 @@
 
 All notable changes to this project are documented in this file.
 
+## 2026-03-14
+
+- Completed the user-owned site lifecycle backend:
+  - Added Spring `sites` domain with owned site CRUD, customization persistence, publish/unpublish state, and public slug resolution.
+  - Added Flyway migrations `V2__site_storage_init.sql` and `V3__site_publish_status.sql`.
+  - Added integration coverage for site creation, rename/delete, publish/unpublish, and customization persistence.
+- Cut editor/dashboard/template flows over to backend site storage:
+  - Template selection now creates a real user-owned site before entering the editor.
+  - Dashboard now lists actual owned sites from backend instead of mock data.
+  - Editor save/publish/font upload/template manifest flows now resolve through backend-owned site records.
+- Hardened editor persistence behavior:
+  - Removed canonical templates from the editor site list so only saveable owned sites are editable.
+  - Added abortable fetches for manifest/customization/publish state to prevent stale site data from overwriting current state during fast switching.
+  - Direct contenteditable text edits now mark the editor dirty on `input`, so autosave catches in-progress text edits instead of waiting for `blur`.
+  - Added empty-state handling and disabled preview/publish actions when no owned site is selected.
+- Removed legacy local-runtime helpers:
+  - Deleted unused local publish/customization stores and legacy migration helpers.
+  - Disabled the old runtime page creation path in `/api/pages` because it no longer matches the current site ownership model.
+- Documentation refresh:
+  - Updated `README.md` and `docs/PROJECT_OVERVIEW.md` to reflect the current auth + site lifecycle backend architecture.
+
 ## 2026-03-10
 
 - Hardened auth redirect behavior and logout UX:

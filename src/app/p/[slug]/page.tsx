@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation";
-import { getPublishRecordBySlug } from "@/lib/publish-store";
+import { getPublishedSiteBySlugFromBackend } from "@/lib/server/site-backend";
 
 type PageProps = {
   params: Promise<{
@@ -9,7 +9,7 @@ type PageProps = {
 
 export default async function PublishedSitePage({ params }: PageProps) {
   const { slug } = await params;
-  const publish = await getPublishRecordBySlug(slug);
+  const publish = await getPublishedSiteBySlugFromBackend(slug);
 
   if (!publish) {
     notFound();

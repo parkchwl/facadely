@@ -54,6 +54,7 @@ public class SecurityConfig {
             .exceptionHandling(ex -> ex.authenticationEntryPoint(jsonAuthenticationEntryPoint))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/v1/health").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/sites/customization", "/api/v1/sites/public/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/v1/auth/signup", "/api/v1/auth/login", "/api/v1/auth/refresh").permitAll()
                 .requestMatchers("/api/v1/auth/oauth2/**").permitAll()
                 .requestMatchers("/error").permitAll()

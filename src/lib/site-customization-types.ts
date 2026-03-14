@@ -82,3 +82,15 @@ export function cloneDefaultTypographyTokens(): TypographyTokens {
     button: { ...DEFAULT_TYPOGRAPHY_TOKENS.button },
   };
 }
+
+export function buildDefaultSiteCustomization(sitePath: string): SiteCustomization {
+  return {
+    sitePath,
+    themeTokens: { ...DEFAULT_THEME_TOKENS },
+    typographyTokens: cloneDefaultTypographyTokens(),
+    typographyPresetEnabled: false,
+    customFonts: [],
+    elements: [],
+    updatedAt: new Date().toISOString(),
+  };
+}

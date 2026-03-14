@@ -3,11 +3,15 @@ import path from "path";
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { readTemplateManifest } from "@/lib/template-manifest-store";
-import { upsertCustomFont } from "@/lib/site-customization-store";
 import {
   requireAuthenticatedUser,
   requireSameOrigin,
 } from "@/lib/server/api-security";
+import {
+  BackendSiteApiError,
+  saveSiteCustomizationToBackend,
+} from "@/lib/server/site-backend";
+import { isCanonicalTemplatePath, resolveTemplateSourcePath } from "@/lib/user-site-store";
 
 const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads", "fonts");
 const SAFE_SITE_PATH = /^\/[a-z0-9/-]*$/;
@@ -58,7 +62,15 @@ export async function POST(req: Request) {
     const sitePath = normalizeSitePath(sitePathRaw);
     const family = sanitizeFontFamily(familyRaw);
 
-    const manifest = await readTemplateManifest(sitePath);
+    if (isCanonicalTemplatePath(sitePath)) {
+      return NextResponse.json(
+        { error: "Create a site from this template before uploading custom fonts." },
+        { status: 400 }
+      );
+    }
+
+    const templateSourcePath = resolveTemplateSourcePath(sitePath);
+    const manifest = await readTemplateManifest(templateSourcePath);
     if (!manifest) {
       return NextResponse.json({ error: "Template manifest not found for sitePath" }, { status: 404 });
     }
@@ -86,7 +98,11 @@ export async function POST(req: Request) {
     await fs.writeFile(outputPath, Buffer.from(arrayBuffer));
 
     const url = `/uploads/fonts/${outputFileName}`;
-    await upsertCustomFont(sitePath, { family, url });
+    const cookieHeader = req.headers.get("cookie") ?? "";
+    await saveSiteCustomizationToBackend(cookieHeader, {
+      sitePath,
+      customFont: { family, url },
+    });
 
     return NextResponse.json({
       success: true,
@@ -96,6 +112,9 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
+    if (error instanceof BackendSiteApiError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
     if (error instanceof Error && (error.message === "FORBIDDEN_ORIGIN" || error.message === "MISSING_ORIGIN")) {
       return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
     }
