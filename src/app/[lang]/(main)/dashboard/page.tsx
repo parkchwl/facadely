@@ -8,10 +8,15 @@ import { i18n, type Locale } from "@/i18n/config";
 import { getTemplateByTemplateId } from "@/lib/template-registry";
 import { listUserSitesFromBackend } from "@/lib/server/site-backend";
 
+const DEFAULT_API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://backend-production-b5b9c.up.railway.app/api/v1"
+    : "http://localhost:8080/api/v1";
+
 const INTERNAL_API_BASE_URL = (
   process.env.INTERNAL_API_BASE_URL ||
   process.env.NEXT_PUBLIC_API_BASE_URL ||
-  "http://localhost:8080/api/v1"
+  DEFAULT_API_BASE_URL
 ).replace(/\/$/, "");
 
 type AuthenticatedUser = {

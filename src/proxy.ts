@@ -2,10 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import { i18n } from '@/i18n/config';
 import { createLoginPathWithNext } from '@/lib/auth-redirect';
 
+const DEFAULT_API_BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://backend-production-b5b9c.up.railway.app/api/v1'
+    : 'http://localhost:8080/api/v1';
+
 const API_BASE_URL = (
   process.env.INTERNAL_API_BASE_URL ||
   process.env.NEXT_PUBLIC_API_BASE_URL ||
-  'http://localhost:8080/api/v1'
+  DEFAULT_API_BASE_URL
 ).replace(/\/$/, '');
 
 const ACCESS_COOKIE_NAME = process.env.COOKIE_ACCESS_NAME || 'facadely_at';

@@ -2,6 +2,22 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 const projectRoot = dirname(fileURLToPath(import.meta.url));
+const defaultApiBaseUrl =
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  process.env.INTERNAL_API_BASE_URL ||
+  (process.env.NODE_ENV === "production"
+    ? "https://backend-production-b5b9c.up.railway.app/api/v1"
+    : "http://localhost:8080/api/v1");
+const defaultApiOrigin = (() => {
+  try {
+    return new URL(defaultApiBaseUrl).origin;
+  } catch {
+    return process.env.NODE_ENV === "production"
+      ? "https://backend-production-b5b9c.up.railway.app"
+      : "http://localhost:8080";
+  }
+})();
+const connectSrc = ["'self'", defaultApiOrigin, "http://localhost:8080", "https://localhost:8080"].join(" ");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -75,7 +91,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' http://localhost:8080 https://localhost:8080; frame-ancestors 'self'; base-uri 'self'; form-action 'self';"
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src ${connectSrc}; frame-ancestors 'self'; base-uri 'self'; form-action 'self';`
           }
         ]
       }
