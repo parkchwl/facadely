@@ -27,7 +27,7 @@ export interface MeResponse {
 
 const DEFAULT_API_BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? 'https://backend-production-b5b9c.up.railway.app/api/v1'
+    ? 'https://api.facadely.com/api/v1'
     : 'http://localhost:8080/api/v1';
 
 const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || DEFAULT_API_BASE_URL).replace(/\/$/, '');

@@ -172,8 +172,8 @@ Frontend:
   - `NEXT_PUBLIC_SITE_URL`
   - `NEXT_PUBLIC_BETA_EDITOR_URL`
 - production example:
-  - `NEXT_PUBLIC_API_BASE_URL=https://backend-production-b5b9c.up.railway.app/api/v1`
-  - `INTERNAL_API_BASE_URL=https://backend-production-b5b9c.up.railway.app/api/v1`
+  - `NEXT_PUBLIC_API_BASE_URL=https://api.facadely.com/api/v1`
+  - `INTERNAL_API_BASE_URL=https://api.facadely.com/api/v1`
   - `NEXT_PUBLIC_SITE_URL=https://facadely.com`
 
 Backend:
@@ -190,12 +190,12 @@ Backend:
 - current Railway deployment:
   - project: `facadely-backend`
   - service: `backend`
-  - public URL: `https://backend-production-b5b9c.up.railway.app`
-  - health check: `https://backend-production-b5b9c.up.railway.app/api/v1/health`
+  - public URL: `https://api.facadely.com`
+  - health check: `https://api.facadely.com/api/v1/health`
   - Google OAuth callback to register:
-    - `https://backend-production-b5b9c.up.railway.app/api/v1/auth/oauth2/callback/google`
+    - `https://api.facadely.com/api/v1/auth/oauth2/callback/google`
   - runtime launch path is pinned by `/Users/parkchwl/front/backend/Procfile`
-  - Railway project currently has two Postgres services; the backend is connected to the service named `Postgres`
+  - Railway backend is connected to the service named `Postgres`
 
 ## Known Deliberate Exception
 

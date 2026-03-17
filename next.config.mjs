@@ -6,14 +6,14 @@ const defaultApiBaseUrl =
   process.env.NEXT_PUBLIC_API_BASE_URL ||
   process.env.INTERNAL_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://backend-production-b5b9c.up.railway.app/api/v1"
+    ? "https://api.facadely.com/api/v1"
     : "http://localhost:8080/api/v1");
 const defaultApiOrigin = (() => {
   try {
     return new URL(defaultApiBaseUrl).origin;
   } catch {
     return process.env.NODE_ENV === "production"
-      ? "https://backend-production-b5b9c.up.railway.app"
+      ? "https://api.facadely.com"
       : "http://localhost:8080";
   }
 })();

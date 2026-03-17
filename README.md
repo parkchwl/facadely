@@ -202,19 +202,29 @@ cd backend
 ## 11) Railway 배포 메모
 
 - 배포된 백엔드 URL:
-  - `https://backend-production-b5b9c.up.railway.app`
+  - `https://api.facadely.com`
 - 헬스체크:
-  - `https://backend-production-b5b9c.up.railway.app/api/v1/health`
+  - `https://api.facadely.com/api/v1/health`
 - Railway 서비스는 `backend` 디렉터리 기준으로 배포되며, jar 실행 경로를 명시하기 위해 `backend/Procfile`을 추가
 - 운영 프론트 예시 env:
-  - `NEXT_PUBLIC_API_BASE_URL=https://backend-production-b5b9c.up.railway.app/api/v1`
-  - `INTERNAL_API_BASE_URL=https://backend-production-b5b9c.up.railway.app/api/v1`
+  - `NEXT_PUBLIC_API_BASE_URL=https://api.facadely.com/api/v1`
+  - `INTERNAL_API_BASE_URL=https://api.facadely.com/api/v1`
 - Google OAuth 운영 콜백 URI:
-  - `https://backend-production-b5b9c.up.railway.app/api/v1/auth/oauth2/callback/google`
-- 현재 Railway 프로젝트에는 Postgres 서비스가 2개 생성되어 있으나, 실제 `backend` 서비스는 `Postgres` 서비스에 연결됨
+  - `https://api.facadely.com/api/v1/auth/oauth2/callback/google`
+- 현재 Railway 프로젝트의 실제 연결 DB 서비스는 `Postgres`
 - GitHub 자동배포를 붙일 경우 Railway 대시보드에서 `backend` 서비스에 `parkchwl/front` 저장소를 연결하고, 서비스 Root Directory를 `backend`로 지정하는 구성이 가장 안전함
 
-## 12) 면접에서 설명하기 좋은 코드 포인트
+## 12) 트러블슈팅: 운영 환경에서 Google OAuth 로그인 실패 해결
+
+배포 환경에서 Google OAuth 로그인은 정상적으로 완료되었지만, 로그인 직후 다시 로그인 페이지로 되돌아가는 문제가 있었습니다.
+문제를 추적한 결과 OAuth 제공자 연동 자체의 실패가 아니라, 인증 쿠키가 `api.facadely.com`에만 설정되어 `facadely.com`의 보호 라우트가 로그인 상태를 인식하지 못하는 쿠키 스코프 문제였습니다.
+
+이를 해결하기 위해 백엔드 쿠키 발급 로직에 `COOKIE_DOMAIN` 설정을 추가해 인증 쿠키를 `facadely.com` 범위로 공유하도록 수정했습니다.
+또한 Railway custom domain(`api.facadely.com`), Google OAuth Redirect URI, 프론트 API base URL을 함께 정렬해 운영 환경에서도 로그인 세션이 일관되게 유지되도록 개선했습니다.
+
+이 과정에서 인증 문제는 단순한 OAuth 연동 오류가 아니라 쿠키 도메인, 배포 도메인 구조, 프록시 환경 설정이 함께 맞물리는 문제임을 확인했고, 인증 흐름을 브라우저-프론트-백엔드-인프라까지 연결해 진단하고 해결하는 경험을 쌓았습니다.
+
+## 13) 면접에서 설명하기 좋은 코드 포인트
 
 - `backend/src/main/java/com/facadely/backend/auth/config/SecurityConfig.java`
 - `backend/src/main/java/com/facadely/backend/auth/security/AuthOriginValidationFilter.java`
@@ -222,6 +232,7 @@ cd backend
 - `backend/src/main/java/com/facadely/backend/site/controller/SiteController.java`
 - `backend/src/main/java/com/facadely/backend/site/service/SiteService.java`
 - `backend/src/main/java/com/facadely/backend/auth/security/OAuth2LoginSuccessHandler.java`
+- `backend/src/main/java/com/facadely/backend/auth/config/CookieFactory.java`
 - `backend/src/main/java/com/facadely/backend/auth/config/AuthConfigurationValidator.java`
 - `backend/src/test/java/com/facadely/backend/auth/AuthControllerIntegrationTest.java`
 - `backend/src/test/java/com/facadely/backend/site/SiteControllerIntegrationTest.java`
