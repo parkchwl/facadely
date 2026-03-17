@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import SocialLoginButton from './SocialLoginButton';
-import { getGoogleAuthUrl, login, me, signup } from '@/lib/api/auth';
+import { getGoogleAuthUrl, login, signup } from '@/lib/api/auth';
 import type { LoginPageDictionary } from '@/types/dictionary';
 import { resolvePostLoginPath, sanitizeNextPath } from '@/lib/auth-redirect';
 
@@ -57,44 +57,16 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageD
   const oauthError = searchParams.get('error');
 
   const bannerMessage = useMemo(() => {
-    if (oauthState === 'success') {
-      return dictionary.googleSuccess;
-    }
     if (oauthState === 'error') {
       return oauthError ? `${dictionary.googleError}: ${oauthError}` : dictionary.googleError;
     }
     return '';
-  }, [oauthError, oauthState, dictionary.googleError, dictionary.googleSuccess]);
+  }, [oauthError, oauthState, dictionary.googleError]);
 
   const termLinks = {
     terms: { href: `/${lang}/terms`, text: dictionary.termsLinkText },
     privacy: { href: `/${lang}/privacy`, text: dictionary.privacyLinkText },
   };
-
-  useEffect(() => {
-    if (oauthState !== 'success') {
-      return;
-    }
-
-    let cancelled = false;
-
-    void (async () => {
-      try {
-        await me();
-        if (!cancelled) {
-          window.location.replace(postLoginPath);
-        }
-      } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : dictionary.googleError);
-        }
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [dictionary.googleError, oauthState, postLoginPath]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -6,6 +6,7 @@ import com.facadely.backend.auth.repository.RefreshTokenRepository;
 import com.facadely.backend.auth.repository.TermsAgreementRepository;
 import com.facadely.backend.auth.repository.UserAccountRepository;
 import com.facadely.backend.auth.repository.UserCredentialRepository;
+import com.facadely.backend.auth.service.LoginAttemptService;
 import com.facadely.backend.site.repository.SiteRecordRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,6 +69,9 @@ class SiteControllerIntegrationTest {
     @Autowired
     private UserCredentialRepository userCredentialRepository;
 
+    @Autowired
+    private LoginAttemptService loginAttemptService;
+
     @BeforeEach
     void cleanDatabase() {
         siteRecordRepository.deleteAllInBatch();
@@ -77,6 +81,7 @@ class SiteControllerIntegrationTest {
         termsAgreementRepository.deleteAllInBatch();
         userCredentialRepository.deleteAllInBatch();
         userAccountRepository.deleteAllInBatch();
+        loginAttemptService.clearAll();
     }
 
     @Test

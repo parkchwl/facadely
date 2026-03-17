@@ -65,7 +65,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         response.addHeader("Set-Cookie", "facadely_next=; Path=/; Max-Age=0; SameSite=Lax");
         clearOAuthSession(request, response);
 
-        response.sendRedirect(buildFrontendUrl(resolveLocale(request), "success", null, resolveNextPath(request)));
+        response.sendRedirect(buildPostLoginUrl(resolveLocale(request), resolveNextPath(request)));
     }
 
     private void clearOAuthSession(HttpServletRequest request, HttpServletResponse response) {
@@ -158,5 +158,21 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         }
 
         return builder.build(true).toUriString();
+    }
+
+    private String buildPostLoginUrl(String locale, String nextPath) {
+        String targetPath = nextPath != null ? nextPath : defaultDashboardPath(locale);
+        String frontendOrigin = authProperties.getFrontendOrigin();
+        if (frontendOrigin.endsWith("/")) {
+            frontendOrigin = frontendOrigin.substring(0, frontendOrigin.length() - 1);
+        }
+        return UriComponentsBuilder.fromUriString(frontendOrigin + targetPath).build(true).toUriString();
+    }
+
+    private String defaultDashboardPath(String locale) {
+        if (locale == null || locale.isBlank() || locale.equalsIgnoreCase(authProperties.getDefaultLocale())) {
+            return "/dashboard";
+        }
+        return "/" + locale + "/dashboard";
     }
 }

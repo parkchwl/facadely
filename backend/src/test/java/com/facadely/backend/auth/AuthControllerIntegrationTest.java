@@ -7,6 +7,7 @@ import com.facadely.backend.auth.repository.RefreshTokenRepository;
 import com.facadely.backend.auth.repository.TermsAgreementRepository;
 import com.facadely.backend.auth.repository.UserAccountRepository;
 import com.facadely.backend.auth.repository.UserCredentialRepository;
+import com.facadely.backend.auth.service.LoginAttemptService;
 import jakarta.servlet.http.Cookie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,6 +63,9 @@ class AuthControllerIntegrationTest {
     @Autowired
     private UserCredentialRepository userCredentialRepository;
 
+    @Autowired
+    private LoginAttemptService loginAttemptService;
+
     @BeforeEach
     void cleanDatabase() {
         refreshTokenRepository.deleteAllInBatch();
@@ -70,6 +74,7 @@ class AuthControllerIntegrationTest {
         termsAgreementRepository.deleteAllInBatch();
         userCredentialRepository.deleteAllInBatch();
         userAccountRepository.deleteAllInBatch();
+        loginAttemptService.clearAll();
     }
 
     @Test
@@ -198,6 +203,21 @@ class AuthControllerIntegrationTest {
             .andExpect(status().isForbidden())
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.code").value("INVALID_ORIGIN"));
+    }
+
+    @Test
+    void signupRateLimitsRepeatedAttemptsFromSameIp() throws Exception {
+        for (int i = 0; i < 5; i += 1) {
+            signup("signup-rate-" + i + "@example.com");
+        }
+
+        mockMvc.perform(post(AUTH_BASE + "/signup")
+                .header("Origin", FRONTEND_ORIGIN)
+                .header("User-Agent", "JUnit")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(signupPayload("signup-rate-blocked@example.com")))
+            .andExpect(status().isTooManyRequests())
+            .andExpect(jsonPath("$.code").value("SIGNUP_RATE_LIMITED"));
     }
 
     private MvcResult signup(String email) throws Exception {
