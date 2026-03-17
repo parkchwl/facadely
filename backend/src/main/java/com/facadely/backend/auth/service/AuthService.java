@@ -64,12 +64,19 @@ public class AuthService {
 
     @Transactional
     public AuthBundle signup(SignupRequest request, String userAgent, String ipAddress) {
-        if (userAccountRepository.existsByEmailIgnoreCase(request.email())) {
+        if (loginAttemptService.isSignupLocked(ipAddress)) {
+            throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "SIGNUP_RATE_LIMITED", "회원가입 요청이 너무 많습니다. 잠시 후 다시 시도해주세요.");
+        }
+
+        loginAttemptService.recordSignupAttempt(ipAddress);
+
+        String normalizedEmail = request.email().trim().toLowerCase();
+        if (userAccountRepository.existsByEmailIgnoreCase(normalizedEmail)) {
             throw new ApiException(HttpStatus.CONFLICT, "EMAIL_EXISTS", "이미 가입된 이메일입니다.");
         }
 
         UserAccount user = new UserAccount();
-        user.setEmail(request.email().trim().toLowerCase());
+        user.setEmail(normalizedEmail);
         user.setName(request.name().trim());
         user.setRole(UserRole.USER);
         user.setStatus(UserStatus.ACTIVE);

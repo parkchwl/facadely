@@ -44,6 +44,8 @@ public class AuthConfigurationValidator {
         if ("none".equalsIgnoreCase(authProperties.getCookie().getSameSite()) && !authProperties.getCookie().isSecure()) {
             throw new IllegalStateException("COOKIE_SECURE must be true when COOKIE_SAME_SITE=None.");
         }
+
+        validateCookieDomain(localOrigin);
     }
 
     private void validateJwtSecret(String key, String value, boolean localOrigin) {
@@ -76,5 +78,46 @@ public class AuthConfigurationValidator {
         } catch (Exception ignored) {
             return false;
         }
+    }
+
+    private void validateCookieDomain(boolean localOrigin) {
+        String cookieDomain = normalizeDomain(authProperties.getCookie().getDomain());
+        if (localOrigin) {
+            return;
+        }
+
+        if (cookieDomain.isEmpty()) {
+            throw new IllegalStateException("COOKIE_DOMAIN must be configured for non-local FRONTEND_ORIGIN.");
+        }
+
+        String frontendHost = frontendHost();
+        if (frontendHost.isEmpty()) {
+            throw new IllegalStateException("FRONTEND_ORIGIN must contain a valid host when COOKIE_DOMAIN is configured.");
+        }
+
+        if (!frontendHost.equals(cookieDomain) && !frontendHost.endsWith("." + cookieDomain)) {
+            throw new IllegalStateException("COOKIE_DOMAIN must match FRONTEND_ORIGIN or its parent domain.");
+        }
+    }
+
+    private String frontendHost() {
+        try {
+            URI parsed = URI.create(authProperties.getFrontendOrigin());
+            String host = parsed.getHost();
+            return host == null ? "" : host.toLowerCase(Locale.ROOT);
+        } catch (Exception ignored) {
+            return "";
+        }
+    }
+
+    private String normalizeDomain(String value) {
+        if (value == null) {
+            return "";
+        }
+        String normalized = value.trim().toLowerCase(Locale.ROOT);
+        if (normalized.startsWith(".")) {
+            normalized = normalized.substring(1);
+        }
+        return normalized;
     }
 }
