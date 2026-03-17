@@ -6,7 +6,6 @@ facadely는 사용자가 템플릿을 선택해 웹사이트를 빠르게 제작
 이 저장소의 백엔드는 회원 인증, 세션 유지, OAuth 연동, 인증 감사 로그뿐 아니라  
 **사용자 사이트 생성, 에디터 커스터마이징 저장, 발행/비발행 관리**까지 담당합니다.
 
-프론트엔드가 함께 있는 저장소지만, 이 문서는 **백엔드 이력서/포트폴리오 기준**으로 작성된 백엔드 전용 README입니다.
 
 ## 1) 프로젝트 한 줄 요약
 
@@ -40,6 +39,12 @@ Spring Boot 기반 백엔드를 설계/구현하여
 - `sites.customization_json`에 에디터 수정값을 저장해 대시보드-에디터-공개 페이지가 같은 소스 오브 트루스를 보도록 구성
 - `publish/unpublish`와 `public/{slug}` 조회를 분리해 초안과 공개 상태를 명확히 구분
 
+### 사이트 분리 설계
+- 템플릿 원본과 사용자가 만든 사이트 인스턴스를 분리해, 같은 템플릿을 여러 사용자가 선택해도 수정 데이터가 섞이지 않도록 설계
+- 각 사이트는 `owner_user_id`, `site_slug`, `site_path`로 식별하고, 수정 API는 소유권을 함께 검증
+- 내부 작업 경로(`site_path`)와 공개 경로(`published_slug`, `custom_domain`)를 분리해 `draft`와 `published` 상태를 명확히 관리
+- 현재는 초기 제품 단계에 맞춰 `customization_json`으로 빠르게 저장 구조를 만들었고, 이후에는 버전 히스토리/협업 요구에 따라 리비전 모델로 확장 가능
+
 ## 4) 기술 스택
 
 - Java 21
@@ -48,7 +53,7 @@ Spring Boot 기반 백엔드를 설계/구현하여
 - Spring Data JPA (Hibernate)
 - PostgreSQL / Flyway
 - Gradle
-- JUnit5 / MockMvc / Testcontainers(PostgreSQL)
+- JUnit5 / MockMvc
 
 ## 5) 핵심 기능
 
@@ -187,7 +192,29 @@ cd backend
 - `GOOGLE_CLIENT_ID`
 - `GOOGLE_CLIENT_SECRET`
 
-## 11) 면접에서 설명하기 좋은 코드 포인트
+프론트 배포 시 함께 맞춰야 하는 값 (`/.env.example` 기준):
+
+- `NEXT_PUBLIC_API_BASE_URL`
+- `INTERNAL_API_BASE_URL`
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_BETA_EDITOR_URL`
+
+## 11) Railway 배포 메모
+
+- 배포된 백엔드 URL:
+  - `https://backend-production-b5b9c.up.railway.app`
+- 헬스체크:
+  - `https://backend-production-b5b9c.up.railway.app/api/v1/health`
+- Railway 서비스는 `backend` 디렉터리 기준으로 배포되며, jar 실행 경로를 명시하기 위해 `backend/Procfile`을 추가
+- 운영 프론트 예시 env:
+  - `NEXT_PUBLIC_API_BASE_URL=https://backend-production-b5b9c.up.railway.app/api/v1`
+  - `INTERNAL_API_BASE_URL=https://backend-production-b5b9c.up.railway.app/api/v1`
+- Google OAuth 운영 콜백 URI:
+  - `https://backend-production-b5b9c.up.railway.app/api/v1/auth/oauth2/callback/google`
+- 현재 Railway 프로젝트에는 Postgres 서비스가 2개 생성되어 있으나, 실제 `backend` 서비스는 `Postgres` 서비스에 연결됨
+- GitHub 자동배포를 붙일 경우 Railway 대시보드에서 `backend` 서비스에 `parkchwl/front` 저장소를 연결하고, 서비스 Root Directory를 `backend`로 지정하는 구성이 가장 안전함
+
+## 12) 면접에서 설명하기 좋은 코드 포인트
 
 - `backend/src/main/java/com/facadely/backend/auth/config/SecurityConfig.java`
 - `backend/src/main/java/com/facadely/backend/auth/security/AuthOriginValidationFilter.java`

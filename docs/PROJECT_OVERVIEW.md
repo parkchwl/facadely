@@ -1,6 +1,6 @@
 # Project Overview
 
-Last updated: 2026-03-14
+Last updated: 2026-03-17
 
 ## Stack
 
@@ -171,6 +171,10 @@ Frontend:
   - `INTERNAL_API_BASE_URL`
   - `NEXT_PUBLIC_SITE_URL`
   - `NEXT_PUBLIC_BETA_EDITOR_URL`
+- production example:
+  - `NEXT_PUBLIC_API_BASE_URL=https://backend-production-b5b9c.up.railway.app/api/v1`
+  - `INTERNAL_API_BASE_URL=https://backend-production-b5b9c.up.railway.app/api/v1`
+  - `NEXT_PUBLIC_SITE_URL=https://facadely.com`
 
 Backend:
 
@@ -183,6 +187,15 @@ Backend:
   - non-local `FRONTEND_ORIGIN` cannot use placeholder Google OAuth credentials
   - `COOKIE_SECURE` must be `true` outside local development
   - `COOKIE_SAME_SITE=None` requires `COOKIE_SECURE=true`
+- current Railway deployment:
+  - project: `facadely-backend`
+  - service: `backend`
+  - public URL: `https://backend-production-b5b9c.up.railway.app`
+  - health check: `https://backend-production-b5b9c.up.railway.app/api/v1/health`
+  - Google OAuth callback to register:
+    - `https://backend-production-b5b9c.up.railway.app/api/v1/auth/oauth2/callback/google`
+  - runtime launch path is pinned by `/Users/parkchwl/front/backend/Procfile`
+  - Railway project currently has two Postgres services; the backend is connected to the service named `Postgres`
 
 ## Known Deliberate Exception
 
