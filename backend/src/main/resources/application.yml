@@ -48,6 +48,7 @@ app:
       same-site: ${COOKIE_SAME_SITE:Lax}
       access-name: ${COOKIE_ACCESS_NAME:facadely_at}
       refresh-name: ${COOKIE_REFRESH_NAME:facadely_rt}
+      domain: ${COOKIE_DOMAIN:}
 
 logging:
   level:

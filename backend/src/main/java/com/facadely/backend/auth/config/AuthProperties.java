@@ -87,6 +87,7 @@ public class AuthProperties {
         private String sameSite = "Lax";
         private String accessName = "facadely_at";
         private String refreshName = "facadely_rt";
+        private String domain;
 
         public boolean isSecure() {
             return secure;
@@ -118,6 +119,14 @@ public class AuthProperties {
 
         public void setRefreshName(String refreshName) {
             this.refreshName = refreshName;
+        }
+
+        public String getDomain() {
+            return domain;
+        }
+
+        public void setDomain(String domain) {
+            this.domain = domain;
         }
     }
 }
