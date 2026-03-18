@@ -214,7 +214,14 @@ cd backend
 - 현재 Railway 프로젝트의 실제 연결 DB 서비스는 `Postgres`
 - GitHub 자동배포를 붙일 경우 Railway 대시보드에서 `backend` 서비스에 `parkchwl/front` 저장소를 연결하고, 서비스 Root Directory를 `backend`로 지정하는 구성이 가장 안전함
 
-## 12) 트러블슈팅: 운영 환경에서 Google OAuth 로그인 실패 해결
+## 12) 운영 환경 인증 설계
+
+- 운영 환경은 `facadely.com`(frontend)과 `api.facadely.com`(backend)으로 분리
+- Google OAuth 로그인 이후에도 보호 라우트가 세션을 안정적으로 인식할 수 있도록 인증 쿠키를 `COOKIE_DOMAIN=facadely.com` 기준으로 공유
+- 운영 도메인 구조에 맞게 `HttpOnly`, `Secure`, `SameSite` 정책을 조정하고, Google OAuth Redirect URI와 프론트 API base URL을 동일한 기준으로 정렬
+- 결과적으로 브라우저-프론트-백엔드 간 인증 컨텍스트가 끊기지 않도록 설계
+
+## 13) 트러블슈팅: 운영 환경에서 Google OAuth 로그인 실패 해결
 
 배포 환경에서 Google OAuth 로그인은 정상적으로 완료되었지만, 로그인 직후 다시 로그인 페이지로 되돌아가는 문제가 있었습니다.
 문제를 추적한 결과 OAuth 제공자 연동 자체의 실패가 아니라, 인증 쿠키가 `api.facadely.com`에만 설정되어 `facadely.com`의 보호 라우트가 로그인 상태를 인식하지 못하는 쿠키 스코프 문제였습니다.
@@ -224,7 +231,14 @@ cd backend
 
 이 과정에서 인증 문제는 단순한 OAuth 연동 오류가 아니라 쿠키 도메인, 배포 도메인 구조, 프록시 환경 설정이 함께 맞물리는 문제임을 확인했고, 인증 흐름을 브라우저-프론트-백엔드-인프라까지 연결해 진단하고 해결하는 경험을 쌓았습니다.
 
-## 13) 면접에서 설명하기 좋은 코드 포인트
+## 14) 운영 이슈 이후 보강한 점
+
+- `signup` 요청에도 IP 기반 rate limit을 추가해 봇성 가입 반복으로 인한 비용 유발 가능성을 완화
+- `COOKIE_DOMAIN` 설정에 fail-fast 검증을 추가해 운영 환경에서 잘못된 도메인 설정이 조용히 배포되지 않도록 보강
+- OAuth 성공 후 `/login?oauth=success` 페이지에서 클라이언트 재시도에 의존하지 않고, 서버가 바로 `next` 또는 `/dashboard`로 리다이렉트하도록 개선
+- 인증 관련 단위 테스트와 통합 테스트를 추가해 운영 이슈 수정 이후 재발 가능성을 낮춤
+
+## 15) 면접에서 설명하기 좋은 코드 포인트
 
 - `backend/src/main/java/com/facadely/backend/auth/config/SecurityConfig.java`
 - `backend/src/main/java/com/facadely/backend/auth/security/AuthOriginValidationFilter.java`
@@ -235,4 +249,6 @@ cd backend
 - `backend/src/main/java/com/facadely/backend/auth/config/CookieFactory.java`
 - `backend/src/main/java/com/facadely/backend/auth/config/AuthConfigurationValidator.java`
 - `backend/src/test/java/com/facadely/backend/auth/AuthControllerIntegrationTest.java`
+- `backend/src/test/java/com/facadely/backend/auth/config/AuthConfigurationValidatorTest.java`
+- `backend/src/test/java/com/facadely/backend/auth/security/OAuth2LoginSuccessHandlerTest.java`
 - `backend/src/test/java/com/facadely/backend/site/SiteControllerIntegrationTest.java`
