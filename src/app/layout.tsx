@@ -5,10 +5,10 @@ import type { CSSProperties } from "react";
 
 export const metadata: Metadata = {
   title: {
-    default: "facadely - Website Builder",
+    default: "facadely | High-End Website Templates",
     template: "%s | facadely"
   },
-  description: "Build and operate professional websites with a modern website builder and template system.",
+  description: "Explore high-end website templates and build polished websites with Facadely.",
   keywords: ["website builder", "templates", "web design", "landing page", "website platform"],
   authors: [{ name: "facadely Team" }],
   creator: "facadely Corp.",
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: '/',
-    title: 'facadely - Website Builder',
-    description: 'Build and operate professional websites with a modern website builder',
+    title: 'facadely | High-End Website Templates',
+    description: 'Explore high-end website templates and build polished websites with Facadely.',
     siteName: 'facadely',
     images: [{
       url: '/image/og-image.jpg',
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'facadely - Website Builder',
-    description: 'Build and operate professional websites with a modern website builder',
+    title: 'facadely | High-End Website Templates',
+    description: 'Explore high-end website templates and build polished websites with Facadely.',
     images: ['/image/og-image.jpg'],
   },
   robots: {

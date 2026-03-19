@@ -136,7 +136,7 @@ const ANIMATIONS = {
 // ================================================================================
 const STYLES = {
   // Container & Layout
-  containerClasses: "w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+  containerClasses: "w-full max-w-7xl mx-auto px-6 sm:px-8",
   heroContainerClasses: "w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16",
   sectionSpacing: "py-16 sm:py-20 lg:py-24 xl:py-28 2xl:py-32",
 
@@ -807,7 +807,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
           <div className={STYLES.containerClasses}>
             <motion.div
               {...ANIMATIONS.faqFadeInUp}
-              className="text-center max-w-5xl mx-auto relative z-10"
+              className="text-center w-full relative z-10"
             >
               <h2
                 className={finalCtaTitleClassName}
