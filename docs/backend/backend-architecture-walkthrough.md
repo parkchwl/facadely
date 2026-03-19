@@ -1,10 +1,10 @@
-# Backend Starter Guide (Spring) - facadely
+# Backend Architecture Walkthrough (Spring) - facadely
 
-이 문서는 **백엔드를 처음 접하는 사람**을 위한 입문서입니다.
-설명 기준은 현재 코드 그대로이며, "무엇을 썼는지"보다 "왜 이렇게 나눴는지"를 먼저 설명합니다.
+이 문서는 facadely 백엔드 구조를 빠르게 이해하기 위한 아키텍처 워크스루입니다.
+설명 기준은 현재 코드이며, "무엇을 썼는지"보다 "왜 이렇게 나눴는지"와 요청이 어떻게 흐르는지를 중심으로 정리합니다.
 
-- 프로젝트 루트: `/Users/parkchwl/front`
-- 백엔드 루트: `/Users/parkchwl/front/backend`
+- 프로젝트 루트: `repo root`
+- 백엔드 루트: `/backend`
 - 문서 기준일: 2026-03-03
 
 ---
@@ -40,7 +40,7 @@
 ## 3. 실제 폴더 구조와 역할
 
 ```text
-/Users/parkchwl/front/backend/src/main/java/com/facadely/backend
+backend/src/main/java/com/facadely/backend
 ├── BackendApplication.java                     # 스프링 부트 시작점
 ├── health
 │   └── HealthController.java                  # /api/v1/health
@@ -73,7 +73,7 @@
 리소스/설정:
 
 ```text
-/Users/parkchwl/front/backend/src/main/resources
+backend/src/main/resources
 ├── application.yml                            # 앱/DB/보안/OAuth 설정
 └── db/migration/V1__auth_init.sql            # Flyway 스키마
 ```
@@ -102,7 +102,7 @@
 
 ### 5.1 Controller (입구)
 
-파일: `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/controller/AuthController.java`
+파일: `backend/src/main/java/com/facadely/backend/auth/controller/AuthController.java`
 
 하는 일:
 - URL 매핑 (`/api/v1/auth/*`)
@@ -120,7 +120,7 @@
 
 ### 5.2 Service (핵심 규칙)
 
-파일: `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/service/AuthService.java`
+파일: `backend/src/main/java/com/facadely/backend/auth/service/AuthService.java`
 
 하는 일:
 - 회원가입/로그인/리프레시/로그아웃/내정보 조회
@@ -135,11 +135,11 @@
 ### 5.3 DTO (계약)
 
 파일들:
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/dto/SignupRequest.java`
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/dto/LoginRequest.java`
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/dto/MeResponse.java`
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/dto/TermsAgreeRequest.java`
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/dto/MessageResponse.java`
+- `backend/src/main/java/com/facadely/backend/auth/dto/SignupRequest.java`
+- `backend/src/main/java/com/facadely/backend/auth/dto/LoginRequest.java`
+- `backend/src/main/java/com/facadely/backend/auth/dto/MeResponse.java`
+- `backend/src/main/java/com/facadely/backend/auth/dto/TermsAgreeRequest.java`
+- `backend/src/main/java/com/facadely/backend/auth/dto/MessageResponse.java`
 
 왜 DTO를 따로?
 - Entity를 API에 그대로 노출하면 DB 구조 변경이 API 파괴로 이어짐
@@ -148,12 +148,12 @@
 ### 5.4 Repository (DB 접근)
 
 파일들:
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/repository/UserAccountRepository.java`
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/repository/UserCredentialRepository.java`
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/repository/RefreshTokenRepository.java`
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/repository/TermsAgreementRepository.java`
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/repository/OAuthGoogleAccountRepository.java`
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/repository/AuthAuditLogRepository.java`
+- `backend/src/main/java/com/facadely/backend/auth/repository/UserAccountRepository.java`
+- `backend/src/main/java/com/facadely/backend/auth/repository/UserCredentialRepository.java`
+- `backend/src/main/java/com/facadely/backend/auth/repository/RefreshTokenRepository.java`
+- `backend/src/main/java/com/facadely/backend/auth/repository/TermsAgreementRepository.java`
+- `backend/src/main/java/com/facadely/backend/auth/repository/OAuthGoogleAccountRepository.java`
+- `backend/src/main/java/com/facadely/backend/auth/repository/AuthAuditLogRepository.java`
 
 왜 인터페이스만 있는데 동작하나?
 - Spring Data JPA가 메서드 이름(`findBy...`)을 읽어 구현체를 런타임에 생성
@@ -163,7 +163,7 @@
 ## 6. 데이터 모델을 기초부터 이해하기
 
 스키마 파일:
-- `/Users/parkchwl/front/backend/src/main/resources/db/migration/V1__auth_init.sql`
+- `backend/src/main/resources/db/migration/V1__auth_init.sql`
 
 핵심 테이블:
 
@@ -185,7 +185,7 @@
 - 인증 이벤트 감사 로그 (signup/login/refresh/logout/google)
 
 6. `oauth_google_accounts`
-- Google `sub`와 내부 `user_id` 연결
+- Google `sub`와 내부 `user_id`연결
 
 관계 요약:
 
@@ -209,7 +209,7 @@ flowchart LR
 ### 7.1 SecurityConfig
 
 파일:
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/config/SecurityConfig.java`
+- `backend/src/main/java/com/facadely/backend/auth/config/SecurityConfig.java`
 
 핵심 설정:
 
@@ -221,7 +221,7 @@ flowchart LR
 2. 나머지 요청은 인증 필요
 
 3. JWT 필터 등록
-- `JwtAuthenticationFilter`를 `UsernamePasswordAuthenticationFilter` 앞에 배치
+- `JwtAuthenticationFilter`를 `UsernamePasswordAuthenticationFilter`앞에 배치
 
 4. OAuth2 로그인 성공/실패 핸들러 연결
 
@@ -256,16 +256,16 @@ flowchart LR
 
 ## 8.1 회원가입 (`POST /api/v1/auth/signup`)
 
-1. `AuthController.signup`이 `SignupRequest` 검증
-2. `AuthService.signup` 호출
+1. `AuthController.signup`이 `SignupRequest`검증
+2. `AuthService.signup`호출
 3. 중복 이메일 검사 (`UserAccountRepository.existsByEmailIgnoreCase`)
-4. `users` 저장
-5. 비밀번호 Argon2 해시 후 `user_credentials` 저장
+4. `users`저장
+5. 비밀번호 Argon2 해시 후 `user_credentials`저장
 6. 약관동의 저장 (`terms_agreements`)
 7. 감사 로그 저장
 8. Access/Refresh 발급 + Refresh 해시 DB 저장
 9. Controller가 Set-Cookie 2개(access, refresh) 내려줌
-10. `MeResponse` 반환
+10. `MeResponse`반환
 
 ```mermaid
 sequenceDiagram
@@ -301,13 +301,13 @@ sequenceDiagram
 2. `JwtAuthenticationFilter`가 access cookie 추출
 3. JWT 검증 성공 시 `SecurityContext`에 사용자 주체(subject=userId) 저장
 4. `AuthController.me`에서 `Authentication`으로 userId 획득
-5. `AuthService.me`가 `users`, `terms_agreements` 조회 후 응답
+5. `AuthService.me`가 `users`, `terms_agreements`조회 후 응답
 
 ## 8.4 토큰 재발급 (`POST /api/v1/auth/refresh`)
 
 1. Controller가 refresh cookie 추출
 2. Service가 해시 후 DB에서 유효 토큰 조회
-3. 기존 토큰 즉시 revoke (`revoked_at` 설정)
+3. 기존 토큰 즉시 revoke (`revoked_at`설정)
 4. 새 access/refresh 발급
 5. 새 refresh 해시 저장
 6. 새 쿠키 발급
@@ -324,8 +324,8 @@ sequenceDiagram
 
 1. 브라우저가 구글 인증으로 이동
 2. 콜백: `/api/v1/auth/oauth2/callback/google`
-3. 성공 시 `OAuth2LoginSuccessHandler` 동작
-4. `sub/email/name` 추출
+3. 성공 시 `OAuth2LoginSuccessHandler`동작
+4. `sub/email/name`추출
 5. `AuthService.handleGoogleLogin`에서
 - 기존 google_sub 연결 조회
 - 없으면 email 기준 사용자 생성/조회 + oauth_google_accounts 연결 저장
@@ -344,7 +344,7 @@ DTO 검증:
 - 예: `@AssertTrue agreeTerms`로 약관 동의 필수
 
 검증 실패 시 흐름:
-1. Spring이 `MethodArgumentNotValidException` 발생
+1. Spring이 `MethodArgumentNotValidException`발생
 2. `GlobalExceptionHandler`가 잡음
 3. 클라이언트에 아래 형태로 반환
 
@@ -369,7 +369,7 @@ DTO 검증:
 ## 10. 설정 파일을 읽는 법 (application.yml)
 
 파일:
-- `/Users/parkchwl/front/backend/src/main/resources/application.yml`
+- `backend/src/main/resources/application.yml`
 
 중요 포인트:
 
@@ -387,16 +387,16 @@ DTO 검증:
 - 프론트 Origin, JWT 만료, 쿠키 정책, 약관 버전 등을 한곳에서 관리
 
 환경변수 샘플:
-- `/Users/parkchwl/front/backend/.env.example`
+- `backend/.env.example`
 
 ---
 
-## 11. 왜 `AuthProperties` + `CookieFactory`를 따로 뒀는가
+## 11. 왜 `AuthProperties`+ `CookieFactory`를 따로 뒀는가
 
 ### AuthProperties
 
 역할:
-- `application.yml` 값을 타입 안전하게 주입
+- `application.yml`값을 타입 안전하게 주입
 
 장점:
 - 문자열 하드코딩 감소
@@ -409,7 +409,7 @@ DTO 검증:
 
 장점:
 - 모든 컨트롤러/핸들러가 동일 정책 사용
-- `Secure`, `SameSite`, `Path` 정책 누락 방지
+- `Secure`, `SameSite`, `Path`정책 누락 방지
 
 ---
 
@@ -435,7 +435,7 @@ DTO 검증:
 ## 13. 로그인 시도 제한(LoginAttemptService) 이해
 
 파일:
-- `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/service/LoginAttemptService.java`
+- `backend/src/main/java/com/facadely/backend/auth/service/LoginAttemptService.java`
 
 현재 정책:
 - 15분 윈도우 내 실패 5회 이상이면 잠금
@@ -457,17 +457,17 @@ DTO 검증:
 ## 14. 프론트와 연결되는 지점
 
 프론트 API 클라이언트:
-- `/Users/parkchwl/front/src/lib/api/auth.ts`
+- `src/lib/api/auth.ts`
 
 핵심:
 - `credentials: 'include'`로 쿠키 전송
 - 백엔드 베이스 URL: `NEXT_PUBLIC_API_BASE_URL`
 
 라우트 보호 프록시:
-- `/Users/parkchwl/front/src/proxy.ts`
+- `src/proxy.ts`
 
 동작:
-- 보호 라우트 접근 시 백엔드 `/auth/me` 호출
+- 보호 라우트 접근 시 백엔드 `/auth/me`호출
 - 401이면 로그인으로 리다이렉트
 
 이 구조의 의미:
@@ -486,7 +486,7 @@ DTO 검증:
 - 앱 시작 로그에 Flyway 성공 여부
 
 3. 쿠키 발급 확인
-- 로그인 응답 헤더에 `Set-Cookie` 2개 있는지
+- 로그인 응답 헤더에 `Set-Cookie`2개 있는지
 
 4. 쿠키 전송 확인
 - 후속 요청에 access cookie가 포함되는지
@@ -495,10 +495,10 @@ DTO 검증:
 - `/auth/me`가 200인지 401인지
 
 6. 예외 형식 확인
-- `GlobalExceptionHandler` JSON 구조로 나오는지
+- `GlobalExceptionHandler`JSON 구조로 나오는지
 
 7. CORS 확인
-- `FRONTEND_ORIGIN` 값이 현재 프론트 주소와 일치하는지
+- `FRONTEND_ORIGIN`값이 현재 프론트 주소와 일치하는지
 
 ---
 
@@ -522,7 +522,7 @@ DTO 검증:
 - 인증 필요 여부/role 정책 반영
 
 6. 실패 케이스 정의
-- `ApiException` 코드/메시지 설계
+- `ApiException`코드/메시지 설계
 
 7. 문서 업데이트
 - 본 문서 + phase 문서 동기화
@@ -551,25 +551,25 @@ DTO 검증:
 
 1. DB 실행
 ```bash
-cd /Users/parkchwl/front/backend
+cd  backend
 docker compose up -d
 ```
 
 2. 백엔드 테스트
 ```bash
-cd /Users/parkchwl/front/backend
+cd  backend
 ./gradlew test
 ```
 
 3. 백엔드 실행
 ```bash
-cd /Users/parkchwl/front/backend
+cd  backend
 ./gradlew bootRun
 ```
 
 4. 프론트 실행
 ```bash
-cd /Users/parkchwl/front
+cd .
 npm run dev
 ```
 
@@ -584,7 +584,7 @@ npm run dev
 
 이 문서를 읽은 다음에는 아래 순서로 코드를 보면 이해가 가장 빠릅니다.
 
-1. `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/controller/AuthController.java`
-2. `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/service/AuthService.java`
-3. `/Users/parkchwl/front/backend/src/main/java/com/facadely/backend/auth/config/SecurityConfig.java`
-4. `/Users/parkchwl/front/backend/src/main/resources/db/migration/V1__auth_init.sql`
+1. `backend/src/main/java/com/facadely/backend/auth/controller/AuthController.java`
+2. `backend/src/main/java/com/facadely/backend/auth/service/AuthService.java`
+3. `backend/src/main/java/com/facadely/backend/auth/config/SecurityConfig.java`
+4. `backend/src/main/resources/db/migration/V1__auth_init.sql`

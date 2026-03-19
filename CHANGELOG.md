@@ -119,7 +119,7 @@ All notable changes to this project are documented in this file.
   - Removed legacy auth-related frontend packages
 - Added backend learning documentation:
   - `docs/backend/README.md`
-  - `docs/backend/backend_starter.md` (초보자용 백엔드 입문/상호작용 설명)
+  - `docs/backend/backend-architecture-walkthrough.md` (백엔드 구조/요청 흐름 설명)
   - `docs/backend/glossary.md`
   - `docs/backend/architecture-decisions.md`
   - `docs/backend/phase-00-foundation.md` ... `docs/backend/phase-06-cutover.md`
@@ -146,8 +146,8 @@ All notable changes to this project are documented in this file.
 
 ## 2026-02-17 (Documentation Overhaul)
 
-- Reorganized documentation into active docs and archived legacy docs.
-- Moved outdated/analysis-heavy 2025 documents into `docs/archive/2025-legacy/`.
+- Reorganized documentation into active docs and a legacy archive set.
+- Isolated outdated/analysis-heavy 2025 documents from the active documentation set.
 - Added `docs/README.md` as the documentation index and maintenance guideline.
 - Added `docs/PROJECT_OVERVIEW.md` as the current architecture and route reference.
 - Rewrote `README.md` to align with current project state.

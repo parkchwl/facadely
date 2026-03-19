@@ -1,32 +1,17 @@
 # Documentation Index
 
-This directory contains the active project documentation for `front`.
+This directory contains the active documentation for facadely.
 
-## Active Docs
-
-- `/Users/parkchwl/front/README.md`
-  - Quick start, scripts, and top-level orientation.
-- `/Users/parkchwl/front/CHANGELOG.md`
-  - Chronological change history.
-- `/Users/parkchwl/front/docs/PROJECT_OVERVIEW.md`
-  - Current architecture, route map, template routing model, i18n behavior, runtime notes, and security/env assumptions.
-- `/Users/parkchwl/front/docs/backend/README.md`
-  - Spring backend migration learning track, `backend_starter.md` 입문서, and phase-by-phase guides.
-
-## Archived Docs
-
-- `/Users/parkchwl/front/docs/archive/2025-legacy/`
-  - Legacy analysis and optimization documents from 2025.
-  - These are preserved for historical context but are not the source of truth for current implementation.
+## Core Docs
+- `README.md`
+  - Public portfolio overview and quick start
+- `docs/PROJECT_OVERVIEW.md`
+  - Current architecture, route map, runtime behavior, and deployment assumptions
+- `docs/backend/README.md`
+  - Backend documentation index
 
 ## Documentation Policy
-
-- Keep root docs minimal and current:
-  - `README.md`
-  - `CHANGELOG.md`
-- Put implementation-level details in `/docs`.
-- Archive outdated docs instead of deleting when they may still be useful for history.
-- When code behavior changes, update:
-  1. `CHANGELOG.md`
-  2. `docs/PROJECT_OVERVIEW.md` (if architecture/route/runtime behavior changed, including layout/font/runtime/security policy)
-  3. `README.md` (if quick start, script, env bootstrap, or top-level structure changed)
+- Keep the root `README.md` concise and portfolio-friendly
+- Keep implementation details under `/docs`
+- Update `docs/PROJECT_OVERVIEW.md` when architecture, runtime, routing, or security behavior changes
+- Update backend docs when auth, site lifecycle, or persistence behavior changes

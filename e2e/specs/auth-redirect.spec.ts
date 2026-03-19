@@ -22,7 +22,7 @@ function extractCookieValue(response: APIResponse, cookieName: string): string {
 async function seedPasswordSession(request: APIRequestContext, context: BrowserContext): Promise<void> {
   const response = await request.post(`${MOCK_API_BASE}/auth/login`, {
     data: {
-      email: 'facadelycorp@gmail.com',
+      email: 'test-user@facadely.local',
       password: 'test-password-1234',
     },
   });

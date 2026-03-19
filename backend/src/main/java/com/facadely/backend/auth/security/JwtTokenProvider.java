@@ -72,17 +72,9 @@ public class JwtTokenProvider {
         } catch (Exception ignored) {
             bytes = source.getBytes(StandardCharsets.UTF_8);
         }
-        return Keys.hmacShaKeyFor(bytes.length >= 32 ? bytes : pad(bytes));
-    }
-
-    private byte[] pad(byte[] bytes) {
-        if (bytes.length == 0) {
-            bytes = "fallback-jwt-secret-value-change-me".getBytes(StandardCharsets.UTF_8);
+        if (bytes.length < 32) {
+            throw new IllegalStateException("JWT access secret must resolve to at least 32 bytes.");
         }
-        byte[] padded = new byte[32];
-        for (int i = 0; i < padded.length; i++) {
-            padded[i] = bytes[i % bytes.length];
-        }
-        return padded;
+        return Keys.hmacShaKeyFor(bytes);
     }
 }
