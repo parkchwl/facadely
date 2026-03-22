@@ -378,6 +378,15 @@ const HOME_GALLERY_TEMPLATES = listCanonicalTemplateEntries().map((entry) => ({
   image: entry.previewImage,
 }));
 
+const HOME_GALLERY_TOP_ROW_IDS = [
+  'velocity-saas-landing',
+  'vault-fintech-dashboard',
+  'rekolet-brutalism',
+  'nocturne-typography-agency',
+  'nexus-ai-enterprise',
+  'ion-modern-product',
+] as const;
+
 const iconMap: { [key: string]: React.ElementType } = {
   Zap,
   Smartphone,
@@ -429,17 +438,25 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     ? `${inter.className} text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-8 tracking-tight leading-none sm:whitespace-nowrap`
     : `${inter.className} text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white mb-8 tracking-tight leading-none`;
 
-  const gallerySplitIndex = useMemo(
-    () => Math.ceil(HOME_GALLERY_TEMPLATES.length / 2),
+  const topRowTemplateIdSet = useMemo(
+    () => new Set<string>(HOME_GALLERY_TOP_ROW_IDS),
     []
   );
   const topRowTemplates = useMemo(
-    () => HOME_GALLERY_TEMPLATES.slice(0, gallerySplitIndex),
-    [gallerySplitIndex]
+    () =>
+      HOME_GALLERY_TOP_ROW_IDS
+        .map((templateId) =>
+          HOME_GALLERY_TEMPLATES.find((template) => template.id === templateId)
+        )
+        .filter((template): template is (typeof HOME_GALLERY_TEMPLATES)[number] => Boolean(template)),
+    []
   );
   const bottomRowTemplates = useMemo(
-    () => HOME_GALLERY_TEMPLATES.slice(gallerySplitIndex),
-    [gallerySplitIndex]
+    () =>
+      HOME_GALLERY_TEMPLATES.filter(
+        (template) => !topRowTemplateIdSet.has(String(template.id))
+      ),
+    [topRowTemplateIdSet]
   );
   const duplicatedRow1 = useMemo(() =>
     [...topRowTemplates, ...topRowTemplates],

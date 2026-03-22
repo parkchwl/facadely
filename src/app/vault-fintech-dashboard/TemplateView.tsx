@@ -23,7 +23,7 @@ export default function VaultFintechDashboardTemplate() {
   return (
     <>
       <SiteCustomizationRuntime />
-      <main data-edit-id="t9-main" className="bg-[#0b1121] text-white">
+      <main data-edit-id="t9-main" className="relative isolate overflow-hidden bg-[#040404] text-white">
         <style
           dangerouslySetInnerHTML={{
             __html:
@@ -32,12 +32,14 @@ export default function VaultFintechDashboardTemplate() {
         />
 
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute left-0 top-0 h-full w-full bg-[linear-gradient(rgba(148,163,184,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.06)_1px,transparent_1px)] bg-[size:48px_48px]" />
-          <div className="absolute left-[12%] top-[8%] h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
-          <div className="absolute right-[10%] top-[22%] h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:48px_48px]" />
+          <div className="absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
+          <div className="absolute left-[10%] top-[8%] h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+          <div className="absolute right-[8%] top-[20%] h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+          <div className="absolute inset-x-0 bottom-0 h-[30rem] bg-gradient-to-t from-black via-black/90 to-transparent" />
         </div>
 
-        <header className="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-[#0b1121]/75 backdrop-blur-2xl">
+        <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-black/70 backdrop-blur-2xl">
           <TemplateContainer className="flex items-center justify-between py-4">
             <a
               href="#"
@@ -45,13 +47,13 @@ export default function VaultFintechDashboardTemplate() {
               className="flex items-center gap-2 text-sm font-bold tracking-wide text-white"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-md bg-blue-500 text-xs font-black text-white">
+              <span className="flex h-6 w-6 items-center justify-center rounded-md bg-white text-xs font-black text-black shadow-[0_0_24px_rgba(255,255,255,0.2)]">
                 V
               </span>
               Vault
             </a>
             <nav
-              className="hidden items-center gap-7 text-[0.82rem] text-slate-400 md:flex"
+              className="hidden items-center gap-7 text-[0.82rem] text-white/55 md:flex"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               <a href="#features" className="transition hover:text-white">Features</a>
@@ -61,7 +63,7 @@ export default function VaultFintechDashboardTemplate() {
             <a
               href="#pricing"
               data-edit-id="t9-top-cta"
-              className="rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-blue-500"
+              className="rounded-lg border border-white/10 bg-white px-4 py-2 text-xs font-semibold text-black transition hover:bg-white/90"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Get started
@@ -74,9 +76,10 @@ export default function VaultFintechDashboardTemplate() {
             <div className="mx-auto max-w-4xl text-center">
               <p
                 data-edit-id="t9-eyebrow"
-                className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-xs font-medium text-blue-300"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium text-white/75 shadow-[0_0_32px_rgba(255,255,255,0.04)]"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
+                <span className="h-2 w-2 rounded-full bg-blue-400 shadow-[0_0_12px_rgba(96,165,250,0.9)]" />
                 Now processing $12B annually
               </p>
               <h1
@@ -86,11 +89,11 @@ export default function VaultFintechDashboardTemplate() {
               >
                 The modern way
                 <br />
-                to manage <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">money.</span>
+                to manage <span className="bg-gradient-to-r from-white via-blue-200 to-blue-500 bg-clip-text text-transparent">money.</span>
               </h1>
               <p
                 data-edit-id="t9-copy"
-                className="mx-auto mt-7 max-w-xl text-base leading-8 text-slate-400"
+                className="mx-auto mt-7 max-w-xl text-base leading-8 text-white/58"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 Vault combines multi-currency accounts, instant transfers, and real-time analytics
@@ -100,7 +103,7 @@ export default function VaultFintechDashboardTemplate() {
                 <a
                   href="#pricing"
                   data-edit-id="t9-cta-primary"
-                  className="rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
+                  className="rounded-lg border border-white/10 bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-white/90"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   Open an account
@@ -108,7 +111,7 @@ export default function VaultFintechDashboardTemplate() {
                 <a
                   href="#features"
                   data-edit-id="t9-cta-secondary"
-                  className="rounded-lg border border-white/10 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:bg-white/5"
+                  className="rounded-lg border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white/76 transition hover:bg-white/[0.07]"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   See all features
@@ -117,12 +120,13 @@ export default function VaultFintechDashboardTemplate() {
             </div>
 
             <div className="relative mx-auto mt-16 max-w-4xl">
-              <div className="absolute -inset-4 rounded-2xl bg-gradient-to-b from-blue-500/10 to-transparent blur-xl" />
+              <div className="absolute -inset-5 rounded-[2rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_60%)] blur-2xl" />
+              <div className="absolute -inset-1 rounded-[1.75rem] border border-white/10 bg-white/[0.03]" />
               <img
                 data-edit-id="t9-dashboard-image"
-                src="/t9-dashboard.png"
+                src="/t9-dashboard.svg"
                 alt="Vault dashboard"
-                className="relative w-full rounded-xl border border-white/10 object-cover shadow-2xl shadow-blue-950/20"
+                className="relative w-full rounded-[1.4rem] border border-white/10 object-cover shadow-[0_30px_120px_rgba(0,0,0,0.55)]"
               />
             </div>
           </TemplateContainer>
@@ -130,7 +134,7 @@ export default function VaultFintechDashboardTemplate() {
 
         <section className="border-y border-white/5 py-8">
           <TemplateContainer>
-            <div className="flex flex-wrap items-center justify-center gap-8 text-sm font-semibold tracking-wide text-slate-500/60">
+            <div className="flex flex-wrap items-center justify-center gap-8 text-sm font-semibold tracking-[0.18em] text-white/28">
               {["TechCrunch", "Forbes", "Bloomberg", "Wired", "Financial Times"].map((name) => (
                 <span key={name}>{name}</span>
               ))}
@@ -143,7 +147,7 @@ export default function VaultFintechDashboardTemplate() {
             <div className="mx-auto max-w-2xl text-center">
               <p
                 data-edit-id="t9-features-eyebrow"
-                className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-400"
+                className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-300"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 Features
@@ -162,10 +166,10 @@ export default function VaultFintechDashboardTemplate() {
                 <div
                   key={feature}
                   data-edit-id={`t9-feature-${index + 1}`}
-                  className="rounded-xl border border-white/5 bg-white/[0.02] p-7"
+                  className="rounded-2xl border border-white/8 bg-white/[0.03] p-7 shadow-[0_18px_50px_rgba(0,0,0,0.28)]"
                 >
                   <p
-                    className="text-sm leading-7 text-slate-300"
+                    className="text-sm leading-7 text-white/74"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     {feature}
@@ -178,17 +182,19 @@ export default function VaultFintechDashboardTemplate() {
 
         <section id="security" className="py-20 md:py-28">
           <TemplateContainer>
-            <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-              <img
-                data-edit-id="t9-card-image"
-                src="/t9-card.png"
-                alt="Vault card"
-                className="w-full object-contain"
-              />
+            <div className="grid gap-12 rounded-[2rem] border border-white/8 bg-white/[0.025] p-8 shadow-[0_24px_80px_rgba(0,0,0,0.3)] lg:grid-cols-2 lg:items-center lg:p-10">
+              <div className="rounded-[1.5rem] border border-white/8 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_48%)] p-6">
+                <img
+                  data-edit-id="t9-card-image"
+                  src="/t9-card.png"
+                  alt="Vault card"
+                  className="w-full object-contain"
+                />
+              </div>
               <div>
                 <p
                   data-edit-id="t9-card-eyebrow"
-                  className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-400"
+                  className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-300"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   The Vault card
@@ -202,7 +208,7 @@ export default function VaultFintechDashboardTemplate() {
                 </h2>
                 <p
                   data-edit-id="t9-card-copy"
-                  className="mt-6 text-base leading-8 text-slate-400"
+                  className="mt-6 text-base leading-8 text-white/58"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   Matte black metal, dynamic CVV, instant freeze, and spending controls that move
@@ -218,7 +224,7 @@ export default function VaultFintechDashboardTemplate() {
             <div className="mx-auto max-w-2xl text-center">
               <p
                 data-edit-id="t9-pricing-eyebrow"
-                className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-400"
+                className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-300"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 Pricing
@@ -239,8 +245,8 @@ export default function VaultFintechDashboardTemplate() {
                   data-edit-id={`t9-plan-${index + 1}`}
                   className={`rounded-xl border p-7 ${
                     index === 1
-                      ? "border-blue-500/30 bg-blue-500/5 shadow-xl shadow-blue-900/10"
-                      : "border-white/5 bg-white/[0.02]"
+                      ? "border-white/15 bg-white/[0.05] shadow-[0_24px_80px_rgba(37,99,235,0.16)]"
+                      : "border-white/8 bg-white/[0.025]"
                   }`}
                 >
                   <h3
@@ -256,7 +262,7 @@ export default function VaultFintechDashboardTemplate() {
                     {plan.price}
                   </p>
                   <p
-                    className="mt-3 text-sm text-slate-400"
+                    className="mt-3 text-sm text-white/58"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     {plan.description}
