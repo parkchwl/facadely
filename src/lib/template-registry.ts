@@ -70,7 +70,7 @@ const REACT_TEMPLATE_REGISTRY: ReactTemplateRegistryEntry[] = [
     legacyPath: "/9",
     name: "Fintech Dashboard Landing",
     description: "Modern fintech landing page with dashboard preview, pricing tiers, and finance-focused feature sections",
-    previewImage: "/template-previews/vault-fintech-dashboard.svg",
+    previewImage: "/template-previews/vault-fintech-dashboard.png",
   },
   {
     templateId: "serenica-wellness-retreat",
