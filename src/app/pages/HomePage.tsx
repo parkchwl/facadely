@@ -387,6 +387,33 @@ const HOME_GALLERY_TOP_ROW_IDS = [
   'ion-modern-product',
 ] as const;
 
+const EDITOR_EXPERIENCE_PANELS = [
+  {
+    label: 'AI',
+    title: 'Start from a prompt',
+    description:
+      'Generate a structured starting page you can refine right away.',
+  },
+  {
+    label: 'Edit',
+    title: 'Edit the live page',
+    description:
+      'Update text, spacing, and style in one canvas with instant feedback.',
+  },
+  {
+    label: 'CMS',
+    title: 'Keep content in sync',
+    description:
+      'Manage copy, images, and reusable sections in one workflow.',
+  },
+  {
+    label: 'Publish',
+    title: 'Publish without handoff',
+    description:
+      'Go from draft to live with a workflow built for fast updates.',
+  },
+] as const;
+
 const iconMap: { [key: string]: React.ElementType } = {
   Zap,
   Smartphone,
@@ -660,6 +687,69 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </div>
           </section>
 
+        </section>
+
+        <section className="relative border-t border-white/8 bg-black py-20 sm:py-24 lg:py-32">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.12),transparent_28%),radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.08),transparent_20%)]" />
+          <div className={`${STYLES.containerClasses} relative z-10`}>
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,0.66fr)_minmax(0,1.94fr)] xl:items-start">
+              <motion.div
+                {...ANIMATIONS.solutionFadeInUp}
+                className="flex flex-col justify-between gap-8"
+              >
+                <div className="space-y-6">
+                  <div className="space-y-5">
+                    <h2 className={`${inter.className} max-w-[10ch] text-4xl font-extrabold leading-[0.92] tracking-tight text-white sm:text-5xl lg:text-6xl`}>
+                      <span className="block">Build</span>
+                      <span className="block">Edit</span>
+                      <span className="block">Publish</span>
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="grid gap-3">
+                  {EDITOR_EXPERIENCE_PANELS.map((panel, index) => (
+                    <div
+                      key={panel.label}
+                      className={`rounded-2xl border px-5 py-5 transition-all duration-300 ${
+                        index === 0
+                          ? 'border-white/14 bg-white/[0.06] shadow-[0_20px_60px_rgba(255,255,255,0.04)]'
+                          : 'border-white/8 bg-white/[0.02]'
+                      }`}
+                    >
+                      <div className="mb-2 text-sm font-semibold uppercase tracking-[0.28em] text-white/45">
+                        {panel.label}
+                      </div>
+                      <h3 className="text-xl font-semibold text-white">
+                        {panel.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-7 text-white/55 sm:text-base">
+                        {panel.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <div className="relative xl:sticky xl:top-24 xl:self-start xl:-mr-24 2xl:-mr-32">
+                <motion.div
+                  {...ANIMATIONS.solutionFadeInUp}
+                  className="xl:w-[calc(100%+6rem)] xl:max-w-none 2xl:w-[calc(100%+10rem)]"
+                >
+                  <OptimizedImage
+                    src="/image/mockup.png"
+                    alt="Facadely editor interface"
+                    type={ImageType.USER_CONTENT}
+                    width={3332}
+                    height={1996}
+                    priority={false}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 70vw, 900px"
+                    className="h-auto w-full"
+                  />
+                </motion.div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="relative border-t border-gray-800 overflow-hidden">
