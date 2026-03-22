@@ -155,7 +155,7 @@ export default function PricingPageClient({ dictionary }: { dictionary: PricingP
         <div className="w-full relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 xl:gap-16 items-start">
             <motion.div variants={fadeIn} className="lg:sticky top-24">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 sm:mb-6 lg:mb-8 leading-tight bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">
+              <h1 className="max-w-[12ch] pr-2 pb-1 text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-black leading-[1.08] bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">
                 {dictionary.title}
               </h1>
               <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-8 lg:mb-12 leading-relaxed">

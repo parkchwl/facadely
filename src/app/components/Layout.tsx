@@ -103,28 +103,28 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
       }
     >
       {!isOnDashboard && (
-      <header className="w-full top-0 z-50 fixed flex justify-center">
-        <div className="py-3 sm:py-4 flex justify-between items-center max-w-7xl w-full mx-4 px-6 sm:px-8 rounded-2xl mt-4 bg-black/60 backdrop-blur-md text-white shadow-lg">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/78 text-white backdrop-blur-xl">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6 sm:h-[72px] sm:px-8">
           {/* Left Side: Logo */}
           <div className="flex items-center">
             <Link
               href={createLocalizedPath(currentLocale, '/')}
-              className="flex-shrink-0 flex items-center space-x-1 text-lg sm:text-xl font-bold font-montserrat tracking-tight z-50"
+              className="flex-shrink-0 flex items-center space-x-1 text-lg font-bold font-montserrat tracking-tight text-white transition-opacity hover:opacity-80 sm:text-xl"
             >
               ✦ {footer.brand.name}
             </Link>
           </div>
 
           {/* Center: Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6">
-            <Link href={createLocalizedPath(currentLocale, '/templates')} className="font-semibold hover:text-blue-400 transition-colors text-sm">{navigation.templates}</Link>
-            <Link href={editorHref} className="font-semibold hover:text-blue-400 transition-colors text-sm">{navigation.generate}</Link>
-            <Link href={createLocalizedPath(currentLocale, '/service')} className="font-semibold hover:text-blue-400 transition-colors text-sm">{navigation.service}</Link>
-            <Link href={createLocalizedPath(currentLocale, '/pricing')} className="font-semibold hover:text-blue-400 transition-colors text-sm">{navigation.pricing}</Link>
+          <nav className="hidden lg:flex items-center gap-8">
+            <Link href={createLocalizedPath(currentLocale, '/templates')} className="text-sm font-medium text-white/72 transition-colors hover:text-white">{navigation.templates}</Link>
+            <Link href={editorHref} className="text-sm font-medium text-white/72 transition-colors hover:text-white">{navigation.generate}</Link>
+            <Link href={createLocalizedPath(currentLocale, '/service')} className="text-sm font-medium text-white/72 transition-colors hover:text-white">{navigation.service}</Link>
+            <Link href={createLocalizedPath(currentLocale, '/pricing')} className="text-sm font-medium text-white/72 transition-colors hover:text-white">{navigation.pricing}</Link>
           </nav>
 
           {/* Right Side Actions (Desktop) */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3">
             {/* Language Dropdown */}
             <div
               className="relative"
@@ -132,7 +132,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
               onMouseLeave={() => setIsLanguageDropdownOpen(false)}
             >
               <motion.button
-                className="flex items-center font-semibold p-1"
+                className="flex items-center p-1 text-white/72 transition-colors hover:text-white"
                 whileTap={{ scale: 0.95 }}
               >
                 <Globe className="h-6 w-6" />
@@ -181,7 +181,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
               >
                 <motion.button
                   type="button"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+                  className="inline-flex items-center gap-2 rounded-md border border-white/14 px-3.5 py-2 text-sm font-medium text-white transition hover:border-white/28 hover:bg-white/6"
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setIsAccountMenuOpen((prev) => !prev)}
                 >
@@ -236,7 +236,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
             ) : (
               <Link
                 href={loginHref}
-                className="bg-white text-black hover:bg-gray-200 py-2 px-4 rounded-lg transition shadow font-bold"
+                className="rounded-md bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-gray-200"
               >
                 {navigation.signup} <span className="font-normal">{navigation.signupFree}</span>
               </Link>
@@ -245,7 +245,10 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden z-50">
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="flex h-10 w-10 items-center justify-center rounded-md border border-white/10 text-white/80 transition-colors hover:border-white/20 hover:text-white"
+            >
               {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
@@ -468,7 +471,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
       )}
 
       {/* Main Content */}
-      <main className={isOnDashboard ? "flex-1 w-full h-full" : "flex-grow"}>
+      <main className={isOnDashboard ? "flex-1 w-full h-full" : "flex-grow pt-16 sm:pt-[72px]"}>
         {children}
       </main>
 
