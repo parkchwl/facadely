@@ -1,8 +1,10 @@
 package com.facadely.backend.site.dto;
 
+import java.util.UUID;
 import java.util.List;
 
 public record SiteCustomizationUpdateRequest(
+    UUID siteId,
     String sitePath,
     String editId,
     ElementPatchMutationPayload patch,

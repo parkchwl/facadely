@@ -20,13 +20,16 @@ import {
 } from "@/lib/server/api-security";
 import {
   BackendSiteApiError,
-  getSiteCustomizationFromBackend,
+  getOwnedSiteCustomizationFromBackend,
+  getPublishedSiteCustomizationFromBackend,
   saveSiteCustomizationToBackend,
 } from "@/lib/server/site-backend";
 import { isCanonicalTemplatePath, resolveTemplateSourcePath } from "@/lib/user-site-store";
 
 type SaveCodeRequest = {
+  siteId?: string;
   sitePath?: string;
+  templatePath?: string;
   editId?: string;
   patch?: {
     styles?: Record<string, string>;
@@ -237,19 +240,42 @@ function validateElementPatch(
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const incomingSitePath = searchParams.get("sitePath") ?? getDefaultCanonicalTemplatePath();
-    if (isCanonicalTemplatePath(incomingSitePath)) {
+    const incomingSitePath = searchParams.get("sitePath")?.trim() ?? "";
+    const siteId = searchParams.get("siteId") ?? "";
+    const publishedSlug = searchParams.get("publishedSlug") ?? "";
+
+    if (publishedSlug) {
+      const customization = await getPublishedSiteCustomizationFromBackend(publishedSlug);
+      return NextResponse.json({ success: true, customization });
+    }
+
+    if (!siteId && !incomingSitePath) {
+      return NextResponse.json({
+        success: true,
+        customization: buildDefaultSiteCustomization(getDefaultCanonicalTemplatePath()),
+      });
+    }
+
+    if (!siteId && isCanonicalTemplatePath(incomingSitePath)) {
       return NextResponse.json({
         success: true,
         customization: buildDefaultSiteCustomization(incomingSitePath),
       });
     }
 
-    const customization = await getSiteCustomizationFromBackend(incomingSitePath);
+    await requireAuthenticatedUser(req);
+    const cookieHeader = req.headers.get("cookie") ?? "";
+    const customization = await getOwnedSiteCustomizationFromBackend(cookieHeader, {
+      siteId: siteId || undefined,
+      sitePath: incomingSitePath,
+    });
     return NextResponse.json({ success: true, customization });
   } catch (error) {
     if (error instanceof BackendSiteApiError) {
       return NextResponse.json({ error: error.message }, { status: error.status });
+    }
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
     }
     console.error("save-code GET error:", error);
     return NextResponse.json({ error: "Failed to load site customization" }, { status: 500 });
@@ -261,7 +287,8 @@ export async function POST(req: Request) {
     requireSameOrigin(req);
     await requireAuthenticatedUser(req);
     const body = (await req.json()) as SaveCodeRequest;
-    const incomingSitePath = body.sitePath ?? getDefaultCanonicalTemplatePath();
+    const incomingSitePath = typeof body.sitePath === "string" ? body.sitePath.trim() : "";
+    const incomingSiteId = typeof body.siteId === "string" ? body.siteId.trim() : "";
     const requestedPatches = Array.isArray(body.patches) ? body.patches : [];
     const singlePatchRequested = typeof body.editId === "string" && isObject(body.patch);
     const hasPatchBatch = requestedPatches.length > 0;
@@ -280,14 +307,32 @@ export async function POST(req: Request) {
       );
     }
 
-    if (isCanonicalTemplatePath(incomingSitePath)) {
+    if (!incomingSiteId && !incomingSitePath) {
+      return NextResponse.json(
+        { error: "siteId or sitePath is required." },
+        { status: 400 }
+      );
+    }
+
+    if (!incomingSiteId && isCanonicalTemplatePath(incomingSitePath)) {
       return NextResponse.json(
         { error: "Create a site from this template before saving customizations." },
         { status: 400 }
       );
     }
 
-    const templateSourcePath = resolveTemplateSourcePath(incomingSitePath);
+    const templateSourcePath =
+      typeof body.templatePath === "string" && body.templatePath.trim()
+        ? body.templatePath.trim()
+        : incomingSitePath
+          ? resolveTemplateSourcePath(incomingSitePath)
+          : "";
+    if (!templateSourcePath) {
+      return NextResponse.json(
+        { error: "templatePath is required when sitePath is omitted." },
+        { status: 400 }
+      );
+    }
     const manifest = await readTemplateManifest(templateSourcePath);
     if (!manifest) {
       return NextResponse.json(
@@ -364,8 +409,10 @@ export async function POST(req: Request) {
     const cookieHeader = req.headers.get("cookie") ?? "";
     const normalizedBody: Record<string, unknown> = {
       ...body,
-      sitePath: incomingSitePath,
+      siteId: incomingSiteId || undefined,
+      sitePath: incomingSitePath || undefined,
     };
+    delete normalizedBody.templatePath;
 
     if (patchRequests.length > 0) {
       normalizedBody.patches = patchRequests.map((patchRequest) => ({

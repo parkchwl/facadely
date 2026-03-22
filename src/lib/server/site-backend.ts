@@ -143,9 +143,13 @@ export async function deleteUserSiteFromBackend(cookieHeader: string, siteId: st
 
 export async function getSitePublishStateFromBackend(
   cookieHeader: string,
-  sitePath: string
+  params: { siteId?: string; sitePath?: string }
 ): Promise<SitePublishRecord> {
-  const response = await fetchSiteApi(`/publish?sitePath=${encodeURIComponent(sitePath)}`, {
+  const search = new URLSearchParams();
+  if (params.siteId) search.set("siteId", params.siteId);
+  if (params.sitePath) search.set("sitePath", params.sitePath);
+
+  const response = await fetchSiteApi(`/publish?${search.toString()}`, {
     method: "GET",
     headers: {
       cookie: cookieHeader,
@@ -162,7 +166,7 @@ export async function getSitePublishStateFromBackend(
 
 export async function publishSiteOnBackend(
   cookieHeader: string,
-  body: { sitePath: string; customDomain?: string }
+  body: { siteId?: string; sitePath?: string; customDomain?: string }
 ): Promise<SitePublishRecord> {
   const response = await fetchSiteApi("/publish", {
     method: "POST",
@@ -183,9 +187,13 @@ export async function publishSiteOnBackend(
 
 export async function unpublishSiteOnBackend(
   cookieHeader: string,
-  sitePath: string
+  params: { siteId?: string; sitePath?: string }
 ): Promise<SitePublishRecord> {
-  const response = await fetchSiteApi(`/publish?sitePath=${encodeURIComponent(sitePath)}`, {
+  const search = new URLSearchParams();
+  if (params.siteId) search.set("siteId", params.siteId);
+  if (params.sitePath) search.set("sitePath", params.sitePath);
+
+  const response = await fetchSiteApi(`/publish?${search.toString()}`, {
     method: "DELETE",
     headers: {
       cookie: cookieHeader,
@@ -217,14 +225,37 @@ export async function getPublishedSiteBySlugFromBackend(slug: string): Promise<P
   return payload.publishedSite;
 }
 
-export async function getSiteCustomizationFromBackend(sitePath: string): Promise<SiteCustomization> {
-  const response = await fetchSiteApi(`/customization?sitePath=${encodeURIComponent(sitePath)}`, {
+export async function getOwnedSiteCustomizationFromBackend(
+  cookieHeader: string,
+  params: { siteId?: string; sitePath?: string }
+): Promise<SiteCustomization> {
+  const search = new URLSearchParams();
+  if (params.siteId) search.set("siteId", params.siteId);
+  if (params.sitePath) search.set("sitePath", params.sitePath);
+
+  const response = await fetchSiteApi(`/customization?${search.toString()}`, {
     method: "GET",
+    headers: {
+      cookie: cookieHeader,
+    },
   });
 
   const payload = await parseEnvelope(response);
   if (!response.ok || !payload?.customization) {
     throw new BackendSiteApiError(response.status, getErrorMessage(payload, "Failed to load site customization"));
+  }
+
+  return payload.customization;
+}
+
+export async function getPublishedSiteCustomizationFromBackend(publishedSlug: string): Promise<SiteCustomization> {
+  const response = await fetchSiteApi(`/public/${encodeURIComponent(publishedSlug)}/customization`, {
+    method: "GET",
+  });
+
+  const payload = await parseEnvelope(response);
+  if (!response.ok || !payload?.customization) {
+    throw new BackendSiteApiError(response.status, getErrorMessage(payload, "Failed to load published site customization"));
   }
 
   return payload.customization;

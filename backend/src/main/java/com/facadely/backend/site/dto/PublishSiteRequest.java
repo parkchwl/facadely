@@ -1,9 +1,9 @@
 package com.facadely.backend.site.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import java.util.UUID;
 
 public record PublishSiteRequest(
-    @NotBlank(message = "sitePath는 필수입니다.")
+    UUID siteId,
     String sitePath,
     String customDomain
 ) {

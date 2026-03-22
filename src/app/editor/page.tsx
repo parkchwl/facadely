@@ -71,6 +71,12 @@ type Website = {
   name: string;
   desc: string;
   path: string;
+  templateId: string;
+  templateSlug: string;
+  templatePath: string;
+  lifecycleStatus?: string;
+  publishedSlug?: string | null;
+  customDomain?: string | null;
 };
 
 type SaveableElementPatch = {
@@ -92,10 +98,46 @@ type CanvasStructureNode = {
 };
 
 type PublishState = {
+  siteId?: string;
   publicUrl: string;
   publishedSlug?: string;
   customDomain?: string | null;
   publishedAt?: string | null;
+};
+
+type EditorBootstrapResponse = {
+  sites?: Array<{
+    id: string;
+    name: string;
+    description: string;
+    sitePath: string;
+    templateId: string;
+    templateSlug: string;
+    templatePath: string;
+    lifecycleStatus?: string;
+    publishedSlug?: string | null;
+    customDomain?: string | null;
+  }>;
+  activeSite?: {
+    id: string;
+    name: string;
+    description: string;
+    sitePath: string;
+    templateId: string;
+    templateSlug: string;
+    templatePath: string;
+    lifecycleStatus?: string;
+    publishedSlug?: string | null;
+    customDomain?: string | null;
+  } | null;
+  manifest?: TemplateManifest | null;
+  customization?: {
+    themeTokens?: ThemeTokens;
+    typographyTokens?: TypographyTokens;
+    typographyPresetEnabled?: boolean;
+    customFonts?: CustomFontAsset[];
+  } | null;
+  publish?: PublishState | null;
 };
 
 interface ViewportConfig {
@@ -147,7 +189,16 @@ const sanitizeWebsites = (sites: Website[]) => {
 
   sites.forEach((site) => {
     const normalizedPath = normalizeSitePath(site.path);
-    const normalized: Website = { ...site, path: normalizedPath };
+    const normalized: Website = {
+      ...site,
+      path: normalizedPath,
+      templateId: site.templateId ?? "",
+      templateSlug: site.templateSlug ?? "",
+      templatePath: site.templatePath ?? "",
+      lifecycleStatus: site.lifecycleStatus ?? "",
+      publishedSlug: site.publishedSlug ?? null,
+      customDomain: site.customDomain ?? null,
+    };
     if (isExcludedWebsite(normalized)) return;
     if (!normalized.path) return;
     dedupedByPath.set(normalized.path, normalized);
@@ -162,6 +213,12 @@ const DEFAULT_ACTIVE_SITE: Website = DEFAULT_WEBSITES[0] ?? {
   name: "",
   desc: "",
   path: "",
+  templateId: "",
+  templateSlug: "",
+  templatePath: "",
+  lifecycleStatus: "",
+  publishedSlug: null,
+  customDomain: null,
 };
 
 const TOKEN_TO_CSS_VAR: Record<keyof ThemeTokens, string> = {
@@ -301,6 +358,19 @@ const normalizePresetPath = (value: string) => {
   }
 };
 
+const mapBootstrapSite = (site: NonNullable<EditorBootstrapResponse["sites"]>[number]): Website => ({
+  id: site.id,
+  name: site.name,
+  desc: site.description,
+  path: site.sitePath,
+  templateId: site.templateId,
+  templateSlug: site.templateSlug,
+  templatePath: site.templatePath,
+  lifecycleStatus: site.lifecycleStatus ?? "",
+  publishedSlug: site.publishedSlug ?? null,
+  customDomain: site.customDomain ?? null,
+});
+
 function EditorContent() {
   const searchParams = useSearchParams();
   const [activeSite, setActiveSite] = useState<Website>(DEFAULT_ACTIVE_SITE);
@@ -313,6 +383,7 @@ function EditorContent() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const [websites, setWebsites] = useState<Website[]>(DEFAULT_WEBSITES);
+  const lastLoadedSiteIdRef = useRef("");
 
   // Styling state
   const selectedElementRef = useRef<HTMLElement | null>(null);
@@ -385,6 +456,71 @@ function EditorContent() {
   const pendingActionRef = useRef<HistoryAction | null>(null);
   const actionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hasActiveSite = activeSite.path.trim().length > 0;
+  const requestedSiteId = (searchParams.get("siteId") ?? "").trim();
+  const requestedSitePath = normalizeSitePath(searchParams.get("sitePath") ?? "");
+
+  const applyBootstrapData = useCallback((payload: EditorBootstrapResponse) => {
+    const nextSites = sanitizeWebsites((payload.sites ?? []).map(mapBootstrapSite));
+    setWebsites(nextSites);
+
+    const nextActiveSite = payload.activeSite ? mapBootstrapSite(payload.activeSite) : DEFAULT_ACTIVE_SITE;
+    setActiveSite(nextActiveSite);
+    lastLoadedSiteIdRef.current = nextActiveSite.id;
+
+    setTemplateManifest(payload.manifest ?? null);
+    setManifestError(payload.manifest ? null : nextActiveSite.id ? "Template manifest unavailable" : null);
+
+    if (payload.customization?.themeTokens) {
+      setThemeTokens(payload.customization.themeTokens);
+    } else {
+      setThemeTokens({
+        primary: "#6366f1",
+        secondary: "#d946ef",
+        radius: "0.5rem",
+        spacingBase: "1rem",
+      });
+    }
+
+    if (payload.customization?.typographyTokens) {
+      setTypographyTokens(payload.customization.typographyTokens);
+    } else {
+      setTypographyTokens(cloneDefaultTypographyTokens());
+    }
+
+    setTypographyPresetEnabled(payload.customization?.typographyPresetEnabled === true);
+    setCustomFonts(Array.isArray(payload.customization?.customFonts) ? payload.customization!.customFonts : []);
+    setPublishState(payload.publish ?? null);
+  }, []);
+
+  const loadBootstrapData = useCallback(
+    async (
+      params: { siteId?: string; sitePath?: string } = {},
+      signal?: AbortSignal
+    ) => {
+      const query = new URLSearchParams();
+      if (params.siteId) query.set("siteId", params.siteId);
+      if (params.sitePath) query.set("sitePath", params.sitePath);
+
+      const endpoint = query.toString()
+        ? `/api/editor/bootstrap?${query.toString()}`
+        : "/api/editor/bootstrap";
+      const response = await fetch(endpoint, {
+        cache: "no-store",
+        signal,
+      });
+      const payload = (await response.json().catch(() => null)) as EditorBootstrapResponse & {
+        error?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(payload?.error ?? "Failed to load editor bootstrap data");
+      }
+
+      applyBootstrapData(payload ?? {});
+      return payload ?? {};
+    },
+    [applyBootstrapData]
+  );
 
   const commitAction = useCallback((action: HistoryAction) => {
     setActionStack(prev => [...prev.slice(0, actionIndex + 1), action]);
@@ -669,29 +805,6 @@ function EditorContent() {
     }
 
     setIsMounting(false);
-
-    const controller = new AbortController();
-
-    fetch("/api/pages", { cache: "no-store", signal: controller.signal })
-      .then((res) => res.json())
-      .then((data: { pages?: Website[] }) => {
-        const incomingPages = data.pages ?? [];
-        if (incomingPages.length > 0) {
-          setWebsites(sanitizeWebsites(incomingPages));
-        } else {
-          setWebsites([]);
-        }
-      })
-      .catch((error) => {
-        if (error instanceof Error && error.name === "AbortError") {
-          return;
-        }
-        console.warn(error);
-      });
-
-    return () => {
-      controller.abort();
-    };
   }, []);
 
   useEffect(() => {
@@ -791,100 +904,39 @@ function EditorContent() {
     setCanvasStructure([]);
     setElementType("unknown");
     setIsPropertyPanelOpen(false);
-    setTypographyTokens(cloneDefaultTypographyTokens());
-    setTypographyPresetEnabled(false);
-    setCustomFonts([]);
     setCustomFontFamilyInput("");
   }, [activeSite.path]);
 
   useEffect(() => {
-    if (!activeSite.path) {
-      setTemplateManifest(null);
-      setManifestError(null);
+    const shouldLoadBootstrap = requestedSiteId
+      ? requestedSiteId !== lastLoadedSiteIdRef.current
+      : requestedSitePath
+        ? requestedSitePath !== activeSite.path || !lastLoadedSiteIdRef.current
+        : !lastLoadedSiteIdRef.current;
+
+    if (!shouldLoadBootstrap) {
       return;
     }
 
     const controller = new AbortController();
 
-    fetch(`/api/template-manifest?sitePath=${encodeURIComponent(activeSite.path)}`, {
-      signal: controller.signal,
-    })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(new Error("Template manifest not found"))
-      )
-      .then((data: { manifest?: TemplateManifest }) => {
-        if (controller.signal.aborted) return;
-        if (!data.manifest) {
-          throw new Error("Template manifest not found");
-        }
-        setTemplateManifest(data.manifest);
-        setManifestError(null);
-      })
+    loadBootstrapData(
+      {
+        siteId: requestedSiteId || undefined,
+        sitePath: requestedSitePath || undefined,
+      },
+      controller.signal
+    )
       .catch((error) => {
         if (controller.signal.aborted) return;
-        setTemplateManifest(null);
-        setManifestError(error instanceof Error ? error.message : "Template manifest unavailable");
+        setManifestError(error instanceof Error ? error.message : "Failed to load editor");
+        console.warn("Failed to load editor bootstrap:", error);
       });
 
     return () => {
       controller.abort();
     };
-  }, [activeSite.path]);
-
-  useEffect(() => {
-    if (!activeSite.path) {
-      setThemeTokens({
-        primary: "#6366f1",
-        secondary: "#d946ef",
-        radius: "0.5rem",
-        spacingBase: "1rem",
-      });
-      setTypographyTokens(cloneDefaultTypographyTokens());
-      setTypographyPresetEnabled(false);
-      setCustomFonts([]);
-      return;
-    }
-
-    const controller = new AbortController();
-
-    fetch(`/api/save-code?sitePath=${encodeURIComponent(activeSite.path)}`, {
-      signal: controller.signal,
-    })
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data: {
-        customization?: {
-          themeTokens?: ThemeTokens;
-          typographyTokens?: TypographyTokens;
-          typographyPresetEnabled?: boolean;
-          customFonts?: CustomFontAsset[];
-        };
-      } | null) => {
-        if (controller.signal.aborted) return;
-        if (!data?.customization) return;
-        if (data.customization.themeTokens) {
-          setThemeTokens(data.customization.themeTokens);
-        }
-        if (data.customization.typographyTokens) {
-          setTypographyTokens(data.customization.typographyTokens);
-        } else {
-          setTypographyTokens(cloneDefaultTypographyTokens());
-        }
-        setTypographyPresetEnabled(data.customization.typographyPresetEnabled === true);
-        if (Array.isArray(data.customization.customFonts)) {
-          setCustomFonts(data.customization.customFonts);
-        } else {
-          setCustomFonts([]);
-        }
-      })
-      .catch((error) => {
-        if (controller.signal.aborted) return;
-        console.warn(error);
-      });
-
-    return () => {
-      controller.abort();
-    };
-  }, [activeSite.path]);
+  }, [activeSite.path, loadBootstrapData, requestedSiteId, requestedSitePath]);
 
   useEffect(() => {
     if (!activeSite.path) return;
@@ -957,19 +1009,6 @@ function EditorContent() {
     setElementType("unknown");
     setFontQuery("");
   }, []);
-
-  useEffect(() => {
-    const requestedSitePath = normalizeSitePath(searchParams.get("sitePath") ?? "");
-    if (!requestedSitePath) return;
-
-    const matched = websites.find((site) => site.path === requestedSitePath);
-    if (!matched || matched.path === activeSite.path) {
-      return;
-    }
-
-    clearSelection();
-    setActiveSite(matched);
-  }, [activeSite.path, clearSelection, searchParams, websites]);
 
   const selectEditableElement = useCallback((editableTarget: HTMLElement, editableNode: TemplateEditableNode) => {
     if (editableTarget.isContentEditable) return;
@@ -1544,7 +1583,9 @@ function EditorContent() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        siteId: activeSite.id,
         sitePath: activeSite.path,
+        templatePath: activeSite.templatePath,
         editId,
         patch,
       }),
@@ -1554,7 +1595,7 @@ function EditorContent() {
       const payload = await res.json().catch(() => null);
       throw new Error(payload?.error ?? `Failed to save patch for ${editId}`);
     }
-  }, [activeSite.path]);
+  }, [activeSite.id, activeSite.path, activeSite.templatePath]);
 
   const applyScenePreset = useCallback(async (scene: TemplateScenePreset) => {
     const iframeDoc = iframeRef.current?.contentWindow?.document;
@@ -1691,7 +1732,9 @@ function EditorContent() {
 
     try {
       const requestBody: Record<string, unknown> = {
+        siteId: activeSite.id,
         sitePath: activeSite.path,
+        templatePath: activeSite.templatePath,
         themeTokens,
         typographyTokens,
         typographyPresetEnabled,
@@ -1738,7 +1781,9 @@ function EditorContent() {
       setIsSaving(false);
     }
   }, [
+    activeSite.id,
     activeSite.path,
+    activeSite.templatePath,
     collectAllEditablePatches,
     themeTokens,
     typographyPresetEnabled,
@@ -1764,37 +1809,6 @@ function EditorContent() {
     };
   }, [activeSite.path, changeVersion, saveToDataStore]);
 
-  useEffect(() => {
-    if (!activeSite.path || isCanonicalTemplatePath(activeSite.path)) {
-      setPublishState(null);
-      return;
-    }
-
-    const controller = new AbortController();
-
-    fetch(`/api/publish?sitePath=${encodeURIComponent(activeSite.path)}`, {
-      cache: "no-store",
-      signal: controller.signal,
-    })
-      .then(async (response) => {
-        const payload = await response.json().catch(() => null);
-        if (!response.ok) {
-          throw new Error(payload?.error ?? "Failed to load publish state");
-        }
-        if (controller.signal.aborted) return;
-        setPublishState(payload?.published ? (payload.publish as PublishState) : null);
-      })
-      .catch((error) => {
-        if (controller.signal.aborted) return;
-        setPublishState(null);
-        console.warn("Failed to load publish state:", error);
-      });
-
-    return () => {
-      controller.abort();
-    };
-  }, [activeSite.path]);
-
   const handlePublish = async () => {
     if (!activeSite.path) {
       alert("Create or select a site before publishing.");
@@ -1816,7 +1830,10 @@ function EditorContent() {
       const res = await fetch("/api/publish", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sitePath: activeSite.path }),
+        body: JSON.stringify({
+          siteId: activeSite.id,
+          sitePath: activeSite.path,
+        }),
       });
       const payload = await res.json().catch(() => null);
       if (!res.ok || !payload?.publish?.publicUrl) {
@@ -2135,6 +2152,14 @@ function EditorContent() {
                     onClick={() => {
                       clearSelection();
                       setActiveSite(site);
+                      if (site.id !== lastLoadedSiteIdRef.current) {
+                        void loadBootstrapData({
+                          siteId: site.id,
+                          sitePath: site.path,
+                        }).catch((error) => {
+                          console.warn("Failed to load selected site:", error);
+                        });
+                      }
                     }}
                     className={`w-full flex flex-col items-start px-3 py-3 rounded-xl transition-all group ${isActive
                       ? "bg-indigo-500/10 border border-indigo-500/20 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"

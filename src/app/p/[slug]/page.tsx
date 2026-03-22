@@ -15,5 +15,5 @@ export default async function PublishedSitePage({ params }: PageProps) {
     notFound();
   }
 
-  redirect(publish.sitePath);
+  redirect(`/s/${publish.templateSlug}?published=${encodeURIComponent(publish.publishedSlug)}`);
 }

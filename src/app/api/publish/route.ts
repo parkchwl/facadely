@@ -19,13 +19,17 @@ export async function GET(req: Request) {
     await requireAuthenticatedUser(req);
     const { searchParams, origin } = new URL(req.url);
     const sitePath = searchParams.get("sitePath");
+    const siteId = searchParams.get("siteId");
 
-    if (!sitePath) {
-      return NextResponse.json({ error: "sitePath is required" }, { status: 400 });
+    if (!sitePath && !siteId) {
+      return NextResponse.json({ error: "siteId or sitePath is required" }, { status: 400 });
     }
 
     const cookieHeader = req.headers.get("cookie") ?? "";
-    const publish = await getSitePublishStateFromBackend(cookieHeader, sitePath);
+    const publish = await getSitePublishStateFromBackend(cookieHeader, {
+      siteId: siteId ?? undefined,
+      sitePath: sitePath ?? undefined,
+    });
     if (!publish.published || !publish.publishedSlug) {
       return NextResponse.json({ success: true, published: false });
     }
@@ -54,16 +58,17 @@ export async function POST(req: Request) {
   try {
     requireSameOrigin(req);
     await requireAuthenticatedUser(req);
-    const { sitePath, customDomain } = (await req.json()) as {
+    const { siteId, sitePath, customDomain } = (await req.json()) as {
+      siteId?: string;
       sitePath?: string;
       customDomain?: string;
     };
-    if (!sitePath) {
-      return NextResponse.json({ error: "sitePath is required" }, { status: 400 });
+    if (!sitePath && !siteId) {
+      return NextResponse.json({ error: "siteId or sitePath is required" }, { status: 400 });
     }
 
     const cookieHeader = req.headers.get("cookie") ?? "";
-    const publish = await publishSiteOnBackend(cookieHeader, { sitePath, customDomain });
+    const publish = await publishSiteOnBackend(cookieHeader, { siteId, sitePath, customDomain });
     if (!publish.publishedSlug) {
       return NextResponse.json({ error: "Publish slug was not created" }, { status: 500 });
     }
@@ -107,12 +112,16 @@ export async function DELETE(req: Request) {
     await requireAuthenticatedUser(req);
     const { searchParams } = new URL(req.url);
     const sitePath = searchParams.get("sitePath");
-    if (!sitePath) {
-      return NextResponse.json({ error: "sitePath is required" }, { status: 400 });
+    const siteId = searchParams.get("siteId");
+    if (!sitePath && !siteId) {
+      return NextResponse.json({ error: "siteId or sitePath is required" }, { status: 400 });
     }
 
     const cookieHeader = req.headers.get("cookie") ?? "";
-    const publish = await unpublishSiteOnBackend(cookieHeader, sitePath);
+    const publish = await unpublishSiteOnBackend(cookieHeader, {
+      siteId: siteId ?? undefined,
+      sitePath: sitePath ?? undefined,
+    });
 
     return NextResponse.json({
       success: true,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { SiteCustomization } from "@/lib/site-customization-types";
 import { findEditorFontByFamily } from "@/lib/font-catalog";
 import {
@@ -103,13 +103,18 @@ function applyCustomization(customization: SiteCustomization): void {
 
 export default function SiteCustomizationRuntime() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (!pathname || pathname === "/") return;
+    const publishedSlug = searchParams.get("published")?.trim() ?? "";
 
     const controller = new AbortController();
+    const requestUrl = publishedSlug
+      ? `/api/save-code?publishedSlug=${encodeURIComponent(publishedSlug)}`
+      : `/api/save-code?sitePath=${encodeURIComponent(pathname)}`;
 
-    fetch(`/api/save-code?sitePath=${encodeURIComponent(pathname)}`, {
+    fetch(requestUrl, {
       signal: controller.signal,
     })
       .then((res) => (res.ok ? res.json() : null))
@@ -124,7 +129,7 @@ export default function SiteCustomizationRuntime() {
       });
 
     return () => controller.abort();
-  }, [pathname]);
+  }, [pathname, searchParams]);
 
   return null;
 }

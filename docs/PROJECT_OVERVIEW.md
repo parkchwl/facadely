@@ -1,6 +1,6 @@
 # Project Overview
 
-Last updated: 2026-03-17
+Last updated: 2026-03-22
 
 ## Stack
 
@@ -85,9 +85,9 @@ Non-localized routes:
   - lists authenticated user sites from backend and links to `/editor?sitePath=...`
 - Editor:
   - `src/app/editor/page.tsx`
-  - loads only owned sites
-  - autosaves element/theme/token changes to `/api/save-code`
-  - resolves template manifests through the owning site path
+  - bootstraps owned site list, active site, manifest, customization, and publish state through `src/app/api/editor/bootstrap/route.ts`
+  - autosaves element/theme/token changes to `/api/save-code` using `siteId` as the primary identifier
+  - uses the stored `templatePath` from the owned site record instead of re-deriving template identity from the URL slug
 - Publish:
   - `src/app/api/publish/route.ts`
   - backend publish state source: `/api/v1/sites/publish`
@@ -116,6 +116,8 @@ Non-localized routes:
   - dashboard now renders real owned sites instead of mock cards
   - editor no longer exposes canonical templates as save targets
   - direct text editing now marks editor dirty on input, not only on blur
+  - editor bootstrap flow now consolidates site list, manifest, draft customization, and publish state into one authenticated request
+  - site save/publish paths now accept `siteId` so routing slugs are no longer the primary backend identifier
 - Backend auth cutover:
   - frontend auth source unified to Spring `/api/v1/auth/*`
   - Google OAuth only; Apple/Facebook removed from login flow
@@ -157,9 +159,13 @@ Non-localized routes:
   - site customization / publish state: PostgreSQL `sites`table via Spring backend
   - uploaded fonts: `public/uploads/fonts`
 - Backend public read surface:
-  - `GET /api/v1/sites/customization`
   - `GET /api/v1/sites/public/{slug}`
-  - these are intentionally public so published runtime/customization can be resolved without an authenticated editor session
+  - `GET /api/v1/sites/public/{slug}/customization`
+  - published runtime resolves only published site metadata/customization without an authenticated editor session
+- Backend owner-only draft surface:
+  - `GET /api/v1/sites/customization`
+  - `GET /api/v1/sites/publish`
+  - draft customization and publish state now require authentication plus ownership checks
 
 ## Env and Boot Assumptions
 
@@ -197,14 +203,19 @@ Backend:
   - runtime launch path is pinned by `backend/Procfile`
   - Railway backend is connected to the service named `Postgres`
 
-## Known Deliberate Exception
+## Current Publication Model
 
-- `GET /api/save-code`remains public because the runtime path ultimately needs read access to site customization without going through an authenticated editor session.
-- The current model therefore treats persisted customization JSON as presentation data.
-- If draft state and published state need to diverge later, the next refactor should separate:
+- Draft editor state and published runtime state are now separated at the API boundary.
+- Draft customization is loaded only through authenticated owner-scoped endpoints.
+- Published runtime reads through `/p/{slug}` -> published site lookup -> canonical `/s/{templateSlug}?published=...` runtime hydration.
+- The current persistence model still stores customization on the owned site record itself.
+
+## Next Architecture Step
+
+- If facadely starts supporting “edited template variants assigned across multiple user spaces,” the next backend refactor should introduce a distinct revision layer:
   - draft editor storage
   - published runtime snapshot storage
-  - publication snapshot generation
+  - reusable template revision / assignment records
 
 ## Validation Baseline
 

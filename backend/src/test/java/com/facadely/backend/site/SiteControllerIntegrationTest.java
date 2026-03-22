@@ -183,12 +183,14 @@ class SiteControllerIntegrationTest {
     }
 
     @Test
-    void customizationCanBeSavedByOwnerAndReadPublicly() throws Exception {
+    void customizationCanBeSavedByOwnerAndReadOnlyAfterPublish() throws Exception {
         MvcResult signupResult = signup("customization-owner@example.com");
         String accessToken = responseCookies(signupResult).get(ACCESS_COOKIE);
 
         JsonNode site = createSite(accessToken, "nexus-ai-enterprise");
         String sitePath = site.path("sitePath").asText();
+        String siteSlug = site.path("siteSlug").asText();
+        String siteId = site.path("id").asText();
         assertThat(sitePath).startsWith("/s/nexus-ai-enterprise-");
 
         mockMvc.perform(post(SITE_BASE + "/customization")
@@ -218,9 +220,33 @@ class SiteControllerIntegrationTest {
             .andExpect(jsonPath("$.customization.elements[0].editId").value("t5-title"));
 
         mockMvc.perform(get(SITE_BASE + "/customization")
-                .param("sitePath", sitePath))
+                .cookie(new Cookie(ACCESS_COOKIE, accessToken))
+                .param("siteId", siteId))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.success").value(true))
+            .andExpect(jsonPath("$.customization.themeTokens.primary").value("#123456"))
+            .andExpect(jsonPath("$.customization.elements[0].innerText").value("Saved from backend"));
+
+        mockMvc.perform(get(SITE_BASE + "/customization")
+                .param("sitePath", sitePath))
+            .andExpect(status().isUnauthorized());
+
+        mockMvc.perform(get(SITE_BASE + "/public/" + siteSlug + "/customization"))
+            .andExpect(status().isNotFound());
+
+        mockMvc.perform(post(SITE_BASE + "/publish")
+                .cookie(new Cookie(ACCESS_COOKIE, accessToken))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {
+                      "siteId": "%s"
+                    }
+                    """.formatted(siteId)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.publish.published").value(true));
+
+        mockMvc.perform(get(SITE_BASE + "/public/" + siteSlug + "/customization"))
+            .andExpect(status().isOk())
             .andExpect(jsonPath("$.customization.themeTokens.primary").value("#123456"))
             .andExpect(jsonPath("$.customization.elements[0].innerText").value("Saved from backend"));
     }

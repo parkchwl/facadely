@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { i18n } from '@/i18n/config';
 import { createLoginPathWithNext } from '@/lib/auth-redirect';
+import { getTemplateBySlug } from '@/lib/template-registry';
 
 const DEFAULT_API_BASE_URL =
   process.env.NODE_ENV === 'production'
@@ -95,10 +96,13 @@ export async function proxy(request: NextRequest) {
   }
 
   const protectedRoutes = ['/dashboard', '/editor', '/generate'];
+  const sRouteMatch = pathname.match(/^\/s\/([^/?#]+)/);
+  const sRouteSlug = sRouteMatch?.[1] ?? '';
+  const isOwnedDraftSiteRoute = Boolean(sRouteSlug) && getTemplateBySlug(sRouteSlug) === null;
 
   const isProtectedRoute = protectedRoutes.some(route =>
     pathnameWithoutLocale === route || pathnameWithoutLocale.startsWith(`${route}/`)
-  );
+  ) || isOwnedDraftSiteRoute;
 
   if (isProtectedRoute) {
     const locale = localeFromPath && i18n.locales.includes(localeFromPath) ? localeFromPath : i18n.defaultLocale;

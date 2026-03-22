@@ -64,11 +64,12 @@ public class SiteController {
     @GetMapping("/publish")
     public ResponseEntity<Map<String, Object>> publishState(
         Authentication authentication,
-        @RequestParam String sitePath
+        @RequestParam(required = false) UUID siteId,
+        @RequestParam(required = false) String sitePath
     ) {
         return ResponseEntity.ok(Map.of(
             "success", true,
-            "publish", siteService.getPublishState(requireUserId(authentication), sitePath)
+            "publish", siteService.getPublishState(requireUserId(authentication), siteId, sitePath)
         ));
     }
 
@@ -79,18 +80,19 @@ public class SiteController {
     ) {
         return ResponseEntity.ok(Map.of(
             "success", true,
-            "publish", siteService.publishSite(requireUserId(authentication), request.sitePath(), request.customDomain())
+            "publish", siteService.publishSite(requireUserId(authentication), request.siteId(), request.sitePath(), request.customDomain())
         ));
     }
 
     @DeleteMapping("/publish")
     public ResponseEntity<Map<String, Object>> unpublish(
         Authentication authentication,
-        @RequestParam String sitePath
+        @RequestParam(required = false) UUID siteId,
+        @RequestParam(required = false) String sitePath
     ) {
         return ResponseEntity.ok(Map.of(
             "success", true,
-            "publish", siteService.unpublishSite(requireUserId(authentication), sitePath)
+            "publish", siteService.unpublishSite(requireUserId(authentication), siteId, sitePath)
         ));
     }
 
@@ -103,10 +105,22 @@ public class SiteController {
     }
 
     @GetMapping("/customization")
-    public ResponseEntity<Map<String, Object>> customization(@RequestParam String sitePath) {
+    public ResponseEntity<Map<String, Object>> customization(
+        Authentication authentication,
+        @RequestParam(required = false) UUID siteId,
+        @RequestParam(required = false) String sitePath
+    ) {
         return ResponseEntity.ok(Map.of(
             "success", true,
-            "customization", siteService.getCustomization(sitePath)
+            "customization", siteService.getOwnedCustomization(requireUserId(authentication), siteId, sitePath)
+        ));
+    }
+
+    @GetMapping("/public/{slug}/customization")
+    public ResponseEntity<Map<String, Object>> publishedCustomization(@PathVariable String slug) {
+        return ResponseEntity.ok(Map.of(
+            "success", true,
+            "customization", siteService.getPublishedCustomization(slug)
         ));
     }
 

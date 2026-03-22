@@ -118,16 +118,16 @@ public class SiteService {
     }
 
     @Transactional(readOnly = true)
-    public SitePublishStateResponse getPublishState(UUID userId, String sitePathRaw) {
+    public SitePublishStateResponse getPublishState(UUID userId, UUID siteId, String sitePathRaw) {
         requireUser(userId);
-        SiteRecord site = requireOwnedSiteByPath(userId, sitePathRaw);
+        SiteRecord site = requireOwnedSite(userId, siteId, sitePathRaw);
         return toPublishResponse(site);
     }
 
     @Transactional
-    public SitePublishStateResponse publishSite(UUID userId, String sitePathRaw, String customDomainRaw) {
+    public SitePublishStateResponse publishSite(UUID userId, UUID siteId, String sitePathRaw, String customDomainRaw) {
         requireUser(userId);
-        SiteRecord site = requireOwnedSiteByPath(userId, sitePathRaw);
+        SiteRecord site = requireOwnedSite(userId, siteId, sitePathRaw);
 
         String customDomain = normalizeCustomDomain(customDomainRaw);
         if (customDomain != null && siteRecordRepository.existsByCustomDomainIgnoreCaseAndIdNot(customDomain, site.getId())) {
@@ -148,9 +148,9 @@ public class SiteService {
     }
 
     @Transactional
-    public SitePublishStateResponse unpublishSite(UUID userId, String sitePathRaw) {
+    public SitePublishStateResponse unpublishSite(UUID userId, UUID siteId, String sitePathRaw) {
         requireUser(userId);
-        SiteRecord site = requireOwnedSiteByPath(userId, sitePathRaw);
+        SiteRecord site = requireOwnedSite(userId, siteId, sitePathRaw);
 
         site.setLifecycleStatus(SiteLifecycleStatus.DRAFT);
         site.setCustomDomain(null);
@@ -178,10 +178,9 @@ public class SiteService {
     }
 
     @Transactional(readOnly = true)
-    public SiteCustomizationResponse getCustomization(String sitePathRaw) {
-        String sitePath = normalizeSitePath(sitePathRaw);
-        SiteRecord site = siteRecordRepository.findBySitePath(sitePath)
-            .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "SITE_NOT_FOUND", "사이트를 찾을 수 없습니다."));
+    public SiteCustomizationResponse getOwnedCustomization(UUID userId, UUID siteId, String sitePathRaw) {
+        requireUser(userId);
+        SiteRecord site = requireOwnedSite(userId, siteId, sitePathRaw);
         return readCustomization(site);
     }
 
@@ -191,7 +190,7 @@ public class SiteService {
             throw new ApiException(HttpStatus.BAD_REQUEST, "INVALID_CUSTOMIZATION_REQUEST", "커스터마이징 요청이 필요합니다.");
         }
 
-        SiteRecord site = requireOwnedSiteByPath(userId, request.sitePath());
+        SiteRecord site = requireOwnedSite(userId, request.siteId(), request.sitePath());
 
         List<PatchMutationRequest> patchRequests = collectPatchRequests(request);
         boolean hasWritePayload = request.themeTokens() != null
@@ -256,6 +255,24 @@ public class SiteService {
         String sitePath = normalizeSitePath(sitePathRaw);
         return siteRecordRepository.findByOwnerUserIdAndSitePath(userId, sitePath)
             .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "SITE_NOT_FOUND", "사이트를 찾을 수 없습니다."));
+    }
+
+    private SiteRecord requireOwnedSite(UUID userId, UUID siteId, String sitePathRaw) {
+        if (siteId != null) {
+            return requireOwnedSiteById(userId, siteId);
+        }
+
+        return requireOwnedSiteByPath(userId, sitePathRaw);
+    }
+
+    @Transactional(readOnly = true)
+    public SiteCustomizationResponse getPublishedCustomization(String publishedSlugRaw) {
+        String publishedSlug = normalizePublishedSlug(publishedSlugRaw);
+        SiteRecord site = siteRecordRepository
+            .findByPublishedSlugAndLifecycleStatus(publishedSlug, SiteLifecycleStatus.PUBLISHED)
+            .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "PUBLISHED_SITE_NOT_FOUND", "발행된 사이트를 찾을 수 없습니다."));
+
+        return readCustomization(site);
     }
 
     private SiteResponse toResponse(SiteRecord site, UserAccount user) {
