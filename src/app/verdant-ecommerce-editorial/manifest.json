@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "templateId": "verdant-ecommerce-editorial",
+  "sitePath": "/s/verdant-ecommerce-editorial",
+  "name": "E-Commerce Editorial",
+  "description": "Organic wellness e-commerce template with soft editorial product storytelling",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/verdant-ecommerce-editorial/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t26-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t26-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t26-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t26-copy", "label": "Hero Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t26-hero-image", "label": "Hero Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t26-products-title", "label": "Products Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t26-products-image", "label": "Products Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t26-lifestyle-image", "label": "Lifestyle Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t26-values-title", "label": "Values Title", "kind": "text", "fields": ["text", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": { "imageInitialVisible": 4, "sceneInitialVisible": 4 }
+}

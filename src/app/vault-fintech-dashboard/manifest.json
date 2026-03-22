@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "templateId": "vault-fintech-dashboard",
+  "sitePath": "/9",
+  "name": "Fintech Dashboard Landing",
+  "description": "Modern fintech landing page with dashboard preview, pricing tiers, and finance-focused feature sections",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/vault-fintech-dashboard/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t9-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t9-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t9-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t9-copy", "label": "Hero Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t9-dashboard-image", "label": "Dashboard Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t9-features-title", "label": "Features Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t9-card-image", "label": "Card Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t9-card-title", "label": "Card Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t9-pricing-title", "label": "Pricing Title", "kind": "text", "fields": ["text", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": { "imageInitialVisible": 4, "sceneInitialVisible": 4 }
+}

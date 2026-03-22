@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "templateId": "serenica-wellness-retreat",
+  "sitePath": "/14",
+  "name": "Serenica Wellness Retreat",
+  "description": "Calm wellness landing page with cinematic hero imagery and restorative sections",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/serenica-wellness-retreat/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t14-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t14-hero-image", "label": "Hero Image", "kind": "container", "fields": ["image", "color"] },
+    { "editId": "t14-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t14-nav-cta", "label": "Nav CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t14-eyebrow", "label": "Hero Eyebrow", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t14-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t14-copy", "label": "Hero Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t14-cta-primary", "label": "Primary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t14-cta-secondary", "label": "Secondary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t14-story-title", "label": "Story Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t14-story-copy", "label": "Story Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t14-story-image", "label": "Story Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t14-features-title", "label": "Features Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t14-features-copy", "label": "Features Copy", "kind": "text", "fields": ["text", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": {
+    "imageInitialVisible": 4,
+    "sceneInitialVisible": 4
+  }
+}

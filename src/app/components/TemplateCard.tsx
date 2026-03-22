@@ -4,7 +4,7 @@ import React from 'react';
 import OptimizedImage, { ImageType } from './OptimizedImage';
 
 interface Template {
-  id: number;
+  id: string | number;
   title: string;
   category: string;
   image: string;

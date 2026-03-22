@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "templateId": "rekolet-brutalism",
+  "sitePath": "/17",
+  "name": "Rekolet Brutalism",
+  "description": "Dark brutalist studio template with oversized typography, glass card hero, and recognition wall",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/rekolet-brutalism/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t17-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t17-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t17-hero-image", "label": "Hero Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t17-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t17-card-copy", "label": "Card Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t17-card-cta", "label": "Card CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t17-description", "label": "Description", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t17-recognition-title", "label": "Recognition Title", "kind": "text", "fields": ["text", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": { "imageInitialVisible": 4, "sceneInitialVisible": 4 }
+}

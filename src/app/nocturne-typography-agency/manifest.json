@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "templateId": "nocturne-typography-agency",
+  "sitePath": "/s/nocturne-typography-agency",
+  "name": "Typography Agency",
+  "description": "Cinematic dark portfolio template with editorial typography and luxury creative studio layouts",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/nocturne-typography-agency/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t25-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t25-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t25-hero-image", "label": "Hero Image", "kind": "container", "fields": ["image", "color"] },
+    { "editId": "t25-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t25-copy", "label": "Hero Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t25-hero-cta", "label": "Hero CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t25-work-title", "label": "Work Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t25-about-title", "label": "About Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t25-capabilities-title", "label": "Capabilities Title", "kind": "text", "fields": ["text", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": { "imageInitialVisible": 4, "sceneInitialVisible": 4 }
+}

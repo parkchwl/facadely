@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "templateId": "nordhaven-architecture",
+  "sitePath": "/18",
+  "name": "Nordhaven Architecture",
+  "description": "Scandinavian architecture showcase with masked hero lettering and editorial sections",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/nordhaven-architecture/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t18-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t18-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t18-cta-top", "label": "Top CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t18-hero-wordmark", "label": "Hero Wordmark", "kind": "text", "fields": ["text", "color", "font", "image"] },
+    { "editId": "t18-hero-image", "label": "Hero Image", "kind": "container", "fields": ["image", "color"] },
+    { "editId": "t18-about-title", "label": "About Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t18-about-copy-1", "label": "About Copy One", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t18-about-copy-2", "label": "About Copy Two", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t18-about-cta", "label": "About CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t18-services-eyebrow", "label": "Services Eyebrow", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t18-services-cta", "label": "Services CTA", "kind": "button", "fields": ["text", "button", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": {
+    "imageInitialVisible": 4,
+    "sceneInitialVisible": 4
+  }
+}

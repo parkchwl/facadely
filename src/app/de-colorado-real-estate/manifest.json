@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "templateId": "de-colorado-real-estate",
+  "sitePath": "/20",
+  "name": "De Colorado Real Estate",
+  "description": "Luxury real estate landing page with split-tone storytelling and editorial imagery",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/de-colorado-real-estate/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t20-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t20-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t20-header-cta", "label": "Header CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t20-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t20-top-image", "label": "Top Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t20-address", "label": "Address", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t20-intro-copy", "label": "Intro Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t20-cta-primary", "label": "Primary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t20-cta-secondary", "label": "Secondary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t20-bottom-title", "label": "Bottom Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t20-bottom-image", "label": "Bottom Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t20-bottom-copy-1", "label": "Bottom Copy One", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t20-bottom-copy-2", "label": "Bottom Copy Two", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t20-bottom-cta", "label": "Bottom CTA", "kind": "button", "fields": ["text", "button", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": {
+    "imageInitialVisible": 4,
+    "sceneInitialVisible": 4
+  }
+}

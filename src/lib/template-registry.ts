@@ -1,9 +1,10 @@
-type ReactTemplateRegistryEntry = {
+export type ReactTemplateRegistryEntry = {
   templateId: string;
   slug: string;
   legacyPath: string;
   name: string;
   description: string;
+  previewImage: string;
 };
 
 const REACT_TEMPLATE_REGISTRY: ReactTemplateRegistryEntry[] = [
@@ -13,6 +14,7 @@ const REACT_TEMPLATE_REGISTRY: ReactTemplateRegistryEntry[] = [
     legacyPath: "/6",
     name: "Velocity SaaS Landing",
     description: "Dark SaaS landing template with hero, feature grid, and social proof",
+    previewImage: "/template-previews/velocity-saas-landing.jpg",
   },
   {
     templateId: "nexus-ai-enterprise",
@@ -20,6 +22,7 @@ const REACT_TEMPLATE_REGISTRY: ReactTemplateRegistryEntry[] = [
     legacyPath: "/5",
     name: "Nexus AI Enterprise",
     description: "Dark enterprise AI consulting landing template",
+    previewImage: "/template-previews/nexus-ai-enterprise.jpg",
   },
   {
     templateId: "onepro-dashboard-white",
@@ -27,6 +30,95 @@ const REACT_TEMPLATE_REGISTRY: ReactTemplateRegistryEntry[] = [
     legacyPath: "/7",
     name: "OnePro Dashboard",
     description: "SaaS dashboard hero template",
+    previewImage: "/template-previews/onepro-dashboard-white.jpg",
+  },
+  {
+    templateId: "ion-modern-product",
+    slug: "ion-modern-product",
+    legacyPath: "/2",
+    name: "Modern Product Landing",
+    description: "Dark premium product landing page with performance storytelling and technical feature panels",
+    previewImage: "/template-previews/ion-modern-product.jpg",
+  },
+  {
+    templateId: "nocturne-typography-agency",
+    slug: "nocturne-typography-agency",
+    legacyPath: "/s/nocturne-typography-agency",
+    name: "Typography Agency",
+    description: "Cinematic dark portfolio template with editorial typography and luxury creative studio layouts",
+    previewImage: "/template-previews/nocturne-typography-agency.jpg",
+  },
+  {
+    templateId: "verdant-ecommerce-editorial",
+    slug: "verdant-ecommerce-editorial",
+    legacyPath: "/s/verdant-ecommerce-editorial",
+    name: "E-Commerce Editorial",
+    description: "Organic wellness e-commerce template with soft editorial product storytelling",
+    previewImage: "/template-previews/verdant-ecommerce-editorial.jpg",
+  },
+  {
+    templateId: "sejour-luxury-wellness-resort",
+    slug: "sejour-luxury-wellness-resort",
+    legacyPath: "/8",
+    name: "Luxury Wellness Resort",
+    description: "High-end hospitality landing page with serene hero imagery and curated resort sections",
+    previewImage: "/template-previews/sejour-luxury-wellness-resort.jpg",
+  },
+  {
+    templateId: "vault-fintech-dashboard",
+    slug: "vault-fintech-dashboard",
+    legacyPath: "/9",
+    name: "Fintech Dashboard Landing",
+    description: "Modern fintech landing page with dashboard preview, pricing tiers, and finance-focused feature sections",
+    previewImage: "/template-previews/vault-fintech-dashboard.jpg",
+  },
+  {
+    templateId: "serenica-wellness-retreat",
+    slug: "serenica-wellness-retreat",
+    legacyPath: "/14",
+    name: "Serenica Wellness Retreat",
+    description: "Calm wellness landing page with cinematic hero imagery and restorative sections",
+    previewImage: "/template-previews/serenica-wellness-retreat.jpg",
+  },
+  {
+    templateId: "rekolet-brutalism",
+    slug: "rekolet-brutalism",
+    legacyPath: "/17",
+    name: "Rekolet Brutalism",
+    description: "Dark brutalist studio template with oversized typography, glass card hero, and recognition wall",
+    previewImage: "/template-previews/rekolet-brutalism.jpg",
+  },
+  {
+    templateId: "nordhaven-architecture",
+    slug: "nordhaven-architecture",
+    legacyPath: "/18",
+    name: "Nordhaven Architecture",
+    description: "Scandinavian architecture showcase with masked hero lettering and editorial sections",
+    previewImage: "/template-previews/nordhaven-architecture.jpg",
+  },
+  {
+    templateId: "de-colorado-real-estate",
+    slug: "de-colorado-real-estate",
+    legacyPath: "/20",
+    name: "De Colorado Real Estate",
+    description: "Luxury real estate landing page with split-tone storytelling and editorial imagery",
+    previewImage: "/template-previews/de-colorado-real-estate.jpg",
+  },
+  {
+    templateId: "flato-minimalist-cabin",
+    slug: "flato-minimalist-cabin",
+    legacyPath: "/21",
+    name: "Flato Minimalist Cabin",
+    description: "Minimal real estate and architecture template with overlapped hero typography and asymmetrical gallery layout",
+    previewImage: "/template-previews/flato-minimalist-cabin.jpg",
+  },
+  {
+    templateId: "formark-architect-agency",
+    slug: "formark-architect-agency",
+    legacyPath: "/22",
+    name: "Formark Architect Agency",
+    description: "Brutalist architecture agency landing page with neon marquee and gallery storytelling",
+    previewImage: "/template-previews/formark-architect-agency.jpg",
   },
 ];
 

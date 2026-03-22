@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "templateId": "flato-minimalist-cabin",
+  "sitePath": "/21",
+  "name": "Flato Minimalist Cabin",
+  "description": "Minimal real estate and architecture template with overlapped hero typography and asymmetrical gallery layout",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/flato-minimalist-cabin/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t21-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t21-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t21-hero-image", "label": "Hero Image", "kind": "image", "fields": ["image"] },
+    { "editId": "t21-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t21-about-copy", "label": "About Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t21-about-cta", "label": "About CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t21-gallery-caption-1", "label": "Gallery Caption One", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t21-gallery-caption-2", "label": "Gallery Caption Two", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t21-gallery-caption-3", "label": "Gallery Caption Three", "kind": "text", "fields": ["text", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": { "imageInitialVisible": 4, "sceneInitialVisible": 4 }
+}

@@ -7,6 +7,7 @@ import { Search, ChevronDown, Grid3x3, Grid2x2 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '@/i18n/config';
+import OptimizedImage, { ImageType } from '@/app/components/OptimizedImage';
 
 type CategoryKey = 'business' | 'portfolio' | 'ecommerce' | 'blog' | 'landingPage';
 
@@ -16,6 +17,7 @@ export type TemplateListItem = {
   categoryKey: CategoryKey;
   path: string;
   description: string;
+  image: string;
 };
 
 export default function TemplatesPageClient({
@@ -232,13 +234,24 @@ export default function TemplatesPageClient({
               className="group"
             >
               <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                <div className="aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center relative overflow-hidden">
-                  <div className="text-gray-300 text-center group-hover:scale-110 transition-transform duration-300">
-                    <div className="text-4xl sm:text-5xl mb-2 sm:mb-3">✦</div>
-                    <p className="text-xs sm:text-sm font-medium">{dictionary.preview}</p>
+                <div className="aspect-[3/4] bg-black relative overflow-hidden">
+                  <OptimizedImage
+                    src={template.image}
+                    alt={`${template.name} preview`}
+                    type={ImageType.TEMPLATE_THUMBNAIL}
+                    fill
+                    sizes={gridCols === 2 ? '(max-width: 640px) 100vw, 50vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 lg:p-6">
+                    <div className="inline-flex items-center rounded-full bg-white/14 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
+                      {dictionary.preview}
+                    </div>
                   </div>
 
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/55 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="flex flex-col items-center gap-3 px-4">
                       <button
                         type="button"

@@ -9,6 +9,7 @@ type TemplateItem = {
   categoryKey: 'business' | 'portfolio' | 'ecommerce' | 'blog' | 'landingPage';
   path: string;
   description: string;
+  image: string;
 };
 
 function inferCategoryKey(input: string): TemplateItem['categoryKey'] {
@@ -43,6 +44,7 @@ export default async function TemplatesPage({
       categoryKey: inferCategoryKey(`${entry.templateId} ${entry.name} ${entry.description}`),
       path: entry.canonicalPath,
       description: entry.description,
+      image: entry.previewImage,
     }));
 
   return <TemplatesPageClient dictionary={dictionary.templatesPage} templates={templates} />;

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "templateId": "formark-architect-agency",
+  "sitePath": "/22",
+  "name": "Formark Architect Agency",
+  "description": "Brutalist architecture agency landing page with neon marquee and gallery storytelling",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/formark-architect-agency/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t22-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t22-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t22-pages-link", "label": "Pages Link", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t22-hero-image", "label": "Hero Image", "kind": "container", "fields": ["image", "color"] },
+    { "editId": "t22-about-label", "label": "About Label", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t22-about-subtext", "label": "About Subtext", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t22-about-copy", "label": "About Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t22-about-cta", "label": "About CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t22-gallery-image-1", "label": "Gallery Image One", "kind": "image", "fields": ["image"] },
+    { "editId": "t22-gallery-caption-1", "label": "Gallery Caption One", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t22-gallery-image-2", "label": "Gallery Image Two", "kind": "image", "fields": ["image"] },
+    { "editId": "t22-gallery-caption-2", "label": "Gallery Caption Two", "kind": "text", "fields": ["text", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": {
+    "imageInitialVisible": 4,
+    "sceneInitialVisible": 4
+  }
+}

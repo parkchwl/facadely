@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "templateId": "ion-modern-product",
+  "sitePath": "/2",
+  "name": "Modern Product Landing",
+  "description": "Dark premium product landing page with performance storytelling and technical feature panels",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/ion-modern-product/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t2-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t2-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t2-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t2-copy", "label": "Hero Copy", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t2-cta-primary", "label": "Primary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t2-cta-secondary", "label": "Secondary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t2-features-title", "label": "Features Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t2-performance-title", "label": "Performance Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t2-system-title", "label": "System Title", "kind": "text", "fields": ["text", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": { "imageInitialVisible": 4, "sceneInitialVisible": 4 }
+}

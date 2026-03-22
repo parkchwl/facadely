@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "templateId": "sejour-luxury-wellness-resort",
+  "sitePath": "/8",
+  "name": "Luxury Wellness Resort",
+  "description": "High-end hospitality landing page with serene hero imagery and curated resort sections",
+  "runtime": {
+    "format": "react",
+    "entry": "src/app/sejour-luxury-wellness-resort/TemplateView.tsx",
+    "deployment": "static"
+  },
+  "editable": [
+    { "editId": "t8-main", "label": "Main", "kind": "container", "fields": ["color"] },
+    { "editId": "t8-brand", "label": "Brand", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t8-hero-image", "label": "Hero Image", "kind": "container", "fields": ["image", "color"] },
+    { "editId": "t8-title", "label": "Hero Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t8-story-title", "label": "Story Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t8-properties-title", "label": "Properties Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t8-experiences-title", "label": "Experiences Title", "kind": "text", "fields": ["text", "color", "font"] },
+    { "editId": "t8-cta-primary", "label": "Primary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] },
+    { "editId": "t8-cta-secondary", "label": "Secondary CTA", "kind": "button", "fields": ["text", "button", "color", "font"] }
+  ],
+  "themeTokens": ["primary", "secondary", "radius", "spacingBase"],
+  "presetUi": { "imageInitialVisible": 4, "sceneInitialVisible": 4 }
+}
