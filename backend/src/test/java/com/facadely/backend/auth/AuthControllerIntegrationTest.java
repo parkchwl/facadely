@@ -1,6 +1,7 @@
 package com.facadely.backend.auth;
 
 import com.facadely.backend.auth.domain.UserAccount;
+import com.facadely.backend.auth.domain.UserStatus;
 import com.facadely.backend.auth.repository.AuthAuditLogRepository;
 import com.facadely.backend.auth.repository.OAuthGoogleAccountRepository;
 import com.facadely.backend.auth.repository.RefreshTokenRepository;
@@ -218,6 +219,58 @@ class AuthControllerIntegrationTest {
                 .content(signupPayload("signup-rate-blocked@example.com")))
             .andExpect(status().isTooManyRequests())
             .andExpect(jsonPath("$.code").value("SIGNUP_RATE_LIMITED"));
+    }
+
+    @Test
+    void loginRejectsInactiveUser() throws Exception {
+        signup("inactive-login@example.com");
+        UserAccount user = userAccountRepository.findByEmailIgnoreCase("inactive-login@example.com").orElseThrow();
+        user.setStatus(UserStatus.INACTIVE);
+        userAccountRepository.save(user);
+
+        mockMvc.perform(post(AUTH_BASE + "/login")
+                .header("Origin", FRONTEND_ORIGIN)
+                .header("User-Agent", "JUnit")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {
+                      "email": "inactive-login@example.com",
+                      "password": "Password123!"
+                    }
+                    """))
+            .andExpect(status().isForbidden())
+            .andExpect(jsonPath("$.code").value("ACCOUNT_INACTIVE"));
+    }
+
+    @Test
+    void refreshRejectsInactiveUser() throws Exception {
+        MvcResult signupResult = signup("inactive-refresh@example.com");
+        String refreshToken = responseCookies(signupResult).get(REFRESH_COOKIE);
+
+        UserAccount user = userAccountRepository.findByEmailIgnoreCase("inactive-refresh@example.com").orElseThrow();
+        user.setStatus(UserStatus.INACTIVE);
+        userAccountRepository.save(user);
+
+        mockMvc.perform(post(AUTH_BASE + "/refresh")
+                .header("Origin", FRONTEND_ORIGIN)
+                .cookie(new Cookie(REFRESH_COOKIE, refreshToken)))
+            .andExpect(status().isForbidden())
+            .andExpect(jsonPath("$.code").value("ACCOUNT_INACTIVE"));
+    }
+
+    @Test
+    void meRejectsInactiveUserEvenWithValidAccessCookie() throws Exception {
+        MvcResult signupResult = signup("inactive-me@example.com");
+        String accessToken = responseCookies(signupResult).get(ACCESS_COOKIE);
+
+        UserAccount user = userAccountRepository.findByEmailIgnoreCase("inactive-me@example.com").orElseThrow();
+        user.setStatus(UserStatus.INACTIVE);
+        userAccountRepository.save(user);
+
+        mockMvc.perform(get(AUTH_BASE + "/me")
+                .cookie(new Cookie(ACCESS_COOKIE, accessToken)))
+            .andExpect(status().isUnauthorized())
+            .andExpect(jsonPath("$.code").value("UNAUTHORIZED"));
     }
 
     private MvcResult signup(String email) throws Exception {

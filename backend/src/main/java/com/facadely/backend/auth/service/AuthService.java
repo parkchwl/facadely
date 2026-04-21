@@ -107,6 +107,7 @@ public class AuthService {
 
         UserAccount user = userAccountRepository.findByEmailIgnoreCase(email)
             .orElseThrow(() -> invalidCredentials(email, ipAddress));
+        ensureActive(user);
 
         UserCredential credential = userCredentialRepository.findById(user.getId())
             .orElseThrow(() -> invalidCredentials(email, ipAddress));
@@ -127,15 +128,18 @@ public class AuthService {
         }
 
         String tokenHash = hash(refreshTokenRaw);
-        RefreshToken existing = refreshTokenRepository
-            .findByTokenHashAndRevokedAtIsNullAndExpiresAtAfter(tokenHash, Instant.now())
+        Instant now = Instant.now();
+        int revoked = refreshTokenRepository.revokeByTokenHashIfActive(tokenHash, now, now);
+        if (revoked != 1) {
+            throw new ApiException(HttpStatus.UNAUTHORIZED, "INVALID_REFRESH_TOKEN", "유효하지 않은 리프레시 토큰입니다.");
+        }
+
+        UUID userId = refreshTokenRepository.findUserIdByTokenHash(tokenHash)
             .orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "INVALID_REFRESH_TOKEN", "유효하지 않은 리프레시 토큰입니다."));
 
-        existing.setRevokedAt(Instant.now());
-        refreshTokenRepository.save(existing);
-
-        UserAccount user = userAccountRepository.findById(existing.getUserId())
+        UserAccount user = userAccountRepository.findById(userId)
             .orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "USER_NOT_FOUND", "사용자를 찾을 수 없습니다."));
+        ensureActive(user);
 
         logAudit(user.getId(), "REFRESH_SUCCESS", ipAddress, userAgent);
         return issueTokens(user, userAgent, ipAddress);
@@ -159,6 +163,7 @@ public class AuthService {
     public MeResponse me(UUID userId) {
         UserAccount user = userAccountRepository.findById(userId)
             .orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "USER_NOT_FOUND", "사용자를 찾을 수 없습니다."));
+        ensureActive(user);
 
         boolean termsAgreed = termsAgreementRepository.existsByUserId(user.getId());
 
@@ -285,6 +290,7 @@ public class AuthService {
             googleAccount.setEmail(email.toLowerCase());
             oAuthGoogleAccountRepository.save(googleAccount);
         }
+        ensureActive(user);
 
         logAudit(user.getId(), "GOOGLE_LOGIN_SUCCESS", ipAddress, userAgent);
         return issueTokens(user, userAgent, ipAddress);
@@ -293,6 +299,12 @@ public class AuthService {
     private ApiException invalidCredentials(String email, String ipAddress) {
         loginAttemptService.recordFailure(email, ipAddress);
         return new ApiException(HttpStatus.UNAUTHORIZED, "INVALID_CREDENTIALS", "이메일 또는 비밀번호가 올바르지 않습니다.");
+    }
+
+    private void ensureActive(UserAccount user) {
+        if (user.getStatus() != UserStatus.ACTIVE) {
+            throw new ApiException(HttpStatus.FORBIDDEN, "ACCOUNT_INACTIVE", "비활성화된 계정입니다.");
+        }
     }
 
     private AuthBundle issueTokens(UserAccount user, String userAgent, String ipAddress) {

@@ -1,11 +1,13 @@
 package com.facadely.backend.auth.service;
 
+import com.facadely.backend.auth.domain.AuthRateLimitState;
+import com.facadely.backend.auth.repository.AuthRateLimitRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class LoginAttemptService {
@@ -14,67 +16,99 @@ public class LoginAttemptService {
     private static final int MAX_SIGNUP_ATTEMPTS = 5;
     private static final Duration WINDOW = Duration.ofMinutes(15);
 
-    private final Map<String, AttemptState> loginStates = new ConcurrentHashMap<>();
-    private final Map<String, AttemptState> signupStates = new ConcurrentHashMap<>();
+    private static final int CREATE_RETRY_COUNT = 3;
 
+    private final AuthRateLimitRepository authRateLimitRepository;
+
+    public LoginAttemptService(AuthRateLimitRepository authRateLimitRepository) {
+        this.authRateLimitRepository = authRateLimitRepository;
+    }
+
+    @Transactional
     public boolean isLocked(String email, String ipAddress) {
-        return isLocked(loginStates, key(email, ipAddress));
+        return isLocked(key(email, ipAddress));
     }
 
+    @Transactional
     public void recordFailure(String email, String ipAddress) {
-        recordAttempt(loginStates, key(email, ipAddress), MAX_LOGIN_ATTEMPTS);
+        recordAttempt(key(email, ipAddress), MAX_LOGIN_ATTEMPTS);
     }
 
+    @Transactional
     public void recordSuccess(String email, String ipAddress) {
-        loginStates.remove(key(email, ipAddress));
+        authRateLimitRepository.deleteById(key(email, ipAddress));
     }
 
+    @Transactional
     public boolean isSignupLocked(String ipAddress) {
-        return isLocked(signupStates, signupKey(ipAddress));
+        return isLocked(signupKey(ipAddress));
     }
 
+    @Transactional
     public void recordSignupAttempt(String ipAddress) {
-        recordAttempt(signupStates, signupKey(ipAddress), MAX_SIGNUP_ATTEMPTS);
+        recordAttempt(signupKey(ipAddress), MAX_SIGNUP_ATTEMPTS);
     }
 
+    @Transactional
     public void clearAll() {
-        loginStates.clear();
-        signupStates.clear();
+        authRateLimitRepository.deleteAllInBatch();
     }
 
-    private boolean isLocked(Map<String, AttemptState> states, String key) {
-        AttemptState state = states.get(key);
+    private boolean isLocked(String rateKey) {
+        AuthRateLimitState state = authRateLimitRepository.findForUpdate(rateKey).orElse(null);
         if (state == null) {
             return false;
         }
+
         Instant now = Instant.now();
-        if (state.lockedUntil != null && state.lockedUntil.isAfter(now)) {
+        if (state.getLockedUntil() != null && state.getLockedUntil().isAfter(now)) {
             return true;
         }
-        if (state.firstAttempt != null && state.firstAttempt.plus(WINDOW).isBefore(now)) {
-            states.remove(key);
+
+        if (state.getFirstAttemptAt() != null && state.getFirstAttemptAt().plus(WINDOW).isBefore(now)) {
+            authRateLimitRepository.delete(state);
             return false;
         }
+
         return false;
     }
 
-    private void recordAttempt(Map<String, AttemptState> states, String key, int maxAttempts) {
+    private void recordAttempt(String rateKey, int maxAttempts) {
         Instant now = Instant.now();
-        states.compute(key, (ignored, prev) -> {
-            AttemptState next = prev == null ? new AttemptState() : prev;
-            if (next.firstAttempt == null || next.firstAttempt.plus(WINDOW).isBefore(now)) {
-                next.firstAttempt = now;
-                next.attempts = 1;
-                next.lockedUntil = null;
-                return next;
+        AuthRateLimitState state = loadOrCreateLocked(rateKey);
+        Instant firstAttemptAt = state.getFirstAttemptAt();
+
+        if (firstAttemptAt == null || firstAttemptAt.plus(WINDOW).isBefore(now)) {
+            state.setFirstAttemptAt(now);
+            state.setAttempts(1);
+            state.setLockedUntil(null);
+            authRateLimitRepository.save(state);
+            return;
+        }
+
+        int attempts = state.getAttempts() + 1;
+        state.setAttempts(attempts);
+        if (attempts >= maxAttempts) {
+            state.setLockedUntil(now.plus(WINDOW));
+        }
+        authRateLimitRepository.save(state);
+    }
+
+    private AuthRateLimitState loadOrCreateLocked(String rateKey) {
+        for (int attempt = 0; attempt < CREATE_RETRY_COUNT; attempt += 1) {
+            AuthRateLimitState existing = authRateLimitRepository.findForUpdate(rateKey).orElse(null);
+            if (existing != null) {
+                return existing;
             }
 
-            next.attempts += 1;
-            if (next.attempts >= maxAttempts) {
-                next.lockedUntil = now.plus(WINDOW);
+            try {
+                return authRateLimitRepository.saveAndFlush(new AuthRateLimitState(rateKey));
+            } catch (DataIntegrityViolationException ignored) {
+                // Another request inserted concurrently; retry and acquire lock.
             }
-            return next;
-        });
+        }
+
+        throw new IllegalStateException("Unable to create rate-limit state.");
     }
 
     private String key(String email, String ipAddress) {
@@ -83,11 +117,5 @@ public class LoginAttemptService {
 
     private String signupKey(String ipAddress) {
         return "signup|" + (ipAddress == null ? "unknown" : ipAddress);
-    }
-
-    private static class AttemptState {
-        private int attempts;
-        private Instant firstAttempt;
-        private Instant lockedUntil;
     }
 }
