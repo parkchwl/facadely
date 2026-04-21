@@ -27,9 +27,6 @@ const CONFIG = {
   // Timing & Intervals
   FAQ_ROTATION_INTERVAL: 15000,      // FAQ auto-cycle interval (ms)
   INTERSECTION_THRESHOLD: 0.3,        // IntersectionObserver threshold
-  CRITICAL_IMAGES: 3,                 // Images needed before showing page
-  MIN_LOADING_TIME: 500,              // Minimum loading screen duration
-  MAX_LOADING_TIME: 1500,             // Maximum loading screen duration
 
   // Animation Durations (seconds)
   ANIMATION_DURATION_FAST: 0.3,       // Quick transitions
@@ -39,10 +36,6 @@ const CONFIG = {
   // Animation Delays
   ANIMATION_DELAY_SMALL: 0.2,         // Small delay
   ANIMATION_DELAY_MEDIUM: 0.4,        // Medium delay
-
-  // Image Quality & Format
-  IMAGE_QUALITY: 75,                  // Next.js image quality
-  IMAGE_FORMAT: 'webp' as const,      // Image format
 
   // Scales & Transforms
   HOVER_SCALE: 1.05,                  // Hover scale effect
@@ -312,65 +305,6 @@ function useFaqRotation(faqCount: number) {
   };
 }
 
-/**
- * useImageLoading Hook
- * Handles image loading state and minimum loading screen duration
- * Returns loading state and image load handler
- */
-// Custom hook for image loading with session check
-function useImageLoading(criticalImageCount: number = CONFIG.CRITICAL_IMAGES) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState(0);
-  const loadStartTime = React.useRef<number | null>(null);
-  const hasVisitedRef = React.useRef(false);
-
-  useEffect(() => {
-    hasVisitedRef.current = sessionStorage.getItem('hasVisited') === 'true';
-
-    // Returning visitors skip loading screen after hydration.
-    if (hasVisitedRef.current) {
-      const visitedTimer = setTimeout(() => {
-        setIsLoaded(true);
-      }, 0);
-      return () => clearTimeout(visitedTimer);
-    }
-
-    loadStartTime.current = Date.now();
-  }, []);
-
-  // Manage loading screen timing
-  useEffect(() => {
-    if (hasVisitedRef.current || isLoaded || loadStartTime.current === null) return;
-
-    if (imagesLoaded >= criticalImageCount) {
-      const elapsed = Date.now() - loadStartTime.current;
-      const remainingDelay = Math.max(0, CONFIG.MIN_LOADING_TIME - elapsed);
-
-      const minTimer = setTimeout(() => {
-        setIsLoaded(true);
-        sessionStorage.setItem('hasVisited', 'true');
-      }, remainingDelay);
-      return () => clearTimeout(minTimer);
-    } else {
-      const maxTimer = setTimeout(() => {
-        setIsLoaded(true);
-        sessionStorage.setItem('hasVisited', 'true');
-      }, CONFIG.MAX_LOADING_TIME);
-      return () => clearTimeout(maxTimer);
-    }
-  }, [imagesLoaded, criticalImageCount, isLoaded]);
-
-  const handleImageLoad = useCallback(() => {
-    setImagesLoaded(prev => prev + 1);
-  }, []);
-
-  return {
-    isLoaded,
-    imagesLoaded,
-    handleImageLoad,
-  };
-}
-
 const HOME_GALLERY_TEMPLATES = listCanonicalTemplateEntries().map((entry) => ({
   id: entry.templateId,
   title: entry.name,
@@ -435,7 +369,6 @@ interface HomePageProps {
 
 export default function HomePage({ dictionary, lang }: HomePageProps) {
   // Initialize custom hooks for state management
-  const { isLoaded, handleImageLoad } = useImageLoading();
   const {
     activeFaqIndex,
     isPaused,
@@ -448,7 +381,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
   } = useFaqRotation(dictionary.faq.questions.length);
 
   // Extract dictionary data
-  const { hero, solution, faq, finalCta, loadingScreen } = dictionary;
+  const { hero, solution, faq, finalCta } = dictionary;
   const FAQS = faq.questions;
   const langPrefix = lang ? `/${lang}` : '';
   const SOLUTION_DATA = solution.items;
@@ -482,7 +415,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
     () =>
       HOME_GALLERY_TEMPLATES.filter(
         (template) => !topRowTemplateIdSet.has(String(template.id))
-      ),
+      ).slice(0, 6),
     [topRowTemplateIdSet]
   );
   const duplicatedRow1 = useMemo(() =>
@@ -603,8 +536,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
 
 
   return (
-    <>
-      <main className="bg-black min-h-app-vh">
+    <main className="bg-black min-h-app-vh">
         <section className="relative z-10 flex flex-col bg-black">
           <div className="relative text-center text-white flex items-center justify-center overflow-hidden py-24 sm:py-32 lg:py-40">
             {/* Plain Black Background */}
@@ -616,6 +548,8 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                 type={ImageType.STATIC_BACKGROUND}
                 fill
                 priority
+                sizes="100vw"
+                quality={68}
                 className="object-cover opacity-40"
               />
               <div className="absolute inset-0 bg-black/50" />
@@ -659,7 +593,6 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                         template={template}
                         index={index}
                         imageWidthPx={galleryCardWidth}
-                        handleImageLoad={index < 4 ? handleImageLoad : undefined}
                       />
                     </div>
                   </Link>
@@ -744,6 +677,7 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
                     height={1996}
                     priority={false}
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 70vw, 900px"
+                    quality={60}
                     className="h-auto w-full"
                   />
                 </motion.div>
@@ -758,8 +692,9 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             alt="facadely solution background"
             type={ImageType.STATIC_BACKGROUND}
             fill
+            sizes="100vw"
+            quality={62}
             className="object-cover"
-            onLoad={handleImageLoad}
           />
           <div className="absolute inset-0 bg-black/10"></div>
           <div className={`${STYLES.containerClasses} ${STYLES.sectionSpacing} relative z-10`}>
@@ -972,31 +907,6 @@ export default function HomePage({ dictionary, lang }: HomePageProps) {
             </div>
           </div>
         </section>
-      </main>
-
-      <AnimatePresence>
-        {!isLoaded && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="fixed bg-black z-50 flex flex-col items-center justify-center"
-            style={{
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              overflow: 'hidden'
-            }}
-          >
-            <div className="text-center">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white font-montserrat tracking-tight animate-pulse-glow">
-                ✦ {loadingScreen.brandName}
-              </h1>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    </main>
   );
 }

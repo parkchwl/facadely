@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import "../../globals.css";
 import Layout from "../../components/Layout";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import { getDictionary } from "@/lib/get-dictionary";
 import { i18n, type Locale } from "@/i18n/config";
-import { getAuthenticatedUser } from "@/lib/server/api-security";
 
 type LayoutProps = Readonly<{
   children: React.ReactNode;
@@ -25,11 +23,9 @@ export default async function MainLayout({
     ? (lang as Locale)
     : i18n.defaultLocale;
   const dictionary = await getDictionary(resolvedLang);
-  const requestHeaders = await headers();
-  const authenticatedUser = await getAuthenticatedUser(requestHeaders.get('cookie') || '');
   return (
     <ErrorBoundary>
-      <Layout dictionary={dictionary} authenticatedUser={authenticatedUser}>{children}</Layout>
+      <Layout dictionary={dictionary} authenticatedUser={null}>{children}</Layout>
     </ErrorBoundary>
   );
 }

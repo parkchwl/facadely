@@ -37,9 +37,6 @@ const nextConfig = {
     return config;
   },
   images: {
-    // Custom loader for flexible image handling (CDN-ready)
-    loader: 'custom',
-    loaderFile: './src/lib/imageLoader.ts',
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {

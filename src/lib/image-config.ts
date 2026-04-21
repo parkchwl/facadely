@@ -30,17 +30,17 @@ interface ImageStrategy {
 
 export const IMAGE_STRATEGY: Record<ImageTypeKey, ImageStrategy> = {
   [ImageType.STATIC_BACKGROUND]: {
-    component: 'img',
-    loading: 'eager',
-    optimization: false,
-    reason: 'Above-the-fold static AVIF, pre-optimized, no need for Next.js processing'
+    component: 'Image',
+    loading: 'lazy',
+    optimization: true,
+    reason: 'Background images should use responsive variants; promote only true LCP assets with priority'
   },
 
   [ImageType.TEMPLATE_THUMBNAIL]: {
-    component: 'img',
+    component: 'Image',
     loading: 'lazy',
-    optimization: false,
-    reason: 'Native img tag for faster mobile performance, WebP already optimized'
+    optimization: true,
+    reason: 'Template lists benefit from responsive image sizing and modern format conversion'
   },
 
   [ImageType.USER_CONTENT]: {

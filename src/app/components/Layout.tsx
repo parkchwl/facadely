@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, ReactNode } from 'react';
+import { useEffect, useState, ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Globe, Check, Menu, X, Instagram, Facebook, ChevronDown, LayoutDashboard, LogOut } from 'lucide-react';
@@ -10,6 +10,7 @@ import { languageNames } from '@/i18n/utils';
 import type { Dictionary } from '@/types/dictionary';
 import type { AuthenticatedUser } from '@/lib/auth-types';
 import { getErrorMessage, logoutWithRetry } from '@/lib/logout';
+import { me } from '@/lib/api/auth';
 
 const dmSerif = { className: 'font-serif' } as const;
 
@@ -21,6 +22,7 @@ interface LayoutProps {
 
 export default function Layout({ children, dictionary, authenticatedUser }: LayoutProps) {
   const pathname = usePathname();
+  const [currentUser, setCurrentUser] = useState<AuthenticatedUser | null>(authenticatedUser);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
@@ -28,6 +30,34 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [logoutError, setLogoutError] = useState<string | null>(null);
   const editorHref = process.env.NEXT_PUBLIC_BETA_EDITOR_URL?.trim() || '/editor';
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const resolveAuthenticatedUser = async () => {
+      if (authenticatedUser) {
+        setCurrentUser(authenticatedUser);
+        return;
+      }
+
+      try {
+        const user = await me();
+        if (isMounted) {
+          setCurrentUser(user);
+        }
+      } catch {
+        if (isMounted) {
+          setCurrentUser(null);
+        }
+      }
+    };
+
+    resolveAuthenticatedUser();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [authenticatedUser]);
 
   const getLocaleFromPath = (path: string): Locale => {
     const segments = path.split('/');
@@ -173,7 +203,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
               </AnimatePresence>
             </div>
 
-            {authenticatedUser ? (
+            {currentUser ? (
               <div
                 className="relative"
                 onMouseEnter={() => setIsAccountMenuOpen(true)}
@@ -203,7 +233,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
                         <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">
                           {accountMenu.signedInAs}
                         </p>
-                        <p className="mt-1.5 truncate text-xs font-medium text-gray-700">{authenticatedUser.email}</p>
+                        <p className="mt-1.5 truncate text-xs font-medium text-gray-700">{currentUser.email}</p>
                       </div>
                       <div className="p-1.5">
                         <Link
@@ -398,7 +428,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
                     transition={{ delay: 0.95, duration: 0.5 }}
                     className="space-y-2"
                   >
-                    {authenticatedUser ? (
+                    {currentUser ? (
                       <>
                         <button
                           type="button"
@@ -421,7 +451,7 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
                                 <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45">
                                   {accountMenu.signedInAs}
                                 </p>
-                                <p className="mt-1.5 break-all text-xs text-white/70">{authenticatedUser.email}</p>
+                                <p className="mt-1.5 break-all text-xs text-white/70">{currentUser.email}</p>
                                 <Link
                                   href={dashboardHref}
                                   onClick={() => setIsMobileMenuOpen(false)}

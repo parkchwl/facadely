@@ -29,7 +29,7 @@ const TemplateCard: React.FC<TemplateCardProps> = React.memo(({ template, index,
         fill
         sizes={imageSizes}
         className="object-cover opacity-100"
-        priority={index < 6}
+        priority={index < 1}
         onLoad={handleImageLoad}
       />
     </div>

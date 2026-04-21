@@ -23,6 +23,7 @@ export const appMontserrat = localFont({
   ],
   variable: "--font-app-montserrat",
   display: "swap",
+  preload: false,
   fallback: ["Arial", "Helvetica", "sans-serif"],
 });
 
@@ -34,5 +35,6 @@ export const appPlusJakarta = localFont({
   ],
   variable: "--font-app-plus-jakarta",
   display: "swap",
+  preload: false,
   fallback: ["Arial", "Helvetica", "sans-serif"],
 });
