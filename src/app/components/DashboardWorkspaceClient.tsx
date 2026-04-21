@@ -14,6 +14,7 @@ import {
   SunMedium,
   Trash2,
 } from "lucide-react";
+import { markAuthSessionHint, recordAuthSessionProbe } from "@/lib/auth-session-hint";
 
 export type DashboardSiteCard = {
   id: string;
@@ -194,6 +195,11 @@ export default function DashboardWorkspaceClient({
   useEffect(() => {
     setCards(siteCards);
   }, [siteCards]);
+
+  useEffect(() => {
+    markAuthSessionHint();
+    recordAuthSessionProbe(true);
+  }, []);
 
   useEffect(() => {
     try {

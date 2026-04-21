@@ -49,6 +49,14 @@ app:
       access-name: ${COOKIE_ACCESS_NAME:facadely_at}
       refresh-name: ${COOKIE_REFRESH_NAME:facadely_rt}
       domain: ${COOKIE_DOMAIN:}
+  security:
+    public-rate-limit:
+      enabled: ${PUBLIC_RATE_LIMIT_ENABLED:true}
+      window-seconds: ${PUBLIC_RATE_LIMIT_WINDOW_SECONDS:60}
+      cleanup-interval-seconds: ${PUBLIC_RATE_LIMIT_CLEANUP_INTERVAL_SECONDS:300}
+      health-max-requests: ${PUBLIC_RATE_LIMIT_HEALTH_MAX_REQUESTS:120}
+      auth-me-max-requests: ${PUBLIC_RATE_LIMIT_AUTH_ME_MAX_REQUESTS:60}
+      sites-public-max-requests: ${PUBLIC_RATE_LIMIT_SITES_PUBLIC_MAX_REQUESTS:240}
 
 logging:
   level:

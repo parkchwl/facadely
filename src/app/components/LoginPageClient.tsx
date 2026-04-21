@@ -8,6 +8,7 @@ import SocialLoginButton from './SocialLoginButton';
 import { getGoogleAuthUrl, login, signup } from '@/lib/api/auth';
 import type { LoginPageDictionary } from '@/types/dictionary';
 import { resolvePostLoginPath, sanitizeNextPath } from '@/lib/auth-redirect';
+import { markAuthSessionHint, recordAuthSessionProbe } from '@/lib/auth-session-hint';
 
 // Helper to render text with links
 const TextWithLinks = ({ text, links }: { text: string, links: { [key: string]: { href: string, text: string } } }) => {
@@ -91,6 +92,8 @@ export default function LoginPageClient({ dictionary }: { dictionary: LoginPageD
         await login({ email, password });
       }
 
+      markAuthSessionHint();
+      recordAuthSessionProbe(true);
       router.push(postLoginPath);
     } catch (err) {
       setError(err instanceof Error ? err.message : dictionary.unknownError);

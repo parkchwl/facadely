@@ -11,6 +11,13 @@ import type { Dictionary } from '@/types/dictionary';
 import type { AuthenticatedUser } from '@/lib/auth-types';
 import { getErrorMessage, logoutWithRetry } from '@/lib/logout';
 import { me } from '@/lib/api/auth';
+import {
+  clearAuthSessionHint,
+  hasAuthSessionHint,
+  markAuthSessionHint,
+  recordAuthSessionProbe,
+  shouldProbeAuthSession,
+} from '@/lib/auth-session-hint';
 
 const dmSerif = { className: 'font-serif' } as const;
 
@@ -33,28 +40,44 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
 
   useEffect(() => {
     let isMounted = true;
+    let probeTimer: ReturnType<typeof setTimeout> | null = null;
 
     const resolveAuthenticatedUser = async () => {
       if (authenticatedUser) {
         setCurrentUser(authenticatedUser);
+        markAuthSessionHint();
+        recordAuthSessionProbe(true);
         return;
       }
 
-      try {
-        const user = await me();
-        if (isMounted) {
-          setCurrentUser(user);
-        }
-      } catch {
-        if (isMounted) {
-          setCurrentUser(null);
-        }
+      if (!hasAuthSessionHint() || !shouldProbeAuthSession()) {
+        return;
       }
+
+      probeTimer = setTimeout(async () => {
+        try {
+          const user = await me();
+          if (isMounted) {
+            setCurrentUser(user);
+            markAuthSessionHint();
+            recordAuthSessionProbe(true);
+          }
+        } catch {
+          if (isMounted) {
+            setCurrentUser(null);
+          }
+          clearAuthSessionHint();
+          recordAuthSessionProbe(false);
+        }
+      }, 1200);
     };
 
     resolveAuthenticatedUser();
 
     return () => {
+      if (probeTimer) {
+        clearTimeout(probeTimer);
+      }
       isMounted = false;
     };
   }, [authenticatedUser]);
@@ -112,6 +135,8 @@ export default function Layout({ children, dictionary, authenticatedUser }: Layo
 
     try {
       await logoutWithRetry();
+      clearAuthSessionHint();
+      setCurrentUser(null);
       window.location.assign(homeHref);
     } catch (error) {
       setIsLoggingOut(false);

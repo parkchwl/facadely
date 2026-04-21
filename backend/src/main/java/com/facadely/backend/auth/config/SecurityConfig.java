@@ -1,5 +1,6 @@
 package com.facadely.backend.auth.config;
 
+import com.facadely.backend.common.security.PublicEndpointRateLimitFilter;
 import com.facadely.backend.auth.security.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +28,7 @@ public class SecurityConfig {
     private final JsonAuthenticationEntryPoint jsonAuthenticationEntryPoint;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
     private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
+    private final PublicEndpointRateLimitFilter publicEndpointRateLimitFilter;
     private final AuthProperties authProperties;
 
     public SecurityConfig(
@@ -35,6 +37,7 @@ public class SecurityConfig {
         JsonAuthenticationEntryPoint jsonAuthenticationEntryPoint,
         OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler,
         OAuth2LoginFailureHandler oAuth2LoginFailureHandler,
+        PublicEndpointRateLimitFilter publicEndpointRateLimitFilter,
         AuthProperties authProperties
     ) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
@@ -42,6 +45,7 @@ public class SecurityConfig {
         this.jsonAuthenticationEntryPoint = jsonAuthenticationEntryPoint;
         this.oAuth2LoginSuccessHandler = oAuth2LoginSuccessHandler;
         this.oAuth2LoginFailureHandler = oAuth2LoginFailureHandler;
+        this.publicEndpointRateLimitFilter = publicEndpointRateLimitFilter;
         this.authProperties = authProperties;
     }
 
@@ -68,6 +72,7 @@ public class SecurityConfig {
             )
             .formLogin(form -> form.disable())
             .httpBasic(basic -> basic.disable())
+            .addFilterBefore(publicEndpointRateLimitFilter, UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(authOriginValidationFilter, UsernamePasswordAuthenticationFilter.class)
             .addFilterAfter(jwtAuthenticationFilter, AuthOriginValidationFilter.class);
 
