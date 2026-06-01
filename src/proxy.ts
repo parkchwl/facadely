@@ -16,6 +16,62 @@ const API_BASE_URL = (
 
 const ACCESS_COOKIE_NAME = process.env.COOKIE_ACCESS_NAME || 'facadely_at';
 const REFRESH_COOKIE_NAME = process.env.COOKIE_REFRESH_NAME || 'facadely_rt';
+const EMERGENCY_LOCK_ENABLED = process.env.EMERGENCY_LOCK_ENABLED !== 'false';
+
+function emergencyLockResponse(): NextResponse {
+  return new NextResponse(
+    `<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>facadely maintenance</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #050505;
+        color: #f5f5f5;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      main {
+        width: min(560px, calc(100% - 48px));
+        text-align: center;
+      }
+      strong {
+        display: block;
+        margin-bottom: 12px;
+        font-size: clamp(28px, 7vw, 52px);
+        line-height: 1;
+      }
+      p {
+        margin: 0;
+        color: #a3a3a3;
+        font-size: 16px;
+        line-height: 1.7;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <strong>facadely</strong>
+      <p>현재 보안 점검을 위해 서비스를 일시적으로 중단했습니다.</p>
+    </main>
+  </body>
+</html>`,
+    {
+      status: 503,
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Retry-After': '3600',
+      },
+    }
+  );
+}
 
 function hasCookie(request: NextRequest, cookieName: string): boolean {
   return request.cookies.has(cookieName);
@@ -41,6 +97,10 @@ async function isAuthenticated(request: NextRequest): Promise<boolean> {
 }
 
 export async function proxy(request: NextRequest) {
+  if (EMERGENCY_LOCK_ENABLED) {
+    return emergencyLockResponse();
+  }
+
   const pathname = request.nextUrl.pathname;
   const passthroughRoutes = ['/editor', '/5', '/6', '/7', '/s', '/t', '/p'];
   const isPassthroughRoute = passthroughRoutes.some(

@@ -25,3 +25,6 @@ spring:
 app:
   auth:
     frontend-origin: http://localhost:3000
+  security:
+    emergency-lock:
+      enabled: false

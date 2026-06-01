@@ -50,6 +50,8 @@ app:
       refresh-name: ${COOKIE_REFRESH_NAME:facadely_rt}
       domain: ${COOKIE_DOMAIN:}
   security:
+    emergency-lock:
+      enabled: ${EMERGENCY_LOCK_ENABLED:true}
     public-rate-limit:
       enabled: ${PUBLIC_RATE_LIMIT_ENABLED:true}
       window-seconds: ${PUBLIC_RATE_LIMIT_WINDOW_SECONDS:60}
